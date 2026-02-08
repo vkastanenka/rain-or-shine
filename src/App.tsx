@@ -1,35 +1,245 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import axios from 'axios';
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import './App.css';
+
+const API_BASE_URL = 'https://geocoding-api.open-meteo.com';
+enum API_VERSIONS { v1 = 'v1' };
+enum API_ENDPOINTS {
+  Forecast = 'forecast',
+  Search = 'search',
+};
+
+const generateApiUrl = (
+  endpoint: API_ENDPOINTS,
+  options?: { version?: API_VERSIONS },
+) => {
+  const version = options?.version || API_VERSIONS.v1;
+  return `${API_BASE_URL}/${version}/${endpoint}`
+};
+
+const queryClient = new QueryClient();
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Main />
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
+
+function Main() {
+  const searchTerm = 'Toronto';
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['locations', searchTerm],
+    queryFn: () => fetchLocations(searchTerm),
+    enabled: !!searchTerm,
+  });
+
+  useEffect(() => {
+    console.log('Data:', data);
+    console.log('Is Loading:', isLoading);
+    console.log('Error', error);
+  }, [data, isLoading, error]);
+
+  return <div>Rain or Shine</div>;
+}
+
+const fetchLocations = async (searchTerm: string) => {
+  const { data } = await axios.get(`${API_GEOCODING}?name=${searchTerm}`);
+  return data;
+};
+
+const fetchWeatherForecast = async () => {
+  const { data } = await axios.get(`${API_GEOCODING}?name=${searchTerm}`);
+  return data;
+};
+
+const locationsData = {
+  results: [
+    {
+      id: 6167865,
+      name: 'Toronto',
+      latitude: 43.70643,
+      longitude: -79.39864,
+      elevation: 161,
+      feature_code: 'PPLA',
+      country_code: 'CA',
+      admin1_id: 6093943,
+      timezone: 'America/Toronto',
+      population: 2600000,
+      country_id: 6251999,
+      country: 'Canada',
+      admin1: 'Ontario',
+    },
+    {
+      id: 5174095,
+      name: 'Toronto',
+      latitude: 40.46423,
+      longitude: -80.60091,
+      elevation: 214,
+      feature_code: 'PPL',
+      country_code: 'US',
+      admin1_id: 5165418,
+      admin2_id: 5159079,
+      admin3_id: 5158916,
+      timezone: 'America/New_York',
+      population: 4882,
+      postcodes: ['43964'],
+      country_id: 6252001,
+      country: 'United States',
+      admin1: 'Ohio',
+      admin2: 'Jefferson',
+      admin3: 'Township of Island Creek',
+    },
+    {
+      id: 4280519,
+      name: 'Toronto',
+      latitude: 37.79893,
+      longitude: -95.94916,
+      elevation: 290,
+      feature_code: 'PPL',
+      country_code: 'US',
+      admin1_id: 4273857,
+      admin2_id: 4282006,
+      admin3_id: 4280527,
+      timezone: 'America/Chicago',
+      population: 261,
+      postcodes: ['66777'],
+      country_id: 6252001,
+      country: 'United States',
+      admin1: 'Kansas',
+      admin2: 'Woodson',
+      admin3: 'Toronto Township',
+    },
+    {
+      id: 5232379,
+      name: 'Toronto',
+      latitude: 44.57302,
+      longitude: -96.64255,
+      elevation: 610,
+      feature_code: 'PPL',
+      country_code: 'US',
+      admin1_id: 5769223,
+      admin2_id: 5227295,
+      admin3_id: 5232381,
+      timezone: 'America/Chicago',
+      population: 210,
+      postcodes: ['57268'],
+      country_id: 6252001,
+      country: 'United States',
+      admin1: 'South Dakota',
+      admin2: 'Deuel',
+      admin3: 'Town of Toronto',
+    },
+    {
+      id: 4878739,
+      name: 'Toronto',
+      latitude: 41.90502,
+      longitude: -90.86403,
+      elevation: 220,
+      feature_code: 'PPL',
+      country_code: 'US',
+      admin1_id: 4862182,
+      admin2_id: 4852032,
+      admin3_id: 4864638,
+      timezone: 'America/Chicago',
+      population: 120,
+      country_id: 6252001,
+      country: 'United States',
+      admin1: 'Iowa',
+      admin2: 'Clinton',
+      admin3: 'Liberty Township',
+    },
+    {
+      id: 149454,
+      name: 'Toronto',
+      latitude: -4.9,
+      longitude: 38.1,
+      elevation: 548,
+      feature_code: 'PPL',
+      country_code: 'TZ',
+      admin1_id: 149595,
+      admin2_id: 156478,
+      admin3_id: 11007017,
+      timezone: 'Africa/Dar_es_Salaam',
+      country_id: 149590,
+      country: 'Tanzania',
+      admin1: 'Tanga',
+      admin2: 'Korogwe District',
+      admin3: 'Mkalamo',
+    },
+    {
+      id: 2146222,
+      name: 'Toronto',
+      latitude: -33,
+      longitude: 151.6,
+      elevation: 9999,
+      feature_code: 'PPL',
+      country_code: 'AU',
+      admin1_id: 2155400,
+      timezone: 'Australia/Sydney',
+      country_id: 2077456,
+      country: 'Australia',
+      admin1: 'New South Wales',
+    },
+    {
+      id: 3666869,
+      name: 'Toronto',
+      latitude: 8.40396,
+      longitude: -75.27907,
+      elevation: 23,
+      feature_code: 'PPL',
+      country_code: 'CO',
+      admin1_id: 3685889,
+      admin2_id: 3671664,
+      timezone: 'America/Bogota',
+      country_id: 3686110,
+      country: 'Colombia',
+      admin1: 'Departamento de Córdoba',
+      admin2: 'Pueblo Nuevo',
+    },
+    {
+      id: 3666870,
+      name: 'Toronto',
+      latitude: 7.96021,
+      longitude: -74.92025,
+      elevation: 46,
+      feature_code: 'PPL',
+      country_code: 'CO',
+      admin1_id: 3689815,
+      admin2_id: 3687026,
+      timezone: 'America/Bogota',
+      country_id: 3686110,
+      country: 'Colombia',
+      admin1: 'Antioquia',
+      admin2: 'Caucasia',
+    },
+    {
+      id: 4251360,
+      name: 'Toronto',
+      latitude: 39.71394,
+      longitude: -89.62982,
+      elevation: 180,
+      feature_code: 'PPL',
+      country_code: 'US',
+      admin1_id: 4896861,
+      admin2_id: 4249472,
+      admin3_id: 4253460,
+      timezone: 'America/Chicago',
+      country_id: 6252001,
+      country: 'United States',
+      admin1: 'Illinois',
+      admin2: 'Sangamon',
+      admin3: 'Woodside Township',
+    },
+  ],
+  generationtime_ms: 0.6636381,
+};
