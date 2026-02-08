@@ -23,7 +23,7 @@ abstract class GeocodingServiceBase extends OpenMeteoApiClient {
  * Service for interacting with the Open-Meteo Geocoding API (v1).
  * Used to convert place names or postal codes into geographic coordinates.
  */
-export class GeocodingServiceV1 extends GeocodingServiceBase {
+export class GeocodingService extends GeocodingServiceBase {
   /**
    * Initializes the Geocoding service using the v1 configuration.
    */

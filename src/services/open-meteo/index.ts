@@ -5,24 +5,24 @@
  * and geocoding services.
  */
 
-import { WeatherForecastServiceV1 } from './weather-forecast';
-import { HistoricalWeatherServiceV1 } from './historical-weather';
-import { SeasonalForecastServiceV1 } from './seasonal-forecast';
-import { GeocodingServiceV1 } from './geocoding';
+import { WeatherForecastService } from './weather-forecast';
+import { HistoricalWeatherService } from './historical-weather';
+import { SeasonalForecastService } from './seasonal-forecast';
+import { GeocodingService } from './geocoding';
 
 // --- SERVICE INSTANCES (Singletons) ---
 
 /** Service for high-resolution 16-day weather forecasts. */
-export const weatherForecast = new WeatherForecastServiceV1();
+export const weatherForecast = new WeatherForecastService();
 
 /** Service for accessing long-term historical weather records (ERA5). */
-export const historicalWeather = new HistoricalWeatherServiceV1();
+export const historicalWeather = new HistoricalWeatherService();
 
 /** Service for long-range probabilistic seasonal outlooks. */
-export const seasonalForecast = new SeasonalForecastServiceV1();
+export const seasonalForecast = new SeasonalForecastService();
 
 /** Service for location searching and coordinate resolution. */
-export const geocoding = new GeocodingServiceV1();
+export const geocoding = new GeocodingService();
 
 // --- BUNDLED SDK OBJECT ---
 

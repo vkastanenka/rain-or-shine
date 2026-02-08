@@ -4,7 +4,7 @@ import { type BaseWeatherParams } from '../base/types';
  * Parameters for requesting weather forecasts.
  * * Note: You must provide at least one of 'hourly', 'daily', or 'current'.
  */
-export interface ForecastParams extends BaseWeatherParams {
+export interface WeatherForecastParams extends BaseWeatherParams {
   /** * A list of weather variables for hourly resolution.
    * Can be a string array or a comma-separated string.
    * @example ['temperature_2m', 'relative_humidity_2m', 'rain']

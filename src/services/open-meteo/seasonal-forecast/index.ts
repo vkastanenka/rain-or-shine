@@ -27,7 +27,7 @@ abstract class SeasonalForecastServiceBase extends OpenMeteoApiClient {
  * focus on "Anomalies" to understand if a month will be warmer or wetter than 
  * the 30-year climate average.
  */
-export class SeasonalForecastServiceV1 extends SeasonalForecastServiceBase {
+export class SeasonalForecastService extends SeasonalForecastServiceBase {
   /**
    * Initializes the Seasonal Forecast service using the v1 configuration.
    */

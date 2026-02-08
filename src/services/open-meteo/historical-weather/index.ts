@@ -27,7 +27,7 @@ abstract class HistoricalWeatherServiceBase extends OpenMeteoApiClient {
  * current date. For data within the last 48 hours, use the Forecast service 
  * with the `past_days` parameter.
  */
-export class HistoricalWeatherServiceV1 extends HistoricalWeatherServiceBase {
+export class HistoricalWeatherService extends HistoricalWeatherServiceBase {
   /**
    * Initializes the Historical Weather service using the v1 configuration.
    */

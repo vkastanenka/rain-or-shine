@@ -4,7 +4,7 @@ import {
   type OpenMeteoBaseApiVersions,
   type WeatherResponse,
 } from '../base/types';
-import { type ForecastParams } from './types';
+import { type WeatherForecastParams } from './types';
 
 /**
  * Abstract base class for Weather Forecast services.
@@ -27,7 +27,7 @@ abstract class WeatherForecastServiceBase extends OpenMeteoApiClient {
  * - **Europe**: Uses ICON (2km) and DWD models.
  * - **Global**: Falls back to GFS or ECMWF for long-range and remote areas.
  */
-export class WeatherForecastServiceV1 extends WeatherForecastServiceBase {
+export class WeatherForecastService extends WeatherForecastServiceBase {
   /**
    * Initializes the Weather Forecast service using the v1 configuration.
    */
@@ -57,7 +57,7 @@ export class WeatherForecastServiceV1 extends WeatherForecastServiceBase {
    * });
    * ```
    */
-  public getForecast = (params: ForecastParams): Promise<WeatherResponse> => {
+  public getForecast = (params: WeatherForecastParams): Promise<WeatherResponse> => {
     return this.instance.get(
       OPEN_METEO_API_CONFIG.base.versions.v1.endpoints.forecast,
       {
