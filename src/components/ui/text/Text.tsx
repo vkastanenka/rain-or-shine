@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { textTypeMap } from "./text.constants";
 import { type TextProps } from "./text.types";
 

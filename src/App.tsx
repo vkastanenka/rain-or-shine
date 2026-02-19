@@ -1,25 +1,15 @@
-import { cn } from "@/lib/utils";
-import { Text } from "@/components";
+import { Flex, Section, Text } from "@/components";
 
 function App() {
   return (
     <Section>
-      <Text type="headline1">Headline1</Text>
+      <Flex>
+        <Text>Flex Test Item 1</Text>
+        <Text>Flex Test Item 2</Text>
+        <Text>Flex Test Item 3</Text>
+      </Flex>
     </Section>
   );
 }
 
 export default App;
-
-interface SectionProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const Section = ({ children, className = "" }: SectionProps) => {
-  return (
-    <section className={cn("w-full py-10", className)}>
-      <div className="content-container">{children}</div>
-    </section>
-  );
-};
