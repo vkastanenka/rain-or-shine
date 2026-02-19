@@ -1,7 +1,12 @@
 import { cn } from "@/lib/utils";
+import { Text } from "@/components";
 
 function App() {
-  return <Section>App</Section>;
+  return (
+    <Section>
+      <Text type="headline1">Headline1</Text>
+    </Section>
+  );
 }
 
 export default App;

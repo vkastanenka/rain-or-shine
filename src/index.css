@@ -16,7 +16,66 @@
 }
 
 @theme {
+  /**
+   * Typography Design System
+   * Scale: Fluid 640px -> 1280px
+   */
+
+  /* Fonts */
   --font-quicksand: "Quicksand", sans-serif;
+
+  /* Headline 1: 48px -> 98px */
+  --text-h1: clamp(3rem, 1.25rem + 4.375vw, 6.125rem);
+  --text-h1--letter-spacing: -0.015em;
+  --text-h1--font-weight: 800;
+
+  /* Headline 2: 36px -> 61px */
+  --text-h2: clamp(2.25rem, 1.3125rem + 2.34vw, 3.8125rem);
+  --text-h2--letter-spacing: -0.008em;
+  --text-h2--font-weight: 800;
+
+  /* Headline 3: 30px -> 49px */
+  --text-h3: clamp(1.875rem, 1.15rem + 1.8vw, 3.0625rem);
+  --text-h3--letter-spacing: 0em;
+  --text-h3--font-weight: 700;
+
+  /* Headline 4: 26px -> 35px */
+  --text-h4: clamp(1.625rem, 1.15rem + 0.9vw, 2.1875rem);
+  --text-h4--letter-spacing: 0.007em;
+  --text-h4--font-weight: 700;
+
+  /* Headline 5: 20px -> 24px */
+  --text-h5: clamp(1.25rem, 1rem + 0.625vw, 1.5rem);
+  --text-h5--letter-spacing: 0em;
+  --text-h5--font-weight: 600;
+
+  /* Headline 6: 18px -> 20px */
+  --text-h6: clamp(1.125rem, 1rem + 0.3125vw, 1.25rem);
+  --text-h6--letter-spacing: 0.0075em;
+  --text-h6--font-weight: 600;
+
+  /* --- Subtitles --- */
+  --text-subtitle1: 1rem; /* 16px */
+  --text-subtitle1--letter-spacing: 0.009em;
+
+  --text-subtitle2: 0.875rem; /* 14px */
+  --text-subtitle2--letter-spacing: 0.007em;
+
+  /* --- Body & UI --- */
+  --text-body1: 1rem; /* 16px */
+  --text-body1--letter-spacing: 0.031em;
+
+  --text-body2: 0.875rem; /* 14px */
+  --text-body2--letter-spacing: 0.017em;
+
+  --text-button: 0.875rem; /* 14px */
+  --text-button--letter-spacing: 0.089em;
+
+  --text-caption: 0.75rem; /* 12px */
+  --text-caption--letter-spacing: 0.033em;
+
+  --text-overline: 0.625rem; /* 10px */
+  --text-overline--letter-spacing: 0.15em;
 }
 
 @layer base {
