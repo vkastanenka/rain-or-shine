@@ -1,17 +1,22 @@
-@import 'tailwindcss';
-@plugin "daisyui";
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes:
+    cupcake --default,
+    dark --prefersdark,
+    forest;
+}
 
 @font-face {
-  font-family: 'Quicksand';
-  src: url('./assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf')
-    format('truetype-variations');
+  font-family: "Quicksand";
+  src: url("./assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf")
+    format("truetype-variations");
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
 }
 
 @theme {
-  --font-quicksand: 'Quicksand', sans-serif;
+  --font-quicksand: "Quicksand", sans-serif;
 }
 
 @layer base {
@@ -21,7 +26,6 @@
     padding: 0;
     font-family: var(--font-quicksand);
     min-height: 100svh;
-    background-color: lightpink;
   }
 }
 

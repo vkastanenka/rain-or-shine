@@ -1,5 +1,20 @@
+import { cn } from "@/lib/utils";
+
 function App() {
-  return <div className="content-container bg-fuchsia-400">App</div>;
+  return <Section>App</Section>;
 }
 
 export default App;
+
+interface SectionProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const Section = ({ children, className = "" }: SectionProps) => {
+  return (
+    <section className={cn("w-full py-10", className)}>
+      <div className="content-container">{children}</div>
+    </section>
+  );
+};
