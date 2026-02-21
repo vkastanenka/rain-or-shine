@@ -1,16 +1,16 @@
 import { cn } from "@/utils";
-import { textTypeMap } from "./text.constants";
+import { TEXT_TYPE_MAP } from "./text.constants";
 import { type TextProps } from "./text.types";
 
 export const Text = ({
-  type = "body1",
   element: Component = "p",
-  children,
+  type = "body1",
   className,
+  children,
   ...props
 }: TextProps) => {
   return (
-    <Component className={cn(textTypeMap[type], className)} {...props}>
+    <Component className={cn(TEXT_TYPE_MAP[type], className)} {...props}>
       {children}
     </Component>
   );

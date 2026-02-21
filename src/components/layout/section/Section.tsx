@@ -1,10 +1,19 @@
 import { cn } from "@/utils";
+import { Container } from "../container";
 import { type SectionProps } from "./section.types";
 
-export const Section = ({ children, className = "" }: SectionProps) => {
+export const Section = ({
+  maxWidth,
+  px,
+  className,
+  children,
+  ...props
+}: SectionProps) => {
   return (
-    <section className={cn("w-full py-10", className)}>
-      <div className="content-container">{children}</div>
+    <section className={cn("w-full py-10", className)} {...props}>
+      <Container maxWidth={maxWidth} px={px}>
+        {children}
+      </Container>
     </section>
   );
 };

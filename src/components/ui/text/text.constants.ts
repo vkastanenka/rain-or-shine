@@ -1,6 +1,4 @@
-import { type TextVariant } from "./text.types";
-
-export const textTypeMap: Record<TextVariant, string> = {
+export const TEXT_TYPE_MAP = {
   headline1: "text-h1",
   headline2: "text-h2",
   headline3: "text-h3",
@@ -14,4 +12,4 @@ export const textTypeMap: Record<TextVariant, string> = {
   button: "text-button uppercase font-medium",
   caption: "text-caption",
   overline: "text-overline uppercase",
-};
+} as const;

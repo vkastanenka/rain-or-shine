@@ -88,7 +88,3 @@
     min-height: 100svh;
   }
 }
-
-@utility content-container {
-  @apply container mx-auto px-5;
-}

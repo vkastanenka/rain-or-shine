@@ -1,17 +1,4 @@
-export type TextVariant =
-  | "headline1"
-  | "headline2"
-  | "headline3"
-  | "headline4"
-  | "headline5"
-  | "headline6"
-  | "subtitle1"
-  | "subtitle2"
-  | "body1"
-  | "body2"
-  | "button"
-  | "caption"
-  | "overline";
+import { TEXT_TYPE_MAP } from "./text.constants";
 
 export type TextElement =
   | "h1"
@@ -23,9 +10,13 @@ export type TextElement =
   | "p"
   | "span";
 
+export type TextTypeMapKey = keyof typeof TEXT_TYPE_MAP;
+export type TextTypeMapValue =
+  (typeof TEXT_TYPE_MAP)[keyof typeof TEXT_TYPE_MAP];
+
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
-  type?: TextVariant;
   element?: TextElement;
-  children: React.ReactNode;
+  type?: TextTypeMapKey;
   className?: string;
+  children: React.ReactNode;
 }
