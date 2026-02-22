@@ -2,6 +2,12 @@ import fs from 'fs';
 import path from 'path';
 
 const targetSubFolder = process.argv[2]; // e.g., meteocons/fill
+
+if (!targetSubFolder) {
+  console.error("Please provide a folder path! Example: npm run generate-icons -- meteocons/fill");
+  process.exit(1);
+}
+
 const ICONS_ROOT = path.join(process.cwd(), 'src/assets/icons', targetSubFolder);
 const OUTPUT_FILE = path.join(ICONS_ROOT, 'index.ts');
 

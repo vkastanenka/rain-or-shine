@@ -8,9 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "gen-icons": "node ./scripts/generate-icons.mjs",
-    "gen-icons:meteocons-fill": "npm run gen-icons -- meteocons/fill",
-    "gen-icons:meteocons-line": "npm run gen-icons -- meteocons/line"
+    "generate-icons": "node ./scripts/generate-icons.mjs",
+    "generate-icons:meteocons-fill": "npm run generate-icons -- meteocons/fill",
+    "generate-icons:meteocons-line": "npm run generate-icons -- meteocons/line"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.0",
