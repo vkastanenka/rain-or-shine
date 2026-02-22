@@ -10,9 +10,10 @@ import { type FlexProps } from "./flex.types";
 export const Flex = ({
   direction = "row",
   justify = "start",
-  align = "start",
-  gap = 4,
+  align = "stretch",
+  gap = 2,
   wrap = false,
+  stretchItems = false,
   className,
   children,
   ...props
@@ -29,6 +30,7 @@ export const Flex = ({
           false: "flex-nowrap",
         }),
         resolveResponsiveValues(gap, FLEX_GAP_MAP),
+        stretchItems && "*:flex-1",
         className,
       )}
       {...props}

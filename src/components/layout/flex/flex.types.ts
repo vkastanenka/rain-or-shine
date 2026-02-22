@@ -27,5 +27,6 @@ export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: ResponsiveValue<FlexAlignMapKey>;
   gap?: ResponsiveValue<FlexGapMapKey>;
   wrap?: ResponsiveValue<boolean>;
+  stretchItems?: boolean;
   children: React.ReactNode;
 }

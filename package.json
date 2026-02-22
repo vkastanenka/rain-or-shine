@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "generate-icons": "node ./scripts/generate-icons.mjs",
     "generate-icons:meteocons-fill": "npm run generate-icons -- meteocons/fill",
-    "generate-icons:meteocons-line": "npm run generate-icons -- meteocons/line"
+    "generate-icons:meteocons-line": "npm run generate-icons -- meteocons/line",
+    "generate-tailwind-safelist": "tsx ./scripts/generate-tailwind-safelist.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.0",
@@ -31,6 +32,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "tsx": "^4.21.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
