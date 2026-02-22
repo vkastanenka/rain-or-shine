@@ -17,8 +17,7 @@ const generate = () => {
 export const ${name} = IconWrapper(${name}Raw);`;
   });
 
-  const content = `// Auto-generated
-import { IconWrapper } from '../../IconWrapper';
+  const content = `import { IconWrapper } from '@/components';
 
 ${exports.join('\n\n')}
 `;

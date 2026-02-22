@@ -5,7 +5,7 @@ import { Barometer } from "./assets/icons/meteocons/fill";
 function App() {
   return (
     <Section>
-      <Barometer size={128} />
+      <Barometer className="w-4 md:w-96" />
     </Section>
   );
 }
