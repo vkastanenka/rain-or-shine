@@ -1,6 +1,5 @@
 import { cn } from "@/utils";
 import { Flex, Text } from "@/components";
-import { type CurrentWeatherData, type HourlyWeatherData } from "@/entities";
 import {
   calculateWeatherCardPrecipitationIndicatorHeight,
   getHourlyWeatherCardTime,
@@ -8,21 +7,33 @@ import {
   getWeatherCardPrecipitationAmountIcon,
   getWeatherCardPrecipitationProbabilityIcon,
 } from "../../utils";
+import {
+  type WmoCodesMapKey,
+  type OpenMeteoWeatherForecastIsDayValue,
+} from "@/entities";
 
-type WeatherCardProps = CurrentWeatherData & HourlyWeatherData;
+interface HourlyWeatherCardProps {
+  time: string;
+  apparent_temperature?: number | null;
+  is_day?: OpenMeteoWeatherForecastIsDayValue;
+  precipitation_probability?: number | null;
+  precipitation?: number | null;
+  temperature_2m?: number | null;
+  weather_code: WmoCodesMapKey | null;
+}
 
-export const WeatherCard = ({
-  // current data
-  is_day,
-
-  // hourly data
+export const HourlyWeatherCard = ({
   apparent_temperature,
+  is_day,
   precipitation_probability,
   precipitation,
   temperature_2m,
   time,
   weather_code,
-}: WeatherCardProps) => {
+  ...props
+}: HourlyWeatherCardProps) => {
+  // TODO: Provide fallbacks for values
+
   const formattedTime = getHourlyWeatherCardTime(time);
   const IconMain = getWeatherCardIcon(weather_code, is_day);
   const IconPrecipitationAmount = getWeatherCardPrecipitationAmountIcon(
@@ -35,7 +46,7 @@ export const WeatherCard = ({
     calculateWeatherCardPrecipitationIndicatorHeight(precipitation);
 
   return (
-    <div className="bg-mauve-700 rounded-lg pt-3 overflow-hidden">
+    <div className="bg-mauve-700 rounded-lg pt-3 overflow-hidden" {...props}>
       <Flex
         direction={{ base: "col" }}
         align={{ base: "center" }}
