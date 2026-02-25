@@ -1,12 +1,12 @@
 import { Rain, Snowflake } from "@/assets/icons/meteocons/fill";
 import { type IconProps } from "@/components";
 import {
-  WMO_RAIN_CODES_MAP,
   WMO_SNOW_CODES_MAP,
   WMO_CODES_DAY_ICONS_FILL_MAP,
   WMO_CODES_NIGHT_ICONS_FILL_MAP,
   type WmoCodesMapKey,
 } from "@/entities";
+import { isWmoCodeRain, isWmoCodeSnow } from "@/entities";
 
 type WeatherIcon = React.ForwardRefExoticComponent<
   Omit<IconProps, "ref"> & React.RefAttributes<SVGSVGElement>
@@ -28,8 +28,8 @@ export const getWeatherCardPrecipitationAmountIcon = (
   precipitation: number,
 ): WeatherIcon | undefined => {
   if (precipitation <= 0) return;
-  if (weatherCodeMapKey in WMO_RAIN_CODES_MAP) return Rain;
-  if (weatherCodeMapKey in WMO_SNOW_CODES_MAP) return Snowflake;
+  if (isWmoCodeRain(weatherCodeMapKey)) return Rain;
+  if (isWmoCodeSnow(weatherCodeMapKey)) return Snowflake;
 };
 
 export const getWeatherCardPrecipitationProbabilityIcon = (

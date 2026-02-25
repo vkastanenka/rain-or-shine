@@ -6,7 +6,7 @@ import {
   WMO_CODES_DAY_ICONS_LINE_MAP,
   WMO_CODES_NIGHT_ICONS_FILL_MAP,
   WMO_CODES_NIGHT_ICONS_LINE_MAP,
-} from "./wmo.constants";
+} from "./constants";
 
 export type WmoCodesMapKey = keyof typeof WMO_CODES_MAP;
 export type WmoCodesMapValue =
