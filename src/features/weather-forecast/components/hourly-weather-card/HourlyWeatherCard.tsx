@@ -1,5 +1,6 @@
-import { cn } from "@/utils";
 import { Flex, Text } from "@/components";
+import { cn } from "@/utils";
+import { type OpenMeteoForecastHourlyListItem } from "@/entities";
 import {
   calculateWeatherCardPrecipitationIndicatorHeight,
   getHourlyWeatherCardTime,
@@ -7,20 +8,6 @@ import {
   getWeatherCardPrecipitationAmountIcon,
   getWeatherCardPrecipitationProbabilityIcon,
 } from "../../utils";
-import {
-  type WmoCodesMapKey,
-  type OpenMeteoWeatherForecastIsDayValue,
-} from "@/entities";
-
-interface HourlyWeatherCardProps {
-  time: string;
-  apparent_temperature?: number | null;
-  is_day?: OpenMeteoWeatherForecastIsDayValue;
-  precipitation_probability?: number | null;
-  precipitation?: number | null;
-  temperature_2m?: number | null;
-  weather_code: WmoCodesMapKey | null;
-}
 
 export const HourlyWeatherCard = ({
   apparent_temperature,
@@ -31,9 +18,7 @@ export const HourlyWeatherCard = ({
   time,
   weather_code,
   ...props
-}: HourlyWeatherCardProps) => {
-  // TODO: Provide fallbacks for values
-
+}: OpenMeteoForecastHourlyListItem) => {
   const formattedTime = getHourlyWeatherCardTime(time);
   const IconMain = getWeatherCardIcon(weather_code, is_day);
   const IconPrecipitationAmount = getWeatherCardPrecipitationAmountIcon(

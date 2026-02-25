@@ -7,7 +7,7 @@ export type OpenMeteoForecastVariablesUnits<T> = {
   [K in keyof T]: string;
 };
 
-export type OpenMeteoIsDayValue = 1 | 0 | null;
+export type OpenMeteoIsDayValue = 1 | 0 | undefined | null;
 
 export type OpenMeteoTimeIntervalMapValue =
   (typeof OPEN_METEO_TIME_INTERVAL_MAP)[keyof typeof OPEN_METEO_TIME_INTERVAL_MAP];

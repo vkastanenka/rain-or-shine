@@ -1,12 +1,14 @@
 import { Rain, Snowflake } from "@/assets/icons/meteocons/fill";
-import { type IconProps } from "@/components";
 import {
   WMO_SNOW_CODES_MAP,
   WMO_CODES_DAY_ICONS_FILL_MAP,
   WMO_CODES_NIGHT_ICONS_FILL_MAP,
+  isWmoCodeRain,
+  isWmoCodeSnow,
+  type OpenMeteoIsDayValue,
   type WmoCodesMapKey,
 } from "@/entities";
-import { isWmoCodeRain, isWmoCodeSnow } from "@/entities";
+import { type IconProps } from "@/components";
 
 type WeatherIcon = React.ForwardRefExoticComponent<
   Omit<IconProps, "ref"> & React.RefAttributes<SVGSVGElement>
@@ -14,7 +16,7 @@ type WeatherIcon = React.ForwardRefExoticComponent<
 
 export const getWeatherCardIcon = (
   weatherCodeMapKey: WmoCodesMapKey,
-  isDay: 0 | 1,
+  isDay: OpenMeteoIsDayValue,
 ): WeatherIcon => {
   const iconMap = isDay
     ? WMO_CODES_DAY_ICONS_FILL_MAP
