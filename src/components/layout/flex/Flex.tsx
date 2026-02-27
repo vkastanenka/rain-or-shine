@@ -39,3 +39,11 @@ export const Flex = ({
     </div>
   );
 };
+
+export const FlexRow = (props: Omit<FlexProps, "direction">) => (
+  <Flex {...props} direction="row" />
+);
+
+export const FlexCol = (props: Omit<FlexProps, "direction">) => (
+  <Flex {...props} direction="col" />
+);

@@ -1,8 +1,9 @@
-import { Flex, Text } from "@/components";
+import { FlexRow, FlexCol, Text } from "@/components";
 import {
   formatOpenMeteoValue,
   type OpenMeteoForecastHourlyListItem,
 } from "@/entities";
+import { cn } from "@/utils";
 import {
   getWeatherCardIcon,
   getWeatherCardPrecipitationProbabilityIcon,
@@ -24,19 +25,12 @@ export const HourlyWeatherCard = ({
     getWeatherCardPrecipitationProbabilityIcon(weather_code);
 
   return (
-    <div className="bg-mauve-700 rounded-lg pt-3 overflow-hidden" {...props}>
-      <Flex
-        direction={{ base: "col" }}
-        align={{ base: "center" }}
-        justify={{ base: "between" }}
-        gap={4}
-        className="w-full h-full"
-      >
-        <Flex
-          direction={{ base: "col" }}
-          align={{ base: "center" }}
-          className="w-full"
-        >
+    <div
+      className={cn("bg-mauve-700", "rounded-lg", "pt-3", "overflow-hidden")}
+      {...props}
+    >
+      <FlexCol gap={4} className={cn("w-full", "h-full")}>
+        <FlexCol align="center" className={cn("px-3", "w-full")}>
           <Text>{formatOpenMeteoValue.hourlyTime(time)}</Text>
           <MainIcon size={48} />
           <Text type="headline4">
@@ -45,21 +39,21 @@ export const HourlyWeatherCard = ({
           <Text type="caption">
             {formatOpenMeteoValue.apparentTemperature(apparent_temperature)}
           </Text>
-          <Flex gap={1}>
+          <FlexRow gap={1}>
             <PrecipitationProbabilityIcon />
             <Text>
               {formatOpenMeteoValue.precipitationProbability(
                 precipitation_probability,
               )}
             </Text>
-          </Flex>
-        </Flex>
+          </FlexRow>
+        </FlexCol>
 
         <WeatherCardPrecipitationScale
           precipitation={precipitation}
           weatherCode={weather_code}
         />
-      </Flex>
+      </FlexCol>
     </div>
   );
 };

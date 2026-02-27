@@ -1,9 +1,9 @@
 export const FLEX_ALIGN_MAP = {
+  stretch: "items-stretch",
+  center: "items-center",
   start: "items-start",
   end: "items-end",
-  center: "items-center",
   baseline: "items-baseline",
-  stretch: "items-stretch",
 } as const;
 
 export const FLEX_DIRECTION_MAP = {
