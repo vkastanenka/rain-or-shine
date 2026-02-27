@@ -1,3 +1,4 @@
+import { type ForecastTimePeriodMapValue } from "@/features";
 import { type UnwrapArray } from "@/types";
 import { OPEN_METEO_TIME_INTERVAL_MAP } from "../constants";
 import { type OpenMeteoTimeIntervalMapValue } from "./base";
@@ -12,10 +13,20 @@ export type NormalizedOpenMeteoForecastTimeIntervalListItem<
   [P in K]: UnwrapArray<NonNullable<OpenMeteoForecastResponse[T]>[P]>;
 };
 
+export type OpenMeteoForecastDailyTimePeriods = Record<
+  string,
+  Record<ForecastTimePeriodMapValue, OpenMeteoForecastHourlyListItem[]>
+>;
+
 export type OpenMeteoForecastDailyListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
     typeof OPEN_METEO_TIME_INTERVAL_MAP.Daily
   >;
+
+export type OpenMeteoForecastDailyTimePeriodListItem =
+  NormalizedOpenMeteoForecastTimeIntervalListItem<
+    typeof OPEN_METEO_TIME_INTERVAL_MAP.Hourly
+  > & { timePeriod: string };
 
 export type OpenMeteoForecastHourlyListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
