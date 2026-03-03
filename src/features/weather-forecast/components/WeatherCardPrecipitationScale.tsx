@@ -27,7 +27,9 @@ export const WeatherCardPrecipitationScale = ({
     precipitation,
   );
 
-  if (!hasPrecipitation || !Icon) return null;
+  if (!hasPrecipitation || !Icon) {
+    return <div className={cn("pb-3", className)} />;
+  }
 
   const indicatorHeight =
     calculateWeatherCardPrecipitationIndicatorHeight(precipitation);

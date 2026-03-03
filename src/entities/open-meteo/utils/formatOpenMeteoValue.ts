@@ -50,7 +50,7 @@ export const formatOpenMeteoValue = {
   precipitationProbability: (percent: OpenMeteoNumberVar): string => {
     if (percent === null || percent === undefined || percent === 0)
       return `0${MEASUREMENT_LABELS_MAP["%"]}`;
-    return `${percent}${MEASUREMENT_LABELS_MAP["%"]}`;
+    return `${Math.round(percent)}${MEASUREMENT_LABELS_MAP["%"]}`;
   },
 
   /**
@@ -60,13 +60,13 @@ export const formatOpenMeteoValue = {
   temperature: (value: OpenMeteoNumberVar): string => {
     if (value === null || value === undefined)
       return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
-    return `${value}${MEASUREMENT_LABELS_MAP["°"]}`;
+    return `${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
   },
 
   apparentTemperature: (value: OpenMeteoNumberVar): string => {
     if (value === null || value === undefined)
       return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
-    return `${FORECAST_LABELS_MAP.feels} ${value || 0}`;
+    return `${FORECAST_LABELS_MAP.feels} ${Math.round(value)}`;
   },
 
   diurnalPeriodApparentTemperature: (
@@ -75,6 +75,6 @@ export const formatOpenMeteoValue = {
   ): string => {
     if (!diurnalPeriod || value === null || value === undefined)
       return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
-    return `${FORECAST_LABELS_MAP[diurnalPeriod]} ${value || 0}${MEASUREMENT_LABELS_MAP["°"]}`;
+    return `${FORECAST_LABELS_MAP[diurnalPeriod]} ${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
   },
 };

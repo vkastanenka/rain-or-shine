@@ -1,6 +1,5 @@
 import { FlexCol, FlexRow, Section, Text } from "@/components";
 import {
-  createOpenMeteoDiurnalPeriodList,
   groupOpenMeteoHourlyForecastByDiurnalPeriod,
   createOpenMeteoDailyTimePeriodList,
   groupOpenMeteoHourlyForecastByDateTimePeriod,
