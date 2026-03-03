@@ -12,7 +12,7 @@ import {
 import { type IconComponent } from "@/components";
 
 export const getWeatherCardIcon = (
-  weatherCode: OpenMeteoWeatherCodeVariable,
+  weatherCode: OpenMeteoWeatherCodeVariable = 0,
   isDay: OpenMeteoIsDayVariable = 1,
 ): IconComponent => {
   const iconMap = isDay
@@ -23,8 +23,8 @@ export const getWeatherCardIcon = (
 };
 
 export const getWeatherCardPrecipitationAmountIcon = (
-  weatherCode: OpenMeteoWeatherCodeVariable,
-  precipitation: OpenMeteoPrecipitationVariable,
+  weatherCode: OpenMeteoWeatherCodeVariable = 0,
+  precipitation: OpenMeteoPrecipitationVariable = 0,
 ): IconComponent | undefined => {
   if (!precipitation || precipitation <= 0) {
     return;
@@ -38,7 +38,7 @@ export const getWeatherCardPrecipitationAmountIcon = (
 };
 
 export const getWeatherCardPrecipitationProbabilityIcon = (
-  weatherCode: OpenMeteoWeatherCodeVariable,
+  weatherCode: OpenMeteoWeatherCodeVariable = 0,
 ): IconComponent => {
   if (!weatherCode || !(weatherCode in WMO_SNOW_CODES_MAP)) {
     return Rain;

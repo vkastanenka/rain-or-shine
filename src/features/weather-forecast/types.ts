@@ -1,5 +1,7 @@
 import {
   FORECAST_SHARED_LABELS_MAP,
+  FORECAST_DIURNAL_PERIOD_LABELS_MAP,
+  FORECAST_DIURNAL_PERIOD_MAP,
   FORECAST_TIME_PERIOD_LABELS_MAP,
   FORECAST_TIME_PERIOD_MAP,
   FORECAST_LABELS_MAP,
@@ -9,6 +11,16 @@ export type ForecastSharedLabelsMapKey =
   keyof typeof FORECAST_SHARED_LABELS_MAP;
 export type ForecastSharedLabelsMapValue =
   (typeof FORECAST_SHARED_LABELS_MAP)[keyof typeof FORECAST_SHARED_LABELS_MAP];
+
+export type ForecastDiurnalPeriodLabelsMapKey =
+  keyof typeof FORECAST_DIURNAL_PERIOD_LABELS_MAP;
+export type ForecastDiurnalPeriodLabelsMapValue =
+  (typeof FORECAST_DIURNAL_PERIOD_LABELS_MAP)[keyof typeof FORECAST_DIURNAL_PERIOD_LABELS_MAP];
+
+export type ForecastDiurnalPeriodMapKey =
+  keyof typeof FORECAST_DIURNAL_PERIOD_MAP;
+export type ForecastDiurnalPeriodMapValue =
+  (typeof FORECAST_DIURNAL_PERIOD_MAP)[keyof typeof FORECAST_DIURNAL_PERIOD_MAP];
 
 export type ForecastTimePeriodLabelsMapKey =
   keyof typeof FORECAST_TIME_PERIOD_LABELS_MAP;

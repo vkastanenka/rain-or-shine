@@ -1,5 +1,7 @@
 import { FlexCol, FlexRow, Section, Text } from "@/components";
 import {
+  createOpenMeteoDiurnalPeriodList,
+  groupOpenMeteoHourlyForecastByDiurnalPeriod,
   createOpenMeteoDailyTimePeriodList,
   groupOpenMeteoHourlyForecastByDateTimePeriod,
   normalizeOpenMeteoForecastTimeInterval,
@@ -22,6 +24,18 @@ function App() {
   const dailyTimePeriodForecastList = createOpenMeteoDailyTimePeriodList(
     dateTimePeriodGroupsList,
   );
+
+  const diurnalPeriodGroupsList = groupOpenMeteoHourlyForecastByDiurnalPeriod(
+    hourlyForecastItemsList,
+  );
+
+  // const diurnalPeriodForecastList = createOpenMeteoDiurnalPeriodList(
+  //   diurnalPeriodGroupsList,
+  // );
+
+  console.log("diurnalPeriodGroupsList", diurnalPeriodGroupsList);
+
+  console.log("dateTimePeriodGroupsList", dateTimePeriodGroupsList);
 
   return (
     <Section>
