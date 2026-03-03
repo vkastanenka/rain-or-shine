@@ -1,7 +1,3 @@
-import {
-  type ForecastDiurnalPeriodMapValue,
-  type ForecastTimePeriodMapValue,
-} from "@/features";
 import { type UnwrapArray } from "@/types";
 import { OPEN_METEO_TIME_INTERVAL_MAP } from "../constants";
 import { type OpenMeteoTimeIntervalMapValue } from "./base";
@@ -16,30 +12,14 @@ export type NormalizedOpenMeteoForecastTimeIntervalListItem<
   [P in K]: UnwrapArray<NonNullable<OpenMeteoForecastResponse[T]>[P]>;
 };
 
-export type OpenMeteoForecastDailyTimePeriods = Record<
-  string,
-  Record<ForecastTimePeriodMapValue, OpenMeteoForecastHourlyListItem[]>
->;
+/**
+ * Forecast List Items
+ */
 
 export type OpenMeteoForecastDailyListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
     typeof OPEN_METEO_TIME_INTERVAL_MAP.Daily
   >;
-
-export type OpenMeteoForecastDailyTimePeriodListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Hourly
-  > & { timePeriod: string };
-
-export type OpenMeteoForecastDiurnalPeriods = Record<
-  string,
-  Record<ForecastDiurnalPeriodMapValue, OpenMeteoForecastHourlyListItem[]>
->;
-
-export type OpenMeteoForecastDiurnalPeriodListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Hourly
-  > & { diurnalPeriod: string };
 
 export type OpenMeteoForecastHourlyListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
@@ -51,21 +31,9 @@ export type OpenMeteoForecastCurrentListItem =
     typeof OPEN_METEO_TIME_INTERVAL_MAP.Current
   >;
 
-export type OpenMeteoHourlyForecastByDailyTimePeriodListItem = {
-  time: string;
-  dailyTimePeriodItems: OpenMeteoForecastDailyTimePeriodListItem[];
-};
-
-export type OpenMeteoHourlyForecastByDailyTimePeriodList =
-  OpenMeteoHourlyForecastByDailyTimePeriodListItem[];
-
-export type OpenMeteoHourlyForecastByDiurnalPeriodListItem = {
-  time: string;
-  diurnalPeriodItems: OpenMeteoForecastDiurnalPeriodListItem[];
-};
-
-export type OpenMeteoHourlyForecastByDiurnalPeriodList =
-  OpenMeteoHourlyForecastByDiurnalPeriodListItem[];
+/**
+ * Forecast Time Period Items
+ */
 
 export type OpenMeteoForecastTimePeriodListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<

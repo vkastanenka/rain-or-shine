@@ -3,14 +3,14 @@ import {
   FORECAST_TIME_PERIOD_MAP,
 } from "@/features";
 import {
-  type OpenMeteoForecastDailyTimePeriods,
+  type OpenMeteoForecastTimePeriods,
   type OpenMeteoForecastHourlyListItem,
 } from "../types";
 import { groupOpenMeteoHourlyForecastListByDateAndPeriod } from "./groupOpenMeteoHourlyForecastListByDateAndPeriod";
 
 export const createOpenMeteoDailyTimePeriods = (
   hourlyList: OpenMeteoForecastHourlyListItem[],
-): OpenMeteoForecastDailyTimePeriods => {
+): OpenMeteoForecastTimePeriods => {
   return groupOpenMeteoHourlyForecastListByDateAndPeriod(
     hourlyList,
     getDailyTimePeriodFromDate,
