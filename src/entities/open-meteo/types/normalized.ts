@@ -12,10 +12,6 @@ export type NormalizedOpenMeteoForecastTimeIntervalListItem<
   [P in K]: UnwrapArray<NonNullable<OpenMeteoForecastResponse[T]>[P]>;
 };
 
-/**
- * Forecast List Items
- */
-
 export type OpenMeteoForecastDailyListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
     typeof OPEN_METEO_TIME_INTERVAL_MAP.Daily
@@ -30,28 +26,3 @@ export type OpenMeteoForecastCurrentListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
     typeof OPEN_METEO_TIME_INTERVAL_MAP.Current
   >;
-
-/**
- * Forecast Time Period Items
- */
-
-export type OpenMeteoForecastTimePeriodListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Hourly
-  > & { timePeriod: string };
-
-export type OpenMeteoHourlyForecastTimePeriodList =
-  OpenMeteoForecastTimePeriodListItem[];
-
-export type OpenMeteoForecastTimePeriods = Record<
-  string,
-  Record<string, OpenMeteoForecastHourlyListItem[]>
->;
-
-export type OpenMeteoHourlyForecastByTimePeriodListItem = {
-  time: string;
-  timePeriodItems: OpenMeteoForecastTimePeriodListItem[];
-};
-
-export type OpenMeteoHourlyForecastByTimePeriodPeriodList =
-  OpenMeteoHourlyForecastByTimePeriodListItem[];

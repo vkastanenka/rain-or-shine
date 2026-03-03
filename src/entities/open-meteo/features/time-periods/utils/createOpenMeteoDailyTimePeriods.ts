@@ -2,16 +2,14 @@ import {
   getDailyTimePeriodFromDate,
   FORECAST_TIME_PERIOD_MAP,
 } from "@/features";
-import {
-  type OpenMeteoForecastTimePeriods,
-  type OpenMeteoForecastHourlyListItem,
-} from "../types";
-import { groupOpenMeteoHourlyForecastListByDateAndPeriod } from "./groupOpenMeteoHourlyForecastListByDateAndPeriod";
+import { type OpenMeteoForecastHourlyListItem } from "../../../types";
+import { type OpenMeteoForecastTimePeriods } from "../types";
+import { groupOpenMeteoHourlyForecastByDateAndPeriod } from "./groupOpenMeteoHourlyForecastByDateAndPeriod";
 
 export const createOpenMeteoDailyTimePeriods = (
   hourlyList: OpenMeteoForecastHourlyListItem[],
 ): OpenMeteoForecastTimePeriods => {
-  return groupOpenMeteoHourlyForecastListByDateAndPeriod(
+  return groupOpenMeteoHourlyForecastByDateAndPeriod(
     hourlyList,
     getDailyTimePeriodFromDate,
     FORECAST_TIME_PERIOD_MAP,

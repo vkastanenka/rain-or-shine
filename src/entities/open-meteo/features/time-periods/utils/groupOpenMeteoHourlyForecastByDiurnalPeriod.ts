@@ -1,7 +1,7 @@
 import {
   type OpenMeteoForecastHourlyListItem,
-  type OpenMeteoHourlyForecastByTimePeriodPeriodList,
-} from "../types";
+} from "../../../types";
+import { type OpenMeteoHourlyForecastByTimePeriodPeriodList } from "../types";
 import { createOpenMeteoDiurnalPeriods } from "./createOpenMeteoDiurnalPeriods";
 import { createOpenMeteoTimePeriodListData } from "./createOpenMeteoTimePeriodListData";
 

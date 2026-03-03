@@ -1,8 +1,9 @@
 import {
   type OpenMeteoForecastHourlyListItem,
-  type OpenMeteoForecastTimePeriodListItem,
-} from "../types";
-import { calculateOpenMeteoForecastHourlyListAverages } from "./calculateOpenMeteoForecastHourlyListAverages";
+  // type OpenMeteoForecastTimePeriodListItem,
+} from "../../../types";
+import { type OpenMeteoForecastTimePeriodListItem } from "../types";
+import { calculateOpenMeteoForecastHourlyListAverages } from "@/entities/open-meteo/utils";
 
 export const createOpenMeteoTimePeriodListItem = (
   timePeriodKey: string,

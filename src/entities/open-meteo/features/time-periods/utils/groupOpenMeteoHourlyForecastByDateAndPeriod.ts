@@ -1,6 +1,6 @@
-import { type OpenMeteoForecastHourlyListItem } from "../types";
+import { type OpenMeteoForecastHourlyListItem } from "../../../types";
 
-export const groupOpenMeteoHourlyForecastListByDateAndPeriod = <T extends string>(
+export const groupOpenMeteoHourlyForecastByDateAndPeriod = <T extends string>(
   hourlyList: OpenMeteoForecastHourlyListItem[],
   getPeriodFn: (time: string) => T,
   periodMap: Record<string, T>,
