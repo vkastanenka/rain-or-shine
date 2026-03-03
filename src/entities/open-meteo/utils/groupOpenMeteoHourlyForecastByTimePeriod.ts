@@ -7,6 +7,7 @@ import {
   type OpenMeteoForecastDailyTimePeriods,
   type OpenMeteoForecastDailyTimePeriodListItem,
   type OpenMeteoForecastHourlyListItem,
+  type OpenMeteoHourlyForecastByDailyTimePeriod,
 } from "../types";
 
 // Group raw hourly objects into Day -> Period buckets
@@ -86,10 +87,7 @@ export const createOpenMeteoDailyTimePeriodListItem = (
 
 export const createOpenMeteoDailyTimePeriodListData = (
   dailyTimePeriods: OpenMeteoForecastDailyTimePeriods,
-): {
-  time: string;
-  dailyTimePeriodItems: OpenMeteoForecastDailyTimePeriodListItem[];
-}[] => {
+): OpenMeteoHourlyForecastByDailyTimePeriod => {
   const dailyTimePeriodsList = Object.entries(dailyTimePeriods).map(
     ([dateKey, periods]) => {
       const dailyTimePeriodItems = Object.entries(periods).map(
@@ -113,10 +111,7 @@ export const createOpenMeteoDailyTimePeriodListData = (
 
 export const groupOpenMeteoHourlyForecastByDateTimePeriod = (
   hourlyList: OpenMeteoForecastHourlyListItem[],
-): {
-  time: string;
-  dailyTimePeriodItems: OpenMeteoForecastDailyTimePeriodListItem[];
-}[] => {
+): OpenMeteoHourlyForecastByDailyTimePeriod => {
   const dailyTimePeriods = createOpenMeteoDailyTimePeriods(hourlyList);
   const dailyTimePeriodsListData =
     createOpenMeteoDailyTimePeriodListData(dailyTimePeriods);
@@ -128,7 +123,7 @@ export const createOpenMeteoDailyTimePeriodList = (
     time: string;
     dailyTimePeriodItems: OpenMeteoForecastDailyTimePeriodListItem[];
   }[],
-) => {
+): OpenMeteoForecastDailyTimePeriodListItem[] => {
   const dailyTimePeriodList = dailyTimePeriodListData.reduce(
     (acc: OpenMeteoForecastDailyTimePeriodListItem[], curr) => {
       return [...acc, ...(curr?.dailyTimePeriodItems ?? [])];

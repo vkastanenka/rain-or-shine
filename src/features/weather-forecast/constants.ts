@@ -22,6 +22,9 @@ export const FORECAST_LABELS_MAP = {
   ...FORECAST_SHARED_LABELS_MAP,
   ...FORECAST_DIURNAL_PERIOD_LABELS_MAP,
   ...FORECAST_TIME_PERIOD_LABELS_MAP,
+  hourly: "Hourly",
+  sevenDays: "7 days",
+  fourteenDays: "14 days",
 } as const;
 
 /**

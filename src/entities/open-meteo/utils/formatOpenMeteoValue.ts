@@ -3,7 +3,6 @@ import { MEASUREMENT_LABELS_MAP } from "@/constants";
 import {
   getDailyTimePeriodFromDate,
   FORECAST_LABELS_MAP,
-  FORECAST_DIURNAL_PERIOD_MAP,
   FORECAST_TIME_PERIOD_LABELS_MAP,
   type ForecastTimePeriodLabelsMapValue,
   type ForecastDiurnalPeriodMapValue,
@@ -61,17 +60,21 @@ export const formatOpenMeteoValue = {
   temperature: (value: OpenMeteoNumberVar): string => {
     if (value === null || value === undefined)
       return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
-    return `${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
+    return `${value}${MEASUREMENT_LABELS_MAP["°"]}`;
   },
 
   apparentTemperature: (value: OpenMeteoNumberVar): string => {
+    if (value === null || value === undefined)
+      return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
     return `${FORECAST_LABELS_MAP.feels} ${value || 0}`;
   },
 
   diurnalPeriodApparentTemperature: (
-    diurnalPeriod: ForecastDiurnalPeriodMapValue = FORECAST_DIURNAL_PERIOD_MAP.Day,
+    diurnalPeriod: ForecastDiurnalPeriodMapValue,
     value: OpenMeteoNumberVar = 0,
   ): string => {
+    if (!diurnalPeriod || value === null || value === undefined)
+      return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
     return `${FORECAST_LABELS_MAP[diurnalPeriod]} ${value || 0}${MEASUREMENT_LABELS_MAP["°"]}`;
   },
 };

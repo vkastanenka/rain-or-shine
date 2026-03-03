@@ -50,3 +50,19 @@ export type OpenMeteoForecastCurrentListItem =
   NormalizedOpenMeteoForecastTimeIntervalListItem<
     typeof OPEN_METEO_TIME_INTERVAL_MAP.Current
   >;
+
+export type OpenMeteoHourlyForecastByDailyTimePeriodListItem = {
+  time: string;
+  dailyTimePeriodItems: OpenMeteoForecastDailyTimePeriodListItem[];
+};
+
+export type OpenMeteoHourlyForecastByDailyTimePeriodList =
+  OpenMeteoHourlyForecastByDailyTimePeriodListItem[];
+
+export type OpenMeteoHourlyForecastByDiurnalPeriodListItem = {
+  time: string;
+  diurnalPeriodItems: OpenMeteoForecastDiurnalPeriodListItem[];
+};
+
+export type OpenMeteoHourlyForecastByDiurnalPeriodList =
+  OpenMeteoHourlyForecastByDiurnalPeriodListItem[];

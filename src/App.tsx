@@ -8,7 +8,12 @@ import {
   OPEN_METEO_TIME_INTERVAL_MAP,
   type OpenMeteoForecastResponse,
 } from "@/entities";
-import { DailyTimePeriodWeatherCard, HourlyWeatherCard } from "@/features";
+import {
+  DailyTimePeriodWeatherCard,
+  DiurnalPeriodWeatherCard,
+  FORECAST_LABELS_MAP,
+  HourlyWeatherCard,
+} from "@/features";
 import weatherResponse from "./hourlyWeather.json";
 
 function App() {
@@ -29,49 +34,30 @@ function App() {
     hourlyForecastItemsList,
   );
 
-  // const diurnalPeriodForecastList = createOpenMeteoDiurnalPeriodList(
-  //   diurnalPeriodGroupsList,
-  // );
-
-  console.log("diurnalPeriodGroupsList", diurnalPeriodGroupsList);
-
-  console.log("dateTimePeriodGroupsList", dateTimePeriodGroupsList);
-
   return (
     <Section>
       <FlexCol gap={8}>
         <FlexCol>
-          <Text type="headline6">Hourly</Text>
+          <Text type="headline6">{FORECAST_LABELS_MAP.hourly}</Text>
           <FlexRow stretchItems>
             {hourlyForecastItemsList.slice(0, 5).map((data) => (
-              <HourlyWeatherCard
-                key={data.time}
-                apparent_temperature={data.apparent_temperature}
-                is_day={data.is_day}
-                precipitation_probability={data.precipitation_probability}
-                precipitation={data.precipitation_probability}
-                temperature_2m={data.temperature_2m}
-                time={data.time}
-                weather_code={data.weather_code}
-              />
+              <HourlyWeatherCard key={data.time} {...data} />
             ))}
           </FlexRow>
         </FlexCol>
         <FlexCol>
-          <Text type="headline6">7 Days</Text>
+          <Text type="headline6">{FORECAST_LABELS_MAP.sevenDays}</Text>
           <FlexRow stretchItems>
             {dailyTimePeriodForecastList.slice(0, 5).map((data) => (
-              <DailyTimePeriodWeatherCard
-                key={data.time}
-                apparent_temperature={data.apparent_temperature}
-                is_day={data.is_day}
-                precipitation_probability={data.precipitation_probability}
-                precipitation={data.precipitation_probability}
-                temperature_2m={data.temperature_2m}
-                time={data.time}
-                timePeriod={data.timePeriod}
-                weather_code={data.weather_code}
-              />
+              <DailyTimePeriodWeatherCard key={data.time} {...data} />
+            ))}
+          </FlexRow>
+        </FlexCol>
+        <FlexCol>
+          <Text type="headline6">{FORECAST_LABELS_MAP.fourteenDays}</Text>
+          <FlexRow stretchItems>
+            {diurnalPeriodGroupsList.slice(0, 5).map((data) => (
+              <DiurnalPeriodWeatherCard key={data.time} {...data} />
             ))}
           </FlexRow>
         </FlexCol>
