@@ -1,7 +1,7 @@
 import { FlexCol, FlexRow, Section, Text } from "@/components";
 import {
   groupOpenMeteoHourlyForecastByDiurnalPeriod,
-  createOpenMeteoDailyTimePeriodList,
+  createOpenMeteoTimePeriodList,
   groupOpenMeteoHourlyForecastByDateTimePeriod,
   normalizeOpenMeteoForecastTimeInterval,
   OPEN_METEO_TIME_INTERVAL_MAP,
@@ -25,7 +25,7 @@ function App() {
     hourlyForecastItemsList,
   );
 
-  const dailyTimePeriodForecastList = createOpenMeteoDailyTimePeriodList(
+  const dailyTimePeriodForecastList = createOpenMeteoTimePeriodList(
     dateTimePeriodGroupsList,
   );
 
