@@ -14,6 +14,17 @@ import {
   WindBeaufort10,
   WindBeaufort11,
   WindBeaufort12,
+  MoonFirstQuarter,
+  MoonFull,
+  MoonLastQuarter,
+  MoonNew,
+  MoonWaningCrescent,
+  MoonWaningGibbous,
+  MoonWaxingCrescent,
+  MoonWaxingGibbous,
+  Sunrise,
+  Sunset,
+  ClearDay,
 } from "@/assets/icons/meteocons/fill";
 import {
   isWmoCodeRain,
@@ -24,6 +35,7 @@ import {
   type OpenMeteoIsDayVariable,
   type OpenMeteoNumberVar,
   type OpenMeteoPrecipitationVariable,
+  type OpenMeteoStringVar,
   type OpenMeteoWeatherCodeVariable,
 } from "@/entities";
 import { type IconComponent } from "@/components";
@@ -102,4 +114,58 @@ export const getWindSpeedIcon = (speed: OpenMeteoNumberVar): IconComponent => {
   }
   const beaufortRank = getBeaufortRank(speed);
   return BEAUFORT_RANK_ICON_MAP[beaufortRank];
+};
+
+const getMoonPhaseIcon = () => {
+  const date = new Date();
+  const LUNAR_MONTH = 29.530588853;
+  const referenceDate = new Date(2000, 0, 6, 12, 24, 1);
+
+  const totalDays = (date.getTime() - referenceDate.getTime()) / 86400000;
+  const age = ((totalDays % LUNAR_MONTH) + LUNAR_MONTH) % LUNAR_MONTH;
+
+  // Divide the month into 8 equal segments (0-7)
+  const phaseIndex = Math.floor((age / LUNAR_MONTH) * 8 + 0.5) % 8;
+
+  const icons = [
+    MoonNew, // 0
+    MoonWaxingCrescent, // 1
+    MoonFirstQuarter, // 2
+    MoonWaxingGibbous, // 3
+    MoonFull, // 4
+    MoonWaningGibbous, // 5
+    MoonLastQuarter, // 6
+    MoonWaningCrescent, // 7
+  ];
+
+  return icons[phaseIndex];
+};
+
+export const getCelestialIcon = (
+  sunrise: OpenMeteoStringVar,
+  sunset: OpenMeteoStringVar,
+) => {
+  if (
+    sunrise === undefined ||
+    sunset === undefined ||
+    sunrise === null ||
+    sunset === null
+  ) {
+    return ClearDay;
+  }
+
+  const now = new Date().getTime();
+  const rise = new Date(sunrise).getTime();
+  const set = new Date(sunset).getTime();
+
+  if (now < rise || now > set) return getMoonPhaseIcon(); // Night time
+
+  const totalDaylight = set - rise;
+  const progress = ((now - rise) / totalDaylight) * 100;
+
+  if (progress < 15) return Sunrise; // Your 6-9 range
+  if (progress < 30) return ClearDay; // Your 9-12 range
+  if (progress < 70) return ClearDay; // High Noon
+  if (progress < 85) return Sunset; // Your 18-12 range
+  return Sunset;
 };
