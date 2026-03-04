@@ -20,11 +20,51 @@ export const formatOpenMeteoValue = {
    * Condition
    */
 
-  conditionDescription: (weatherCode: OpenMeteoWmoVar) => {
+  conditionDescription: (weatherCode: OpenMeteoWmoVar): string => {
     if (weatherCode === null || weatherCode === undefined) {
       return MEASUREMENT_LABELS_MAP.emptyValue;
     }
     return WMO_CODES_MAP[weatherCode];
+  },
+
+  /**
+   * Direction
+   */
+
+  cardinalDirection: (degree: OpenMeteoNumberVar): string => {
+    if (degree === null || degree === undefined) {
+      return MEASUREMENT_LABELS_MAP.emptyValue;
+    }
+
+    const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+
+    // Divide by 45 degrees, round to nearest integer,
+    // and use modulo 8 to wrap 360 back to 0 (North).
+    const index = Math.round(degree / 45) % 8;
+
+    return directions[index];
+  },
+
+  /**
+   * Speed
+   */
+
+  /**
+   * Wind
+   */
+
+  windSpeed: (speed: OpenMeteoNumberVar): string => {
+    if (speed === null || speed === undefined) {
+      return MEASUREMENT_LABELS_MAP.emptyValue;
+    }
+    return `${Math.round(speed)} ${MEASUREMENT_LABELS_MAP["km/h"]}`;
+  },
+
+  gustSpeed: (speed: OpenMeteoNumberVar): string => {
+    if (speed === null || speed === undefined) {
+      return MEASUREMENT_LABELS_MAP.emptyValue;
+    }
+    return `${FORECAST_LABELS_MAP.gustLabel} ${Math.round(speed)} ${MEASUREMENT_LABELS_MAP["km/h"]}`;
   },
 
   /**

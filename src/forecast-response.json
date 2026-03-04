@@ -13,7 +13,10 @@
     "temperature_2m": 7.7,
     "is_day": 0,
     "apparent_temperature": 5.4,
-    "weather_code": 0
+    "weather_code": 0,
+    "wind_speed_10m": 7.7,
+    "wind_direction_10m": 11,
+    "wind_gusts_10m": 16.2
   },
   "hourly_units": {
     "time": "iso8601",

@@ -11,7 +11,7 @@ export const CurrentDayConditionCard = ({
 }: CurrentDayConditionCardProps) => {
   return (
     <Card className={cn("p-4")}>
-      <FlexCol>
+      <FlexCol justify="between" className={cn("w-full", "h-full")}>
         <Text type="body2">{fullDateLabel}</Text>
         <FlexRow justify="center">
           <ConditionIcon size={60} />
@@ -23,7 +23,7 @@ export const CurrentDayConditionCard = ({
           </FlexCol>
           <FlexCol gap={0}>
             <Text type="caption">{FORECAST_LABELS_MAP.sunset}</Text>
-            <Text type="body1">{sunsetTimeLabel}</Text>
+            <Text>{sunsetTimeLabel}</Text>
           </FlexCol>
         </FlexRow>
       </FlexCol>

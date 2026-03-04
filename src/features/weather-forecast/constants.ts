@@ -13,6 +13,8 @@ export const FORECAST_SHARED_LABELS_MAP = {
   lLabel: "L:",
   sunrise: "Sunrise",
   sunset: "Sunset",
+  gustLabel: "Gust:",
+  wind: "Wind",
 } as const;
 
 export const FORECAST_DIURNAL_PERIOD_LABELS_MAP = {
