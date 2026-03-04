@@ -84,6 +84,8 @@ function App() {
             <CurrentDayVisibilityCard />
             <CurrentDayCeilingCard />
             <PriorDayTemperatureRangeCard />
+            {/* Air Quality? */}
+            {/* UV? */}
           </FlexRow>
         </FlexCol>
         <FlexCol>
