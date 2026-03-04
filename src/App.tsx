@@ -9,6 +9,13 @@ import {
 } from "@/entities";
 import {
   FORECAST_LABELS_MAP,
+  // CurrentDayCeilingCard,
+  CurrentDayConditionCard,
+  CurrentDayHumidityCard,
+  CurrentDayPressureCard,
+  CurrentDayVisibilityCard,
+  CurrentDayWindCard,
+  // PriorDayTemperatureRangeCard,
   DailyTimePeriodWeatherCard,
   DiurnalPeriodWeatherCard,
   HourlyWeatherCard,
@@ -49,11 +56,6 @@ function App() {
     ...dailyForecastItemsList[0],
   });
 
-  console.log({
-    ...(forecastResponse.current ? forecastResponse.current : {}),
-    ...dailyForecastItemsList[0],
-  });
-
   return (
     <Section>
       <FlexCol gap={8}>
@@ -61,6 +63,18 @@ function App() {
           <Text type="headline6">{FORECAST_LABELS_MAP.current}</Text>
           <FlexRow stretchItems>
             <CurrentWeatherCard {...currentWeatherCardProps} />
+          </FlexRow>
+        </FlexCol>
+        <FlexCol>
+          <Text type="headline6">{FORECAST_LABELS_MAP.todaysConditions}</Text>
+          <FlexRow stretchItems>
+            <CurrentDayConditionCard />
+            <CurrentDayWindCard />
+            <CurrentDayPressureCard />
+            <CurrentDayHumidityCard />
+            <CurrentDayVisibilityCard />
+            {/* CurrentDayCeilingCard */}
+            {/* PriorDayTemperatureRangeCard */}
           </FlexRow>
         </FlexCol>
         <FlexCol>

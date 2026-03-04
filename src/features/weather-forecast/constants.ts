@@ -4,6 +4,7 @@
 
 export const FORECAST_SHARED_LABELS_MAP = {
   current: "Current",
+  todaysConditions: "Today's Conditions",
   hourly: "Hourly",
   sevenDays: "7 days",
   fourteenDays: "14 days",
