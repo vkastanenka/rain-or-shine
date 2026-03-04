@@ -1,4 +1,4 @@
-import { FlexRow, FlexCol, Text } from "@/components";
+import { Card, FlexRow, FlexCol, Text } from "@/components";
 import { cn } from "@/utils";
 import { WeatherCardPrecipitationScale } from "../WeatherCardPrecipitationScale";
 import { type BaseWeatherCardProps } from "./base-weather-card.types";
@@ -16,10 +16,7 @@ export const BaseWeatherCard = ({
   ...props
 }: BaseWeatherCardProps) => {
   return (
-    <div
-      className={cn("bg-mauve-700", "rounded-lg", "pt-3", "overflow-hidden")}
-      {...props}
-    >
+    <Card className={cn("pt-3")} {...props}>
       <FlexCol gap={4} className={cn("w-full", "h-full")}>
         <FlexCol align="center" className={cn("px-3", "w-full")}>
           <Text>{primaryTimeLabel}</Text>
@@ -40,6 +37,6 @@ export const BaseWeatherCard = ({
           weatherCode={weatherCode}
         />
       </FlexCol>
-    </div>
+    </Card>
   );
 };

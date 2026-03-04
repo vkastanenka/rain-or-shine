@@ -8,17 +8,28 @@ import {
   type OpenMeteoForecastResponse,
 } from "@/entities";
 import {
+  FORECAST_LABELS_MAP,
   DailyTimePeriodWeatherCard,
   DiurnalPeriodWeatherCard,
-  FORECAST_LABELS_MAP,
   HourlyWeatherCard,
 } from "@/features";
-import weatherResponse from "./hourlyWeather.json";
+import forecastResponseJson from "./forecast-response.json";
+import {
+  CurrentWeatherCard,
+  getCurrentWeatherCardProps,
+} from "./features/weather-forecast/components/current-weather-card";
 
 function App() {
+  const forecastResponse = forecastResponseJson as OpenMeteoForecastResponse;
+
   const hourlyForecastItemsList = normalizeOpenMeteoForecastTimeInterval(
-    weatherResponse as OpenMeteoForecastResponse,
+    forecastResponse,
     OPEN_METEO_TIME_INTERVAL_MAP.Hourly,
+  );
+
+  const dailyForecastItemsList = normalizeOpenMeteoForecastTimeInterval(
+    forecastResponse,
+    OPEN_METEO_TIME_INTERVAL_MAP.Daily,
   );
 
   const dateTimePeriodGroupsList = groupOpenMeteoHourlyForecastByDateTimePeriod(
@@ -33,9 +44,25 @@ function App() {
     hourlyForecastItemsList,
   );
 
+  const currentWeatherCardProps = getCurrentWeatherCardProps({
+    ...(forecastResponse.current ? forecastResponse.current : {}),
+    ...dailyForecastItemsList[0],
+  });
+
+  console.log({
+    ...(forecastResponse.current ? forecastResponse.current : {}),
+    ...dailyForecastItemsList[0],
+  });
+
   return (
     <Section>
       <FlexCol gap={8}>
+        <FlexCol>
+          <Text type="headline6">{FORECAST_LABELS_MAP.current}</Text>
+          <FlexRow stretchItems>
+            <CurrentWeatherCard {...currentWeatherCardProps} />
+          </FlexRow>
+        </FlexCol>
         <FlexCol>
           <Text type="headline6">{FORECAST_LABELS_MAP.hourly}</Text>
           <FlexRow stretchItems>

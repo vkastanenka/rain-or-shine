@@ -8,9 +8,21 @@ import {
   type ForecastDiurnalPeriodMapValue,
 } from "@/features";
 import { conversions } from "@/utils";
-import { type OpenMeteoNumberVar } from "../types";
+import { WMO_CODES_MAP } from "@/entities/wmo";
+import { type OpenMeteoNumberVar, type OpenMeteoWmoVar } from "../types";
 
 export const formatOpenMeteoValue = {
+  /**
+   * Condition
+   */
+
+  conditionDescription: (weatherCode: OpenMeteoWmoVar) => {
+    if (weatherCode === null || weatherCode === undefined) {
+      return MEASUREMENT_LABELS_MAP.emptyValue;
+    }
+    return WMO_CODES_MAP[weatherCode];
+  },
+
   /**
    * Time
    */
@@ -61,6 +73,27 @@ export const formatOpenMeteoValue = {
     if (value === null || value === undefined)
       return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
     return `${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
+  },
+
+  temperatureWithUnit: (value: OpenMeteoNumberVar): string => {
+    if (value === null || value === undefined) {
+      return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}${MEASUREMENT_LABELS_MAP.c}`;
+    }
+    return `${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}${MEASUREMENT_LABELS_MAP.c}`;
+  },
+
+  highTemperature: (value: OpenMeteoNumberVar): string => {
+    if (value === null || value === undefined) {
+      return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
+    }
+    return `${FORECAST_LABELS_MAP.hLabel} ${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
+  },
+
+  lowTemperature: (value: OpenMeteoNumberVar): string => {
+    if (value === null || value === undefined) {
+      return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
+    }
+    return `${FORECAST_LABELS_MAP.lLabel} ${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
   },
 
   apparentTemperature: (value: OpenMeteoNumberVar): string => {

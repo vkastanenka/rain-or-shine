@@ -1,6 +1,6 @@
 import {
   formatOpenMeteoValue,
-  type OpenMeteoForecastDailyTimePeriodListItem,
+  type OpenMeteoForecastTimePeriodListItem,
 } from "@/entities";
 import {
   getBaseWeatherCardProps,
@@ -8,7 +8,7 @@ import {
 } from "../base-weather-card";
 
 export const getDailyTimePeriodWeatherCardProps = (
-  props: OpenMeteoForecastDailyTimePeriodListItem,
+  props: OpenMeteoForecastTimePeriodListItem,
 ): BaseWeatherCardProps => ({
   ...getBaseWeatherCardProps(props),
   primaryTimeLabel: formatOpenMeteoValue.dailyTimePeriod(props.time),
