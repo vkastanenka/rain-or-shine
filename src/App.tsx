@@ -13,13 +13,13 @@ import {
   getCurrentDayConditionCardProps,
   getCurrentDayWindCardProps,
   FORECAST_LABELS_MAP,
-  // CurrentDayCeilingCard,
+  CurrentDayCeilingCard,
   CurrentDayConditionCard,
   CurrentDayHumidityCard,
   CurrentDayPressureCard,
   CurrentDayVisibilityCard,
   CurrentDayWindCard,
-  // PriorDayTemperatureRangeCard,
+  PriorDayTemperatureRangeCard,
   DailyTimePeriodWeatherCard,
   DiurnalPeriodWeatherCard,
   HourlyWeatherCard,
@@ -82,8 +82,8 @@ function App() {
             <CurrentDayPressureCard />
             <CurrentDayHumidityCard />
             <CurrentDayVisibilityCard />
-            {/* CurrentDayCeilingCard */}
-            {/* PriorDayTemperatureRangeCard */}
+            <CurrentDayCeilingCard />
+            <PriorDayTemperatureRangeCard />
           </FlexRow>
         </FlexCol>
         <FlexCol>
