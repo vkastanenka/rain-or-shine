@@ -9,7 +9,11 @@ import {
 } from "@/features";
 import { conversions } from "@/utils";
 import { WMO_CODES_MAP } from "@/entities/wmo";
-import { type OpenMeteoNumberVar, type OpenMeteoWmoVar } from "../types";
+import {
+  type OpenMeteoNumberVar,
+  type OpenMeteoStringVar,
+  type OpenMeteoWmoVar,
+} from "../types";
 
 export const formatOpenMeteoValue = {
   /**
@@ -26,6 +30,16 @@ export const formatOpenMeteoValue = {
   /**
    * Time
    */
+
+  fullDate: (date: string): string => {
+    if (!date) return MEASUREMENT_LABELS_MAP.emptyValue;
+    return formatDate(new Date(date), "MMMM d, yyyy");
+  },
+
+  fullTime: (date: OpenMeteoStringVar): string => {
+    if (!date) return MEASUREMENT_LABELS_MAP.emptyValue;
+    return formatDate(new Date(date), "h:mmaa");
+  },
 
   dayOfWeek: (date: string): string => {
     return formatDate(new Date(date), "EEE");

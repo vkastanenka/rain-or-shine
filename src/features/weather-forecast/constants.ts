@@ -11,6 +11,8 @@ export const FORECAST_SHARED_LABELS_MAP = {
   feels: "Feels",
   hLabel: "H:",
   lLabel: "L:",
+  sunrise: "Sunrise",
+  sunset: "Sunset",
 } as const;
 
 export const FORECAST_DIURNAL_PERIOD_LABELS_MAP = {

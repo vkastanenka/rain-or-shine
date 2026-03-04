@@ -1,6 +1,32 @@
-import { Card } from "@/components";
+import { Card, FlexCol, FlexRow, Text } from "@/components";
+import { FORECAST_LABELS_MAP } from "@/features";
 import { cn } from "@/utils";
+import { type CurrentDayConditionCardProps } from "./current-day-condition-card.types";
 
-export const CurrentDayConditionCard = () => {
-  return <Card className={cn("p-4")}>Current Day Condition Card</Card>;
+export const CurrentDayConditionCard = ({
+  fullDateLabel,
+  ConditionIcon,
+  sunriseTimeLabel,
+  sunsetTimeLabel,
+}: CurrentDayConditionCardProps) => {
+  return (
+    <Card className={cn("p-4")}>
+      <FlexCol>
+        <Text type="body2">{fullDateLabel}</Text>
+        <FlexRow justify="center">
+          <ConditionIcon size={60} />
+        </FlexRow>
+        <FlexRow justify="between">
+          <FlexCol gap={0}>
+            <Text type="caption">{FORECAST_LABELS_MAP.sunrise}</Text>
+            <Text type="body1">{sunriseTimeLabel}</Text>
+          </FlexCol>
+          <FlexCol gap={0}>
+            <Text type="caption">{FORECAST_LABELS_MAP.sunset}</Text>
+            <Text type="body1">{sunsetTimeLabel}</Text>
+          </FlexCol>
+        </FlexRow>
+      </FlexCol>
+    </Card>
+  );
 };

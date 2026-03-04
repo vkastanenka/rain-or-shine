@@ -8,6 +8,9 @@ import {
   type OpenMeteoForecastResponse,
 } from "@/entities";
 import {
+  CurrentWeatherCard,
+  getCurrentWeatherCardProps,
+  getCurrentDayConditionCardProps,
   FORECAST_LABELS_MAP,
   // CurrentDayCeilingCard,
   CurrentDayConditionCard,
@@ -21,10 +24,6 @@ import {
   HourlyWeatherCard,
 } from "@/features";
 import forecastResponseJson from "./forecast-response.json";
-import {
-  CurrentWeatherCard,
-  getCurrentWeatherCardProps,
-} from "./features/weather-forecast/components/current-weather-card";
 
 function App() {
   const forecastResponse = forecastResponseJson as OpenMeteoForecastResponse;
@@ -56,6 +55,16 @@ function App() {
     ...dailyForecastItemsList[0],
   });
 
+  const currentDayConditionCardProps = getCurrentDayConditionCardProps({
+    ...(forecastResponse.current ? forecastResponse.current : {}),
+    ...dailyForecastItemsList[0],
+  });
+
+  console.log({
+    ...(forecastResponse.current ? forecastResponse.current : {}),
+    ...dailyForecastItemsList[0],
+  });
+
   return (
     <Section>
       <FlexCol gap={8}>
@@ -68,7 +77,7 @@ function App() {
         <FlexCol>
           <Text type="headline6">{FORECAST_LABELS_MAP.todaysConditions}</Text>
           <FlexRow stretchItems>
-            <CurrentDayConditionCard />
+            <CurrentDayConditionCard {...currentDayConditionCardProps} />
             <CurrentDayWindCard />
             <CurrentDayPressureCard />
             <CurrentDayHumidityCard />

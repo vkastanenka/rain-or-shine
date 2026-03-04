@@ -11,3 +11,4 @@ export * from "./current-day-pressure-card";
 export * from "./current-day-visibility-card";
 export * from "./current-day-wind-card";
 export * from "./prior-day-temperature-range-card";
+export * from "./current-weather-card";
