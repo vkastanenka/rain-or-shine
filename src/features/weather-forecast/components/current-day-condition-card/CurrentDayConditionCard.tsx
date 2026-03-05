@@ -6,7 +6,6 @@ import { SunPathIcon } from "../sun-path-icon/SunPathIcon";
 
 export const CurrentDayConditionCard = ({
   fullDateLabel,
-  ConditionIcon,
   sunriseTimeLabel,
   sunsetTimeLabel,
 }: CurrentDayConditionCardProps) => {
@@ -16,7 +15,6 @@ export const CurrentDayConditionCard = ({
         <Text type="body2">{fullDateLabel}</Text>
         <FlexRow justify="center">
           <SunPathIcon />
-          {/* <ConditionIcon size={60} /> */}
         </FlexRow>
         <FlexRow justify="between">
           <FlexCol gap={0}>
