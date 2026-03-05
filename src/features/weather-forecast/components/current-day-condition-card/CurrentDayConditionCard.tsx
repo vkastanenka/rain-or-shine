@@ -2,6 +2,7 @@ import { Card, FlexCol, FlexRow, Text } from "@/components";
 import { FORECAST_LABELS_MAP } from "@/features";
 import { cn } from "@/utils";
 import { type CurrentDayConditionCardProps } from "./current-day-condition-card.types";
+import { SunPathIcon } from "../sun-path-icon/SunPathIcon";
 
 export const CurrentDayConditionCard = ({
   fullDateLabel,
@@ -14,7 +15,8 @@ export const CurrentDayConditionCard = ({
       <FlexCol justify="between" className={cn("w-full", "h-full")}>
         <Text type="body2">{fullDateLabel}</Text>
         <FlexRow justify="center">
-          <ConditionIcon size={60} />
+          <SunPathIcon />
+          {/* <ConditionIcon size={60} /> */}
         </FlexRow>
         <FlexRow justify="between">
           <FlexCol gap={0}>
