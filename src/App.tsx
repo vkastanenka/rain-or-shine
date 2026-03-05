@@ -80,10 +80,10 @@ function App() {
             <CurrentDayConditionCard {...currentDayConditionCardProps} />
             <CurrentDayWindCard {...currentDayWindCardProps} />
             <CurrentDayPressureCard />
-            <CurrentDayHumidityCard />
-            <CurrentDayVisibilityCard />
-            <CurrentDayCeilingCard />
-            <PriorDayTemperatureRangeCard />
+            {/* <CurrentDayHumidityCard /> */}
+            {/* <CurrentDayVisibilityCard /> */}
+            {/* <CurrentDayCeilingCard /> */}
+            {/* <PriorDayTemperatureRangeCard /> */}
             {/* Air Quality? */}
             {/* UV? */}
           </FlexRow>

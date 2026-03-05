@@ -20,7 +20,7 @@ const SunPathSVG = React.forwardRef<SVGSVGElement, SunPathIconProps>(
     },
     ref,
   ) => {
-    const progress = 90;
+    const progress = 0;
 
     // 1. Define the geometry of the arch
     const centerX = 67; // Middle of the 134px original grid
@@ -53,7 +53,7 @@ const SunPathSVG = React.forwardRef<SVGSVGElement, SunPathIconProps>(
 
     return (
       <svg
-        viewBox="0 0 134 134"
+        viewBox="10 27 116 68"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
         {...props} // IconWrapper passes width="100%", height="100%", and classNames here
