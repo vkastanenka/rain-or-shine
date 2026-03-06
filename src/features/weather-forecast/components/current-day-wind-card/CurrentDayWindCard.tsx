@@ -22,7 +22,7 @@ export const CurrentDayWindCard = ({
           </FlexRow>
         </FlexCol>
         <FlexRow justify="center">
-          <WindSpeedIcon size={60} />
+          <WindSpeedIcon size={140} />
         </FlexRow>
         <Text>{gustSpeedLabel}</Text>
       </FlexCol>
