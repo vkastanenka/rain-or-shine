@@ -2,21 +2,36 @@ import React from "react";
 import { IconWrapper } from "@/components";
 
 interface HumidityLevelIconProps {
-  size?: number | string;
-  className?: string;
-  humidColor?: string; // Allow overriding the "Humid" text color
+  humidity: number;
 }
 
 export const HumidityLevelSvg = React.forwardRef<
   SVGSVGElement,
   HumidityLevelIconProps
->(({ ...props }, ref) => {
+>(({ humidity = 24, ...props }, ref) => {
   const humidColor = "#ffea53";
+  const normalColor = "#fff";
+
+  // Thresholds
+  const isDry = humidity <= 24;
+  const isModerate = humidity > 24 && humidity <= 75;
+  const isHumid = humidity > 75;
+
+  // Total markers in your SVG: 11 paths were defined in your original snippet
+  // We'll map 0-100% to 11 steps
+  const totalMarkers = 11;
+  const activeMarkersCount = Math.round((humidity / 100) * totalMarkers);
+
+  // The Y coordinates from your original SVG (top to bottom)
+  const markerYCoords = [
+    959.819, 966.068, 972.318, 978.567, 984.816, 991.065, 997.315, 1003.564,
+    1009.813, 1016.062, 1022.312,
+  ];
+
   return (
     <svg
       viewBox="17 43 106 75"
       xmlns="http://www.w3.org/2000/svg"
-      id="humidity-icon"
       ref={ref}
       {...props}
     >
@@ -32,60 +47,67 @@ export const HumidityLevelSvg = React.forwardRef<
         <path fill="#d6e3ec" d="m266.476 997.134-.157.188Z" />
 
         <g id="Labels_and_Markers">
+          {/* Labels with conditional styling */}
           <text
-            fill="#fff"
+            fill={isDry ? humidColor : normalColor}
             fontSize="8"
-            fontWeight="500"
-            opacity="0.697"
+            fontWeight={isDry ? "800" : "500"}
+            opacity={isDry ? "1" : "0.5"}
             transform="translate(331.8 1023.804)"
+            style={{ transition: "all 0.3s" }}
           >
             <tspan x="0" y="0">
               Dry
             </tspan>
           </text>
+
           <text
-            fill="#fff"
+            fill={isModerate ? humidColor : normalColor}
             fontSize="8"
-            fontWeight="500"
-            opacity="0.704"
+            fontWeight={isModerate ? "800" : "500"}
+            opacity={isModerate ? "1" : "0.5"}
             transform="translate(331.8 991.78)"
+            style={{ transition: "all 0.3s" }}
           >
             <tspan x="0" y="0">
               Moderate
             </tspan>
           </text>
+
           <text
-            fill={humidColor}
+            fill={isHumid ? humidColor : normalColor}
             fontSize="8"
-            fontWeight="700"
+            fontWeight={isHumid ? "800" : "500"}
+            opacity={isHumid ? "1" : "0.5"}
             transform="translate(331.354 961)"
+            style={{ transition: "all 0.3s" }}
           >
             <tspan x="0" y="0">
               Humid
             </tspan>
           </text>
 
-          {/* Status Markers (White) */}
-          <g fill="#fff">
-            {[
-              978.567, 984.816, 991.065, 997.315, 1003.564, 1009.813, 1016.062,
-              1022.312,
-            ].map((y, i) => (
-              <path
-                key={`white-line-${i}`}
-                d={`M326.938 ${y}h-5.356a1.25 1.25 0 0 1-1.25-1.25 1.25 1.25 0 0 1 1.25-1.25h5.356a1.25 1.25 0 0 1 1.25 1.25 1.25 1.25 0 0 1-1.25 1.25Z`}
-              />
-            ))}
-          </g>
+          {/* Dynamic Markers */}
+          <g>
+            {markerYCoords.map((y, i) => {
+              // Calculate if this specific marker should be "lit"
+              // Since markers are top-down in array, index 10 is the bottom-most
+              const markerIndexFromBottom = totalMarkers - i;
+              const isActive = markerIndexFromBottom <= activeMarkersCount;
 
-          {/* Status Markers (Greyed out) */}
-          <g fill="#a2a2a2" opacity="0.503">
-            {[959.819, 966.068, 972.318].map((y, i) => (
-              <path
-                key={`grey-line-${i}`}
-                d={`M326.938 ${y}h-5.356a1.25 1.25 0 0 1-1.25-1.25 1.25 1.25 0 0 1 1.25-1.25h5.356a1.25 1.25 0 0 1 1.25 1.25 1.25 1.25 0 0 1-1.25 1.25Z`}
-              />
-            ))}
+              return (
+                <path
+                  key={`marker-${i}`}
+                  d={`M326.938 ${y}h-5.356a1.25 1.25 0 0 1-1.25-1.25 1.25 1.25 0 0 1 1.25-1.25h5.356a1.25 1.25 0 0 1 1.25 1.25 1.25 1.25 0 0 1-1.25 1.25Z`}
+                  fill={isActive ? "#fff" : "#a2a2a2"}
+                  opacity={isActive ? "1" : "0.3"}
+                  style={{
+                    transition: "all 0.2s ease-in",
+                    transitionDelay: `${(totalMarkers - i) * 30}ms`,
+                  }}
+                />
+              );
+            })}
           </g>
         </g>
 

@@ -33,7 +33,6 @@ const PressureGaugeSvg = React.forwardRef<
     <svg
       viewBox="13 53 109 73"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ display: "block" }}
       ref={ref}
       {...props}
     >
