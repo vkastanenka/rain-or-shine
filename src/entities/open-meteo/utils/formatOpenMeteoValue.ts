@@ -188,5 +188,13 @@ export const formatOpenMeteoValue = {
 
   pressure: (pressure: number): string => {
     return `${pressure.toFixed(1)} kPa`
+  },
+
+  /**
+   * Humidity
+   */
+
+  humidity: (humidity: number): string => {
+    return `${humidity}%`
   }
 };

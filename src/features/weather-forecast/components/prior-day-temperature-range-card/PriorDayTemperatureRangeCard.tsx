@@ -5,10 +5,10 @@ import { cn } from "@/utils";
 export const PriorDayTemperatureRangeCard = () => {
   return (
     <Card className={cn("p-4")}>
-      <FlexCol gap={4} className={cn("w-full", "h-full")}>
+      <FlexCol gap={8} className={cn("w-full", "h-full")}>
         <FlexCol gap={0}>
           <Text type="body2">Yesterday</Text>
-          <Text type="body2">Mon, Mar 2</Text>
+          <Text type="headline6">Mon, Mar 2</Text>
         </FlexCol>
         <FlexCol gap={0}>
           <FlexRow justify="center">

@@ -26,6 +26,7 @@ import {
 } from "@/features";
 import forecastResponseJson from "./forecast-response.json";
 import { getCurrentDayPressureCardProps } from "./features/weather-forecast/components/current-day-pressure-card/current-day-pressure-card.utils";
+import { getCurrentDayHumidityCardProps } from "./features/weather-forecast/components/current-day-humidity-card/current-day-humidity-card.utils";
 
 function App() {
   const forecastResponse = forecastResponseJson as OpenMeteoForecastResponse;
@@ -71,6 +72,10 @@ function App() {
     ...(forecastResponse.current ? forecastResponse.current : { time: "" }),
   });
 
+  const currentDayHumidityCardProps = getCurrentDayHumidityCardProps({
+    ...(forecastResponse.current ? forecastResponse.current : { time: "" }),
+  });
+
   return (
     <Section>
       <FlexCol gap={8}>
@@ -88,12 +93,8 @@ function App() {
             />
             <CurrentDayWindCard {...currentDayWindCardProps} />
             <CurrentDayPressureCard {...currentDayPressureCardProps} />
-            <CurrentDayHumidityCard />
-            {/* <CurrentDayVisibilityCard /> */}
-            {/* <CurrentDayCeilingCard /> */}
-            {/* <PriorDayTemperatureRangeCard /> */}
-            {/* Air Quality? */}
-            {/* UV? */}
+            <CurrentDayHumidityCard {...currentDayHumidityCardProps} />
+            <PriorDayTemperatureRangeCard />
           </FlexRow>
         </FlexCol>
         <FlexCol>
