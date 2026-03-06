@@ -6,7 +6,7 @@ export const CurrentDayPressureCard = () => {
   return (
     <Card className={cn("p-4")}>
       Current Day Pressure Card
-      <PressureGaugeIcon />
+      <PressureGaugeIcon sizeX={140} />
     </Card>
   );
 };

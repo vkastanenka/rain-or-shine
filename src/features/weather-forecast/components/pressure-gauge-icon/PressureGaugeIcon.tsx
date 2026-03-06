@@ -1,19 +1,17 @@
 import React from "react";
+import { IconWrapper } from "@/components";
 
 interface PressureGaugeIconProps {
-  size?: number | string;
   className?: string;
 }
 
-export const PressureGaugeIcon: React.FC<PressureGaugeIconProps> = ({
-  size = 134,
-  className = "",
-}) => {
+const PressureGaugeSvg = React.forwardRef<
+  SVGSVGElement,
+  PressureGaugeIconProps
+>(({ className = "" }) => {
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 134 134"
+      viewBox="13 53 109 73"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       style={{ display: "block" }}
@@ -40,7 +38,7 @@ export const PressureGaugeIcon: React.FC<PressureGaugeIconProps> = ({
         `}</style>
       </defs>
       <g id="Pressure_Group">
-        <rect className="p-bg-none" width="134" height="134" />
+        {/* <rect className="p-bg-none" width="134" height="134" /> */}
         <path
           className="p-clr-1"
           d="M119.92,104.67a3.47,3.47,0,0,1,.06.45v4.12c0,.24,0,.48-.06.76H15.07c0-.47-.07-.93-.07-1.38,0-1.08,0-2.16,0-3.24h3.72l.22.42h.59c2.45-.06,4.9,0,7.35-.08,4.85-.15,9.71,0,14.57-.1,4.67-.11,9.34,0,14,0h.36c.35,0,.35,0,.41-.43a18,18,0,0,1,.54-2,10.9,10.9,0,0,1,7.12-6.71,14.46,14.46,0,0,1,3.69-.61c.67.07,1.33.11,2,.21a9.27,9.27,0,0,1,3,.92c-.33.14-.65.27-1,.39a10.89,10.89,0,0,0-4.87,3.73,11.3,11.3,0,0,0-2.08,5.65,7.53,7.53,0,0,0,0,1H78.52c.38,0,.43-.07.44-.47s0-.82,0-1.23c0-.17,0-.34,0-.53l.48,0c3.68-.06,7.35,0,11-.08,5.71-.15,11.43.08,17.15-.11,2.61-.08,5.22,0,7.83,0H116l0-.43a5,5,0,0,1,.54-.07C117.72,104.67,118.82,104.67,119.92,104.67Z"
@@ -144,4 +142,6 @@ export const PressureGaugeIcon: React.FC<PressureGaugeIconProps> = ({
       </g>
     </svg>
   );
-};
+});
+
+export const PressureGaugeIcon = IconWrapper(PressureGaugeSvg);
