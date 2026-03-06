@@ -5,7 +5,7 @@ export * from "./diurnal-period-weather-card";
 export * from "./hourly-weather-card";
 
 export * from "./current-day-ceiling-card";
-export * from "./current-day-condition-card";
+export * from "./current-day-celestial-cycle-card";
 export * from "./current-day-humidity-card";
 export * from "./current-day-pressure-card";
 export * from "./current-day-visibility-card";

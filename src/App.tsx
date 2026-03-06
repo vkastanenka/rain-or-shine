@@ -10,11 +10,11 @@ import {
 import {
   CurrentWeatherCard,
   getCurrentWeatherCardProps,
-  getCurrentDayConditionCardProps,
+  getCurrentDayCelestialCycleCardProps,
   getCurrentDayWindCardProps,
   FORECAST_LABELS_MAP,
   CurrentDayCeilingCard,
-  CurrentDayConditionCard,
+  CurrentDayCelestialCycleCard,
   CurrentDayHumidityCard,
   CurrentDayPressureCard,
   CurrentDayVisibilityCard,
@@ -56,7 +56,7 @@ function App() {
     ...dailyForecastItemsList[0],
   });
 
-  const currentDayConditionCardProps = getCurrentDayConditionCardProps({
+  const currentDayCelestialCycleCardProps = getCurrentDayCelestialCycleCardProps({
     ...(forecastResponse.current ? forecastResponse.current : {}),
     ...dailyForecastItemsList[0],
   });
@@ -77,7 +77,7 @@ function App() {
         <FlexCol>
           <Text type="headline6">{FORECAST_LABELS_MAP.todaysConditions}</Text>
           <FlexRow stretchItems>
-            <CurrentDayConditionCard {...currentDayConditionCardProps} />
+            <CurrentDayCelestialCycleCard {...currentDayCelestialCycleCardProps} />
             <CurrentDayWindCard {...currentDayWindCardProps} />
             <CurrentDayPressureCard />
             {/* <CurrentDayHumidityCard /> */}

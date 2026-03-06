@@ -22,9 +22,6 @@ import {
   MoonWaningGibbous,
   MoonWaxingCrescent,
   MoonWaxingGibbous,
-  Sunrise,
-  Sunset,
-  ClearDay,
 } from "@/assets/icons/meteocons/fill";
 import {
   isWmoCodeRain,
@@ -39,6 +36,7 @@ import {
   type OpenMeteoWeatherCodeVariable,
 } from "@/entities";
 import { type IconComponent } from "@/components";
+import { SunPathIcon } from "../components/sun-path-icon/SunPathIcon";
 
 export const getWeatherCardIcon = (
   weatherCode: OpenMeteoWeatherCodeVariable = 0,
@@ -141,31 +139,25 @@ const getMoonPhaseIcon = () => {
   return icons[phaseIndex];
 };
 
-export const getCelestialIcon = (
+export const getCelestialCycleIcon = (
   sunrise: OpenMeteoStringVar,
   sunset: OpenMeteoStringVar,
+  is_day: OpenMeteoIsDayVariable,
 ) => {
   if (
     sunrise === undefined ||
-    sunset === undefined ||
     sunrise === null ||
-    sunset === null
+    sunset === undefined ||
+    sunset === null ||
+    is_day === undefined ||
+    is_day === null
   ) {
-    return ClearDay;
+    return SunPathIcon;
   }
 
-  const now = new Date().getTime();
-  const rise = new Date(sunrise).getTime();
-  const set = new Date(sunset).getTime();
+  if (is_day) {
+    return SunPathIcon;
+  }
 
-  if (now < rise || now > set) return getMoonPhaseIcon(); // Night time
-
-  const totalDaylight = set - rise;
-  const progress = ((now - rise) / totalDaylight) * 100;
-
-  if (progress < 15) return Sunrise; // Your 6-9 range
-  if (progress < 30) return ClearDay; // Your 9-12 range
-  if (progress < 70) return ClearDay; // High Noon
-  if (progress < 85) return Sunset; // Your 18-12 range
-  return Sunset;
+  return getMoonPhaseIcon();
 };

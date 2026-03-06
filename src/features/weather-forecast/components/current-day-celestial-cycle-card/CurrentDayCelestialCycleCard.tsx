@@ -1,20 +1,21 @@
 import { Card, FlexCol, FlexRow, Text } from "@/components";
 import { FORECAST_LABELS_MAP } from "@/features";
 import { cn } from "@/utils";
-import { type CurrentDayConditionCardProps } from "./current-day-condition-card.types";
-import { SunPathIcon } from "../sun-path-icon/SunPathIcon";
+import { type CurrentDayCelestialCycleCardProps } from "./current-day-celestial-cycle-card.types";
 
-export const CurrentDayConditionCard = ({
+export const CurrentDayCelestialCycleCard = ({
+  Icon,
   fullDateLabel,
   sunriseTimeLabel,
   sunsetTimeLabel,
-}: CurrentDayConditionCardProps) => {
+  dayTimeProgress
+}: CurrentDayCelestialCycleCardProps) => {
   return (
     <Card className={cn("p-4")}>
       <FlexCol justify="between" className={cn("w-full", "h-full")}>
         <Text type="body2">{fullDateLabel}</Text>
         <FlexRow justify="center">
-          <SunPathIcon />
+          <Icon size={140} progress={dayTimeProgress} />
         </FlexRow>
         <FlexRow justify="between">
           <FlexCol gap={0}>

@@ -98,6 +98,23 @@ export const formatOpenMeteoValue = {
     return formatDate(new Date(time), "ha");
   },
 
+  dayTimeProgress: (sunrise: string, sunset: string): number => {
+    const start = new Date(sunrise).getTime();
+    const end = new Date(sunset).getTime();
+    const now = new Date().getTime();
+
+    // Calculate percentage: (current - start) / (end - start) * 100
+    const totalDaylight = end - start;
+    const elapsed = now - start;
+
+    const progress = Math.min(
+      Math.max((elapsed / totalDaylight) * 100, 0),
+      100,
+    );
+
+    return progress;
+  },
+
   /**
    * Precipitation
    */

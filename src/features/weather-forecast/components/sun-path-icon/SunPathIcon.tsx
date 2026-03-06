@@ -1,26 +1,16 @@
 import React from "react";
-// import { IconWrapper } from "@/components";
+import { IconWrapper } from "@/components";
 
 interface SunPathIconProps {
-  size?: number | string;
-  className?: string;
-  sunColor?: string; // The solid small sun
-  horizonColor?: string; // The horizontal line and arch
-  glowColor?: string; // The large faded circle
+  progress?: number;
 }
 
 // This is the internal component that IconWrapper will use
-const SunPathSVG = React.forwardRef<SVGSVGElement, SunPathIconProps>(
-  (
-    {
-      sunColor = "#FFE411",
-      horizonColor = "#A7D2D7",
-      glowColor = "#D7B574",
-      ...props
-    },
-    ref,
-  ) => {
-    const progress = 0;
+const SunPathIconSVG = React.forwardRef<SVGSVGElement, SunPathIconProps>(
+  ({ progress = 50, ...props }, ref) => {
+    const sunColor = "#FFE411";
+    const horizonColor = "#A7D2D7";
+    const glowColor = "#D7B574";
 
     // 1. Define the geometry of the arch
     const centerX = 67; // Middle of the 134px original grid
@@ -103,10 +93,9 @@ const SunPathSVG = React.forwardRef<SVGSVGElement, SunPathIconProps>(
 
         {/* Main Sun Circle */}
         <circle cx={sunX} cy={sunY} r="6.9" fill={sunColor} />
-        {/* <circle cx="44" cy="52.06" r="6.9" fill={sunColor} /> */}
       </svg>
     );
   },
 );
 
-export const SunPathIcon = SunPathSVG;
+export const SunPathIcon = IconWrapper(SunPathIconSVG);

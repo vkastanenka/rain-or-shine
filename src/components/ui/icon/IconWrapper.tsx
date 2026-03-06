@@ -6,23 +6,39 @@ export const IconWrapper = (
   SVGComponent: React.FC<React.SVGProps<SVGSVGElement>>,
 ) => {
   return forwardRef<SVGSVGElement, IconProps>(
-    ({ size, className, style, ...props }, ref) => {
+    ({ size, sizeX, sizeY, className, style, ...props }, ref) => {
       const containerSize = size
         ? typeof size === "number"
           ? `${size}px`
           : size
         : undefined;
 
+      const containerSizeX = sizeX
+        ? typeof sizeX === "number"
+          ? `${sizeX}px`
+          : sizeX
+        : undefined;
+
+      const containerSizeY = sizeY
+        ? typeof sizeY === "number"
+          ? `${sizeY}px`
+          : sizeY
+        : undefined;
+
       return (
         <div
           className={cn(
             "inline-block shrink-0",
-            !size && !className?.includes("w-") && "w-6 h-6",
+            !size &&
+              !sizeX &&
+              !sizeY &&
+              !className?.includes("w-") &&
+              "w-6 h-6",
             className,
           )}
           style={{
-            width: containerSize,
-            height: containerSize,
+            width: containerSizeX ?? containerSize,
+            height: containerSizeY ?? containerSize,
             ...style,
           }}
         >
