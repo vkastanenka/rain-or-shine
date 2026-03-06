@@ -181,4 +181,12 @@ export const formatOpenMeteoValue = {
       return `${MEASUREMENT_LABELS_MAP.emptyValue}${MEASUREMENT_LABELS_MAP["°"]}`;
     return `${FORECAST_LABELS_MAP[diurnalPeriod]} ${Math.round(value)}${MEASUREMENT_LABELS_MAP["°"]}`;
   },
+
+  /**
+   * Pressure
+   */
+
+  pressure: (pressure: number): string => {
+    return `${pressure.toFixed(1)} kPa`
+  }
 };

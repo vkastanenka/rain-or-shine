@@ -25,6 +25,7 @@ import {
   HourlyWeatherCard,
 } from "@/features";
 import forecastResponseJson from "./forecast-response.json";
+import { getCurrentDayPressureCardProps } from "./features/weather-forecast/components/current-day-pressure-card/current-day-pressure-card.utils";
 
 function App() {
   const forecastResponse = forecastResponseJson as OpenMeteoForecastResponse;
@@ -56,12 +57,17 @@ function App() {
     ...dailyForecastItemsList[0],
   });
 
-  const currentDayCelestialCycleCardProps = getCurrentDayCelestialCycleCardProps({
-    ...(forecastResponse.current ? forecastResponse.current : {}),
-    ...dailyForecastItemsList[0],
-  });
+  const currentDayCelestialCycleCardProps =
+    getCurrentDayCelestialCycleCardProps({
+      ...(forecastResponse.current ? forecastResponse.current : {}),
+      ...dailyForecastItemsList[0],
+    });
 
   const currentDayWindCardProps = getCurrentDayWindCardProps({
+    ...(forecastResponse.current ? forecastResponse.current : { time: "" }),
+  });
+
+  const currentDayPressureCardProps = getCurrentDayPressureCardProps({
     ...(forecastResponse.current ? forecastResponse.current : { time: "" }),
   });
 
@@ -77,9 +83,11 @@ function App() {
         <FlexCol>
           <Text type="headline6">{FORECAST_LABELS_MAP.todaysConditions}</Text>
           <FlexRow stretchItems>
-            <CurrentDayCelestialCycleCard {...currentDayCelestialCycleCardProps} />
+            <CurrentDayCelestialCycleCard
+              {...currentDayCelestialCycleCardProps}
+            />
             <CurrentDayWindCard {...currentDayWindCardProps} />
-            <CurrentDayPressureCard />
+            <CurrentDayPressureCard {...currentDayPressureCardProps} />
             {/* <CurrentDayHumidityCard /> */}
             {/* <CurrentDayVisibilityCard /> */}
             {/* <CurrentDayCeilingCard /> */}

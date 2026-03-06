@@ -10,7 +10,7 @@ interface PressureGaugeIconProps {
 const PressureGaugeSvg = React.forwardRef<
   SVGSVGElement,
   PressureGaugeIconProps
->(({ pressure = 95, className = "" }, ref) => {
+>(({ pressure = 95, ...props }, ref) => {
   const minP = 95;
   const maxP = 105;
   const percentage = Math.min(
@@ -33,10 +33,10 @@ const PressureGaugeSvg = React.forwardRef<
   return (
     <svg
       viewBox="13 53 109 73"
-      className={className}
       xmlns="http://www.w3.org/2000/svg"
       style={{ display: "block" }}
       ref={ref}
+      {...props}
     >
       <defs>
         <style>{`
