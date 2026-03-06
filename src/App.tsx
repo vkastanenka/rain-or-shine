@@ -6,6 +6,7 @@ import {
   normalizeOpenMeteoForecastTimeInterval,
   OPEN_METEO_TIME_INTERVAL_MAP,
   type OpenMeteoForecastResponse,
+  groupOpenMeteoHourlyForecastByDate,
 } from "@/entities";
 import {
   CurrentWeatherCard,
@@ -13,11 +14,9 @@ import {
   getCurrentDayCelestialCycleCardProps,
   getCurrentDayWindCardProps,
   FORECAST_LABELS_MAP,
-  CurrentDayCeilingCard,
   CurrentDayCelestialCycleCard,
   CurrentDayHumidityCard,
   CurrentDayPressureCard,
-  CurrentDayVisibilityCard,
   CurrentDayWindCard,
   PriorDayTemperatureRangeCard,
   DailyTimePeriodWeatherCard,
@@ -52,6 +51,12 @@ function App() {
   const diurnalPeriodGroupsList = groupOpenMeteoHourlyForecastByDiurnalPeriod(
     hourlyForecastItemsList,
   );
+
+  const hourlyForecastGroupByDateList = groupOpenMeteoHourlyForecastByDate(
+    hourlyForecastItemsList,
+  );
+
+  console.log(hourlyForecastGroupByDateList);
 
   const currentWeatherCardProps = getCurrentWeatherCardProps({
     ...(forecastResponse.current ? forecastResponse.current : {}),

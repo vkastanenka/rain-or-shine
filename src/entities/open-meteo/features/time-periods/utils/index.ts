@@ -3,6 +3,7 @@ export * from "./createOpenMeteoDiurnalPeriods";
 export * from "./createOpenMeteoTimePeriodList";
 export * from "./createOpenMeteoTimePeriodListData";
 export * from "./createOpenMeteoTimePeriodListItem";
+export * from "./groupOpenMeteoHourlyForecastByDate";
 export * from "./groupOpenMeteoHourlyForecastByDiurnalPeriod";
 export * from "./groupOpenMeteoHourlyForecastByTimePeriod";
 export * from "./groupOpenMeteoHourlyForecastByDateAndPeriod";
