@@ -85,6 +85,14 @@ export const formatOpenMeteoValue = {
     return formatDate(new Date(date), "EEE");
   },
 
+  dayOfWeekMonthDay: (date: string): string => {
+    return formatDate(new Date(date), "E MMM d");
+  },
+
+  hourMarker: (date: string): string => {
+    return formatDate(new Date(date), 'ha').toLowerCase();
+  },
+
   dailyTimePeriod: (date: string): ForecastTimePeriodLabelsMapValue => {
     const timePeriod = getDailyTimePeriodFromDate(date);
     return FORECAST_TIME_PERIOD_LABELS_MAP[timePeriod];
@@ -187,7 +195,7 @@ export const formatOpenMeteoValue = {
    */
 
   pressure: (pressure: number): string => {
-    return `${pressure.toFixed(1)} kPa`
+    return `${pressure.toFixed(1)} kPa`;
   },
 
   /**
@@ -195,6 +203,6 @@ export const formatOpenMeteoValue = {
    */
 
   humidity: (humidity: number): string => {
-    return `${humidity}%`
-  }
+    return `${humidity}%`;
+  },
 };

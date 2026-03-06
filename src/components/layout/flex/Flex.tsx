@@ -10,8 +10,8 @@ import { type FlexProps } from "./flex.types";
 export const Flex = ({
   direction = "row",
   justify = "start",
-  align = "stretch",
-  gap = 2,
+  align = "start",
+  gap = 0,
   wrap = false,
   stretchItems = false,
   className,

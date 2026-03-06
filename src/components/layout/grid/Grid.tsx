@@ -9,7 +9,7 @@ import { type GridProps } from "./grid.types";
 
 export const Grid = ({
   cols = 1,
-  gap = 4,
+  gap = 0,
   align,
   justify,
   className,
