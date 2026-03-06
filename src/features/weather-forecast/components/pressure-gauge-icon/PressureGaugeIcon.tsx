@@ -6,7 +6,6 @@ interface PressureGaugeIconProps {
   className?: string;
 }
 
-// 101.3
 const PressureGaugeSvg = React.forwardRef<
   SVGSVGElement,
   PressureGaugeIconProps

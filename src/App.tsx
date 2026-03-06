@@ -88,7 +88,7 @@ function App() {
             />
             <CurrentDayWindCard {...currentDayWindCardProps} />
             <CurrentDayPressureCard {...currentDayPressureCardProps} />
-            {/* <CurrentDayHumidityCard /> */}
+            <CurrentDayHumidityCard />
             {/* <CurrentDayVisibilityCard /> */}
             {/* <CurrentDayCeilingCard /> */}
             {/* <PriorDayTemperatureRangeCard /> */}

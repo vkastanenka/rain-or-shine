@@ -16,6 +16,7 @@ export const FORECAST_SHARED_LABELS_MAP = {
   gustLabel: "Gust:",
   wind: "Wind",
   pressure: "Pressure",
+  humidity: "Humidity",
 } as const;
 
 export const FORECAST_DIURNAL_PERIOD_LABELS_MAP = {

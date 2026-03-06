@@ -1,4 +1,5 @@
 import React from "react";
+import { IconWrapper } from "@/components";
 
 interface HumidityLevelIconProps {
   size?: number | string;
@@ -6,21 +7,19 @@ interface HumidityLevelIconProps {
   humidColor?: string; // Allow overriding the "Humid" text color
 }
 
-export const HumidityLevelIcon: React.FC<HumidityLevelIconProps> = ({
-  size = 134,
-  className = "",
-  humidColor = "#ffea53",
-}) => {
+export const HumidityLevelSvg = React.forwardRef<
+  SVGSVGElement,
+  HumidityLevelIconProps
+>(({ ...props }, ref) => {
+  const humidColor = "#ffea53";
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 134 134"
-      className={className}
+      viewBox="17 43 106 75"
       xmlns="http://www.w3.org/2000/svg"
       id="humidity-icon"
+      ref={ref}
+      {...props}
     >
-      {/* The translate (-246 -909) is kept to align with the path data */}
       <g transform="translate(-246 -909)">
         <rect
           fill="none"
@@ -122,4 +121,6 @@ export const HumidityLevelIcon: React.FC<HumidityLevelIconProps> = ({
       </g>
     </svg>
   );
-};
+});
+
+export const HumidityLevelIcon = IconWrapper(HumidityLevelSvg);
