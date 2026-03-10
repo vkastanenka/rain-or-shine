@@ -63,6 +63,9 @@
   --text-subtitle2--letter-spacing: 0.007em;
 
   /* --- Body & UI --- */
+  --text-large: 1.125rem; /* 18px */
+  --text-large--letter-spacing: 0.031em;
+
   --text-body1: 1rem; /* 16px */
   --text-body1--letter-spacing: 0.031em;
 

@@ -1,4 +1,4 @@
-import { cn } from "@/utils";
+import { cn, resolveResponsiveValues } from "@/utils";
 import { TEXT_TYPE_MAP } from "./text.constants";
 import { type TextProps } from "./text.types";
 
@@ -10,7 +10,10 @@ export const Text = ({
   ...props
 }: TextProps) => {
   return (
-    <Component className={cn(TEXT_TYPE_MAP[type], className)} {...props}>
+    <Component
+      className={cn(resolveResponsiveValues(type, TEXT_TYPE_MAP), className)}
+      {...props}
+    >
       {children}
     </Component>
   );

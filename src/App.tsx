@@ -78,9 +78,21 @@ function App() {
                     key={`${hourlyListItem.time}-${i}`}
                     className={cn("p-2", "sm:p-4", "w-full")}
                   >
-                    <FlexRow justify="between" align="center">
+                    <FlexRow
+                      gap={2}
+                      justify="between"
+                      align="center"
+                      className={cn(
+                        "max-w-110",
+                        "sm:max-w-3xl",
+                        "xl:max-w-5/6",
+                      )}
+                    >
                       <FlexCol>
-                        <Text>
+                        <Text
+                          type={{ base: "body2", sm: "body1", xl: "large" }}
+                          className="font-bold"
+                        >
                           {formatOpenMeteoValue.hourMarker(hourlyListItem.time)}
                         </Text>
                         <Flex
@@ -89,8 +101,8 @@ function App() {
                           align={{ base: "start", sm: "center" }}
                         >
                           <FlexRow gap={2} align="center">
-                            <Icon className="w-8 sm:w-15"></Icon>
-                            <Text type="headline2">
+                            <Icon className="w-8 sm:w-15, xl:w-18"></Icon>
+                            <Text type={{ base: "headline3", sm: "headline2" }}>
                               {formatOpenMeteoValue.temperature(
                                 hourlyListItem.temperature_2m,
                               )}
@@ -100,8 +112,18 @@ function App() {
                             direction={{ base: "col-reverse", sm: "col" }}
                             gap={0}
                           >
-                            <Text>{condition}</Text>
-                            <Text type="caption">
+                            <Text
+                              type={{ base: "body2", sm: "body1", xl: "large" }}
+                            >
+                              {condition}
+                            </Text>
+                            <Text
+                              type={{
+                                base: "caption",
+                                sm: "body2",
+                                xl: "body1",
+                              }}
+                            >
                               {formatOpenMeteoValue.apparentTemperature(
                                 hourlyListItem.apparent_temperature,
                               )}
@@ -111,12 +133,16 @@ function App() {
                       </FlexCol>
                       <Flex
                         direction={{ base: "col", sm: "row" }}
-                        gap={{ base: 0, sm: 16 }}
-                        className="lg:pr-32"
+                        gap={{ base: 0, sm: 2 }}
                       >
                         <Grid
                           cols={2}
-                          className={cn("gap-x-1", "gap-x-2", "w-full")}
+                          className={cn(
+                            "gap-x-1",
+                            "sm:gap-x-2",
+                            "w-full",
+                            "sm:w-auto",
+                          )}
                         >
                           <CardItem
                             Icon={WiWindDeg}
@@ -136,7 +162,12 @@ function App() {
                         </Grid>
                         <Grid
                           cols={2}
-                          className={cn("gap-x-1", "gap-x-2", "w-full")}
+                          className={cn(
+                            "gap-x-1",
+                            "sm:gap-x-2",
+                            "w-full",
+                            "sm:w-auto",
+                          )}
                         >
                           <CardItem
                             Icon={WiRain}
@@ -176,10 +207,14 @@ const CardItem = ({
   return (
     <>
       <FlexRow align="center" gap={1}>
-        <Icon className="w-4" />
-        <Text type="body2">{mainLabel}</Text>
+        <Icon className={cn("w-4", "sm:w-6", "xl:w-7", "fill-base-content")} />
+        <Text type={{ base: "caption", sm: "body2", xl: "body1" }}>
+          {mainLabel}
+        </Text>
       </FlexRow>
-      <Text type="body2">{secondaryLabel}</Text>
+      <Text type={{ base: "caption", sm: "body2", xl: "body1" }}>
+        {secondaryLabel}
+      </Text>
     </>
   );
 };

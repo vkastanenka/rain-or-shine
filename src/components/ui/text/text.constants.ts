@@ -7,6 +7,7 @@ export const TEXT_TYPE_MAP = {
   headline6: "text-h6",
   subtitle1: "text-subtitle1",
   subtitle2: "text-subtitle2",
+  large: "text-large",
   body1: "text-body1",
   body2: "text-body2",
   button: "text-button uppercase font-medium",

@@ -1,3 +1,4 @@
+import { type ResponsiveValue } from "@/utils";
 import { TEXT_TYPE_MAP } from "./text.constants";
 
 export type TextElement =
@@ -16,7 +17,7 @@ export type TextTypeMapValue =
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   element?: TextElement;
-  type?: TextTypeMapKey;
+  type?: ResponsiveValue<TextTypeMapKey>;
   className?: string;
   children: React.ReactNode;
 }
