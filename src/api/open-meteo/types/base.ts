@@ -1,7 +1,7 @@
-import { TIME_INTERVAL_MAP, TIME_INTERVAL_UNIT_MAP } from "../constants";
+import { FORECAST_INTERVALS, FORECAST_INTERVAL_UNITS } from "../constants";
 
-export type TimeIntervalMapValue =
-  (typeof TIME_INTERVAL_MAP)[keyof typeof TIME_INTERVAL_MAP];
+export type ForecastIntervalValue =
+  (typeof FORECAST_INTERVALS)[keyof typeof FORECAST_INTERVALS];
 
-export type TimeIntervalUnitMapValue =
-  (typeof TIME_INTERVAL_UNIT_MAP)[keyof typeof TIME_INTERVAL_UNIT_MAP];
+export type ForecastIntervalUnitValue =
+  (typeof FORECAST_INTERVAL_UNITS)[keyof typeof FORECAST_INTERVAL_UNITS];

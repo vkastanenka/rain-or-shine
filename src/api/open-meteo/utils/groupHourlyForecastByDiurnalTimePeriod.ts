@@ -1,13 +1,13 @@
 import { createForecastDiurnalTimePeriods } from "./createForecastDiurnalTimePeriods";
 import { createForecastTimePeriodList } from "./createForecastTimePeriodList";
 import type {
-  HourlyForecastByTimePeriodPeriodList,
-  NormalizedForecastHourlyListItem,
+  HourlyForecastDayCollection,
+  HourlyForecastRecord,
 } from "../types";
 
 export const groupHourlyForecastByDiurnalPeriod = (
-  hourlyList: NormalizedForecastHourlyListItem[],
-): HourlyForecastByTimePeriodPeriodList => {
+  hourlyList: HourlyForecastRecord[],
+): HourlyForecastDayCollection[] => {
   const timePeriods = createForecastDiurnalTimePeriods(hourlyList);
   const diurnalPeriodsListData = createForecastTimePeriodList(timePeriods);
   return diurnalPeriodsListData;

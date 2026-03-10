@@ -1,24 +1,15 @@
-import { TIME_INTERVAL_MAP } from "../constants";
-import type {
-  NormalizedForecastTimeIntervalListItem,
-  NormalizedForecastHourlyListItem,
-} from "./normalized";
+import type { HourlyForecastRecord } from "./normalized";
 
-export type ForecastTimePeriodListItem = NormalizedForecastTimeIntervalListItem<
-  typeof TIME_INTERVAL_MAP.Hourly
-> & { timePeriod: string };
-
-export type HourlyForecastTimePeriodList = ForecastTimePeriodListItem[];
-
-export type ForecastTimePeriods = Record<
+export type HourlyForecastGroupedByPeriod = Record<
   string,
-  Record<string, NormalizedForecastHourlyListItem[]>
+  Record<string, HourlyForecastRecord[]>
 >;
 
-export type HourlyForecastByTimePeriodListItem = {
-  time: string;
-  timePeriodItems: ForecastTimePeriodListItem[];
+export type HourlyForecastPeriodItem = HourlyForecastRecord & {
+  timePeriod: string;
 };
 
-export type HourlyForecastByTimePeriodPeriodList =
-  HourlyForecastByTimePeriodListItem[];
+export type HourlyForecastDayCollection = {
+  date: string;
+  periods: HourlyForecastPeriodItem[];
+};

@@ -1,12 +1,12 @@
-import type { NormalizedForecastHourlyListItem } from "../types";
+import type { HourlyForecastRecord } from "../types";
 
 export const groupHourlyForecastByDate = (
-  hourlyList: NormalizedForecastHourlyListItem[],
+  hourlyList: HourlyForecastRecord[],
 ) => {
   const dateMap: Record<string, boolean> = {};
   const grouped: {
     date: string;
-    list: NormalizedForecastHourlyListItem[];
+    list: HourlyForecastRecord[];
   }[] = [];
 
   hourlyList.forEach((hourlyListItem) => {

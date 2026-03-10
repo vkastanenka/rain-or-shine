@@ -1,5 +1,5 @@
 import { type WmoCodesMapKey } from "@/entities/wmo";
-import { TIME_INTERVAL_MAP, TIME_INTERVAL_UNIT_MAP } from "../constants";
+import { FORECAST_INTERVALS, FORECAST_INTERVAL_UNITS } from "../constants";
 
 export type ForecastVariablesUnits<T> = {
   [K in keyof T]: string;
@@ -262,15 +262,15 @@ export type ForecastMinutely15VariablesUnits =
  * Maps
  */
 export interface ForecastTimeIntervalVariablesMap {
-  [TIME_INTERVAL_MAP.Current]: ForecastCurrentVariables;
-  [TIME_INTERVAL_MAP.Daily]: ForecastDailyVariables;
-  [TIME_INTERVAL_MAP.Hourly]: ForecastHourlyVariables;
-  [TIME_INTERVAL_MAP.Minutely15]: ForecastMinutely15Variables;
+  [FORECAST_INTERVALS.Current]: ForecastCurrentVariables;
+  [FORECAST_INTERVALS.Daily]: ForecastDailyVariables;
+  [FORECAST_INTERVALS.Hourly]: ForecastHourlyVariables;
+  [FORECAST_INTERVALS.Minutely15]: ForecastMinutely15Variables;
 }
 
 export interface ForecastTimeIntervalVariablesUnitsMap {
-  [TIME_INTERVAL_UNIT_MAP.Current]: ForecastCurrentVariablesUnits;
-  [TIME_INTERVAL_UNIT_MAP.Daily]: ForecastDailyVariablesUnits;
-  [TIME_INTERVAL_UNIT_MAP.Hourly]: ForecastHourlyVariablesUnits;
-  [TIME_INTERVAL_UNIT_MAP.Minutely15]: ForecastMinutely15VariablesUnits;
+  [FORECAST_INTERVAL_UNITS.Current]: ForecastCurrentVariablesUnits;
+  [FORECAST_INTERVAL_UNITS.Daily]: ForecastDailyVariablesUnits;
+  [FORECAST_INTERVAL_UNITS.Hourly]: ForecastHourlyVariablesUnits;
+  [FORECAST_INTERVAL_UNITS.Minutely15]: ForecastMinutely15VariablesUnits;
 }

@@ -1,10 +1,10 @@
 import { type UnwrapArray } from "@/types";
-import { TIME_INTERVAL_MAP } from "../constants";
-import { type TimeIntervalMapValue } from "./base";
+import { FORECAST_INTERVALS } from "../constants";
+import { type ForecastIntervalValue } from "./base";
 import { type ForecastResponse } from "./responses";
 
-export type NormalizedForecastTimeIntervalListItem<
-  T extends TimeIntervalMapValue,
+export type ForecastRecord<
+  T extends ForecastIntervalValue,
   K extends keyof NonNullable<ForecastResponse[T]> = keyof NonNullable<
     ForecastResponse[T]
   >,
@@ -12,11 +12,14 @@ export type NormalizedForecastTimeIntervalListItem<
   [P in K]: UnwrapArray<NonNullable<ForecastResponse[T]>[P]>;
 };
 
-export type NormalizedForecastCurrentListItem =
-  NormalizedForecastTimeIntervalListItem<typeof TIME_INTERVAL_MAP.Current>;
+export type CurrentForecastRecord = ForecastRecord<
+  typeof FORECAST_INTERVALS.Current
+>;
 
-export type NormalizedForecastDailyListItem =
-  NormalizedForecastTimeIntervalListItem<typeof TIME_INTERVAL_MAP.Daily>;
+export type DailyForecastRecord = ForecastRecord<
+  typeof FORECAST_INTERVALS.Daily
+>;
 
-export type NormalizedForecastHourlyListItem =
-  NormalizedForecastTimeIntervalListItem<typeof TIME_INTERVAL_MAP.Hourly>;
+export type HourlyForecastRecord = ForecastRecord<
+  typeof FORECAST_INTERVALS.Hourly
+>;

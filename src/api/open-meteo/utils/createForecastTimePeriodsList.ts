@@ -1,14 +1,14 @@
-import type { ForecastTimePeriodListItem } from "../types";
+import type {
+  HourlyForecastDayCollection,
+  HourlyForecastPeriodItem,
+} from "../types";
 
 export const createForecastTimePeriodsList = (
-  timePeriodListData: {
-    time: string;
-    timePeriodItems: ForecastTimePeriodListItem[];
-  }[],
-): ForecastTimePeriodListItem[] => {
+  timePeriodListData: HourlyForecastDayCollection[],
+): HourlyForecastPeriodItem[] => {
   const timePeriodList = timePeriodListData.reduce(
-    (acc: ForecastTimePeriodListItem[], curr) => {
-      return [...acc, ...(curr?.timePeriodItems ?? [])];
+    (acc: HourlyForecastPeriodItem[], curr) => {
+      return [...acc, ...(curr?.periods ?? [])];
     },
     [],
   );

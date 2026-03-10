@@ -1,14 +1,11 @@
-import { calculateForecastHourlyListAverages } from "./calculateForecastHourlyListAverages";
-import type {
-  NormalizedForecastHourlyListItem,
-  ForecastTimePeriodListItem,
-} from "../types";
+import { calculateForecastHourlyListAverages } from "./calculations/calculateForecastHourlyListAverages";
+import type { HourlyForecastRecord, HourlyForecastPeriodItem } from "../types";
 
 export const createForecastTimePeriodListItem = (
   timePeriodKey: string,
-  hourlyItems: NormalizedForecastHourlyListItem[],
+  hourlyItems: HourlyForecastRecord[],
   fallbackDate: string,
-): ForecastTimePeriodListItem => {
+): HourlyForecastPeriodItem => {
   const averages = calculateForecastHourlyListAverages(hourlyItems);
 
   return {

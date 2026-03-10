@@ -1,8 +1,7 @@
-import type { NormalizedForecastHourlyListItem } from "../types";
+import type { HourlyForecastRecord } from "../../types";
 
-// change to reduce???
 export const calculateForecastHourlyListAverages = (
-  hourlyList: NormalizedForecastHourlyListItem[],
+  hourlyList: HourlyForecastRecord[],
 ): Record<string, number> => {
   const count = hourlyList.length;
   if (count === 0) return {};

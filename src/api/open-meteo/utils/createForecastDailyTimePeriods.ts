@@ -4,13 +4,13 @@ import {
 } from "@/features";
 import { groupHourlyForecastByDateAndTimePeriod } from "./groupHourlyForecastByDateAndTimePeriod";
 import type {
-  NormalizedForecastHourlyListItem,
-  ForecastTimePeriods,
+  HourlyForecastRecord,
+  HourlyForecastGroupedByPeriod,
 } from "../types";
 
 export const createForecastDailyTimePeriods = (
-  hourlyList: NormalizedForecastHourlyListItem[],
-): ForecastTimePeriods => {
+  hourlyList: HourlyForecastRecord[],
+): HourlyForecastGroupedByPeriod => {
   return groupHourlyForecastByDateAndTimePeriod(
     hourlyList,
     getDailyTimePeriodFromDate,
