@@ -1,4 +1,7 @@
-import { FORECAST_INTERVALS, FORECAST_INTERVAL_UNITS } from "../constants";
+import {
+  FORECAST_INTERVAL_MAP,
+  FORECAST_INTERVAL_UNIT_MAP,
+} from "../constants";
 import type {
   ForecastCurrentVariables,
   ForecastCurrentVariablesUnits,
@@ -20,14 +23,14 @@ export interface ForecastResponse {
   elevation: number;
 
   // Time Interval Data
-  [FORECAST_INTERVALS.Current]?: ForecastCurrentVariables;
-  [FORECAST_INTERVALS.Daily]?: ForecastDailyVariables;
-  [FORECAST_INTERVALS.Hourly]?: ForecastHourlyVariables;
-  [FORECAST_INTERVALS.Minutely15]?: ForecastMinutely15Variables;
+  [FORECAST_INTERVAL_MAP.Current]?: ForecastCurrentVariables;
+  [FORECAST_INTERVAL_MAP.Daily]?: ForecastDailyVariables;
+  [FORECAST_INTERVAL_MAP.Hourly]?: ForecastHourlyVariables;
+  [FORECAST_INTERVAL_MAP.Minutely15]?: ForecastMinutely15Variables;
 
   // Time Interval Units
-  [FORECAST_INTERVAL_UNITS.Current]?: ForecastCurrentVariablesUnits;
-  [FORECAST_INTERVAL_UNITS.Daily]?: ForecastDailyVariablesUnits;
-  [FORECAST_INTERVAL_UNITS.Hourly]?: ForecastHourlyVariablesUnits;
-  [FORECAST_INTERVAL_UNITS.Minutely15]?: ForecastMinutely15VariablesUnits;
+  [FORECAST_INTERVAL_UNIT_MAP.Current]?: ForecastCurrentVariablesUnits;
+  [FORECAST_INTERVAL_UNIT_MAP.Daily]?: ForecastDailyVariablesUnits;
+  [FORECAST_INTERVAL_UNIT_MAP.Hourly]?: ForecastHourlyVariablesUnits;
+  [FORECAST_INTERVAL_UNIT_MAP.Minutely15]?: ForecastMinutely15VariablesUnits;
 }

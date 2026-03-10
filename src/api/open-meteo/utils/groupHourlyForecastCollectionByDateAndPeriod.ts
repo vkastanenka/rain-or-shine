@@ -1,16 +1,16 @@
-import type { HourlyForecastRecord } from "../types";
+import type { DailyForecastMap, HourlyForecastRecord } from "../types";
 
-export const groupHourlyForecastByDateAndTimePeriod = <T extends string>(
-  hourlyList: HourlyForecastRecord[],
+export const groupHourlyForecastByDateAndPeriod = <T extends string>(
+  hourlyCollection: HourlyForecastRecord[],
   getPeriodFn: (time: string) => T,
   periodMap: Record<string, T>,
-) => {
+): DailyForecastMap => {
   const grouped: Record<string, Record<T, HourlyForecastRecord[]>> = {};
   const periodValues = Object.values(periodMap);
 
-  hourlyList.forEach((hourlyListItem) => {
-    const dateKey = hourlyListItem.time.split("T")[0];
-    const timePeriod = getPeriodFn(hourlyListItem.time);
+  hourlyCollection.forEach((record) => {
+    const dateKey = record.time.split("T")[0];
+    const timePeriod = getPeriodFn(record.time);
 
     if (!grouped[dateKey]) {
       grouped[dateKey] = periodValues.reduce(
@@ -22,7 +22,7 @@ export const groupHourlyForecastByDateAndTimePeriod = <T extends string>(
       );
     }
 
-    grouped[dateKey][timePeriod].push(hourlyListItem);
+    grouped[dateKey][timePeriod].push(record);
   });
 
   return grouped;

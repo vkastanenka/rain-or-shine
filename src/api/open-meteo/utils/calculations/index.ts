@@ -1,1 +1,1 @@
-export * from "./calculateForecastHourlyListAverages";
+export * from "./calculateHourlyForecastCollectionAverages";

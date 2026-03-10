@@ -1,11 +1,11 @@
-export const FORECAST_INTERVALS = {
+export const FORECAST_INTERVAL_MAP = {
   Current: "current",
   Daily: "daily",
   Minutely15: "minutely_15",
   Hourly: "hourly",
 } as const;
 
-export const FORECAST_INTERVAL_UNITS = {
+export const FORECAST_INTERVAL_UNIT_MAP = {
   Current: "current_units",
   Daily: "daily_units",
   Minutely15: "minutely_15_units",

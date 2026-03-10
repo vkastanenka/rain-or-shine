@@ -1,8 +1,8 @@
 import { type UnwrapArray } from "@/types";
-import { type ForecastResponse, type TimeIntervalMapValue } from "../types";
+import { type ForecastResponse, type ForecastIntervalMapValue } from "../types";
 
-export function normalizeForecastTimeInterval<
-  T extends TimeIntervalMapValue,
+export function normalizeForecastInterval<
+  T extends ForecastIntervalMapValue,
   K extends keyof NonNullable<ForecastResponse[T]>,
 >(
   data: ForecastResponse,
