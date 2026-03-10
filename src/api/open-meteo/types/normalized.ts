@@ -1,28 +1,22 @@
 import { type UnwrapArray } from "@/types";
-import { OPEN_METEO_TIME_INTERVAL_MAP } from "../constants";
-import { type OpenMeteoTimeIntervalMapValue } from "./base";
-import { type OpenMeteoForecastResponse } from "./responses";
+import { TIME_INTERVAL_MAP } from "../constants";
+import { type TimeIntervalMapValue } from "./base";
+import { type ForecastResponse } from "./responses";
 
-export type NormalizedOpenMeteoForecastTimeIntervalListItem<
-  T extends OpenMeteoTimeIntervalMapValue,
-  K extends keyof NonNullable<OpenMeteoForecastResponse[T]> = keyof NonNullable<
-    OpenMeteoForecastResponse[T]
+export type NormalizedForecastTimeIntervalListItem<
+  T extends TimeIntervalMapValue,
+  K extends keyof NonNullable<ForecastResponse[T]> = keyof NonNullable<
+    ForecastResponse[T]
   >,
 > = {
-  [P in K]: UnwrapArray<NonNullable<OpenMeteoForecastResponse[T]>[P]>;
+  [P in K]: UnwrapArray<NonNullable<ForecastResponse[T]>[P]>;
 };
 
-export type NormalizedOpenMeteoForecastCurrentListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Current
-  >;
+export type NormalizedForecastCurrentListItem =
+  NormalizedForecastTimeIntervalListItem<typeof TIME_INTERVAL_MAP.Current>;
 
-export type NormalizedOpenMeteoForecastDailyListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Daily
-  >;
+export type NormalizedForecastDailyListItem =
+  NormalizedForecastTimeIntervalListItem<typeof TIME_INTERVAL_MAP.Daily>;
 
-export type NormalizedOpenMeteoForecastHourlyListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Hourly
-  >;
+export type NormalizedForecastHourlyListItem =
+  NormalizedForecastTimeIntervalListItem<typeof TIME_INTERVAL_MAP.Hourly>;

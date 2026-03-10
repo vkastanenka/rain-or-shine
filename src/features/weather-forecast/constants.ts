@@ -46,7 +46,7 @@ export const FORECAST_DIURNAL_PERIOD_MAP = {
   Night: "night",
 } as const;
 
-export const FORECAST_TIME_PERIOD_MAP = {
+export const FORECAST_DAILY_TIME_PERIOD_MAP = {
   Morning: "morning",
   Afternoon: "afternoon",
   Evening: "evening",

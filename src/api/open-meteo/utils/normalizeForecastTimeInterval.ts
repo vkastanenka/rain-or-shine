@@ -1,18 +1,15 @@
 import { type UnwrapArray } from "@/types";
-import {
-  type OpenMeteoForecastResponse,
-  type OpenMeteoTimeIntervalMapValue,
-} from "../types";
+import { type ForecastResponse, type TimeIntervalMapValue } from "../types";
 
-export function normalizeOpenMeteoForecastTimeInterval<
-  T extends OpenMeteoTimeIntervalMapValue,
-  K extends keyof NonNullable<OpenMeteoForecastResponse[T]>,
+export function normalizeForecastTimeInterval<
+  T extends TimeIntervalMapValue,
+  K extends keyof NonNullable<ForecastResponse[T]>,
 >(
-  data: OpenMeteoForecastResponse,
+  data: ForecastResponse,
   timeIntervalKey: T,
   keysToExtract?: K[],
 ): Array<{
-  [P in K]: UnwrapArray<NonNullable<OpenMeteoForecastResponse[T]>[P]>;
+  [P in K]: UnwrapArray<NonNullable<ForecastResponse[T]>[P]>;
 }> {
   const group = data[timeIntervalKey];
 
@@ -27,7 +24,7 @@ export function normalizeOpenMeteoForecastTimeInterval<
   return timeArray.map((_, index) => {
     // 3. Use a Record type for the accumulator to avoid 'any'
     const item = {} as {
-      [P in K]: UnwrapArray<NonNullable<OpenMeteoForecastResponse[T]>[P]>;
+      [P in K]: UnwrapArray<NonNullable<ForecastResponse[T]>[P]>;
     };
 
     finalKeys.forEach((key) => {

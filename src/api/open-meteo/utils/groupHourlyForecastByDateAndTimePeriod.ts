@@ -1,13 +1,13 @@
-import type { NormalizedOpenMeteoForecastHourlyListItem } from "../types";
+import type { NormalizedForecastHourlyListItem } from "../types";
 
-export const groupOpenMeteoHourlyForecastByDateAndPeriod = <T extends string>(
-  hourlyList: NormalizedOpenMeteoForecastHourlyListItem[],
+export const groupHourlyForecastByDateAndTimePeriod = <T extends string>(
+  hourlyList: NormalizedForecastHourlyListItem[],
   getPeriodFn: (time: string) => T,
   periodMap: Record<string, T>,
 ) => {
   const grouped: Record<
     string,
-    Record<T, NormalizedOpenMeteoForecastHourlyListItem[]>
+    Record<T, NormalizedForecastHourlyListItem[]>
   > = {};
   const periodValues = Object.values(periodMap);
 
@@ -21,7 +21,7 @@ export const groupOpenMeteoHourlyForecastByDateAndPeriod = <T extends string>(
           acc[period] = [];
           return acc;
         },
-        {} as Record<T, NormalizedOpenMeteoForecastHourlyListItem[]>,
+        {} as Record<T, NormalizedForecastHourlyListItem[]>,
       );
     }
 

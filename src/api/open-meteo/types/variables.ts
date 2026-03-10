@@ -1,283 +1,276 @@
 import { type WmoCodesMapKey } from "@/entities/wmo";
-import {
-  OPEN_METEO_TIME_INTERVAL_MAP,
-  OPEN_METEO_TIME_INTERVAL_UNIT_MAP,
-} from "../constants";
-import {
-  type OpenMeteoIsDayValue,
-  type OpenMeteoForecastVariablesUnits,
-} from "./base";
+import { TIME_INTERVAL_MAP, TIME_INTERVAL_UNIT_MAP } from "../constants";
+
+export type ForecastVariablesUnits<T> = {
+  [K in keyof T]: string;
+};
 
 /**
  * Base Variable Types
  */
-export type OpenMeteoNumberVar = number | null | undefined;
-export type OpenMeteoStringVar = string | null | undefined;
-export type OpenMeteoWmoVar = WmoCodesMapKey | null | undefined;
-export type OpenMeteoDayVar = OpenMeteoIsDayValue | null | undefined;
+export type NumberVar = number | null | undefined;
+export type StringVar = string | null | undefined;
+export type WmoVar = WmoCodesMapKey | null | undefined;
+export type DayVar = 1 | 0 | null | undefined;
 
 /**
  * Shared Type Definitions
  */
-export type OpenMeteoTimeVariable = string;
-export type OpenMeteoApparentTemperatureVariable = OpenMeteoNumberVar;
-export type OpenMeteoCloudCoverVariable = OpenMeteoNumberVar;
-export type OpenMeteoPrecipitationVariable = OpenMeteoNumberVar;
-export type OpenMeteoPrecipitationProbabilityVariable = OpenMeteoNumberVar;
-export type OpenMeteoRainVariable = OpenMeteoNumberVar;
-export type OpenMeteoShowersVariable = OpenMeteoNumberVar;
-export type OpenMeteoSnowfallVariable = OpenMeteoNumberVar;
-export type OpenMeteoTemperatureVariable = OpenMeteoNumberVar;
-export type OpenMeteoWeatherCodeVariable = OpenMeteoWmoVar;
-export type OpenMeteoWindSpeedVariable = OpenMeteoNumberVar;
-export type OpenMeteoWindDirectionVariable = OpenMeteoNumberVar;
-export type OpenMeteoWindGustsVariable = OpenMeteoNumberVar;
-export type OpenMeteoSurfacePressureVariable = OpenMeteoNumberVar;
-export type OpenMeteoPressureMslVariable = OpenMeteoNumberVar;
-export type OpenMeteoIsDayVariable = OpenMeteoDayVar;
-export type OpenMeteoRelativeHumidityVariable = OpenMeteoNumberVar;
-export type OpenMeteoDewPointVariable = OpenMeteoNumberVar;
-export type OpenMeteoCapeVariable = OpenMeteoNumberVar;
-export type OpenMeteoEvapotranspirationVariable = OpenMeteoNumberVar;
-export type OpenMeteoSunshineDurationVariable = OpenMeteoNumberVar;
-export type OpenMeteoVisibilityVariable = OpenMeteoNumberVar;
-export type OpenMeteoRadiationVariable = OpenMeteoNumberVar;
-export type OpenMeteoUvIndexVariable = OpenMeteoNumberVar;
+export type TimeVariable = string;
+export type ApparentTemperatureVariable = NumberVar;
+export type CloudCoverVariable = NumberVar;
+export type PrecipitationVariable = NumberVar;
+export type PrecipitationProbabilityVariable = NumberVar;
+export type RainVariable = NumberVar;
+export type ShowersVariable = NumberVar;
+export type SnowfallVariable = NumberVar;
+export type TemperatureVariable = NumberVar;
+export type WeatherCodeVariable = WmoVar;
+export type WindSpeedVariable = NumberVar;
+export type WindDirectionVariable = NumberVar;
+export type WindGustsVariable = NumberVar;
+export type SurfacePressureVariable = NumberVar;
+export type PressureMslVariable = NumberVar;
+export type IsDayVariable = DayVar;
+export type RelativeHumidityVariable = NumberVar;
+export type DewPointVariable = NumberVar;
+export type CapeVariable = NumberVar;
+export type EvapotranspirationVariable = NumberVar;
+export type SunshineDurationVariable = NumberVar;
+export type VisibilityVariable = NumberVar;
+export type RadiationVariable = NumberVar;
+export type UvIndexVariable = NumberVar;
 
 /**
  * Current Variables
  */
-export interface OpenMeteoForecastCurrentVariables {
-  time: OpenMeteoTimeVariable;
-  apparent_temperature?: OpenMeteoApparentTemperatureVariable;
-  cloud_cover?: OpenMeteoCloudCoverVariable;
-  interval?: OpenMeteoNumberVar;
-  is_day?: OpenMeteoIsDayVariable;
-  precipitation?: OpenMeteoPrecipitationVariable;
-  pressure_msl?: OpenMeteoPressureMslVariable;
-  rain?: OpenMeteoRainVariable;
-  relative_humidity_2m?: OpenMeteoRelativeHumidityVariable;
-  showers?: OpenMeteoShowersVariable;
-  snowfall?: OpenMeteoSnowfallVariable;
-  surface_pressure?: OpenMeteoSurfacePressureVariable;
-  temperature_2m?: OpenMeteoTemperatureVariable;
-  weather_code?: OpenMeteoWeatherCodeVariable;
-  wind_direction_10m?: OpenMeteoWindDirectionVariable;
-  wind_gusts_10m?: OpenMeteoWindGustsVariable;
-  wind_speed_10m?: OpenMeteoWindSpeedVariable;
+export interface ForecastCurrentVariables {
+  time: TimeVariable;
+  apparent_temperature?: ApparentTemperatureVariable;
+  cloud_cover?: CloudCoverVariable;
+  interval?: NumberVar;
+  is_day?: IsDayVariable;
+  precipitation?: PrecipitationVariable;
+  pressure_msl?: PressureMslVariable;
+  rain?: RainVariable;
+  relative_humidity_2m?: RelativeHumidityVariable;
+  showers?: ShowersVariable;
+  snowfall?: SnowfallVariable;
+  surface_pressure?: SurfacePressureVariable;
+  temperature_2m?: TemperatureVariable;
+  weather_code?: WeatherCodeVariable;
+  wind_direction_10m?: WindDirectionVariable;
+  wind_gusts_10m?: WindGustsVariable;
+  wind_speed_10m?: WindSpeedVariable;
 }
 
-export type OpenMeteoForecastCurrentVariablesKey =
-  keyof OpenMeteoForecastCurrentVariables;
-export type OpenMeteoForecastCurrentVariablesUnits =
-  OpenMeteoForecastVariablesUnits<OpenMeteoForecastCurrentVariables>;
+export type ForecastCurrentVariablesKey = keyof ForecastCurrentVariables;
+export type ForecastCurrentVariablesUnits =
+  ForecastVariablesUnits<ForecastCurrentVariables>;
 
 /**
  * Daily Variables
  */
-export interface OpenMeteoForecastDailyVariables {
-  time: OpenMeteoTimeVariable[];
-  apparent_temperature_max?: OpenMeteoApparentTemperatureVariable[];
-  apparent_temperature_mean?: OpenMeteoApparentTemperatureVariable[];
-  apparent_temperature_min?: OpenMeteoApparentTemperatureVariable[];
-  cape_max?: OpenMeteoCapeVariable[];
-  cape_mean?: OpenMeteoCapeVariable[];
-  cape_min?: OpenMeteoCapeVariable[];
-  cloud_cover_max?: OpenMeteoCloudCoverVariable[];
-  cloud_cover_mean?: OpenMeteoCloudCoverVariable[];
-  cloud_cover_min?: OpenMeteoCloudCoverVariable[];
-  daylight_duration?: OpenMeteoNumberVar[];
-  dew_point_2m_max?: OpenMeteoDewPointVariable[];
-  dew_point_2m_mean?: OpenMeteoDewPointVariable[];
-  dew_point_2m_min?: OpenMeteoDewPointVariable[];
-  et0_fao_evapotranspiration_sum?: OpenMeteoEvapotranspirationVariable[];
-  et0_fao_evapotranspiration?: OpenMeteoEvapotranspirationVariable[];
-  growing_degree_days_base_0_limit_50?: OpenMeteoNumberVar[];
-  leaf_wetness_probability_mean?: OpenMeteoNumberVar[];
-  precipitation_hours?: OpenMeteoNumberVar[];
-  precipitation_probability_max?: OpenMeteoPrecipitationProbabilityVariable[];
-  precipitation_probability_mean?: OpenMeteoPrecipitationProbabilityVariable[];
-  precipitation_probability_min?: OpenMeteoPrecipitationProbabilityVariable[];
-  precipitation_sum?: OpenMeteoPrecipitationVariable[];
-  pressure_msl_max?: OpenMeteoPressureMslVariable[];
-  pressure_msl_mean?: OpenMeteoPressureMslVariable[];
-  pressure_msl_min?: OpenMeteoPressureMslVariable[];
-  rain_sum?: OpenMeteoRainVariable[];
-  relative_humidity_2m_max?: OpenMeteoRelativeHumidityVariable[];
-  relative_humidity_2m_mean?: OpenMeteoRelativeHumidityVariable[];
-  relative_humidity_2m_min?: OpenMeteoRelativeHumidityVariable[];
-  shortwave_radiation_sum?: OpenMeteoRadiationVariable[];
-  showers_sum?: OpenMeteoShowersVariable[];
-  snowfall_sum?: OpenMeteoSnowfallVariable[];
-  snowfall_water_equivalent_sum?: OpenMeteoSnowfallVariable[];
-  sunrise?: OpenMeteoStringVar[];
-  sunset?: OpenMeteoStringVar[];
-  sunshine_duration?: OpenMeteoSunshineDurationVariable[];
-  surface_pressure_max?: OpenMeteoSurfacePressureVariable[];
-  surface_pressure_mean?: OpenMeteoSurfacePressureVariable[];
-  surface_pressure_min?: OpenMeteoSurfacePressureVariable[];
-  temperature_2m_max?: OpenMeteoTemperatureVariable[];
-  temperature_2m_mean?: OpenMeteoTemperatureVariable[];
-  temperature_2m_min?: OpenMeteoTemperatureVariable[];
-  updraft_max?: OpenMeteoNumberVar[];
-  uv_index_clear_sky_max?: OpenMeteoUvIndexVariable[];
-  uv_index_max?: OpenMeteoUvIndexVariable[];
-  vapour_pressure_deficit_max?: OpenMeteoNumberVar[];
-  visibility_max?: OpenMeteoVisibilityVariable[];
-  visibility_mean?: OpenMeteoVisibilityVariable[];
-  visibility_min?: OpenMeteoVisibilityVariable[];
-  weather_code?: OpenMeteoWeatherCodeVariable[];
-  wet_bulb_temperature_2m_max?: OpenMeteoTemperatureVariable[];
-  wet_bulb_temperature_2m_mean?: OpenMeteoTemperatureVariable[];
-  wet_bulb_temperature_2m_min?: OpenMeteoTemperatureVariable[];
-  wind_direction_10m_dominant?: OpenMeteoWindDirectionVariable[];
-  wind_gusts_10m_max?: OpenMeteoWindGustsVariable[];
-  wind_gusts_10m_mean?: OpenMeteoWindGustsVariable[];
-  wind_gusts_10m_min?: OpenMeteoWindGustsVariable[];
-  wind_speed_10m_max?: OpenMeteoWindSpeedVariable[];
-  wind_speed_10m_mean?: OpenMeteoWindSpeedVariable[];
-  wind_speed_10m_min?: OpenMeteoWindSpeedVariable[];
+export interface ForecastDailyVariables {
+  time: TimeVariable[];
+  apparent_temperature_max?: ApparentTemperatureVariable[];
+  apparent_temperature_mean?: ApparentTemperatureVariable[];
+  apparent_temperature_min?: ApparentTemperatureVariable[];
+  cape_max?: CapeVariable[];
+  cape_mean?: CapeVariable[];
+  cape_min?: CapeVariable[];
+  cloud_cover_max?: CloudCoverVariable[];
+  cloud_cover_mean?: CloudCoverVariable[];
+  cloud_cover_min?: CloudCoverVariable[];
+  daylight_duration?: NumberVar[];
+  dew_point_2m_max?: DewPointVariable[];
+  dew_point_2m_mean?: DewPointVariable[];
+  dew_point_2m_min?: DewPointVariable[];
+  et0_fao_evapotranspiration_sum?: EvapotranspirationVariable[];
+  et0_fao_evapotranspiration?: EvapotranspirationVariable[];
+  growing_degree_days_base_0_limit_50?: NumberVar[];
+  leaf_wetness_probability_mean?: NumberVar[];
+  precipitation_hours?: NumberVar[];
+  precipitation_probability_max?: PrecipitationProbabilityVariable[];
+  precipitation_probability_mean?: PrecipitationProbabilityVariable[];
+  precipitation_probability_min?: PrecipitationProbabilityVariable[];
+  precipitation_sum?: PrecipitationVariable[];
+  pressure_msl_max?: PressureMslVariable[];
+  pressure_msl_mean?: PressureMslVariable[];
+  pressure_msl_min?: PressureMslVariable[];
+  rain_sum?: RainVariable[];
+  relative_humidity_2m_max?: RelativeHumidityVariable[];
+  relative_humidity_2m_mean?: RelativeHumidityVariable[];
+  relative_humidity_2m_min?: RelativeHumidityVariable[];
+  shortwave_radiation_sum?: RadiationVariable[];
+  showers_sum?: ShowersVariable[];
+  snowfall_sum?: SnowfallVariable[];
+  snowfall_water_equivalent_sum?: SnowfallVariable[];
+  sunrise?: StringVar[];
+  sunset?: StringVar[];
+  sunshine_duration?: SunshineDurationVariable[];
+  surface_pressure_max?: SurfacePressureVariable[];
+  surface_pressure_mean?: SurfacePressureVariable[];
+  surface_pressure_min?: SurfacePressureVariable[];
+  temperature_2m_max?: TemperatureVariable[];
+  temperature_2m_mean?: TemperatureVariable[];
+  temperature_2m_min?: TemperatureVariable[];
+  updraft_max?: NumberVar[];
+  uv_index_clear_sky_max?: UvIndexVariable[];
+  uv_index_max?: UvIndexVariable[];
+  vapour_pressure_deficit_max?: NumberVar[];
+  visibility_max?: VisibilityVariable[];
+  visibility_mean?: VisibilityVariable[];
+  visibility_min?: VisibilityVariable[];
+  weather_code?: WeatherCodeVariable[];
+  wet_bulb_temperature_2m_max?: TemperatureVariable[];
+  wet_bulb_temperature_2m_mean?: TemperatureVariable[];
+  wet_bulb_temperature_2m_min?: TemperatureVariable[];
+  wind_direction_10m_dominant?: WindDirectionVariable[];
+  wind_gusts_10m_max?: WindGustsVariable[];
+  wind_gusts_10m_mean?: WindGustsVariable[];
+  wind_gusts_10m_min?: WindGustsVariable[];
+  wind_speed_10m_max?: WindSpeedVariable[];
+  wind_speed_10m_mean?: WindSpeedVariable[];
+  wind_speed_10m_min?: WindSpeedVariable[];
 }
 
-export type OpenMeteoForecastDailyVariablesKey =
-  keyof OpenMeteoForecastDailyVariables;
-export type OpenMeteoForecastDailyVariablesUnits =
-  OpenMeteoForecastVariablesUnits<OpenMeteoForecastDailyVariables>;
+export type ForecastDailyVariablesKey = keyof ForecastDailyVariables;
+export type ForecastDailyVariablesUnits =
+  ForecastVariablesUnits<ForecastDailyVariables>;
 
 /**
  * Hourly Variables
  */
-export interface OpenMeteoForecastHourlyVariables {
-  time: OpenMeteoTimeVariable[];
-  apparent_temperature?: OpenMeteoApparentTemperatureVariable[];
-  boundary_layer_height?: OpenMeteoNumberVar[];
-  cape?: OpenMeteoCapeVariable[];
-  cloud_cover_high?: OpenMeteoCloudCoverVariable[];
-  cloud_cover_low?: OpenMeteoCloudCoverVariable[];
-  cloud_cover_mid?: OpenMeteoCloudCoverVariable[];
-  cloud_cover?: OpenMeteoCloudCoverVariable[];
-  convective_inhibition?: OpenMeteoNumberVar[];
-  dew_point_2m?: OpenMeteoDewPointVariable[];
-  diffuse_radiation_instant?: OpenMeteoRadiationVariable[];
-  diffuse_radiation?: OpenMeteoRadiationVariable[];
-  direct_normal_irradiance_instant?: OpenMeteoRadiationVariable[];
-  direct_normal_irradiance?: OpenMeteoRadiationVariable[];
-  direct_radiation_instant?: OpenMeteoRadiationVariable[];
-  direct_radiation?: OpenMeteoRadiationVariable[];
-  et0_fao_evapotranspiration?: OpenMeteoEvapotranspirationVariable[];
-  evapotranspiration?: OpenMeteoEvapotranspirationVariable[];
-  freezing_level_height?: OpenMeteoNumberVar[];
-  global_tilted_irradiance_instant?: OpenMeteoRadiationVariable[];
-  global_tilted_irradiance?: OpenMeteoRadiationVariable[];
-  is_day?: OpenMeteoIsDayVariable[];
-  lifted_index?: OpenMeteoNumberVar[];
-  precipitation?: OpenMeteoPrecipitationVariable[];
-  precipitation_probability?: OpenMeteoPrecipitationProbabilityVariable[];
-  pressure_msl?: OpenMeteoPressureMslVariable[];
-  rain?: OpenMeteoRainVariable[];
-  relative_humidity_2m?: OpenMeteoRelativeHumidityVariable[];
-  shortwave_radiation_instant?: OpenMeteoRadiationVariable[];
-  shortwave_radiation?: OpenMeteoRadiationVariable[];
-  showers?: OpenMeteoShowersVariable[];
-  snow_depth?: OpenMeteoNumberVar[];
-  snowfall?: OpenMeteoSnowfallVariable[];
-  soil_moisture_0_to_1cm?: OpenMeteoNumberVar[];
-  soil_moisture_1_to_3cm?: OpenMeteoNumberVar[];
-  soil_moisture_27_to_81cm?: OpenMeteoNumberVar[];
-  soil_moisture_3_to_9cm?: OpenMeteoNumberVar[];
-  soil_moisture_9_to_27cm?: OpenMeteoNumberVar[];
-  soil_temperature_0cm?: OpenMeteoNumberVar[];
-  soil_temperature_18cm?: OpenMeteoNumberVar[];
-  soil_temperature_54cm?: OpenMeteoNumberVar[];
-  soil_temperature_6cm?: OpenMeteoNumberVar[];
-  sunshine_duration?: OpenMeteoSunshineDurationVariable[];
-  surface_pressure?: OpenMeteoSurfacePressureVariable[];
-  temperature_120m?: OpenMeteoTemperatureVariable[];
-  temperature_180m?: OpenMeteoTemperatureVariable[];
-  temperature_2m?: OpenMeteoTemperatureVariable[];
-  temperature_80m?: OpenMeteoTemperatureVariable[];
-  terrestrial_radiation_instant?: OpenMeteoRadiationVariable[];
-  terrestrial_radiation?: OpenMeteoRadiationVariable[];
-  total_column_integrated_water_vapour?: OpenMeteoNumberVar[];
-  uv_index_clear_sky?: OpenMeteoUvIndexVariable[];
-  uv_index?: OpenMeteoUvIndexVariable[];
-  vapour_pressure_deficit?: OpenMeteoNumberVar[];
-  visibility?: OpenMeteoVisibilityVariable[];
-  weather_code?: OpenMeteoWeatherCodeVariable[];
-  wet_bulb_temperature_2m?: OpenMeteoTemperatureVariable[];
-  wind_direction_10m?: OpenMeteoWindDirectionVariable[];
-  wind_direction_120m?: OpenMeteoWindDirectionVariable[];
-  wind_direction_180m?: OpenMeteoWindDirectionVariable[];
-  wind_direction_80m?: OpenMeteoWindDirectionVariable[];
-  wind_gusts_10m?: OpenMeteoWindGustsVariable[];
-  wind_speed_10m?: OpenMeteoWindSpeedVariable[];
-  wind_speed_120m?: OpenMeteoWindSpeedVariable[];
-  wind_speed_180m?: OpenMeteoWindSpeedVariable[];
-  wind_speed_80m?: OpenMeteoWindSpeedVariable[];
+export interface ForecastHourlyVariables {
+  time: TimeVariable[];
+  apparent_temperature?: ApparentTemperatureVariable[];
+  boundary_layer_height?: NumberVar[];
+  cape?: CapeVariable[];
+  cloud_cover_high?: CloudCoverVariable[];
+  cloud_cover_low?: CloudCoverVariable[];
+  cloud_cover_mid?: CloudCoverVariable[];
+  cloud_cover?: CloudCoverVariable[];
+  convective_inhibition?: NumberVar[];
+  dew_point_2m?: DewPointVariable[];
+  diffuse_radiation_instant?: RadiationVariable[];
+  diffuse_radiation?: RadiationVariable[];
+  direct_normal_irradiance_instant?: RadiationVariable[];
+  direct_normal_irradiance?: RadiationVariable[];
+  direct_radiation_instant?: RadiationVariable[];
+  direct_radiation?: RadiationVariable[];
+  et0_fao_evapotranspiration?: EvapotranspirationVariable[];
+  evapotranspiration?: EvapotranspirationVariable[];
+  freezing_level_height?: NumberVar[];
+  global_tilted_irradiance_instant?: RadiationVariable[];
+  global_tilted_irradiance?: RadiationVariable[];
+  is_day?: IsDayVariable[];
+  lifted_index?: NumberVar[];
+  precipitation?: PrecipitationVariable[];
+  precipitation_probability?: PrecipitationProbabilityVariable[];
+  pressure_msl?: PressureMslVariable[];
+  rain?: RainVariable[];
+  relative_humidity_2m?: RelativeHumidityVariable[];
+  shortwave_radiation_instant?: RadiationVariable[];
+  shortwave_radiation?: RadiationVariable[];
+  showers?: ShowersVariable[];
+  snow_depth?: NumberVar[];
+  snowfall?: SnowfallVariable[];
+  soil_moisture_0_to_1cm?: NumberVar[];
+  soil_moisture_1_to_3cm?: NumberVar[];
+  soil_moisture_27_to_81cm?: NumberVar[];
+  soil_moisture_3_to_9cm?: NumberVar[];
+  soil_moisture_9_to_27cm?: NumberVar[];
+  soil_temperature_0cm?: NumberVar[];
+  soil_temperature_18cm?: NumberVar[];
+  soil_temperature_54cm?: NumberVar[];
+  soil_temperature_6cm?: NumberVar[];
+  sunshine_duration?: SunshineDurationVariable[];
+  surface_pressure?: SurfacePressureVariable[];
+  temperature_120m?: TemperatureVariable[];
+  temperature_180m?: TemperatureVariable[];
+  temperature_2m?: TemperatureVariable[];
+  temperature_80m?: TemperatureVariable[];
+  terrestrial_radiation_instant?: RadiationVariable[];
+  terrestrial_radiation?: RadiationVariable[];
+  total_column_integrated_water_vapour?: NumberVar[];
+  uv_index_clear_sky?: UvIndexVariable[];
+  uv_index?: UvIndexVariable[];
+  vapour_pressure_deficit?: NumberVar[];
+  visibility?: VisibilityVariable[];
+  weather_code?: WeatherCodeVariable[];
+  wet_bulb_temperature_2m?: TemperatureVariable[];
+  wind_direction_10m?: WindDirectionVariable[];
+  wind_direction_120m?: WindDirectionVariable[];
+  wind_direction_180m?: WindDirectionVariable[];
+  wind_direction_80m?: WindDirectionVariable[];
+  wind_gusts_10m?: WindGustsVariable[];
+  wind_speed_10m?: WindSpeedVariable[];
+  wind_speed_120m?: WindSpeedVariable[];
+  wind_speed_180m?: WindSpeedVariable[];
+  wind_speed_80m?: WindSpeedVariable[];
 }
 
-export type OpenMeteoForecastHourlyVariablesKey =
-  keyof OpenMeteoForecastHourlyVariables;
-export type OpenMeteoForecastHourlyVariablesUnits =
-  OpenMeteoForecastVariablesUnits<OpenMeteoForecastHourlyVariables>;
+export type ForecastHourlyVariablesKey = keyof ForecastHourlyVariables;
+export type ForecastHourlyVariablesUnits =
+  ForecastVariablesUnits<ForecastHourlyVariables>;
 
 /**
  * Minutely 15 Variables
  */
-export interface OpenMeteoForecastMinutely15Variables {
-  time: OpenMeteoTimeVariable[];
-  apparent_temperature?: OpenMeteoApparentTemperatureVariable[];
-  cape?: OpenMeteoCapeVariable[];
-  dew_point_2m?: OpenMeteoDewPointVariable[];
-  diffuse_radiation_instant?: OpenMeteoRadiationVariable[];
-  diffuse_radiation?: OpenMeteoRadiationVariable[];
-  direct_normal_irradiance_instant?: OpenMeteoRadiationVariable[];
-  direct_normal_irradiance?: OpenMeteoRadiationVariable[];
-  direct_radiation_instant?: OpenMeteoRadiationVariable[];
-  direct_radiation?: OpenMeteoRadiationVariable[];
-  freezing_level_height?: OpenMeteoNumberVar[];
-  global_tilted_irradiance_instant?: OpenMeteoRadiationVariable[];
-  global_tilted_irradiance?: OpenMeteoRadiationVariable[];
-  is_day?: OpenMeteoIsDayVariable[];
-  lightning_potential_index?: OpenMeteoNumberVar[];
-  precipitation?: OpenMeteoPrecipitationVariable[];
-  rain?: OpenMeteoRainVariable[];
-  relative_humidity_2m?: OpenMeteoRelativeHumidityVariable[];
-  shortwave_radiation_instant?: OpenMeteoRadiationVariable[];
-  shortwave_radiation?: OpenMeteoRadiationVariable[];
-  snowfall_height?: OpenMeteoNumberVar[];
-  snowfall?: OpenMeteoSnowfallVariable[];
-  sunshine_duration?: OpenMeteoSunshineDurationVariable[];
-  temperature_2m?: OpenMeteoTemperatureVariable[];
-  terrestrial_radiation_instant?: OpenMeteoRadiationVariable[];
-  terrestrial_radiation?: OpenMeteoRadiationVariable[];
-  visibility?: OpenMeteoVisibilityVariable[];
-  weather_code?: OpenMeteoWeatherCodeVariable[];
-  wind_direction_10m?: OpenMeteoWindDirectionVariable[];
-  wind_direction_80m?: OpenMeteoWindDirectionVariable[];
-  wind_gusts_10m?: OpenMeteoWindGustsVariable[];
-  wind_speed_10m?: OpenMeteoWindSpeedVariable[];
-  wind_speed_80m?: OpenMeteoWindSpeedVariable[];
+export interface ForecastMinutely15Variables {
+  time: TimeVariable[];
+  apparent_temperature?: ApparentTemperatureVariable[];
+  cape?: CapeVariable[];
+  dew_point_2m?: DewPointVariable[];
+  diffuse_radiation_instant?: RadiationVariable[];
+  diffuse_radiation?: RadiationVariable[];
+  direct_normal_irradiance_instant?: RadiationVariable[];
+  direct_normal_irradiance?: RadiationVariable[];
+  direct_radiation_instant?: RadiationVariable[];
+  direct_radiation?: RadiationVariable[];
+  freezing_level_height?: NumberVar[];
+  global_tilted_irradiance_instant?: RadiationVariable[];
+  global_tilted_irradiance?: RadiationVariable[];
+  is_day?: IsDayVariable[];
+  lightning_potential_index?: NumberVar[];
+  precipitation?: PrecipitationVariable[];
+  rain?: RainVariable[];
+  relative_humidity_2m?: RelativeHumidityVariable[];
+  shortwave_radiation_instant?: RadiationVariable[];
+  shortwave_radiation?: RadiationVariable[];
+  snowfall_height?: NumberVar[];
+  snowfall?: SnowfallVariable[];
+  sunshine_duration?: SunshineDurationVariable[];
+  temperature_2m?: TemperatureVariable[];
+  terrestrial_radiation_instant?: RadiationVariable[];
+  terrestrial_radiation?: RadiationVariable[];
+  visibility?: VisibilityVariable[];
+  weather_code?: WeatherCodeVariable[];
+  wind_direction_10m?: WindDirectionVariable[];
+  wind_direction_80m?: WindDirectionVariable[];
+  wind_gusts_10m?: WindGustsVariable[];
+  wind_speed_10m?: WindSpeedVariable[];
+  wind_speed_80m?: WindSpeedVariable[];
 }
 
-export type OpenMeteoForecastMinutely15VariablesKey =
-  keyof OpenMeteoForecastMinutely15Variables;
-export type OpenMeteoForecastMinutely15VariablesUnits =
-  OpenMeteoForecastVariablesUnits<OpenMeteoForecastMinutely15Variables>;
+export type ForecastMinutely15VariablesKey = keyof ForecastMinutely15Variables;
+export type ForecastMinutely15VariablesUnits =
+  ForecastVariablesUnits<ForecastMinutely15Variables>;
 
 /**
  * Maps
  */
-export interface OpenMeteoForecastTimeIntervalVariablesMap {
-  [OPEN_METEO_TIME_INTERVAL_MAP.Current]: OpenMeteoForecastCurrentVariables;
-  [OPEN_METEO_TIME_INTERVAL_MAP.Daily]: OpenMeteoForecastDailyVariables;
-  [OPEN_METEO_TIME_INTERVAL_MAP.Hourly]: OpenMeteoForecastHourlyVariables;
-  [OPEN_METEO_TIME_INTERVAL_MAP.Minutely15]: OpenMeteoForecastMinutely15Variables;
+export interface ForecastTimeIntervalVariablesMap {
+  [TIME_INTERVAL_MAP.Current]: ForecastCurrentVariables;
+  [TIME_INTERVAL_MAP.Daily]: ForecastDailyVariables;
+  [TIME_INTERVAL_MAP.Hourly]: ForecastHourlyVariables;
+  [TIME_INTERVAL_MAP.Minutely15]: ForecastMinutely15Variables;
 }
 
-export interface OpenMeteoForecastTimeIntervalVariablesUnitsMap {
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Current]: OpenMeteoForecastCurrentVariablesUnits;
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Daily]: OpenMeteoForecastDailyVariablesUnits;
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Hourly]: OpenMeteoForecastHourlyVariablesUnits;
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Minutely15]: OpenMeteoForecastMinutely15VariablesUnits;
+export interface ForecastTimeIntervalVariablesUnitsMap {
+  [TIME_INTERVAL_UNIT_MAP.Current]: ForecastCurrentVariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Daily]: ForecastDailyVariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Hourly]: ForecastHourlyVariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Minutely15]: ForecastMinutely15VariablesUnits;
 }

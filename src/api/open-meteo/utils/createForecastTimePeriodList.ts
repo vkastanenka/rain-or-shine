@@ -1,18 +1,18 @@
 import type { ForecastDiurnalPeriodMapValue } from "@/features";
-import { createOpenMeteoTimePeriodListItem } from "./createOpenMeteoTimePeriodListItem";
+import { createForecastTimePeriodListItem } from "./createForecastTimePeriodListItem";
 import type {
-  OpenMeteoForecastTimePeriods,
-  OpenMeteoHourlyForecastByTimePeriodListItem,
+  ForecastTimePeriods,
+  HourlyForecastByTimePeriodListItem,
 } from "../types";
 
-export const createOpenMeteoTimePeriodListData = (
-  timePeriods: OpenMeteoForecastTimePeriods,
-): OpenMeteoHourlyForecastByTimePeriodListItem[] => {
+export const createForecastTimePeriodList = (
+  timePeriods: ForecastTimePeriods,
+): HourlyForecastByTimePeriodListItem[] => {
   const timePeriodsList = Object.entries(timePeriods).map(
     ([dateKey, periods]) => {
       const timePeriodItems = Object.entries(periods).map(
         ([diurnalPeriodKey, hourlyItems]) =>
-          createOpenMeteoTimePeriodListItem(
+          createForecastTimePeriodListItem(
             diurnalPeriodKey as ForecastDiurnalPeriodMapValue,
             hourlyItems,
             dateKey,

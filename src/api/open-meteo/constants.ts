@@ -1,11 +1,11 @@
-export const OPEN_METEO_TIME_INTERVAL_MAP = {
+export const TIME_INTERVAL_MAP = {
   Current: "current",
   Daily: "daily",
   Minutely15: "minutely_15",
   Hourly: "hourly",
 } as const;
 
-export const OPEN_METEO_TIME_INTERVAL_UNIT_MAP = {
+export const TIME_INTERVAL_UNIT_MAP = {
   Current: "current_units",
   Daily: "daily_units",
   Minutely15: "minutely_15_units",

@@ -1,26 +1,24 @@
-import { OPEN_METEO_TIME_INTERVAL_MAP } from "../constants";
+import { TIME_INTERVAL_MAP } from "../constants";
 import type {
-  NormalizedOpenMeteoForecastTimeIntervalListItem,
-  NormalizedOpenMeteoForecastHourlyListItem,
+  NormalizedForecastTimeIntervalListItem,
+  NormalizedForecastHourlyListItem,
 } from "./normalized";
 
-export type OpenMeteoForecastTimePeriodListItem =
-  NormalizedOpenMeteoForecastTimeIntervalListItem<
-    typeof OPEN_METEO_TIME_INTERVAL_MAP.Hourly
-  > & { timePeriod: string };
+export type ForecastTimePeriodListItem = NormalizedForecastTimeIntervalListItem<
+  typeof TIME_INTERVAL_MAP.Hourly
+> & { timePeriod: string };
 
-export type OpenMeteoHourlyForecastTimePeriodList =
-  OpenMeteoForecastTimePeriodListItem[];
+export type HourlyForecastTimePeriodList = ForecastTimePeriodListItem[];
 
-export type OpenMeteoForecastTimePeriods = Record<
+export type ForecastTimePeriods = Record<
   string,
-  Record<string, NormalizedOpenMeteoForecastHourlyListItem[]>
+  Record<string, NormalizedForecastHourlyListItem[]>
 >;
 
-export type OpenMeteoHourlyForecastByTimePeriodListItem = {
+export type HourlyForecastByTimePeriodListItem = {
   time: string;
-  timePeriodItems: OpenMeteoForecastTimePeriodListItem[];
+  timePeriodItems: ForecastTimePeriodListItem[];
 };
 
-export type OpenMeteoHourlyForecastByTimePeriodPeriodList =
-  OpenMeteoHourlyForecastByTimePeriodListItem[];
+export type HourlyForecastByTimePeriodPeriodList =
+  HourlyForecastByTimePeriodListItem[];

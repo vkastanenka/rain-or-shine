@@ -1,19 +1,16 @@
-import {
-  OPEN_METEO_TIME_INTERVAL_MAP,
-  OPEN_METEO_TIME_INTERVAL_UNIT_MAP,
-} from "../constants";
-import {
-  type OpenMeteoForecastCurrentVariables,
-  type OpenMeteoForecastCurrentVariablesUnits,
-  type OpenMeteoForecastDailyVariables,
-  type OpenMeteoForecastDailyVariablesUnits,
-  type OpenMeteoForecastHourlyVariables,
-  type OpenMeteoForecastHourlyVariablesUnits,
-  type OpenMeteoForecastMinutely15Variables,
-  type OpenMeteoForecastMinutely15VariablesUnits,
+import { TIME_INTERVAL_MAP, TIME_INTERVAL_UNIT_MAP } from "../constants";
+import type {
+  ForecastCurrentVariables,
+  ForecastCurrentVariablesUnits,
+  ForecastDailyVariables,
+  ForecastDailyVariablesUnits,
+  ForecastHourlyVariables,
+  ForecastHourlyVariablesUnits,
+  ForecastMinutely15Variables,
+  ForecastMinutely15VariablesUnits,
 } from "./variables";
 
-export interface OpenMeteoForecastResponse {
+export interface ForecastResponse {
   latitude: number;
   longitude: number;
   generationtime_ms: number;
@@ -23,14 +20,14 @@ export interface OpenMeteoForecastResponse {
   elevation: number;
 
   // Time Interval Data
-  [OPEN_METEO_TIME_INTERVAL_MAP.Current]?: OpenMeteoForecastCurrentVariables;
-  [OPEN_METEO_TIME_INTERVAL_MAP.Daily]?: OpenMeteoForecastDailyVariables;
-  [OPEN_METEO_TIME_INTERVAL_MAP.Hourly]?: OpenMeteoForecastHourlyVariables;
-  [OPEN_METEO_TIME_INTERVAL_MAP.Minutely15]?: OpenMeteoForecastMinutely15Variables;
+  [TIME_INTERVAL_MAP.Current]?: ForecastCurrentVariables;
+  [TIME_INTERVAL_MAP.Daily]?: ForecastDailyVariables;
+  [TIME_INTERVAL_MAP.Hourly]?: ForecastHourlyVariables;
+  [TIME_INTERVAL_MAP.Minutely15]?: ForecastMinutely15Variables;
 
   // Time Interval Units
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Current]?: OpenMeteoForecastCurrentVariablesUnits;
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Daily]?: OpenMeteoForecastDailyVariablesUnits;
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Hourly]?: OpenMeteoForecastHourlyVariablesUnits;
-  [OPEN_METEO_TIME_INTERVAL_UNIT_MAP.Minutely15]?: OpenMeteoForecastMinutely15VariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Current]?: ForecastCurrentVariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Daily]?: ForecastDailyVariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Hourly]?: ForecastHourlyVariablesUnits;
+  [TIME_INTERVAL_UNIT_MAP.Minutely15]?: ForecastMinutely15VariablesUnits;
 }

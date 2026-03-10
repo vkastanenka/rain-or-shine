@@ -1,7 +1,8 @@
-import type { NormalizedOpenMeteoForecastHourlyListItem } from "../types";
+import type { NormalizedForecastHourlyListItem } from "../types";
 
-export const calculateOpenMeteoForecastHourlyListAverages = (
-  hourlyList: NormalizedOpenMeteoForecastHourlyListItem[],
+// change to reduce???
+export const calculateForecastHourlyListAverages = (
+  hourlyList: NormalizedForecastHourlyListItem[],
 ): Record<string, number> => {
   const count = hourlyList.length;
   if (count === 0) return {};
