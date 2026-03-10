@@ -13,7 +13,7 @@ import {
   type OpenMeteoNumberVar,
   type OpenMeteoStringVar,
   type OpenMeteoWmoVar,
-} from "../types";
+} from "../entities/open-meteo/types";
 
 export const formatOpenMeteoValue = {
   /**
@@ -90,7 +90,7 @@ export const formatOpenMeteoValue = {
   },
 
   hourMarker: (date: string): string => {
-    return formatDate(new Date(date), 'ha').toLowerCase();
+    return formatDate(new Date(date), "ha").toLowerCase();
   },
 
   dailyTimePeriod: (date: string): ForecastTimePeriodLabelsMapValue => {

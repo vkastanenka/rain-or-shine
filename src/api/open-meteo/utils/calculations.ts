@@ -1,13 +1,13 @@
-import { type OpenMeteoForecastHourlyListItem } from "../types";
+import type { HourlyForecastRecord } from "../types";
 
-export const calculateOpenMeteoForecastHourlyListAverages = (
-  hourlyList: OpenMeteoForecastHourlyListItem[],
+export const calculateHourlyForecastCollectionAverages = (
+  hourlyCollection: HourlyForecastRecord[],
 ): Record<string, number> => {
-  const count = hourlyList.length;
+  const count = hourlyCollection.length;
   if (count === 0) return {};
 
   // Summation
-  const totals = hourlyList.reduce(
+  const totals = hourlyCollection.reduce(
     (acc, curr) => {
       Object.entries(curr).forEach(([key, value]) => {
         if (typeof value !== "number") return;
