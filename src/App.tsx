@@ -76,7 +76,7 @@ function App() {
                 return (
                   <Card
                     key={`${hourlyListItem.time}-${i}`}
-                    className={cn("p-2", "sm:p-4", "w-full")}
+                    className={cn("p-2", "sm:p-3", "xl:p-4", "w-full")}
                   >
                     <FlexRow
                       gap={2}
