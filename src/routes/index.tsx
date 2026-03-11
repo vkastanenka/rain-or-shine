@@ -1,13 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Text,
-  Section,
-  FlexCol,
-  TextInput,
-  Grid,
-  FlexRow,
-  Flex,
-} from "@/components";
+import { Text, Section, FlexCol, TextInput, Grid, Flex } from "@/components";
 import { LocationCard } from "@/features";
 
 export const Route = createFileRoute("/")({
@@ -26,7 +18,7 @@ const suggestions = {
 function RouteComponent() {
   return (
     <div>
-      <Section>
+      <Section py={{ base: 10, md: 16 }}>
         <FlexCol gap={4}>
           <div>
             <Text type={{ base: "headline6", sm: "headline5" }}>
@@ -39,7 +31,7 @@ function RouteComponent() {
           </div>
           <TextInput
             type="search"
-            size={{base: "lg", md: "xl"}}
+            size={{ base: "lg", md: "xl" }}
             placeholder="Enter location"
             className="w-full max-w-130"
             suggestions={suggestions}
