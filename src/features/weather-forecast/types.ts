@@ -3,7 +3,7 @@ import {
   FORECAST_DIURNAL_PERIOD_LABELS_MAP,
   FORECAST_DIURNAL_PERIOD_MAP,
   FORECAST_TIME_PERIOD_LABELS_MAP,
-  FORECAST_TIME_PERIOD_MAP,
+  FORECAST_DAILY_TIME_PERIOD_MAP,
   FORECAST_LABELS_MAP,
 } from "./constants";
 
@@ -27,9 +27,9 @@ export type ForecastTimePeriodLabelsMapKey =
 export type ForecastTimePeriodLabelsMapValue =
   (typeof FORECAST_TIME_PERIOD_LABELS_MAP)[keyof typeof FORECAST_TIME_PERIOD_LABELS_MAP];
 
-export type ForecastTimePeriodMapKey = keyof typeof FORECAST_TIME_PERIOD_MAP;
-export type ForecastTimePeriodMapValue =
-  (typeof FORECAST_TIME_PERIOD_MAP)[keyof typeof FORECAST_TIME_PERIOD_MAP];
+// export type ForecastTimePeriodMapKey = keyof typeof FORECAST_TIME_PERIOD_MAP;
+// export type ForecastTimePeriodMapValue =
+//   (typeof FORECAST_TIME_PERIOD_MAP)[keyof typeof FORECAST_TIME_PERIOD_MAP];
 
 export type ForecastForecastLabelsMapKey = keyof typeof FORECAST_LABELS_MAP;
 export type ForecastForecastLabelsMapValue =
