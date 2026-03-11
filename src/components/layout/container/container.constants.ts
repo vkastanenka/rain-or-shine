@@ -1,10 +1,16 @@
 export const CONTAINER_PADDING_MAP = {
   0: "px-0",
+  1: "px-1",
   2: "px-2",
+  3: "px-3",
   4: "px-4",
+  5: "px-5",
   6: "px-6",
+  7: "px-7",
   8: "px-8",
+  9: "px-9",
   10: "px-10",
+  11: "px-11",
   12: "px-12",
 } as const;
 

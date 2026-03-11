@@ -1,5 +1,5 @@
 import { FaSearch, FaGithub, FaLinkedin, FaBriefcase } from "react-icons/fa";
-import { FlexRow } from "@/components/layout";
+import { Container, FlexRow } from "@/components/layout";
 import { Button } from "../button";
 import { Text } from "../text";
 import type { JSX } from "react";
@@ -37,43 +37,45 @@ const NAV_LINKS: NavLinks[] = [
 
 export const Navbar = () => {
   return (
-    <nav className="bg-neutral py-3 px-3 sticky top-0">
-      <FlexRow gap={2} align="center" justify="between">
-        <Button to="/" unstyled aria-label="Rain or Shine Home">
-          <Text type={{ base: "headline5", sm: "headline4" }}>
-            Rain or Shine
-          </Text>
-        </Button>
-        <FlexRow gap={2} align="center">
-          <FlexRow gap={2} align="center" className="hidden sm:flex">
-            {NAV_LINKS.map((link) => (
-              <Button key={link.label} variant="ghost" to={link.href}>
-                {link.label}
-              </Button>
-            ))}
-          </FlexRow>
-          <Button
-            variant="ghost"
-            shape="circle"
-            size={{ base: "sm", sm: "md" }}
-            aria-label="Search"
-          >
-            <FaSearch />
+    <nav className="bg-neutral py-3 sticky top-0">
+      <Container>
+        <FlexRow gap={2} align="center" justify="between">
+          <Button to="/" unstyled aria-label="Rain or Shine Home">
+            <Text type={{ base: "headline5", sm: "headline4" }}>
+              Rain or Shine
+            </Text>
           </Button>
-          {SOCIAL_LINKS.map((link) => (
+          <FlexRow gap={2} align="center">
+            <FlexRow gap={2} align="center" className="hidden sm:flex">
+              {NAV_LINKS.map((link) => (
+                <Button key={link.label} variant="ghost" to={link.href}>
+                  {link.label}
+                </Button>
+              ))}
+            </FlexRow>
             <Button
-              key={link.label}
-              href={link.href}
               variant="ghost"
               shape="circle"
               size={{ base: "sm", sm: "md" }}
-              aria-label={link.label}
+              aria-label="Search"
             >
-              {link.icon}
+              <FaSearch />
             </Button>
-          ))}
+            {SOCIAL_LINKS.map((link) => (
+              <Button
+                key={link.label}
+                href={link.href}
+                variant="ghost"
+                shape="circle"
+                size={{ base: "sm", sm: "md" }}
+                aria-label={link.label}
+              >
+                {link.icon}
+              </Button>
+            ))}
+          </FlexRow>
         </FlexRow>
-      </FlexRow>
+      </Container>
     </nav>
   );
 };

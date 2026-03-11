@@ -8,7 +8,7 @@ import { type ContainerProps } from "./container.types";
 export const Container = ({
   center = true,
   maxWidth,
-  px = { base: 4 },
+  px = { base: 5 },
   className,
   children,
   ...props

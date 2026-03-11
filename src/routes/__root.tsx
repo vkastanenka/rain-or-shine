@@ -10,7 +10,6 @@ function RootComponent() {
   return (
     <React.Fragment>
       <Navbar />
-      <div>Hello "__root"!</div>
       <Outlet />
     </React.Fragment>
   );
