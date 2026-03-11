@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol, TextInput, FlexRow } from "@/components";
+import { Text, Section, FlexCol, TextInput, FlexRow, Flex } from "@/components";
 import { LocationCard } from "@/features";
 
 export const Route = createFileRoute("/")({
@@ -36,19 +36,28 @@ function RouteComponent() {
             className="w-full max-w-130"
             suggestions={suggestions}
           />
-          <FlexRow>
-            <FlexCol>
-              <Text>Your current location</Text>
+          <Flex
+            gap={4}
+            direction={{ base: "col", sm: "row" }}
+            className="w-full"
+          >
+            <FlexCol gap={1} stretchItems>
+              <Text className="font-medium">Your current location</Text>
               <LocationCard />
             </FlexCol>
-            <FlexCol>
-              <Text>Your recent locations</Text>
-              <FlexRow>
+            <FlexCol gap={1} className="w-full">
+              <Text className="font-medium">Your recent locations</Text>
+              <Flex
+                gap={4}
+                direction={{ base: "col", sm: "row" }}
+                stretchItems
+                className="w-full"
+              >
                 <LocationCard />
                 <LocationCard />
-              </FlexRow>
+              </Flex>
             </FlexCol>
-          </FlexRow>
+          </Flex>
         </FlexCol>
       </Section>
     </div>
