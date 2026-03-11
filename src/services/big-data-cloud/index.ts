@@ -39,7 +39,7 @@ export class BigDataCloudService {
    * Converts coordinates into a human-readable address.
    */
   public reverseGeocode = (
-    params: ReverseGeocodingParams,
+    params?: ReverseGeocodingParams,
   ): Promise<ReverseGeocodingResponse> => {
     return this.instance.get(
       BIG_DATA_CLOUD_API_CONFIG.endpoints.reverseGeocode,
@@ -47,3 +47,6 @@ export class BigDataCloudService {
     );
   };
 }
+
+export const bigDataCloudService = new BigDataCloudService();
+ 
