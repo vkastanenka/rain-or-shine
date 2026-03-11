@@ -28,19 +28,19 @@
   --text-h1: clamp(3rem, 1.25rem + 4.375vw, 6.125rem);
   --text-h1--letter-spacing: -0.015em;
   --text-h1--font-weight: 800;
-  --text-h1--line-height: 1.2;
+  --text-h1--line-height: 1.1;
 
   /* Headline 2: 36px -> 61px */
   --text-h2: clamp(2.25rem, 1.3125rem + 2.34vw, 3.8125rem);
   --text-h2--letter-spacing: -0.008em;
   --text-h2--font-weight: 800;
-  --text-h2--line-height: 1.2;
+  --text-h2--line-height: 1.1;
 
   /* Headline 3: 30px -> 49px */
   --text-h3: clamp(1.875rem, 1.15rem + 1.8vw, 3.0625rem);
   --text-h3--letter-spacing: 0em;
   --text-h3--font-weight: 700;
-  --text-h3--line-height: 1.2;
+  --text-h3--line-height: 1.1;
 
   /* Headline 4: 26px -> 35px */
   --text-h4: clamp(1.625rem, 1.15rem + 0.9vw, 2.1875rem);
