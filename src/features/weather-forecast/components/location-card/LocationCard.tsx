@@ -12,7 +12,7 @@ export const LocationCard = () => {
             <FaCity />
             <Text>Tottenham</Text>
           </FlexRow>
-          <Text type="caption">ON, Canada</Text>
+          <Text type="body2">ON, Canada</Text>
         </FlexCol>
         <FlexRow gap={1} align="center">
           <Icon />
