@@ -5,8 +5,8 @@ import { WMO_CODES_DAY_ICONS_FILL_MAP } from "@/entities";
 export const LocationCard = () => {
   const Icon = WMO_CODES_DAY_ICONS_FILL_MAP[0];
   return (
-    <Card className="p-4">
-      <FlexRow gap={2} align="center" justify="between">
+    <Card className="p-4 w-full">
+      <FlexRow fit gap={2} align="center" justify="between">
         <FlexCol>
           <FlexRow gap={1} align="center">
             <FaCity />

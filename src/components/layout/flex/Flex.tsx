@@ -14,6 +14,7 @@ export const Flex = ({
   gap = 0,
   wrap = false,
   stretchItems = false,
+  fit = false,
   className,
   children,
   ...props
@@ -31,6 +32,7 @@ export const Flex = ({
         }),
         resolveResponsiveValues(gap, FLEX_GAP_MAP),
         stretchItems && "*:flex-1",
+        fit && "w-full",
         className,
       )}
       {...props}

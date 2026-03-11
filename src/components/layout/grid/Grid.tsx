@@ -1,9 +1,9 @@
 import { cn, resolveResponsiveValues } from "@/utils";
-import { 
-  GRID_ALIGN_MAP, 
-  GRID_COLS_MAP, 
-  GRID_GAP_MAP, 
-  GRID_JUSTIFY_MAP 
+import {
+  GRID_ALIGN_MAP,
+  GRID_COLS_MAP,
+  GRID_GAP_MAP,
+  GRID_JUSTIFY_MAP,
 } from "./grid.constants";
 import { type GridProps } from "./grid.types";
 
@@ -12,6 +12,7 @@ export const Grid = ({
   gap = 0,
   align,
   justify,
+  fit = false,
   className,
   children,
   ...props
@@ -24,7 +25,8 @@ export const Grid = ({
         resolveResponsiveValues(gap, GRID_GAP_MAP),
         align && resolveResponsiveValues(align, GRID_ALIGN_MAP),
         justify && resolveResponsiveValues(justify, GRID_JUSTIFY_MAP),
-        className
+        fit && "w-full",
+        className,
       )}
       {...props}
     >

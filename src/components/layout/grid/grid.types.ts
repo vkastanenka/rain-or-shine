@@ -36,11 +36,13 @@ export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   cols?: ResponsiveValue<GridColsMapKey>;
   gap?: ResponsiveValue<GridGapMapKey>;
   justify?: ResponsiveValue<GridJustifyMapKey>;
+  fit?: boolean;
   children: React.ReactNode;
 }
 
 export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
   order?: ResponsiveValue<GridOrderMapKey>;
   span?: ResponsiveValue<GridColSpanMapKey>;
+  fit?: boolean;
   children: React.ReactNode;
 }

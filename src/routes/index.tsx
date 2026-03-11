@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol, TextInput, FlexRow, Flex } from "@/components";
+import {
+  Text,
+  Section,
+  FlexCol,
+  TextInput,
+  Grid,
+  FlexRow,
+  Flex,
+} from "@/components";
 import { LocationCard } from "@/features";
 
 export const Route = createFileRoute("/")({
@@ -31,33 +39,33 @@ function RouteComponent() {
           </div>
           <TextInput
             type="search"
-            size="xl"
+            size={{base: "lg", md: "xl"}}
             placeholder="Enter location"
             className="w-full max-w-130"
             suggestions={suggestions}
           />
-          <Flex
-            gap={4}
-            direction={{ base: "col", sm: "row" }}
-            className="w-full"
-          >
-            <FlexCol gap={1} stretchItems>
-              <Text className="font-medium">Your current location</Text>
-              <LocationCard />
-            </FlexCol>
-            <FlexCol gap={1} className="w-full">
-              <Text className="font-medium">Your recent locations</Text>
-              <Flex
-                gap={4}
-                direction={{ base: "col", sm: "row" }}
-                stretchItems
-                className="w-full"
-              >
+          <Grid fit gap={4} cols={{ base: 1, md: 3 }}>
+            <Grid.Item span={1}>
+              <FlexCol fit gap={1} stretchItems>
+                <Text className="font-medium">Your current location</Text>
                 <LocationCard />
-                <LocationCard />
-              </Flex>
-            </FlexCol>
-          </Flex>
+              </FlexCol>
+            </Grid.Item>
+            <Grid.Item span={{ base: 1, md: 2 }}>
+              <FlexCol fit gap={1}>
+                <Text className="font-medium">Your recent locations</Text>
+                <Flex
+                  fit
+                  gap={4}
+                  direction={{ base: "col", md: "row" }}
+                  stretchItems
+                >
+                  <LocationCard />
+                  <LocationCard />
+                </Flex>
+              </FlexCol>
+            </Grid.Item>
+          </Grid>
         </FlexCol>
       </Section>
     </div>

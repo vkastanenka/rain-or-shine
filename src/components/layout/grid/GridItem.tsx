@@ -5,6 +5,7 @@ import { type GridItemProps } from "./grid.types";
 export const GridItem = ({
   order,
   span,
+  fit = false,
   className,
   children,
   ...props
@@ -14,6 +15,7 @@ export const GridItem = ({
       className={cn(
         span && resolveResponsiveValues(span, GRID_COL_SPAN_MAP),
         order && resolveResponsiveValues(order, GRID_ORDER_MAP),
+        fit && "w-full",
         className,
       )}
       {...props}
