@@ -25,8 +25,11 @@ export const BUTTON_VARIANT_MAP = {
   active: "btn-active",
   ghost: "btn-ghost",
   link: "btn-link",
-  square: "btn-square",
+} as const;
+
+export const BUTTON_SHAPE_MAP = {
   circle: "btn-circle",
+  square: "btn-square",
 } as const;
 
 export const BUTTON_DISPLAY_MAP = {

@@ -4,6 +4,7 @@ import {
   BUTTON_SIZE_MAP,
   BUTTON_COLOR_MAP,
   BUTTON_VARIANT_MAP,
+  BUTTON_SHAPE_MAP,
   BUTTON_DISPLAY_MAP,
 } from "./button.constants";
 import { type ButtonProps } from "./button.types";
@@ -12,8 +13,9 @@ export const Button = ({
   children,
   className,
   size,
-  color = "primary",
+  color,
   variant,
+  shape,
   display,
   unstyled = false,
   ...props
@@ -24,6 +26,7 @@ export const Button = ({
         size && resolveResponsiveValues(size, BUTTON_SIZE_MAP),
         color && resolveResponsiveValues(color, BUTTON_COLOR_MAP),
         variant && resolveResponsiveValues(variant, BUTTON_VARIANT_MAP),
+        shape && resolveResponsiveValues(shape, BUTTON_SHAPE_MAP),
         display && resolveResponsiveValues(display, BUTTON_DISPLAY_MAP),
         className,
       )
