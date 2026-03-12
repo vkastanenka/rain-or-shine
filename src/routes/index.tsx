@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Text, Section, FlexCol, TextInput, Grid, Flex } from "@/components";
 import { LocationCard } from "@/features";
-import { useReverseGeocoding } from "@/hooks/queries";
+// import { useGetBrowserLocation, useReverseGeocoding } from "@/hooks";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -17,9 +17,7 @@ const suggestions = {
 };
 
 function RouteComponent() {
-  const { data: location, isLoading, error } = useReverseGeocoding();
-
-  console.log(location);
+  // useReverseGeocoding();
 
   return (
     <div>
