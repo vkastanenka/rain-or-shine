@@ -14,11 +14,11 @@ export interface LocalityInfo {
   informative: LocalityInfoRecord[];
 }
 
-export type ReverseGeocodingParams =
+export type ReverseGeocodeParams =
   | { latitude: number; longitude: number; localityLanguage?: string }
   | { localityLanguage?: string };
 
-export interface ReverseGeocodingResponse {
+export interface ReverseGeocodeResponse {
   latitude: number;
   lookupSource: string;
   longitude: number;

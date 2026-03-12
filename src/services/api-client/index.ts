@@ -20,12 +20,12 @@ export const createApiClient = (
   });
 
   instance.interceptors.response.use(
-    (response) => response.data,
+    (response) => response.data, // TODO: Confirm return type
     (error: AxiosError<ApiErrorResponse>) => {
       const status = error.response?.status;
       const message = error.response?.data?.reason || error.message;
 
-      // Sentry / LogRocket error handling?
+      // TODO: Sentry error handling
       console.error(
         `[${options.serviceName} API Error ${status || "Network"}]: ${message}`,
       );
