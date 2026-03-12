@@ -2,32 +2,45 @@ import * as MeteoconsFill from "@/assets/icons/meteocons/fill";
 import * as MeteoconsLine from "@/assets/icons/meteocons/line";
 
 export const WMO_CODES_MAP = {
+  // Clear and Cloudy
   0: "Clear sky",
   1: "Mainly clear",
   2: "Partly cloudy",
   3: "Overcast",
+
+  // Fog
   45: "Fog",
   48: "Depositing rime fog",
-  51: "Light drizzle",
-  53: "Moderate drizzle",
-  55: "Dense drizzle",
-  56: "Light freezing drizzle",
-  57: "Dense freezing drizzle",
-  61: "Slight rain",
-  63: "Moderate rain",
-  65: "Heavy rain",
-  66: "Light freezing rain",
-  67: "Heavy freezing rain",
-  71: "Slight snow fall",
-  73: "Moderate snow fall",
-  75: "Heavy snow fall",
+
+  // Drizzle
+  51: "Drizzle: Light intensity",
+  53: "Drizzle: Moderate intensity",
+  55: "Drizzle: Dense intensity",
+  56: "Freezing Drizzle: Light intensity",
+  57: "Freezing Drizzle: Dense intensity",
+
+  // Rain
+  61: "Rain: Slight intensity",
+  63: "Rain: Moderate intensity",
+  65: "Rain: Heavy intensity",
+  66: "Freezing Rain: Light intensity",
+  67: "Freezing Rain: Heavy intensity",
+
+  // Snow
+  71: "Snow fall: Slight intensity",
+  73: "Snow fall: Moderate intensity",
+  75: "Snow fall: Heavy intensity",
   77: "Snow grains",
-  80: "Slight rain showers",
-  81: "Moderate rain showers",
-  82: "Violent rain showers",
-  85: "Slight snow showers",
-  86: "Heavy snow showers",
-  95: "Thunderstorm",
+
+  // Showers
+  80: "Rain showers: Slight",
+  81: "Rain showers: Moderate",
+  82: "Rain showers: Violent",
+  85: "Snow showers: Slight",
+  86: "Snow showers: Heavy",
+
+  // Thunderstorm
+  95: "Thunderstorm: Slight or moderate",
   96: "Thunderstorm with slight hail",
   99: "Thunderstorm with heavy hail",
 } as const;

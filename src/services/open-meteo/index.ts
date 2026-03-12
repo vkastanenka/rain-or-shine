@@ -8,7 +8,7 @@
 import { WeatherForecastService } from './weather-forecast';
 import { HistoricalWeatherService } from './historical-weather';
 import { SeasonalForecastService } from './seasonal-forecast';
-import { GeocodingService } from './geocoding';
+import { GeocodingService } from './geocoding-old';
 
 // --- SERVICE INSTANCES (Singletons) ---
 
@@ -46,4 +46,4 @@ export * from './base/constants';
 export * from './weather-forecast/types';
 export * from './historical-weather/types';
 export * from './seasonal-forecast/types';
-export * from './geocoding/types';
+export * from './geocoding-old/types';
