@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { bigDataCloudService } from "@/services";
 
-export function useReverseGeocoding(coords?: GeolocationCoordinates) {
+export function useReverseGeocode(coords?: GeolocationCoordinates) {
   return useQuery({
     queryKey: [
       "location",
