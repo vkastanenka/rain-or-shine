@@ -16,17 +16,11 @@ export const createApiClient = (
     ...config,
   });
 
-  /**
-   * Standardize error formatting before it reaches the Service layer.
-   */
-
+  // Standardize error formatting before it reaches the service layer.
   instance.interceptors.response.use(
     (response) => response,
     (error: AxiosError<ApiErrorResponse>) => {
-      /**
-       * If aborted by the user/React, we don't want to log as actual error.
-       */
-      
+      // If aborted, don't log the error.
       if (isCancel(error)) {
         return Promise.reject(error);
       }
@@ -43,9 +37,7 @@ export const createApiClient = (
     },
   );
 
-  /**
-   * Ensure app received data that matches defined schemas (The Gatekeeper Pattern).
-   */
+  // Validated get to ensure app receives expected data.
   const customInstance = instance as any;
 
   customInstance.validatedGet = async <T extends z.ZodTypeAny>(
