@@ -1,8 +1,14 @@
 import * as React from "react";
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { Navbar } from "@/components";
+import type { ReverseGeocodingResponse } from "@/services/big-data-cloud/types";
 
-export const Route = createRootRoute({
+interface MyRouterContext {
+  location?: ReverseGeocodingResponse;
+  isLoading: boolean;
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootComponent,
 });
 
