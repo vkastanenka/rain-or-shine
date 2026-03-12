@@ -8,7 +8,7 @@ const locationKeys = {
     [...locationKeys.all, "by-coords", params] as const,
 };
 
-export const locationByCoordsOptions = (params?: LocationByCoordsParams) =>
+export const getLocationByCoordsOptions = (params?: LocationByCoordsParams) =>
   queryOptions({
     queryKey: locationKeys.byCoords(params),
     queryFn: ({ signal }) =>
@@ -18,5 +18,5 @@ export const locationByCoordsOptions = (params?: LocationByCoordsParams) =>
   });
 
 export const useGetLocationByCoords = (params?: LocationByCoordsParams) => {
-  return useQuery(locationByCoordsOptions(params));
+  return useQuery(getLocationByCoordsOptions(params));
 };

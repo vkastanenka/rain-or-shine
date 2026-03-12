@@ -1,4 +1,4 @@
-export { locationByCoordsOptions, useGetLocationByCoords } from "./hooks";
+export { useGetLocationByCoords, getLocationByCoordsOptions } from "./hooks";
 export type {
   Location as BigDataCloudLocation,
   LocationByCoordsParams as BigDataCloudLocationByCoordsParams,
