@@ -1,21 +1,27 @@
 import * as React from "react";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
-import type { UseQueryResult } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { Navbar } from "@/components";
-import type { ReverseGeocodeResponse } from "@/services/big-data-cloud/types";
+import { useGetLocationByCoords, getLocationByCoordsOptions } from "@/services";
 
-type QueryResult<T> = UseQueryResult<T, Error>;
-
-interface MyRouterContext {
-  location?: QueryResult<ReverseGeocodeResponse>;
+interface RootRouterContext {
+  queryClient: QueryClient;
 }
 
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRouteWithContext<RootRouterContext>()({
+  loader: async ({ context }) => {
+    try {
+      await context.queryClient.ensureQueryData(getLocationByCoordsOptions());
+    } catch (error) {
+      console.warn("Location fetch failed, proceeding with default state.");
+    }
+  },
   component: RootComponent,
-  // errorComponent: ({ error }) => <LocationErrorFallback error={error} />,
 });
 
 function RootComponent() {
+  useGetLocationByCoords();
+
   return (
     <React.Fragment>
       <Navbar />
