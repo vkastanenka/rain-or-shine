@@ -1,10 +1,8 @@
 import { z } from "zod";
-import { ReverseGeocodeResponseSchema } from "./schema";
+import { LocationSchema } from "./schema";
 
-export type ReverseGeocodeParams =
+export type LocationCoordsParams =
   | { latitude: number; longitude: number; localityLanguage?: string }
   | { localityLanguage?: string };
 
-export type ReverseGeocodeResponse = z.infer<
-  typeof ReverseGeocodeResponseSchema
->;
+export type Location = z.infer<typeof LocationSchema>;

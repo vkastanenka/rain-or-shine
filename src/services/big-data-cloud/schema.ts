@@ -16,7 +16,7 @@ export const LocalityInfoSchema = z.object({
   informative: z.array(LocalityInfoRecordSchema),
 });
 
-export const ReverseGeocodeResponseSchema = z.object({
+export const LocationSchema = z.object({
   latitude: z.number(),
   longitude: z.number(),
   lookupSource: z.string(),
