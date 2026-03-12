@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { LocationSchema } from "./schema";
 
-export type LocationCoordsParams = {
+export type LocationByCoordsParams = {
   latitude: number;
   longitude: number;
   localityLanguage?: string;

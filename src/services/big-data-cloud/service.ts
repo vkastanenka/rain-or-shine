@@ -2,9 +2,9 @@ import type { AxiosRequestConfig } from "axios";
 import { createApiClient, type CustomAxiosInstance } from "../api-client";
 import { API_CONFIG } from "./constants";
 import { LocationSchema } from "./schema";
-import { type LocationCoordsParams, type Location } from "./types";
+import { type LocationByCoordsParams, type Location } from "./types";
 
-export class BigDataCloudService {
+class BigDataCloudService {
   protected instance: CustomAxiosInstance;
 
   constructor() {
@@ -15,7 +15,7 @@ export class BigDataCloudService {
   }
 
   public getLocationByCoords = (
-    params?: LocationCoordsParams,
+    params?: LocationByCoordsParams,
     config?: AxiosRequestConfig,
   ): Promise<Location> => {
     return this.instance.validatedGet(

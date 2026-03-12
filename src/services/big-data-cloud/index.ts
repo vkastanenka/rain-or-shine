@@ -1,5 +1,5 @@
-export * from "./constants";
-export * from "./hooks";
-export * from "./schema";
-export * from "./service";
-export * from "./types";
+export { locationByCoordsOptions, useGetLocationByCoords } from "./hooks";
+export type {
+  Location as BigDataCloudLocation,
+  LocationByCoordsParams as BigDataCloudLocationByCoordsParams,
+} from "./types";

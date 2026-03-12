@@ -1,14 +1,14 @@
 import { useQuery, queryOptions } from "@tanstack/react-query";
-import { bigDataCloudService } from "@/services";
-import { type LocationCoordsParams } from "./types";
+import { bigDataCloudService } from "./service";
+import { type LocationByCoordsParams } from "./types";
 
-export const locationKeys = {
+const locationKeys = {
   all: ["location"] as const,
-  byCoords: (params?: LocationCoordsParams) =>
+  byCoords: (params?: LocationByCoordsParams) =>
     [...locationKeys.all, "by-coords", params] as const,
 };
 
-export const locationByCoordsOptions = (params?: LocationCoordsParams) =>
+export const locationByCoordsOptions = (params?: LocationByCoordsParams) =>
   queryOptions({
     queryKey: locationKeys.byCoords(params),
     queryFn: ({ signal }) =>
@@ -17,6 +17,6 @@ export const locationByCoordsOptions = (params?: LocationCoordsParams) =>
     gcTime: 1000 * 60 * 15,
   });
 
-export const useGetLocationByCoords = (params?: LocationCoordsParams) => {
+export const useGetLocationByCoords = (params?: LocationByCoordsParams) => {
   return useQuery(locationByCoordsOptions(params));
 };
