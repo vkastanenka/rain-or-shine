@@ -10,5 +10,5 @@ export const formatWeatherUrl = (
     .replace(/\s+/g, "-");
   const city = location.city.toLowerCase().replace(/\s+/g, "-");
 
-  return `/city/${country}/${province}/${city}/${period}`;
+  return `/weather/${country}/${province}/${city}/${period}`;
 };
