@@ -1,16 +1,13 @@
-import axios, {
-  type AxiosInstance,
-  type AxiosRequestConfig,
-  AxiosError,
-} from "axios";
-import { type ApiErrorResponse } from "./types";
+import axios, { type AxiosRequestConfig, AxiosError, isCancel } from "axios";
+import { z } from "zod";
+import { type ApiErrorResponse, type CustomAxiosInstance } from "./types";
 
 export * from "./types";
 
 export const createApiClient = (
   config: AxiosRequestConfig,
   options: { serviceName: string },
-): AxiosInstance => {
+): CustomAxiosInstance => {
   const instance = axios.create({
     timeout: 15000,
     headers: {
@@ -19,9 +16,21 @@ export const createApiClient = (
     ...config,
   });
 
+  /**
+   * Standardize error formatting before it reaches the Service layer.
+   */
+
   instance.interceptors.response.use(
-    (response) => response.data, // TODO: Confirm return type
+    (response) => response,
     (error: AxiosError<ApiErrorResponse>) => {
+      /**
+       * If aborted by the user/React, we don't want to log as actual error.
+       */
+      
+      if (isCancel(error)) {
+        return Promise.reject(error);
+      }
+
       const status = error.response?.status;
       const message = error.response?.data?.reason || error.message;
 
@@ -34,5 +43,31 @@ export const createApiClient = (
     },
   );
 
-  return instance;
+  /**
+   * Ensure app received data that matches defined schemas (The Gatekeeper Pattern).
+   */
+  const customInstance = instance as any;
+
+  customInstance.validatedGet = async <T extends z.ZodTypeAny>(
+    url: string,
+    schema: T,
+    axiosConfig?: AxiosRequestConfig,
+  ): Promise<z.infer<T>> => {
+    const response = await instance.get(url, axiosConfig);
+    const result = schema.safeParse(response.data);
+
+    if (!result.success) {
+      console.error(
+        `[${options.serviceName}] Schema Validation Failed at ${url}:`,
+        result.error.message,
+      );
+      throw new Error(
+        `Invalid API response structure from ${options.serviceName}`,
+      );
+    }
+
+    return result.data;
+  };
+
+  return customInstance as CustomAxiosInstance;
 };

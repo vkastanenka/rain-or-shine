@@ -1,13 +1,14 @@
-import { type AxiosInstance } from "axios";
-import { createApiClient } from "../api-client";
+import type { AxiosRequestConfig } from "axios";
+import { createApiClient, type CustomAxiosInstance } from "../api-client";
 import { API_CONFIG } from "./constants";
+import { ReverseGeocodeResponseSchema } from "./schema";
 import {
   type ReverseGeocodeParams,
   type ReverseGeocodeResponse,
 } from "./types";
 
 export class BigDataCloudService {
-  protected instance: AxiosInstance;
+  protected instance: CustomAxiosInstance;
 
   constructor() {
     this.instance = createApiClient(
@@ -18,8 +19,13 @@ export class BigDataCloudService {
 
   public reverseGeocode = (
     params?: ReverseGeocodeParams,
+    config?: AxiosRequestConfig,
   ): Promise<ReverseGeocodeResponse> => {
-    return this.instance.get(API_CONFIG.endpoints.reverseGeocode, { params });
+    return this.instance.validatedGet(
+      API_CONFIG.endpoints.reverseGeocode,
+      ReverseGeocodeResponseSchema,
+      { ...config, params },
+    );
   };
 }
 

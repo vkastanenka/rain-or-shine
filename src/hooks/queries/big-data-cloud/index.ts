@@ -10,16 +10,21 @@ export function useReverseGeocode(coords?: GeolocationCoordinates) {
       coords?.latitude,
       coords?.longitude,
     ],
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       const params = coords
         ? { longitude: coords.longitude, latitude: coords.latitude }
         : undefined;
 
-      const res = await bigDataCloudService.reverseGeocode(params);
+      const res = await bigDataCloudService.reverseGeocode(params, { signal });
 
       return res;
     },
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 15,
+    // onError: (err) => {
+    //   toast.error(
+    //     "We couldn't determine your location. Please check your settings.",
+    //   );
+    // },
   });
 }
