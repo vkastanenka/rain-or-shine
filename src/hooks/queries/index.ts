@@ -1,4 +1,3 @@
-export * from "./big-data-cloud";
 export * from "./open-meteo/useWeatherForecast";
 export * from "./open-meteo/useHistoricalWeather";
 export * from "./open-meteo/useSeasonalForecast";
