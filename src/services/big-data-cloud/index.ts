@@ -1,4 +1,5 @@
-import axios, { type AxiosInstance } from "axios";
+import { type AxiosInstance } from "axios";
+import { createApiClient } from "../api-client";
 import { BIG_DATA_CLOUD_API_CONFIG } from "./constants";
 import {
   type ReverseGeocodingParams,
@@ -9,29 +10,9 @@ export class BigDataCloudService {
   protected instance: AxiosInstance;
 
   constructor() {
-    this.instance = axios.create({
-      baseURL: BIG_DATA_CLOUD_API_CONFIG.baseUrl,
-    });
-
-    this.initializeInterceptors();
-  }
-
-  /**
-   * Sets up response interceptors to handle data extraction and error logging.
-   * * The interceptor automatically extracts `response.data` on success
-   * and logs a formatted error message to the console on failure.
-   * * @private
-   */
-  private initializeInterceptors(): void {
-    this.instance.interceptors.response.use(
-      (response) => response.data,
-      (error) => {
-        const reason = error.response?.data?.reason || error.message;
-        console.error(
-          `[Big Data Cloud API Error] ${error.config?.url}: ${reason}`,
-        );
-        return Promise.reject(error);
-      },
+    this.instance = createApiClient(
+      { baseURL: BIG_DATA_CLOUD_API_CONFIG.baseUrl },
+      { serviceName: BIG_DATA_CLOUD_API_CONFIG.name },
     );
   }
 
@@ -49,4 +30,3 @@ export class BigDataCloudService {
 }
 
 export const bigDataCloudService = new BigDataCloudService();
- 
