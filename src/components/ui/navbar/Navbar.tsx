@@ -1,10 +1,10 @@
-import { useRouteContext } from "@tanstack/react-router";
+import type { JSX } from "react";
 import { FaSearch, FaGithub, FaLinkedin, FaBriefcase } from "react-icons/fa";
 import { Container, FlexRow } from "@/components/layout";
+import { useGetLocationByCoords } from "@/services";
+import { formatWeatherUrl } from "@/utils";
 import { Button } from "../button";
 import { Text } from "../text";
-import type { JSX } from "react";
-import type { LinkProps } from "@tanstack/react-router";
 
 interface SocialLinks {
   icon: JSX.Element;
@@ -26,17 +26,10 @@ const SOCIAL_LINKS: SocialLinks[] = [
   },
 ];
 
-interface NavLinks {
-  label: string;
-  href: LinkProps["to"];
-}
-
-const NAV_LINKS: NavLinks[] = [
-  { label: "Weather", href: "/weather" },
-  { label: "Maps", href: "/maps" },
-];
-
 export const Navbar = () => {
+  const { data: location } = useGetLocationByCoords();
+  const weatherHref = location ? formatWeatherUrl(location) : "/";
+
   return (
     <nav className="bg-neutral py-3 sticky top-0">
       <Container>
@@ -48,11 +41,15 @@ export const Navbar = () => {
           </Button>
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">
-              {NAV_LINKS.map((link) => (
-                <Button key={link.label} variant="ghost" to={link.href}>
-                  {link.label}
-                </Button>
-              ))}
+              {/* Weather Button */}
+              <Button variant="ghost" to={weatherHref as any}>
+                Weather
+              </Button>
+
+              {/* Other Links */}
+              <Button variant="ghost" to="/maps">
+                Maps
+              </Button>
             </FlexRow>
             <Button
               variant="ghost"
