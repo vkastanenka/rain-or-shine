@@ -4,11 +4,11 @@ export const LocalityInfoRecordSchema = z.object({
   name: z.string().optional(),
   description: z.string().optional(),
   isoName: z.string().optional(),
-  order: z.string().optional(),
-  adminLevel: z.string().optional(),
+  order: z.number().optional(),
+  adminLevel: z.number().optional(),
   isoCode: z.string().optional(),
   wikidataId: z.string().optional(),
-  geonameId: z.string().optional(),
+  geonameId: z.number().optional(),
 });
 
 export const LocalityInfoSchema = z.object({

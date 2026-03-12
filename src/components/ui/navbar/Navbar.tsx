@@ -1,3 +1,4 @@
+import { useRouteContext } from "@tanstack/react-router";
 import { FaSearch, FaGithub, FaLinkedin, FaBriefcase } from "react-icons/fa";
 import { Container, FlexRow } from "@/components/layout";
 import { Button } from "../button";

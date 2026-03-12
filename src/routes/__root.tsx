@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
 import { Navbar } from "@/components";
@@ -9,12 +9,8 @@ interface RootRouterContext {
 }
 
 export const Route = createRootRouteWithContext<RootRouterContext>()({
-  loader: async ({ context }) => {
-    try {
-      await context.queryClient.ensureQueryData(getLocationByCoordsOptions());
-    } catch (error) {
-      console.warn("Location fetch failed, proceeding with default state.");
-    }
+  loader: ({ context }) => {
+    context.queryClient.prefetchQuery(getLocationByCoordsOptions());
   },
   component: RootComponent,
 });
