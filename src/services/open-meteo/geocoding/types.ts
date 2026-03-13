@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { LocationSchema, LocationsSchema } from "./schema";
 
-export type LocationsByNameParams = {
+export type GetLocationsByNameParams = {
   name: string;
   count?: number;
   language?: string;

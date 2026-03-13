@@ -1,7 +1,12 @@
 import { z } from "zod";
 import { WMO_CODE_DESCRIPTION_MAP } from "./constants";
-import { type WmoCodeDescriptionMapValue } from "./types";
+import { type WmoCodeDescriptionMapKey } from "./types";
 
-export const wmoCodeDescriptionSchema = z.enum(
-  Object.values(WMO_CODE_DESCRIPTION_MAP) as WmoCodeDescriptionMapValue[],
-);
+export const wmoCodeSchema = z
+  .number()
+  .refine(
+    (val): val is WmoCodeDescriptionMapKey => val in WMO_CODE_DESCRIPTION_MAP,
+    {
+      message: "Invalid WMO weather code",
+    },
+  );

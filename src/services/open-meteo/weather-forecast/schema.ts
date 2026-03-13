@@ -1,22 +1,24 @@
 import { z } from "zod";
-import { transformForecastValuesShapeToUnitsShape } from "./utils";
+import { wmoCodeSchema } from "@/entities";
+import { FORECAST_INTERVAL_MAP, FORECAST_INTERVAL_UNIT_MAP } from "./constants";
+import { transformValuesShapeToUnitsShape } from "./utils";
 
 /**
  * Shared
  */
 
-export const ForecastIsDayValueSchema = z.union([z.literal(0), z.literal(1)]);
+export const isDayValueSchema = z.union([z.literal(0), z.literal(1)]);
 
 /**
  * Current
  */
 
-export const ForecastCurrentValuesSchema = z.object({
+export const CurrentValuesSchema = z.object({
   time: z.array(z.string()),
   apparent_temperature: z.array(z.number()).optional(),
   cloud_cover: z.array(z.number()).optional(),
   interval: z.array(z.number()).optional(),
-  is_day: ForecastIsDayValueSchema,
+  is_day: z.array(isDayValueSchema).optional(),
   precipitation: z.array(z.number()).optional(),
   pressure_msl: z.array(z.number()).optional(),
   rain: z.array(z.number()).optional(),
@@ -25,21 +27,21 @@ export const ForecastCurrentValuesSchema = z.object({
   snowfall: z.array(z.number()).optional(),
   surface_pressure: z.array(z.number()).optional(),
   temperature_2m: z.array(z.number()).optional(),
-  weather_code: z.array(z.number()).optional(),
+  weather_code: z.array(wmoCodeSchema).optional(),
   wind_direction_10m: z.array(z.number()).optional(),
   wind_gusts_10m: z.array(z.number()).optional(),
   wind_speed_10m: z.array(z.number()).optional(),
 });
 
-export const ForecastCurrentValuesUnitsSchema = z.object(
-  transformForecastValuesShapeToUnitsShape(ForecastCurrentValuesSchema.shape),
+export const CurrentValuesUnitsSchema = z.object(
+  transformValuesShapeToUnitsShape(CurrentValuesSchema.shape),
 );
 
 /**
  * Daily
  */
 
-export const ForecastDailyValuesSchema = z.object({
+export const DailyValuesSchema = z.object({
   time: z.array(z.string()),
   apparent_temperature_max: z.array(z.number()).optional(),
   apparent_temperature_mean: z.array(z.number()).optional(),
@@ -90,7 +92,7 @@ export const ForecastDailyValuesSchema = z.object({
   visibility_max: z.array(z.number()).optional(),
   visibility_mean: z.array(z.number()).optional(),
   visibility_min: z.array(z.number()).optional(),
-  weather_code: z.array(z.number()).optional(),
+  weather_code: z.array(wmoCodeSchema).optional(),
   wet_bulb_temperature_2m_max: z.array(z.number()).optional(),
   wet_bulb_temperature_2m_mean: z.array(z.number()).optional(),
   wet_bulb_temperature_2m_min: z.array(z.number()).optional(),
@@ -103,15 +105,15 @@ export const ForecastDailyValuesSchema = z.object({
   wind_speed_10m_min: z.array(z.number()).optional(),
 });
 
-export const ForecastDailyValuesUnitsSchema = z.object(
-  transformForecastValuesShapeToUnitsShape(ForecastDailyValuesSchema.shape),
+export const DailyValuesUnitsSchema = z.object(
+  transformValuesShapeToUnitsShape(DailyValuesSchema.shape),
 );
 
 /**
  * Hourly
  */
 
-export const ForecastHourlyValuesSchema = z.object({
+export const HourlyValuesSchema = z.object({
   time: z.array(z.string()),
   apparent_temperature: z.array(z.number()).optional(),
   boundary_layer_height: z.array(z.number()).optional(),
@@ -133,7 +135,7 @@ export const ForecastHourlyValuesSchema = z.object({
   freezing_level_height: z.array(z.number()).optional(),
   global_tilted_irradiance_instant: z.array(z.number()).optional(),
   global_tilted_irradiance: z.array(z.number()).optional(),
-  is_day: ForecastIsDayValueSchema,
+  is_day: z.array(isDayValueSchema).optional(),
   lifted_index: z.array(z.number()).optional(),
   precipitation: z.array(z.number()).optional(),
   precipitation_probability: z.array(z.number()).optional(),
@@ -167,7 +169,7 @@ export const ForecastHourlyValuesSchema = z.object({
   uv_index: z.array(z.number()).optional(),
   vapour_pressure_deficit: z.array(z.number()).optional(),
   visibility: z.array(z.number()).optional(),
-  weather_code: z.array(z.number()).optional(),
+  weather_code: z.array(wmoCodeSchema).optional(),
   wet_bulb_temperature_2m: z.array(z.number()).optional(),
   wind_direction_10m: z.array(z.number()).optional(),
   wind_direction_120m: z.array(z.number()).optional(),
@@ -180,15 +182,15 @@ export const ForecastHourlyValuesSchema = z.object({
   wind_speed_80m: z.array(z.number()).optional(),
 });
 
-export const ForecastHourlyValuesUnitsSchema = z.object(
-  transformForecastValuesShapeToUnitsShape(ForecastHourlyValuesSchema.shape),
+export const HourlyValuesUnitsSchema = z.object(
+  transformValuesShapeToUnitsShape(HourlyValuesSchema.shape),
 );
 
 /**
  * Minutely 15
  */
 
-export const ForecastMinutely15ValuesSchema = z.object({
+export const Minutely15ValuesSchema = z.object({
   time: z.array(z.string()),
   apparent_temperature: z.array(z.number()).optional(),
   cape: z.array(z.number()).optional(),
@@ -202,7 +204,7 @@ export const ForecastMinutely15ValuesSchema = z.object({
   freezing_level_height: z.array(z.number()).optional(),
   global_tilted_irradiance_instant: z.array(z.number()).optional(),
   global_tilted_irradiance: z.array(z.number()).optional(),
-  is_day: ForecastIsDayValueSchema,
+  is_day: z.array(isDayValueSchema).optional(),
   lightning_potential_index: z.array(z.number()).optional(),
   precipitation: z.array(z.number()).optional(),
   rain: z.array(z.number()).optional(),
@@ -216,7 +218,7 @@ export const ForecastMinutely15ValuesSchema = z.object({
   terrestrial_radiation_instant: z.array(z.number()).optional(),
   terrestrial_radiation: z.array(z.number()).optional(),
   visibility: z.array(z.number()).optional(),
-  weather_code: z.array(z.number()).optional(),
+  weather_code: z.array(wmoCodeSchema).optional(),
   wind_direction_10m: z.array(z.number()).optional(),
   wind_direction_80m: z.array(z.number()).optional(),
   wind_gusts_10m: z.array(z.number()).optional(),
@@ -224,8 +226,32 @@ export const ForecastMinutely15ValuesSchema = z.object({
   wind_speed_80m: z.array(z.number()).optional(),
 });
 
-export const ForecastMinutely15ValuesUnitsSchema = z.object(
-  transformForecastValuesShapeToUnitsShape(
-    ForecastMinutely15ValuesSchema.shape,
-  ),
+export const Minutely15ValuesUnitsSchema = z.object(
+  transformValuesShapeToUnitsShape(Minutely15ValuesSchema.shape),
 );
+
+/**
+ * Forecast
+ */
+
+export const ForecastSchema = z.object({
+  latitude: z.number(),
+  longitude: z.number(),
+  generationtime_ms: z.number(),
+  utc_offset_seconds: z.number(),
+  timezone: z.string(),
+  timezone_abbreviation: z.string(),
+  elevation: z.number(),
+
+  // Time Interval Data
+  [FORECAST_INTERVAL_MAP.Current]: CurrentValuesSchema,
+  [FORECAST_INTERVAL_MAP.Daily]: DailyValuesSchema,
+  [FORECAST_INTERVAL_MAP.Hourly]: HourlyValuesSchema,
+  [FORECAST_INTERVAL_MAP.Minutely15]: Minutely15ValuesSchema,
+
+  // Time Interval Units
+  [FORECAST_INTERVAL_UNIT_MAP.Current]: CurrentValuesUnitsSchema,
+  [FORECAST_INTERVAL_UNIT_MAP.Daily]: DailyValuesUnitsSchema,
+  [FORECAST_INTERVAL_UNIT_MAP.Hourly]: HourlyValuesUnitsSchema,
+  [FORECAST_INTERVAL_UNIT_MAP.Minutely15]: Minutely15ValuesUnitsSchema,
+});

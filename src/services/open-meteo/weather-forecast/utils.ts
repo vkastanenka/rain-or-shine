@@ -1,6 +1,6 @@
 import { z, type ZodRawShape } from "zod";
 
-export const transformForecastValuesShapeToUnitsShape = <T extends ZodRawShape>(
+export const transformValuesShapeToUnitsShape = <T extends ZodRawShape>(
   shape: T,
 ) => {
   const mappedEntries = Object.keys(shape).map((key) => {

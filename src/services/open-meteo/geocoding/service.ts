@@ -5,24 +5,26 @@ import {
 } from "@/services/api-client";
 import { API_CONFIG } from "../constants";
 import { LocationsSchema } from "./schema";
-import { type LocationsByNameParams, type Locations } from "./types";
+import { type GetLocationsByNameParams, type Locations } from "./types";
+
+const { GEOCODING: GEOCODING_API_CONFIG } = API_CONFIG;
 
 class GeocodingService {
   protected instance: CustomAxiosInstance;
 
   constructor() {
     this.instance = createApiClient(
-      { baseURL: API_CONFIG.GEOCODING.V1.baseUrl },
-      { serviceName: API_CONFIG.GEOCODING.V1.name },
+      { baseURL: GEOCODING_API_CONFIG.V1.baseUrl },
+      { serviceName: GEOCODING_API_CONFIG.V1.name },
     );
   }
 
   public getLocationsByName = (
-    params?: LocationsByNameParams,
+    params?: GetLocationsByNameParams,
     config?: AxiosRequestConfig,
   ): Promise<Locations> => {
     return this.instance.validatedGet(
-      API_CONFIG.GEOCODING.V1.endpoints.search,
+      GEOCODING_API_CONFIG.V1.endpoints.search,
       LocationsSchema,
       { ...config, params },
     );
