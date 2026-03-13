@@ -1,7 +1,11 @@
 import * as MeteoconsFill from "@/assets/icons/meteocons/fill";
 import * as MeteoconsLine from "@/assets/icons/meteocons/line";
 
-export const WMO_CODES_MAP = {
+/**
+ * WMO Code Types
+ */
+
+export const WMO_CODE_DESCRIPTION_MAP = {
   // Clear and Cloudy
   0: "Clear sky",
   1: "Mainly clear",
@@ -45,35 +49,39 @@ export const WMO_CODES_MAP = {
   99: "Thunderstorm with heavy hail",
 } as const;
 
-export const WMO_RAIN_CODES_MAP = {
-  51: WMO_CODES_MAP[51],
-  53: WMO_CODES_MAP[53],
-  55: WMO_CODES_MAP[55],
-  56: WMO_CODES_MAP[56],
-  57: WMO_CODES_MAP[57],
-  61: WMO_CODES_MAP[61],
-  63: WMO_CODES_MAP[63],
-  65: WMO_CODES_MAP[65],
-  66: WMO_CODES_MAP[66],
-  67: WMO_CODES_MAP[67],
-  80: WMO_CODES_MAP[80],
-  81: WMO_CODES_MAP[81],
-  82: WMO_CODES_MAP[82],
-  95: WMO_CODES_MAP[95],
-  96: WMO_CODES_MAP[96],
-  99: WMO_CODES_MAP[99],
+export const WMO_RAIN_CODE_DESCRIPTION_MAP = {
+  51: WMO_CODE_DESCRIPTION_MAP[51],
+  53: WMO_CODE_DESCRIPTION_MAP[53],
+  55: WMO_CODE_DESCRIPTION_MAP[55],
+  56: WMO_CODE_DESCRIPTION_MAP[56],
+  57: WMO_CODE_DESCRIPTION_MAP[57],
+  61: WMO_CODE_DESCRIPTION_MAP[61],
+  63: WMO_CODE_DESCRIPTION_MAP[63],
+  65: WMO_CODE_DESCRIPTION_MAP[65],
+  66: WMO_CODE_DESCRIPTION_MAP[66],
+  67: WMO_CODE_DESCRIPTION_MAP[67],
+  80: WMO_CODE_DESCRIPTION_MAP[80],
+  81: WMO_CODE_DESCRIPTION_MAP[81],
+  82: WMO_CODE_DESCRIPTION_MAP[82],
+  95: WMO_CODE_DESCRIPTION_MAP[95],
+  96: WMO_CODE_DESCRIPTION_MAP[96],
+  99: WMO_CODE_DESCRIPTION_MAP[99],
 } as const;
 
-export const WMO_SNOW_CODES_MAP = {
-  71: WMO_CODES_MAP[71],
-  73: WMO_CODES_MAP[73],
-  75: WMO_CODES_MAP[75],
-  77: WMO_CODES_MAP[77],
-  85: WMO_CODES_MAP[85],
-  86: WMO_CODES_MAP[86],
+export const WMO_SNOW_CODE_DESCRIPTION_MAP = {
+  71: WMO_CODE_DESCRIPTION_MAP[71],
+  73: WMO_CODE_DESCRIPTION_MAP[73],
+  75: WMO_CODE_DESCRIPTION_MAP[75],
+  77: WMO_CODE_DESCRIPTION_MAP[77],
+  85: WMO_CODE_DESCRIPTION_MAP[85],
+  86: WMO_CODE_DESCRIPTION_MAP[86],
 } as const;
 
-export const WMO_CODES_DAY_ICONS_FILL_MAP = {
+/**
+ * Icon Map Types
+ */
+
+export const WMO_CODE_DAY_ICON_FILL_MAP = {
   0: MeteoconsFill.ClearDay,
   1: MeteoconsFill.ClearDay,
   2: MeteoconsFill.PartlyCloudyDay,
@@ -104,7 +112,7 @@ export const WMO_CODES_DAY_ICONS_FILL_MAP = {
   99: MeteoconsFill.ThunderstormsRain,
 } as const;
 
-export const WMO_CODES_DAY_ICONS_LINE_MAP = {
+export const WMO_CODE_DAY_ICON_LINE_MAP = {
   0: MeteoconsLine.ClearDay,
   1: MeteoconsLine.ClearDay,
   2: MeteoconsLine.PartlyCloudyDay,
@@ -135,7 +143,7 @@ export const WMO_CODES_DAY_ICONS_LINE_MAP = {
   99: MeteoconsLine.ThunderstormsRain,
 } as const;
 
-export const WMO_CODES_NIGHT_ICONS_FILL_MAP = {
+export const WMO_CODE_NIGHT_ICON_FILL_MAP = {
   0: MeteoconsFill.ClearNight,
   1: MeteoconsFill.ClearNight,
   2: MeteoconsFill.PartlyCloudyNight,
@@ -166,7 +174,7 @@ export const WMO_CODES_NIGHT_ICONS_FILL_MAP = {
   99: MeteoconsFill.ThunderstormsRain,
 } as const;
 
-export const WMO_CODES_NIGHT_ICONS_LINE_MAP = {
+export const WMO_CODE_NIGHT_ICON_LINE_MAP = {
   0: MeteoconsLine.ClearNight,
   1: MeteoconsLine.ClearNight,
   2: MeteoconsLine.PartlyCloudyNight,
