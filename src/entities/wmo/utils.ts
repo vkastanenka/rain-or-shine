@@ -1,10 +1,10 @@
 import { WMO_RAIN_CODES_MAP, WMO_SNOW_CODES_MAP } from "./constants";
 import { type WmoCodesMapKey } from "./types";
 
-export const isWmoCodeRain = (
+export const wmoCodeIsRain = (
   key: WmoCodesMapKey,
 ): key is keyof typeof WMO_RAIN_CODES_MAP => key in WMO_RAIN_CODES_MAP;
 
-export const isWmoCodeSnow = (
+export const wmoCodeIsSnow = (
   key: WmoCodesMapKey,
 ): key is keyof typeof WMO_SNOW_CODES_MAP => key in WMO_SNOW_CODES_MAP;
