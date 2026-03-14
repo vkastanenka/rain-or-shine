@@ -1,9 +1,7 @@
 @import "tailwindcss";
 @source "../src";
 @plugin "daisyui" {
-  themes:
-    cupcake --default,
-    forest;
+  themes: forest --default;
 }
 
 @font-face {
@@ -91,5 +89,8 @@
     padding: 0;
     font-family: var(--font-quicksand);
     min-height: 100svh;
+  }
+
+  a {
   }
 }

@@ -9,16 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WeatherRouteImport } from './routes/weather'
 import { Route as MapsRouteImport } from './routes/maps'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WeatherCountryProvinceCityPeriodRouteImport } from './routes/weather.$country.$province.$city.$period'
 
-const WeatherRoute = WeatherRouteImport.update({
-  id: '/weather',
-  path: '/weather',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MapsRoute = MapsRouteImport.update({
   id: '/maps',
   path: '/maps',
@@ -31,62 +25,43 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const WeatherCountryProvinceCityPeriodRoute =
   WeatherCountryProvinceCityPeriodRouteImport.update({
-    id: '/$country/$province/$city/$period',
-    path: '/$country/$province/$city/$period',
-    getParentRoute: () => WeatherRoute,
+    id: '/weather/$country/$province/$city/$period',
+    path: '/weather/$country/$province/$city/$period',
+    getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/maps': typeof MapsRoute
-  '/weather': typeof WeatherRouteWithChildren
   '/weather/$country/$province/$city/$period': typeof WeatherCountryProvinceCityPeriodRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/maps': typeof MapsRoute
-  '/weather': typeof WeatherRouteWithChildren
   '/weather/$country/$province/$city/$period': typeof WeatherCountryProvinceCityPeriodRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/maps': typeof MapsRoute
-  '/weather': typeof WeatherRouteWithChildren
   '/weather/$country/$province/$city/$period': typeof WeatherCountryProvinceCityPeriodRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/maps'
-    | '/weather'
-    | '/weather/$country/$province/$city/$period'
+  fullPaths: '/' | '/maps' | '/weather/$country/$province/$city/$period'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/maps' | '/weather' | '/weather/$country/$province/$city/$period'
-  id:
-    | '__root__'
-    | '/'
-    | '/maps'
-    | '/weather'
-    | '/weather/$country/$province/$city/$period'
+  to: '/' | '/maps' | '/weather/$country/$province/$city/$period'
+  id: '__root__' | '/' | '/maps' | '/weather/$country/$province/$city/$period'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MapsRoute: typeof MapsRoute
-  WeatherRoute: typeof WeatherRouteWithChildren
+  WeatherCountryProvinceCityPeriodRoute: typeof WeatherCountryProvinceCityPeriodRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/weather': {
-      id: '/weather'
-      path: '/weather'
-      fullPath: '/weather'
-      preLoaderRoute: typeof WeatherRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/maps': {
       id: '/maps'
       path: '/maps'
@@ -103,29 +78,18 @@ declare module '@tanstack/react-router' {
     }
     '/weather/$country/$province/$city/$period': {
       id: '/weather/$country/$province/$city/$period'
-      path: '/$country/$province/$city/$period'
+      path: '/weather/$country/$province/$city/$period'
       fullPath: '/weather/$country/$province/$city/$period'
       preLoaderRoute: typeof WeatherCountryProvinceCityPeriodRouteImport
-      parentRoute: typeof WeatherRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface WeatherRouteChildren {
-  WeatherCountryProvinceCityPeriodRoute: typeof WeatherCountryProvinceCityPeriodRoute
-}
-
-const WeatherRouteChildren: WeatherRouteChildren = {
-  WeatherCountryProvinceCityPeriodRoute: WeatherCountryProvinceCityPeriodRoute,
-}
-
-const WeatherRouteWithChildren =
-  WeatherRoute._addFileChildren(WeatherRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MapsRoute: MapsRoute,
-  WeatherRoute: WeatherRouteWithChildren,
+  WeatherCountryProvinceCityPeriodRoute: WeatherCountryProvinceCityPeriodRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,8 +1,8 @@
 import type { JSX } from "react";
 import { FaSearch, FaGithub, FaLinkedin, FaBriefcase } from "react-icons/fa";
 import { Container, FlexRow } from "@/components/layout";
+import { formatWeatherUrl } from "@/features";
 import { useGetLocalityByCoords } from "@/services";
-import { formatWeatherUrl } from "@/utils";
 import { Button } from "../button";
 import { Text } from "../text";
 

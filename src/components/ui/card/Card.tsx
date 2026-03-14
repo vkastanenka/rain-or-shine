@@ -15,10 +15,10 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "bg-base-300",
+        "bg-base-200",
         "rounded-lg",
         "overflow-hidden",
-        "shadow-2xl",
+        "shadow-md",
         fit && "w-full",
         pad && "p-4",
         className,
