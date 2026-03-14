@@ -1,7 +1,7 @@
-import { type LocationByCoordsParams } from "./types";
+import { type LocalityByCoordsParams } from "./types";
 
 export const queryKeys = {
-  all: ["location"] as const,
-  byCoords: (params?: LocationByCoordsParams) =>
-    [...queryKeys.all, "by-coords", params] as const,
+  all: ["data"] as const,
+  localityByCoords: (params?: LocalityByCoordsParams) =>
+    [...queryKeys.all, "locality-by-coords", params] as const,
 };

@@ -20,7 +20,7 @@ export const LocalityInfoSchema = z.object({
  * Api Res Data
  */
 
-export const LocationSchema = z.object({
+export const LocalitySchema = z.object({
   latitude: z.number(),
   longitude: z.number(),
   lookupSource: z.string(),

@@ -2,11 +2,9 @@ import { type AxiosRequestConfig } from "axios";
 import { BaseApiService, createApiClient } from "@/services/api";
 import { API_CONFIG } from "./constants";
 import { ForecastSchema } from "./schema";
-import {
-  type Forecast,
-  type GetForecastByCoordsParams,
-  type V1ApiConfig,
-} from "./types";
+import { type Forecast, type GetForecastByCoordsParams } from "./types";
+
+export type V1ApiConfig = typeof API_CONFIG.V1;
 
 class WeatherForecastService extends BaseApiService<V1ApiConfig> {
   public getForecastByCoords = (
@@ -28,4 +26,7 @@ const client = createApiClient(
   { serviceName: config.name },
 );
 
-export const weatherForecastService = new WeatherForecastService(client, config);
+export const weatherForecastService = new WeatherForecastService(
+  client,
+  config,
+);

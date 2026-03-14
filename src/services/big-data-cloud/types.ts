@@ -1,18 +1,11 @@
 import { z } from "zod";
-import { API_CONFIG } from "./constants";
-import { LocationSchema } from "./schema";
-
-/**
- * Api Config
- */
-
-export type ApiConfig = typeof API_CONFIG;
+import { LocalitySchema } from "./schema";
 
 /**
  * Api Req Params
  */
 
-export type LocationByCoordsParams = {
+export type LocalityByCoordsParams = {
   latitude: number;
   longitude: number;
   localityLanguage?: string;
@@ -22,4 +15,4 @@ export type LocationByCoordsParams = {
  * Api Res Data
  */
 
-export type Location = z.infer<typeof LocationSchema>;
+export type Locality = z.infer<typeof LocalitySchema>;

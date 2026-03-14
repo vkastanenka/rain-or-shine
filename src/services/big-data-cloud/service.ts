@@ -1,21 +1,19 @@
 import { type AxiosRequestConfig } from "axios";
 import { BaseApiService, createApiClient } from "@/services/api";
 import { API_CONFIG } from "./constants";
-import { LocationSchema } from "./schema";
-import {
-  type LocationByCoordsParams,
-  type Location,
-  type ApiConfig,
-} from "./types";
+import { LocalitySchema } from "./schema";
+import { type LocalityByCoordsParams, type Locality } from "./types";
+
+export type ApiConfig = typeof API_CONFIG;
 
 class BigDataCloudService extends BaseApiService<ApiConfig> {
-  public getLocationByCoords = (
-    params?: LocationByCoordsParams,
+  public getLocalityByCoords = (
+    params?: LocalityByCoordsParams,
     config?: AxiosRequestConfig,
-  ): Promise<Location> => {
+  ): Promise<Locality> => {
     return this.instance.validatedGet(
       API_CONFIG.endpoints.reverseGeocode,
-      LocationSchema,
+      LocalitySchema,
       { ...config, params },
     );
   };

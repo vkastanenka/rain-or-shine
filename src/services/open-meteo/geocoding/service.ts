@@ -2,11 +2,9 @@ import { type AxiosRequestConfig } from "axios";
 import { BaseApiService, createApiClient } from "@/services/api";
 import { API_CONFIG } from "./constants";
 import { LocationsSchema } from "./schema";
-import {
-  type GetLocationsByNameParams,
-  type Locations,
-  type V1ApiConfig,
-} from "./types";
+import { type GetLocationsByNameParams, type Locations } from "./types";
+
+export type V1ApiConfig = typeof API_CONFIG.V1;
 
 class GeocodingService extends BaseApiService<V1ApiConfig> {
   public getLocationsByName = (

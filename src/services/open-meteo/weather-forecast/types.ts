@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { type MapValue } from "@/types";
-import { API_CONFIG } from "./constants";
 import { FORECAST_INTERVAL_MAP, FORECAST_INTERVAL_UNIT_MAP } from "./constants";
 import {
   CurrentValuesSchema,
@@ -19,12 +18,6 @@ import {
  */
 
 export type ForecastValue<T> = Exclude<T, "time">;
-
-/**
- * Api Config
- */
-
-export type V1ApiConfig = typeof API_CONFIG.V1;
 
 /**
  * Intervals

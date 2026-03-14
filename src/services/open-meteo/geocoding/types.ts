@@ -1,12 +1,5 @@
 import { z } from "zod";
-import { API_CONFIG } from "./constants";
 import { LocationSchema, LocationsSchema } from "./schema";
-
-/**
- * Api Config
- */
-
-export type V1ApiConfig = typeof API_CONFIG.V1;
 
 /**
  * Api Req Params
