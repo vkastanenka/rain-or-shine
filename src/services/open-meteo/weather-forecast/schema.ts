@@ -231,7 +231,7 @@ export const Minutely15ValuesUnitsSchema = z.object(
 );
 
 /**
- * Forecast
+ * Api Res Data
  */
 
 export const ForecastSchema = z.object({

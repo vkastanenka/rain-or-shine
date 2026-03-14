@@ -1,3 +1,11 @@
+export const API_CONFIG = {
+  V1: {
+    name: "Open Meteo Weather Forecast v1",
+    baseUrl: "https://api.open-meteo.com/v1",
+    endpoints: { forecast: "/forecast" },
+  },
+} as const;
+
 export const FORECAST_INTERVAL_MAP = {
   Current: "current",
   Daily: "daily",

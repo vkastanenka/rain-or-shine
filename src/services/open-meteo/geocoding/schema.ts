@@ -23,6 +23,10 @@ export const LocationSchema = z.object({
   admin4_id: z.number().optional(),
 });
 
+/**
+ * Api Res Data
+ */
+
 export const LocationsSchema = z.object({
   results: z.array(LocationSchema).optional().default([]),
   generationtime_ms: z.number().optional(),

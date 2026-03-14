@@ -1,34 +1,31 @@
-import type { AxiosRequestConfig } from "axios";
-import {
-  createApiClient,
-  type CustomAxiosInstance,
-} from "@/services/api/utils";
-import { API_CONFIG } from "../constants";
-import type { Forecast, GetForecastByCoordsParams } from "./types";
+import { type AxiosRequestConfig } from "axios";
+import { BaseApiService, createApiClient } from "@/services/api";
+import { API_CONFIG } from "./constants";
 import { ForecastSchema } from "./schema";
+import {
+  type Forecast,
+  type GetForecastByCoordsParams,
+  type V1ApiConfig,
+} from "./types";
 
-const { WEATHER_FORECAST: WEATHER_FORECAST_API_CONFIG } = API_CONFIG;
-
-class WeatherForecastService {
-  protected instance: CustomAxiosInstance;
-
-  constructor() {
-    this.instance = createApiClient(
-      { baseURL: WEATHER_FORECAST_API_CONFIG.V1.baseUrl },
-      { serviceName: WEATHER_FORECAST_API_CONFIG.V1.name },
-    );
-  }
-
+class WeatherForecastService extends BaseApiService<V1ApiConfig> {
   public getForecastByCoords = (
     params?: GetForecastByCoordsParams,
     config?: AxiosRequestConfig,
   ): Promise<Forecast> => {
     return this.instance.validatedGet(
-      WEATHER_FORECAST_API_CONFIG.V1.endpoints.forecast,
+      this.config.endpoints.forecast,
       ForecastSchema,
       { ...config, params },
     );
   };
 }
 
-export const weatherForecastService = new WeatherForecastService();
+const config = API_CONFIG.V1;
+
+const client = createApiClient(
+  { baseURL: config.baseUrl },
+  { serviceName: config.name },
+);
+
+export const weatherForecastService = new WeatherForecastService(client, config);

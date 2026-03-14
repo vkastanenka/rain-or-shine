@@ -2,8 +2,6 @@ import axios, { type AxiosRequestConfig, AxiosError, isCancel } from "axios";
 import { z } from "zod";
 import { type ApiErrorResponse, type CustomAxiosInstance } from "./types";
 
-export * from "./types";
-
 export const createApiClient = (
   config: AxiosRequestConfig,
   options: { serviceName: string },
