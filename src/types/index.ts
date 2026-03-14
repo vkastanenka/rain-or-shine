@@ -1,15 +1,15 @@
-import { MEASUREMENT_LABELS_MAP } from "@/constants";
+import { QueryClient } from "@tanstack/react-query";
 
 export type UnwrapArray<T> = T extends (infer U)[] ? U : T;
 
 export type MapKey<T> = keyof T;
 export type MapValue<T> = T[keyof T];
 
-export type MeasurementLabelsMapKey = keyof typeof MEASUREMENT_LABELS_MAP;
-export type MeasurementLabelsMapValue =
-  (typeof MEASUREMENT_LABELS_MAP)[keyof typeof MEASUREMENT_LABELS_MAP];
-
 export interface GeolocationCoordinates {
   longitude: number;
   latitude: number;
+}
+
+export interface RouterContext {
+  queryClient: QueryClient;
 }

@@ -1,44 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Text, Section, FlexCol, TextInput, Grid } from "@/components";
-import { LocalityCard, getLocalityCardProps } from "@/features";
-import {
-  getForecastByCoordsOptions,
-  getLocalityByCoordsOptions,
-} from "@/services";
+import { LocalityCard } from "@/features";
 import { LABELS } from "./-constants";
-import { getForecastByCoordsParams } from "./-utils";
+import { routeLoader } from "./-utils";
 
 export const Route = createFileRoute("/(home)/")({
-  loader: async ({ context }) => {
-    const currentLocality = await context.queryClient
-      .fetchQuery(getLocalityByCoordsOptions())
-      .catch(() => null);
-
-    let currentLocalityForecast;
-    let currentLocalityCardParams;
-
-    if (currentLocality) {
-      const currentLocalityForecastParams =
-        getForecastByCoordsParams(currentLocality);
-
-      currentLocalityForecast = await context.queryClient.fetchQuery(
-        getForecastByCoordsOptions(currentLocalityForecastParams),
-      );
-
-      if (currentLocalityForecast) {
-        currentLocalityCardParams = getLocalityCardProps(
-          currentLocality,
-          currentLocalityForecast,
-        );
-      }
-    }
-
-    return {
-      currentLocality,
-      currentLocalityForecast,
-      currentLocalityCardParams,
-    };
-  },
+  loader: routeLoader,
   component: RouteComponent,
 });
 
