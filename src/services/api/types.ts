@@ -13,3 +13,13 @@ export interface CustomAxiosInstance extends AxiosInstance {
     config?: AxiosRequestConfig,
   ): Promise<z.infer<T>>;
 }
+
+export interface BaseApiConfig {
+  name: string;
+  baseUrl: string;
+  endpoints: Record<string, string>;
+}
+
+export interface BaseApiServiceConfig<T extends BaseApiConfig> {
+  endpoints: T["endpoints"];
+}

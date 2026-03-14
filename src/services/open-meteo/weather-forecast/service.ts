@@ -2,7 +2,7 @@ import type { AxiosRequestConfig } from "axios";
 import {
   createApiClient,
   type CustomAxiosInstance,
-} from "@/services/api-client";
+} from "@/services/api/utils";
 import { API_CONFIG } from "../constants";
 import type { Forecast, GetForecastByCoordsParams } from "./types";
 import { ForecastSchema } from "./schema";

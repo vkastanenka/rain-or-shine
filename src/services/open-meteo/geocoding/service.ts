@@ -1,34 +1,31 @@
 import { type AxiosRequestConfig } from "axios";
-import {
-  createApiClient,
-  type CustomAxiosInstance,
-} from "@/services/api-client";
-import { API_CONFIG } from "../constants";
+import { BaseApiService, createApiClient } from "@/services/api";
+import { API_CONFIG } from "./constants";
 import { LocationsSchema } from "./schema";
-import { type GetLocationsByNameParams, type Locations } from "./types";
+import {
+  type GetLocationsByNameParams,
+  type Locations,
+  type V1ApiConfig,
+} from "./types";
 
-const { GEOCODING: GEOCODING_API_CONFIG } = API_CONFIG;
-
-class GeocodingService {
-  protected instance: CustomAxiosInstance;
-
-  constructor() {
-    this.instance = createApiClient(
-      { baseURL: GEOCODING_API_CONFIG.V1.baseUrl },
-      { serviceName: GEOCODING_API_CONFIG.V1.name },
-    );
-  }
-
+class GeocodingService extends BaseApiService<V1ApiConfig> {
   public getLocationsByName = (
     params?: GetLocationsByNameParams,
     config?: AxiosRequestConfig,
   ): Promise<Locations> => {
     return this.instance.validatedGet(
-      GEOCODING_API_CONFIG.V1.endpoints.search,
+      this.config.endpoints.search,
       LocationsSchema,
       { ...config, params },
     );
   };
 }
 
-export const geocodingService = new GeocodingService();
+const config = API_CONFIG.V1;
+
+const client = createApiClient(
+  { baseURL: config.baseUrl },
+  { serviceName: config.name },
+);
+
+export const geocodingService = new GeocodingService(client, config);

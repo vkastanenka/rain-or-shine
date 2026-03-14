@@ -1,5 +1,5 @@
 import { type AxiosRequestConfig } from "axios";
-import { createApiClient, type CustomAxiosInstance } from "../api-client";
+import { createApiClient, type CustomAxiosInstance } from "../api/utils";
 import { API_CONFIG } from "./constants";
 import { LocationSchema } from "./schema";
 import { type LocationByCoordsParams, type Location } from "./types";
