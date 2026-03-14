@@ -15,7 +15,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "bg-base-200",
+        "bg-base-300",
         "rounded-lg",
         "overflow-hidden",
         "shadow-md",
