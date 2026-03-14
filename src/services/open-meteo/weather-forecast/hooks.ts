@@ -1,16 +1,11 @@
 import { useQuery, queryOptions } from "@tanstack/react-query";
+import { queryKeys } from "./keys";
 import { weatherForecastService } from "./service";
 import { type GetForecastByCoordsParams } from "./types";
 
-const forecastKeys = {
-  all: ["forecast"] as const,
-  byCoords: (params: GetForecastByCoordsParams) =>
-    [...forecastKeys.all, "by-coords", params] as const,
-};
-
 export const getForecastByCoordsOptions = (params: GetForecastByCoordsParams) =>
   queryOptions({
-    queryKey: forecastKeys.byCoords(params),
+    queryKey: queryKeys.byCoords(params),
     queryFn: ({ signal }) =>
       weatherForecastService.getForecastByCoords(params, { signal }),
     enabled: !!params.latitude && !!params.longitude,

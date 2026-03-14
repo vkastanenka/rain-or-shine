@@ -47,6 +47,7 @@ export const createApiClient = (
     const result = schema.safeParse(response.data);
 
     if (!result.success) {
+      // TODO: Move beyond console.error to custom Error classes
       console.error(
         `[${options.serviceName}] Schema Validation Failed at ${url}:`,
         result.error.message,
