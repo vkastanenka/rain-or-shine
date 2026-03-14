@@ -14,23 +14,23 @@ export const isDayValueSchema = z.union([z.literal(0), z.literal(1)]);
  */
 
 export const CurrentValuesSchema = z.object({
-  time: z.array(z.string()),
-  apparent_temperature: z.array(z.number()).optional(),
-  cloud_cover: z.array(z.number()).optional(),
-  interval: z.array(z.number()).optional(),
-  is_day: z.array(isDayValueSchema).optional(),
-  precipitation: z.array(z.number()).optional(),
-  pressure_msl: z.array(z.number()).optional(),
-  rain: z.array(z.number()).optional(),
-  relative_humidity_2m: z.array(z.number()).optional(),
-  showers: z.array(z.number()).optional(),
-  snowfall: z.array(z.number()).optional(),
-  surface_pressure: z.array(z.number()).optional(),
-  temperature_2m: z.array(z.number()).optional(),
-  weather_code: z.array(wmoCodeSchema).optional(),
-  wind_direction_10m: z.array(z.number()).optional(),
-  wind_gusts_10m: z.array(z.number()).optional(),
-  wind_speed_10m: z.array(z.number()).optional(),
+  time: z.string(),
+  apparent_temperature: z.number().optional(),
+  cloud_cover: z.number().optional(),
+  interval: z.number().optional(),
+  is_day: isDayValueSchema.optional(),
+  precipitation: z.number().optional(),
+  pressure_msl: z.number().optional(),
+  rain: z.number().optional(),
+  relative_humidity_2m: z.number().optional(),
+  showers: z.number().optional(),
+  snowfall: z.number().optional(),
+  surface_pressure: z.number().optional(),
+  temperature_2m: z.number().optional(),
+  weather_code: wmoCodeSchema.optional(),
+  wind_direction_10m: z.number().optional(),
+  wind_gusts_10m: z.number().optional(),
+  wind_speed_10m: z.number().optional(),
 });
 
 export const CurrentValuesUnitsSchema = z.object(
@@ -244,14 +244,14 @@ export const ForecastSchema = z.object({
   elevation: z.number(),
 
   // Time Interval Data
-  [FORECAST_INTERVAL_MAP.Current]: CurrentValuesSchema,
-  [FORECAST_INTERVAL_MAP.Daily]: DailyValuesSchema,
-  [FORECAST_INTERVAL_MAP.Hourly]: HourlyValuesSchema,
-  [FORECAST_INTERVAL_MAP.Minutely15]: Minutely15ValuesSchema,
+  [FORECAST_INTERVAL_MAP.Current]: CurrentValuesSchema.optional(),
+  [FORECAST_INTERVAL_MAP.Daily]: DailyValuesSchema.optional(),
+  [FORECAST_INTERVAL_MAP.Hourly]: HourlyValuesSchema.optional(),
+  [FORECAST_INTERVAL_MAP.Minutely15]: Minutely15ValuesSchema.optional(),
 
   // Time Interval Units
-  [FORECAST_INTERVAL_UNIT_MAP.Current]: CurrentValuesUnitsSchema,
-  [FORECAST_INTERVAL_UNIT_MAP.Daily]: DailyValuesUnitsSchema,
-  [FORECAST_INTERVAL_UNIT_MAP.Hourly]: HourlyValuesUnitsSchema,
-  [FORECAST_INTERVAL_UNIT_MAP.Minutely15]: Minutely15ValuesUnitsSchema,
+  [FORECAST_INTERVAL_UNIT_MAP.Current]: CurrentValuesUnitsSchema.optional(),
+  [FORECAST_INTERVAL_UNIT_MAP.Daily]: DailyValuesUnitsSchema.optional(),
+  [FORECAST_INTERVAL_UNIT_MAP.Hourly]: HourlyValuesUnitsSchema.optional(),
+  [FORECAST_INTERVAL_UNIT_MAP.Minutely15]: Minutely15ValuesUnitsSchema.optional(),
 });

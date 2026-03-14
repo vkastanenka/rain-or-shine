@@ -4,6 +4,12 @@ import {
 } from "@tanstack/react-router";
 import { Text, Section, FlexCol, TextInput, Grid, Flex } from "@/components";
 import { LocationCard } from "@/features";
+import {
+  useGetLocalityByCoords,
+  useGetForecastByCoords,
+  type GetForecastByCoordsParams,
+  type Locality,
+} from "@/services";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -18,9 +24,26 @@ const suggestions = {
   ],
 };
 
+const getForecastByCoordsParams = (
+  locality?: Locality,
+): GetForecastByCoordsParams | undefined => {
+  return locality
+    ? {
+        latitude: locality.latitude,
+        longitude: locality.longitude,
+        current: ["temperature_2m", "weather_code"],
+      }
+    : undefined;
+};
+
 function RouteComponent() {
-  // const { location, isLoading } = useRouteContext({ from: "__root__" });
-  // console.log(location);
+  const { data: locality, isLoading: localityIsLoading } =
+    useGetLocalityByCoords();
+  const forecastByCoordsParams = getForecastByCoordsParams(locality);
+  const { data: forecast, isLoading: forecastIsLoading } =
+    useGetForecastByCoords(forecastByCoordsParams);
+
+  console.log(forecast);
 
   return (
     <div>
@@ -53,7 +76,7 @@ function RouteComponent() {
                 <LocationCard />
               </FlexCol>
             </Grid.Item>
-            <Grid.Item span={{ base: 1, md: 2 }}>
+            {/* <Grid.Item span={{ base: 1, md: 2 }}>
               <FlexCol fit gap={1}>
                 <Text type="large" className="font-medium">
                   Your recent locations
@@ -68,7 +91,7 @@ function RouteComponent() {
                   <LocationCard />
                 </Flex>
               </FlexCol>
-            </Grid.Item>
+            </Grid.Item> */}
           </Grid>
         </FlexCol>
       </Section>

@@ -8,7 +8,7 @@ export type V1ApiConfig = typeof API_CONFIG.V1;
 
 class WeatherForecastService extends BaseApiService<V1ApiConfig> {
   public getForecastByCoords = (
-    params?: GetForecastByCoordsParams,
+    params: GetForecastByCoordsParams,
     config?: AxiosRequestConfig,
   ): Promise<Forecast> => {
     return this.instance.validatedGet(
