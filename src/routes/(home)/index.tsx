@@ -2,41 +2,42 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Text, Section, FlexCol, TextInput, Grid } from "@/components";
 import { LocalityCard, getLocalityCardProps } from "@/features";
 import {
-  useGetLocalityByCoords,
-  useGetForecastByCoords,
-  type GetForecastByCoordsParams,
-  type Locality,
   getForecastByCoordsOptions,
   getLocalityByCoordsOptions,
 } from "@/services";
+import { LABELS } from "./-constants";
+import { getForecastByCoordsParams } from "./-utils";
 
-const getForecastByCoordsParams = (
-  locality?: Locality,
-): GetForecastByCoordsParams | undefined => {
-  return locality
-    ? {
-        latitude: locality.latitude,
-        longitude: locality.longitude,
-        current: ["temperature_2m", "weather_code", "is_day"],
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      }
-    : undefined;
-};
-
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/(home)/")({
   loader: async ({ context }) => {
-    const locality = await context.queryClient
+    const currentLocality = await context.queryClient
       .fetchQuery(getLocalityByCoordsOptions())
       .catch(() => null);
 
-    if (locality) {
-      const forecastParams = getForecastByCoordsParams(locality);
-      await context.queryClient.prefetchQuery(
-        getForecastByCoordsOptions(forecastParams),
+    let currentLocalityForecast;
+    let currentLocalityCardParams;
+
+    if (currentLocality) {
+      const currentLocalityForecastParams =
+        getForecastByCoordsParams(currentLocality);
+
+      currentLocalityForecast = await context.queryClient.fetchQuery(
+        getForecastByCoordsOptions(currentLocalityForecastParams),
       );
+
+      if (currentLocalityForecast) {
+        currentLocalityCardParams = getLocalityCardProps(
+          currentLocality,
+          currentLocalityForecast,
+        );
+      }
     }
 
-    return;
+    return {
+      currentLocality,
+      currentLocalityForecast,
+      currentLocalityCardParams,
+    };
   },
   component: RouteComponent,
 });
@@ -51,19 +52,7 @@ const suggestions = {
 };
 
 function RouteComponent() {
-  const { data: currentLocality } = useGetLocalityByCoords();
-
-  const currentLocalityForecastByCoordsParams =
-    getForecastByCoordsParams(currentLocality);
-
-  const { data: currentLocalityForecast } = useGetForecastByCoords(
-    currentLocalityForecastByCoordsParams,
-  );
-
-  const currentLocalityCardParams = getLocalityCardProps(
-    currentLocality,
-    currentLocalityForecast,
-  );
+  const { currentLocalityCardParams } = Route.useLoaderData();
 
   return (
     <div>
@@ -72,11 +61,11 @@ function RouteComponent() {
           <FlexCol gap={4}>
             <div>
               <Text type={{ base: "headline6", sm: "headline5" }}>
-                It's Wednesday, March 11th
+                {LABELS.hero.superTitle()}
               </Text>
               <Text type={{ base: "headline3", sm: "headline2" }}>
-                <span className="block">Rain or Shine:</span>
-                <span>Your day defined</span>
+                <span className="block">{LABELS.hero.primaryTitle}</span>
+                <span>{LABELS.hero.secondaryTitle}</span>
               </Text>
             </div>
             <TextInput
@@ -87,18 +76,13 @@ function RouteComponent() {
               suggestions={suggestions}
             />
           </FlexCol>
-          <Grid
-            fit
-            gap={4}
-            cols={{ base: 1, md: currentLocalityForecast ? 3 : 1 }}
-          >
-            {currentLocalityForecast && (
+          {currentLocalityCardParams && (
+            <Grid fit gap={4} cols={{ base: 1, md: 3 }}>
               <Grid.Item span={1}>
                 <FlexCol fit gap={1} stretchItems>
                   <Text type="large" className="font-medium">
-                    Your current location
+                    {LABELS.currentLocation.title}
                   </Text>
-
                   <LocalityCard
                     city={currentLocalityCardParams.city}
                     region={currentLocalityCardParams.region}
@@ -107,8 +91,8 @@ function RouteComponent() {
                   />
                 </FlexCol>
               </Grid.Item>
-            )}
-          </Grid>
+            </Grid>
+          )}
         </FlexCol>
       </Section>
     </div>
