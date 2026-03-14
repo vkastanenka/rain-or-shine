@@ -16,6 +16,10 @@ export const LocalityInfoSchema = z.object({
   informative: z.array(LocalityInfoRecordSchema),
 });
 
+/**
+ * Api Res Data
+ */
+
 export const LocationSchema = z.object({
   latitude: z.number(),
   longitude: z.number(),

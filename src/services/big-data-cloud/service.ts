@@ -1,19 +1,14 @@
 import { type AxiosRequestConfig } from "axios";
-import { createApiClient, type CustomAxiosInstance } from "../api/utils";
+import { BaseApiService, createApiClient } from "@/services/api";
 import { API_CONFIG } from "./constants";
 import { LocationSchema } from "./schema";
-import { type LocationByCoordsParams, type Location } from "./types";
+import {
+  type LocationByCoordsParams,
+  type Location,
+  type ApiConfig,
+} from "./types";
 
-class BigDataCloudService {
-  protected instance: CustomAxiosInstance;
-
-  constructor() {
-    this.instance = createApiClient(
-      { baseURL: API_CONFIG.baseUrl },
-      { serviceName: API_CONFIG.name },
-    );
-  }
-
+class BigDataCloudService extends BaseApiService<ApiConfig> {
   public getLocationByCoords = (
     params?: LocationByCoordsParams,
     config?: AxiosRequestConfig,
@@ -26,4 +21,11 @@ class BigDataCloudService {
   };
 }
 
-export const bigDataCloudService = new BigDataCloudService();
+const config = API_CONFIG;
+
+const client = createApiClient(
+  { baseURL: config.baseUrl },
+  { serviceName: config.name },
+);
+
+export const bigDataCloudService = new BigDataCloudService(client, config);
