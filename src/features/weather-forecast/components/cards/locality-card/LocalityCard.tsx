@@ -1,22 +1,26 @@
 import { FaCity } from "react-icons/fa";
 import { Card, FlexCol, FlexRow, Text } from "@/components";
-import { WMO_CODE_DAY_ICON_FILL_MAP } from "@/entities";
+import { type LocalityCardProps } from "./LocalityCard.types";
 
-export const LocationCard = () => {
-  const Icon = WMO_CODE_DAY_ICON_FILL_MAP[0];
+export const LocalityCard = ({
+  city,
+  region,
+  WmoIcon,
+  temperature,
+}: LocalityCardProps) => {
   return (
-    <Card className="p-4 w-full">
+    <Card fit pad>
       <FlexRow fit gap={2} align="center" justify="between">
         <FlexCol>
           <FlexRow gap={1} align="center">
             <FaCity />
-            <Text>Tottenham</Text>
+            <Text>{city}</Text>
           </FlexRow>
-          <Text type="body2">ON, Canada</Text>
+          <Text type="body2">{region}</Text>
         </FlexCol>
         <FlexRow gap={1} align="center">
-          <Icon />
-          <Text type="large">37°F</Text>
+          <WmoIcon />
+          <Text type="large">{temperature}</Text>
         </FlexRow>
       </FlexRow>
     </Card>

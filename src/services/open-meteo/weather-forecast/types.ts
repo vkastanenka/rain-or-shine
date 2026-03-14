@@ -9,6 +9,7 @@ import {
   ForecastSchema,
   HourlyValuesSchema,
   HourlyValuesUnitsSchema,
+  isDayValueSchema,
   Minutely15ValuesSchema,
   Minutely15ValuesUnitsSchema,
 } from "./schema";
@@ -27,6 +28,12 @@ export type ForecastIntervalMapValue = MapValue<typeof FORECAST_INTERVAL_MAP>;
 export type ForecastIntervalUnitMapValue = MapValue<
   typeof FORECAST_INTERVAL_UNIT_MAP
 >;
+
+/**
+ * Values
+ */
+
+export type IsDayValue = z.infer<typeof isDayValueSchema>;
 
 /**
  * Current Values

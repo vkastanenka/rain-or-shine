@@ -3,7 +3,7 @@ import {
   // useRouteContext
 } from "@tanstack/react-router";
 import { Text, Section, FlexCol, TextInput, Grid, Flex } from "@/components";
-import { LocationCard } from "@/features";
+import { LocalityCard, getLocalityCardProps } from "@/features";
 import {
   useGetLocalityByCoords,
   useGetForecastByCoords,
@@ -31,19 +31,27 @@ const getForecastByCoordsParams = (
     ? {
         latitude: locality.latitude,
         longitude: locality.longitude,
-        current: ["temperature_2m", "weather_code"],
+        current: ["temperature_2m", "weather_code", "is_day"],
       }
     : undefined;
 };
 
 function RouteComponent() {
-  const { data: locality, isLoading: localityIsLoading } =
+  const { data: currentLocality, isLoading: currentLocalityIsLoading } =
     useGetLocalityByCoords();
-  const forecastByCoordsParams = getForecastByCoordsParams(locality);
-  const { data: forecast, isLoading: forecastIsLoading } =
-    useGetForecastByCoords(forecastByCoordsParams);
 
-  console.log(forecast);
+  const currentLocalityForecastByCoordsParams =
+    getForecastByCoordsParams(currentLocality);
+
+  const {
+    data: currentLocalityForecast,
+    isLoading: currentLocalityForecastIsLoading,
+  } = useGetForecastByCoords(currentLocalityForecastByCoordsParams);
+
+  const currentLocalityCardParams = getLocalityCardProps(
+    currentLocality,
+    currentLocalityForecast,
+  );
 
   return (
     <div>
@@ -73,7 +81,14 @@ function RouteComponent() {
                 <Text type="large" className="font-medium">
                   Your current location
                 </Text>
-                <LocationCard />
+                {currentLocality && currentLocalityForecastByCoordsParams && (
+                  <LocalityCard
+                    city={currentLocalityCardParams.city}
+                    region={currentLocalityCardParams.region}
+                    WmoIcon={currentLocalityCardParams.WmoIcon}
+                    temperature={currentLocalityCardParams.temperature}
+                  />
+                )}
               </FlexCol>
             </Grid.Item>
             {/* <Grid.Item span={{ base: 1, md: 2 }}>
