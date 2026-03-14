@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
 import { Navbar } from "@/components";
-import { useGetLocationByCoords, getLocationByCoordsOptions } from "@/services";
+import { useGetLocalityByCoords, getLocalityByCoordsOptions } from "@/services";
 
 interface RootRouterContext {
   queryClient: QueryClient;
@@ -10,13 +10,13 @@ interface RootRouterContext {
 
 export const Route = createRootRouteWithContext<RootRouterContext>()({
   loader: ({ context }) => {
-    context.queryClient.prefetchQuery(getLocationByCoordsOptions());
+    context.queryClient.prefetchQuery(getLocalityByCoordsOptions());
   },
   component: RootComponent,
 });
 
 function RootComponent() {
-  useGetLocationByCoords();
+  useGetLocalityByCoords();
 
   return (
     <React.Fragment>

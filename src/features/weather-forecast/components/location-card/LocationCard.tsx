@@ -1,9 +1,9 @@
 import { FaCity } from "react-icons/fa";
 import { Card, FlexCol, FlexRow, Text } from "@/components";
-import { WMO_CODES_DAY_ICONS_FILL_MAP } from "@/entities";
+import { WMO_CODE_DAY_ICON_FILL_MAP } from "@/entities";
 
 export const LocationCard = () => {
-  const Icon = WMO_CODES_DAY_ICONS_FILL_MAP[0];
+  const Icon = WMO_CODE_DAY_ICON_FILL_MAP[0];
   return (
     <Card className="p-4 w-full">
       <FlexRow fit gap={2} align="center" justify="between">
