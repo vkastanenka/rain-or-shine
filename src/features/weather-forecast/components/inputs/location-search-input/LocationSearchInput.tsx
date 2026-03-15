@@ -1,33 +1,48 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useDebounce } from "@/hooks";
 import { TextInput } from "@/components";
+import { saveRecentLocation } from "@/features/weather-forecast/utils";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { useGetLocalityByCoords, useGetLocationsByName } from "@/services";
 import { cn } from "@/utils";
+import { LocationSearchSuggestions } from "./LocationSearchSuggestions";
 import { LABELS } from "./constants";
 import {
   useGetRecentLocations,
   useShowSuggestionsOnSearch,
   useFilterResults,
+  useIncreaseSearchCount,
 } from "./hooks";
 import { type LocationSearchInputProps } from "./types";
 import { onInputFocus } from "./utils";
-import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import { LocationSearchSuggestions } from "./LocationSearchSuggestions";
-import { saveRecentLocation } from "@/features/weather-forecast/utils";
 
 export const LocationSearchInput = ({
   size,
   className,
 }: LocationSearchInputProps) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [searchCount, setSearchCount] = useState(20);
-  const [query, setQuery] = useState("");
-  const [listIsOpen, setListIsOpen] = useState(false);
-  const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
-  const [currentCountryCode, setCurrentCountryCode] = useState("");
-  const containerRef = useRef<HTMLDivElement>(null);
+  /**
+   * Display state
+   */
 
+  const [isFocused, setIsFocused] = useState(false);
+  const [listIsOpen, setListIsOpen] = useState(false);
+
+  /**
+   * Get user's current country code
+   */
+
+  const { data: locality } = useGetLocalityByCoords();
+  const currentCountryCode = locality?.countryCode;
+
+  /**
+   * Get locations from search
+   */
+
+  const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 400);
+  const [searchCount, setSearchCount] = useState(20);
+  const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
+
   const { data, isLoading } = useGetLocationsByName({
     name: debouncedQuery,
     count: searchCount,
@@ -37,54 +52,58 @@ export const LocationSearchInput = ({
   });
 
   const results = data?.results || [];
-
-  // Escalation Logic
-  useEffect(() => {
-    if (!isLoading && data?.results?.length === 0 && searchCount < 100) {
-      // If we found nothing, bump the count to look deeper
-      setSearchCount((prev) => (prev === 20 ? 50 : 100));
-    }
-  }, [data, isLoading, searchCount]);
-
-  // Reset count when query changes
-  useEffect(() => {
-    setSearchCount(20);
-  }, [debouncedQuery]);
-
-  const { data: locality } = useGetLocalityByCoords();
-
-  useEffect(() => {
-    if (locality?.countryCode) {
-      setCurrentCountryCode(locality.countryCode);
-    }
-  }, [locality?.countryCode]);
-
   const filteredResults = useFilterResults(results);
+
+  /**
+   * Increase search count if no initial results
+   */
+
+  useIncreaseSearchCount({
+    debouncedQuery,
+    isLoading,
+    locationResults: data?.results,
+    searchCount,
+    increaseSearchCountFn: () =>
+      setSearchCount((prev) => (prev === 20 ? 50 : 100)),
+    resetSearchCountFn: () => setSearchCount(20),
+  });
+
+  /**
+   * Get recent locations and remove logic
+   */
+
   const { locations: recentLocations, refresh: refreshRecentLocations } =
     useGetRecentLocations(listIsOpen);
 
-  useOnClickOutside(containerRef, () => setListIsOpen(false));
+  /**
+   * Show suggestions when searching
+   */
 
-  useShowSuggestionsOnSearch(
+  useShowSuggestionsOnSearch({
     isFocused,
     debouncedQuery,
-    () => {
-      setListIsOpen(true);
-    },
-    () => setListIsOpen(false),
-  );
+    openFn: () => setListIsOpen(true),
+    closeFn: () => setListIsOpen(false),
+  });
+
+  /**
+   * Close suggestions if input no longer focused
+   */
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(containerRef, () => setListIsOpen(false));
 
   return (
     <div ref={containerRef} className={cn("relative", "w-full", className)}>
       <TextInput
         type="search"
+        className="w-full"
         size={size ?? { base: "lg", md: "xl" }}
         value={query}
+        placeholder={LABELS.placeholder}
         onChange={(e) => {
           setQuery(e.target.value);
         }}
-        placeholder={LABELS.placeholder}
-        className="w-full"
         onClear={() => {
           setQuery("");
           setListIsOpen(false);

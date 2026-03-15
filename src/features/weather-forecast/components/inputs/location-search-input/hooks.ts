@@ -4,16 +4,21 @@ import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types
 import { locationHasValidPath } from "./utils";
 import { getRecentLocations } from "@/features/weather-forecast/utils";
 
+export const useFilterResults = (
+  results: Location[],
+): ValidWeatherPathLocation[] => {
+  return useMemo(() => {
+    return results.filter(locationHasValidPath);
+  }, [results]);
+};
+
 export const useGetRecentLocations = (listIsOpen: boolean) => {
-  // 1. Create a local state to hold the locations
   const [locations, setLocations] = useState<ValidWeatherPathLocation[]>([]);
 
-  // 2. Create a function to pull fresh data
   const refresh = () => {
     setLocations(getRecentLocations());
   };
 
-  // 3. Refresh when the list opens
   useEffect(() => {
     if (listIsOpen) {
       refresh();
@@ -23,20 +28,43 @@ export const useGetRecentLocations = (listIsOpen: boolean) => {
   return { locations, refresh };
 };
 
-export const useFilterResults = (
-  results: Location[],
-): ValidWeatherPathLocation[] => {
-  return useMemo(() => {
-    return results.filter(locationHasValidPath);
-  }, [results]);
+export const useIncreaseSearchCount = ({
+  debouncedQuery,
+  isLoading,
+  locationResults,
+  searchCount,
+  increaseSearchCountFn,
+  resetSearchCountFn,
+}: {
+  debouncedQuery: string;
+  isLoading: boolean;
+  locationResults?: Location[];
+  searchCount: number;
+  increaseSearchCountFn: () => void;
+  resetSearchCountFn: () => void;
+}) => {
+  useEffect(() => {
+    if (!isLoading && locationResults?.length === 0 && searchCount < 100) {
+      increaseSearchCountFn();
+    }
+  }, [locationResults, isLoading, searchCount]);
+
+  useEffect(() => {
+    resetSearchCountFn();
+  }, [debouncedQuery]);
 };
 
-export const useShowSuggestionsOnSearch = (
-  isFocused: boolean,
-  debouncedQuery: string,
-  openFn: () => void,
-  closeFn: () => void,
-) => {
+export const useShowSuggestionsOnSearch = ({
+  isFocused,
+  debouncedQuery,
+  openFn,
+  closeFn,
+}: {
+  isFocused: boolean;
+  debouncedQuery: string;
+  openFn: () => void;
+  closeFn: () => void;
+}) => {
   const recentLocations = getRecentLocations();
   useEffect(() => {
     if (

@@ -1,13 +1,13 @@
-import { lazy, Suspense } from "react";
 import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
-import { FaFlag, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { Button, FlexCol, FlexRow, Text } from "@/components";
 import {
   deleteRecentLocations,
   formatWeatherUrlPath,
 } from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
+import { LocationSearchFlag } from "./LocationSearchFlag";
 import { LABELS } from "./constants";
 import {
   type LocationSearchSuggestionsProps,
@@ -43,7 +43,6 @@ const RecentLocationsHeader = ({
     <Button
       onClick={() => {
         deleteRecentLocations();
-        // 2. Tell the hook to update the UI state
         onDelete();
       }}
       shape="circle"
@@ -52,41 +51,6 @@ const RecentLocationsHeader = ({
     </Button>
   </FlexRow>
 );
-
-const flagCache: Record<string, any> = {};
-const animatedFlags = new Set<string>();
-
-const Flag = ({ code }: { code?: string }) => {
-  console.log("FLAG", code);
-
-  const flagCode = code?.toUpperCase();
-
-  if (!flagCode) return <FaFlag className="w-4" />;
-
-  if (!flagCache[flagCode]) {
-    flagCache[flagCode] = lazy(() =>
-      // Clean, aliased path. Vite handles the resolution behind the scenes.
-      import(`@flags/${flagCode}/index.js`).catch(() => ({
-        default: () => <FaFlag />,
-      })),
-    );
-  }
-
-  const CachedFlag = flagCache[flagCode];
-
-  const shouldAnimate = !animatedFlags.has(flagCode);
-
-  return (
-    <Suspense fallback={<div className="w-4 h-3 bg-base-300 animate-pulse" />}>
-      <div
-        className={cn(shouldAnimate && "animate-fade-in")}
-        onAnimationEnd={() => animatedFlags.add(flagCode)}
-      >
-        <CachedFlag className="w-4" />
-      </div>
-    </Suspense>
-  );
-};
 
 const LocationResultsHeader = ({
   children,
@@ -116,7 +80,7 @@ const LocationResultsHeader = ({
           )}
           onClick={() => scopeIsGlobal && toggleScopeIsGlobal()}
         >
-          <Flag code={currentCountryCode} />
+          <LocationSearchFlag code={currentCountryCode} />
         </button>
         <button
           type="button"
@@ -136,7 +100,7 @@ const LocationResultsHeader = ({
   );
 };
 
-export const LocLinks = ({
+export const LocationLinks = ({
   results,
   onClickSuggestion,
 }: LocationSearchSuggestionsLinkProps) => {
@@ -187,7 +151,7 @@ export const LocationSearchSuggestions = ({
         <RecentLocationsHeader onDelete={onDeleteRecent}>
           {LABELS.recentLocations}
         </RecentLocationsHeader>
-        <LocLinks
+        <LocationLinks
           results={recentLocations}
           onClickSuggestion={onClickSuggestion}
         />
@@ -206,7 +170,10 @@ export const LocationSearchSuggestions = ({
         {LABELS.locations}
       </LocationResultsHeader>
       {results && results.length > 0 && debouncedQuery ? (
-        <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
+        <LocationLinks
+          results={results}
+          onClickSuggestion={onClickSuggestion}
+        />
       ) : (
         <div className={cn("w-full", HEADER_PADDING, "py-7")}>
           <Text>{!query ? LABELS.searchToFind : LABELS.noLocationsFound}</Text>
