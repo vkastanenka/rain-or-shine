@@ -31,4 +31,5 @@ export interface TextInputProps extends Omit<
   variant?: ResponsiveValue<TextInputVariantMapKey>;
   type?: TextInputTypeMapKey;
   suggestions?: { id: string; collection: string[] };
+  onClear?: () => void;
 }

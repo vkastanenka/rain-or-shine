@@ -1,5 +1,6 @@
 import { cn, resolveResponsiveValues } from "@/utils";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
+import { Button } from "../button";
 import {
   TEXT_INPUT_SIZE_MAP,
   TEXT_INPUT_COLOR_MAP,
@@ -15,6 +16,7 @@ export const TextInput = ({
   variant,
   suggestions,
   type = "text",
+  value,
   ...props
 }: TextInputProps) => {
   const isSearch = type === TEXT_INPUT_TYPE_MAP.search;
@@ -33,6 +35,7 @@ export const TextInput = ({
     <>
       <input
         {...props}
+        value={value}
         type={type}
         list={suggestions?.id ? suggestions.id : undefined}
         className={isSearch ? "" : combinedClasses}
@@ -52,6 +55,16 @@ export const TextInput = ({
       <label className={cn(combinedClasses)}>
         <FaSearch className={iconColor} />
         {inputElement}
+        {value && (
+          <Button
+            variant="ghost"
+            shape="circle"
+            onClick={props.onClear}
+            aria-label="Clear search"
+          >
+            <FaTimes />
+          </Button>
+        )}
       </label>
     );
   }

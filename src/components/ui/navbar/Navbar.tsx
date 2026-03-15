@@ -1,7 +1,6 @@
 import type { JSX } from "react";
 import { FaSearch, FaGithub, FaLinkedin, FaBriefcase } from "react-icons/fa";
 import { Container, FlexRow } from "@/components/layout";
-import { formatWeatherUrl } from "@/features";
 import { useGetLocalityByCoords } from "@/services";
 import { Button } from "../button";
 import { Text } from "../text";
@@ -27,9 +26,6 @@ const SOCIAL_LINKS: SocialLinks[] = [
 ];
 
 export const Navbar = () => {
-  const { data: locality } = useGetLocalityByCoords();
-  const weatherHref = locality ? formatWeatherUrl(locality) : "/";
-
   return (
     <nav className="bg-neutral py-3 sticky top-0">
       <Container>
@@ -42,7 +38,7 @@ export const Navbar = () => {
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">
               {/* Weather Button */}
-              <Button variant="ghost" to={weatherHref as any}>
+              <Button variant="ghost" to="/">
                 Weather
               </Button>
 

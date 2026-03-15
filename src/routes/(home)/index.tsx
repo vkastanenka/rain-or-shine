@@ -3,6 +3,7 @@ import { Text, Section, FlexCol, TextInput, Grid } from "@/components";
 import { LocalityCard } from "@/features";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
+import { LocationSearchInput } from "@/features/weather-forecast/components/inputs";
 
 export const Route = createFileRoute("/(home)/")({
   loader: routeLoader,
@@ -35,16 +36,17 @@ function RouteComponent() {
                 <span>{LABELS.hero.secondaryTitle}</span>
               </Text>
             </div>
-            <TextInput
+            <LocationSearchInput className="max-w-130" />
+            {/* <TextInput
               type="search"
               size={{ base: "lg", md: "xl" }}
-              placeholder="Enter location"
+              placeholder={LABELS.locationSearch.placeholder}
               className="w-full max-w-130"
               suggestions={suggestions}
-            />
+            /> */}
           </FlexCol>
           {currentLocalityCardParams && (
-            <Grid fit gap={4} cols={{ base: 1, md: 3 }}>
+            <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>
               <Grid.Item span={1}>
                 <FlexCol fit gap={1} stretchItems>
                   <Text type="large" className="font-medium">
