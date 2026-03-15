@@ -1,11 +1,12 @@
 import { FaMinus } from "react-icons/fa";
-import { type Locality, type IsDayValue, type Location } from "@/services";
+import { type IsDayValue } from "@/services";
 import type { IconComponent } from "@/components";
 import {
   WMO_CODE_DAY_ICON_FILL_MAP,
   WMO_CODE_NIGHT_ICON_FILL_MAP,
   type WmoCodeDescriptionMapKey,
 } from "@/entities";
+import type { LinkProps } from "@tanstack/react-router";
 
 const EMPTY_VALUE = "--";
 
@@ -53,10 +54,10 @@ export const formatWeatherUrlPath = (
   region: string,
   city: string,
   period: string,
-) => {
+): LinkProps["to"] => {
   const formatString = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
   const parsedCountryCode = formatString(countryCode);
   const parsedRegion = formatString(region);
   const parsedCity = formatString(city);
-  return `/weather/${parsedCountryCode}/${parsedRegion}/${parsedCity}/${period}`;
+  return `/weather/${parsedCountryCode}/${parsedRegion}/${parsedCity}/${period}` as "/weather/$country/$province/$city/$period";
 };
