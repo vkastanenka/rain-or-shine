@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol, Grid } from "@/components";
+import { Text, Section, FlexCol, Grid, Flex } from "@/components";
 import { LocalityCard } from "@/features";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
@@ -11,7 +11,8 @@ export const Route = createFileRoute("/(home)/")({
 });
 
 function RouteComponent() {
-  const { currentLocalityCardParams } = Route.useLoaderData();
+  const { currentLocalityCardParams, recentLocationsCardParams } =
+    Route.useLoaderData();
 
   return (
     <div>
@@ -29,45 +30,57 @@ function RouteComponent() {
             </div>
             <LocationSearchInput className="max-w-130" />
           </FlexCol>
-          {currentLocalityCardParams && (
+          {(currentLocalityCardParams || recentLocationsCardParams) && (
             <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>
-              <Grid.Item span={1}>
-                <FlexCol fit gap={1} stretchItems>
-                  <Text type="large" className="font-medium">
-                    {LABELS.currentLocation.title}
-                  </Text>
-                  <LocalityCard
-                    city={currentLocalityCardParams.city}
-                    region={currentLocalityCardParams.region}
-                    WmoIcon={currentLocalityCardParams.WmoIcon}
-                    temperature={currentLocalityCardParams.temperature}
-                  />
-                </FlexCol>
-              </Grid.Item>
+              {currentLocalityCardParams && (
+                <Grid.Item span={1}>
+                  <FlexCol fit gap={1} stretchItems>
+                    <Text type="large" className="font-medium">
+                      {LABELS.currentLocation.title}
+                    </Text>
+                    <LocalityCard
+                      city={currentLocalityCardParams.city}
+                      region={currentLocalityCardParams.region}
+                      WmoIcon={currentLocalityCardParams.WmoIcon}
+                      temperature={currentLocalityCardParams.temperature}
+                    />
+                  </FlexCol>
+                </Grid.Item>
+              )}
+              {recentLocationsCardParams && (
+                <Grid.Item
+                  span={{
+                    base: 1,
+                    lg: recentLocationsCardParams.length === 1 ? 1 : 2,
+                  }}
+                >
+                  <FlexCol fit gap={1}>
+                    <Text type="large" className="font-medium">
+                      {LABELS.recentLocations.title}
+                    </Text>
+                    <Flex
+                      fit
+                      gap={4}
+                      direction={{ base: "col", md: "row" }}
+                      stretchItems
+                    >
+                      {recentLocationsCardParams.map((params, i) => (
+                        <LocalityCard
+                          key={`${params.city}-${i}`}
+                          city={params.city}
+                          region={params.region}
+                          WmoIcon={params.WmoIcon}
+                          temperature={params.temperature}
+                        />
+                      ))}
+                    </Flex>
+                  </FlexCol>
+                </Grid.Item>
+              )}
             </Grid>
           )}
         </FlexCol>
       </Section>
     </div>
   );
-}
-
-// TODO: precious searches
-{
-  /* <Grid.Item span={{ base: 1, md: 2 }}>
-              <FlexCol fit gap={1}>
-                <Text type="large" className="font-medium">
-                  Your recent locations
-                </Text>
-                <Flex
-                  fit
-                  gap={4}
-                  direction={{ base: "col", md: "row" }}
-                  stretchItems
-                >
-                  <LocationCard />
-                  <LocationCard />
-                </Flex>
-              </FlexCol>
-            </Grid.Item> */
 }
