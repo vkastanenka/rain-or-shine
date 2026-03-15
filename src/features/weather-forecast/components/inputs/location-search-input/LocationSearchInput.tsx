@@ -24,7 +24,14 @@ export const LocationSearchInput = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const debouncedQuery = useDebounce(query, 400);
-  const { data, isLoading } = useGetLocationsByName({ name: debouncedQuery });
+  const { data, isLoading } = useGetLocationsByName({
+    name: debouncedQuery,
+    count: 100,
+    countryCode: "CA",
+  });
+
+  console.log(data);
+
   const results = data?.results || [];
 
   const filteredResults = useFilterResults(results);

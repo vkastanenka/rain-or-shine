@@ -21,6 +21,18 @@ const Title = ({
   </div>
 );
 
+const LocationResultsHeader = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cn("p-4", "w-full", className)}>
+    <Text>{children}</Text>
+  </div>
+);
+
 export const LocLinks = ({
   title,
   results,
