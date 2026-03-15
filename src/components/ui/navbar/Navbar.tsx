@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { FaSearch, FaGithub, FaLinkedin, FaBriefcase } from "react-icons/fa";
 import { Container, FlexRow } from "@/components/layout";
-import { useGetLocalityByCoords } from "@/services";
+// import { useGetLocalityByCoords } from "@/services";
 import { Button } from "../button";
 import { Text } from "../text";
 
@@ -27,7 +27,7 @@ const SOCIAL_LINKS: SocialLinks[] = [
 
 export const Navbar = () => {
   return (
-    <nav className="bg-neutral py-3 sticky top-0">
+    <nav className="bg-base-300 py-3 sticky top-0">
       <Container>
         <FlexRow gap={2} align="center" justify="between">
           <Button to="/" unstyled aria-label="Rain or Shine Home">
