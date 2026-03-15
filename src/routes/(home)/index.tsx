@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol, TextInput, Grid } from "@/components";
+import { Text, Section, FlexCol, Grid } from "@/components";
 import { LocalityCard } from "@/features";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
@@ -9,15 +9,6 @@ export const Route = createFileRoute("/(home)/")({
   loader: routeLoader,
   component: RouteComponent,
 });
-
-const suggestions = {
-  id: "locations",
-  collection: [
-    "Toronto, Ontario, Canada",
-    "Vancouver, British Columbia, Canada",
-    "North Bay, Ontario, Canada",
-  ],
-};
 
 function RouteComponent() {
   const { currentLocalityCardParams } = Route.useLoaderData();
@@ -37,13 +28,6 @@ function RouteComponent() {
               </Text>
             </div>
             <LocationSearchInput className="max-w-130" />
-            {/* <TextInput
-              type="search"
-              size={{ base: "lg", md: "xl" }}
-              placeholder={LABELS.locationSearch.placeholder}
-              className="w-full max-w-130"
-              suggestions={suggestions}
-            /> */}
           </FlexCol>
           {currentLocalityCardParams && (
             <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>
