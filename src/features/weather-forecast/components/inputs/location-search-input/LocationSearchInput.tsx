@@ -4,11 +4,16 @@ import { TextInput } from "@/components";
 import { useGetLocationsByName } from "@/services";
 import { cn } from "@/utils";
 import { LABELS } from "./constants";
-import { useShowSuggestionsOnSearch, useFilterResults } from "./hooks";
+import {
+  useGetRecentLocations,
+  useShowSuggestionsOnSearch,
+  useFilterResults,
+} from "./hooks";
 import { type LocationSearchInputProps } from "./types";
 import { onInputFocus } from "./utils";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { LocationSearchSuggestions } from "./LocationSearchSuggestions";
+import { saveRecentLocation } from "@/features/weather-forecast/utils";
 
 export const LocationSearchInput = ({
   size,
@@ -23,6 +28,7 @@ export const LocationSearchInput = ({
   const results = data?.results || [];
 
   const filteredResults = useFilterResults(results);
+  const recentLocations = useGetRecentLocations(listIsOpen);
 
   useOnClickOutside(containerRef, () => setListIsOpen(false));
 
@@ -52,9 +58,11 @@ export const LocationSearchInput = ({
       <LocationSearchSuggestions
         isLoading={isLoading}
         results={filteredResults}
+        recentLocations={recentLocations}
         listIsOpen={listIsOpen}
         query={query}
-        onClickSuggestion={() => {
+        onClickSuggestion={(loc) => {
+          saveRecentLocation(loc);
           setListIsOpen(false);
         }}
       />

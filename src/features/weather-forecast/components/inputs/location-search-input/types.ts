@@ -1,12 +1,6 @@
 import { type TextInputSizeMapKey } from "@/components";
-import { type Location } from "@/services";
 import { type ResponsiveValue } from "@/utils";
-
-export type ValidLocation = Location & {
-  country_code: string;
-  admin1: string;
-  name: string;
-};
+import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types";
 
 export interface LocationSearchInputProps {
   size?: ResponsiveValue<TextInputSizeMapKey>;
@@ -15,8 +9,15 @@ export interface LocationSearchInputProps {
 
 export interface LocationSearchSuggestionsProps {
   isLoading: boolean;
-  results: ValidLocation[];
+  results: ValidWeatherPathLocation[];
+  recentLocations?: ValidWeatherPathLocation[];
   listIsOpen: boolean;
   query: string;
-  onClickSuggestion: () => void;
+  onClickSuggestion: (loc: ValidWeatherPathLocation) => void;
+}
+
+export interface LocationSearchSuggestionLinkProps {
+  title: string;
+  results: ValidWeatherPathLocation[];
+  onClickSuggestion: (loc: ValidWeatherPathLocation) => void;
 }

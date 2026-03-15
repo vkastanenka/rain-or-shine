@@ -5,24 +5,30 @@ import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LABELS } from "./constants";
 import {
   type LocationSearchSuggestionsProps,
-  type ValidLocation,
+  type LocationSearchSuggestionLinkProps,
 } from "./types";
+import { cn } from "@/utils";
 
-const IsLoadingMessage = () => (
-  <div className="p-4">
-    <Text>{LABELS.isLoadingMessage}</Text>
+const Title = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cn("p-4", "w-full", className)}>
+    <Text>{children}</Text>
   </div>
 );
 
 export const LocLinks = ({
+  title,
   results,
   onClickSuggestion,
-}: {
-  results: ValidLocation[];
-  onClickSuggestion: () => void;
-}) => {
+}: LocationSearchSuggestionLinkProps) => {
   return (
-    <>
+    <FlexCol>
+      <Title className="bg-neutral">{title}</Title>
       {results.map((loc) => (
         <Link
           key={loc.id}
@@ -33,7 +39,7 @@ export const LocLinks = ({
             FORECAST_PERIOD_MAP.current,
           )}
           className="input-suggestions-link"
-          onClick={onClickSuggestion}
+          onClick={() => onClickSuggestion(loc)}
         >
           <Text type="large" className="font-medium">
             {loc.name}
@@ -43,27 +49,42 @@ export const LocLinks = ({
           </Text>
         </Link>
       ))}
-    </>
+    </FlexCol>
   );
 };
 
 export const LocationSearchSuggestions = ({
   isLoading,
   results,
+  recentLocations,
   listIsOpen,
   onClickSuggestion,
 }: LocationSearchSuggestionsProps) => {
   if (!listIsOpen) return null;
 
-  const renderedComponent = isLoading ? (
-    <IsLoadingMessage />
+  const recentLocationsComponent =
+    recentLocations && recentLocations.length > 0 ? (
+      <LocLinks
+        title={LABELS.recentLocations}
+        results={recentLocations}
+        onClickSuggestion={onClickSuggestion}
+      />
+    ) : null;
+
+  const locationResultsComponent = isLoading ? (
+    <Title>{LABELS.isLoadingMessage}</Title>
   ) : (
-    <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
+    <LocLinks
+      title={LABELS.locations}
+      results={results}
+      onClickSuggestion={onClickSuggestion}
+    />
   );
 
   return (
     <div className="input-suggestions-container">
-      <FlexCol>{renderedComponent}</FlexCol>
+      {recentLocationsComponent}
+      {locationResultsComponent}
     </div>
   );
 };

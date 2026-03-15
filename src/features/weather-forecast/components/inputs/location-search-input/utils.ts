@@ -1,7 +1,9 @@
 import { type Location } from "@/services";
-import { type ValidLocation } from "./types";
+import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types";
 
-export const locationHasValidPath = (loc: Location): loc is ValidLocation => {
+export const locationHasValidPath = (
+  loc: Location,
+): loc is ValidWeatherPathLocation => {
   return !!(loc.country_code && loc.admin1 && loc.name);
 };
 
