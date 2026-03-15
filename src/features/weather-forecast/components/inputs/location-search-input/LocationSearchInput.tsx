@@ -29,7 +29,9 @@ export const LocationSearchInput = ({
   const { data, isLoading } = useGetLocationsByName({
     name: debouncedQuery,
     count: 100,
-    ...(currentCountryCode && !scopeIsGlobal ? { countryCode: "CA" } : {}),
+    ...(currentCountryCode && !scopeIsGlobal
+      ? { countryCode: currentCountryCode }
+      : {}),
   });
 
   const results = data?.results || [];
@@ -47,9 +49,15 @@ export const LocationSearchInput = ({
 
   useOnClickOutside(containerRef, () => setListIsOpen(false));
 
-  useShowSuggestionsOnSearch(filteredResults, isLoading, debouncedQuery, () => {
-    setListIsOpen(true);
-  });
+  useShowSuggestionsOnSearch(
+    debouncedQuery,
+    () => {
+      setListIsOpen(true);
+    },
+    () => setListIsOpen(false),
+  );
+
+  console.log(debouncedQuery);
 
   return (
     <div ref={containerRef} className={cn("relative", "w-full", className)}>

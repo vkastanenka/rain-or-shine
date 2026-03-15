@@ -19,15 +19,15 @@ export const useFilterResults = (
 };
 
 export const useShowSuggestionsOnSearch = (
-  results: Location[],
-  isLoading: boolean,
   debouncedQuery: string,
-  callbackFn: () => void,
+  openFn: () => void,
+  closeFn: () => void,
 ) => {
   useEffect(() => {
-    const hasResults = results.length > 0 || isLoading;
-    if (debouncedQuery.length >= 2 && hasResults) {
-      callbackFn();
+    if (debouncedQuery.length >= 2) {
+      openFn();
+      return;
     }
-  }, [debouncedQuery, results.length, isLoading]);
+    closeFn();
+  }, [debouncedQuery]);
 };
