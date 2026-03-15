@@ -1,22 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { FlexCol, Text } from "@/components";
+import { CA } from "country-flag-icons/react/3x2";
+import { FcGlobe } from "react-icons/fc";
+import { Button, Flex, FlexCol, FlexRow, Text } from "@/components";
 import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LABELS } from "./constants";
 import {
   type LocationSearchSuggestionsProps,
-  type LocationSearchSuggestionLinkProps,
+  type LocationSearchSuggestionsLinkProps,
+  type LocationSearchResultsHeaderProps,
 } from "./types";
 import { cn } from "@/utils";
 
-const Title = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div className={cn("p-4", "w-full", className)}>
+const HEADER_PADDING = "p-4";
+const HEADER_BG_COLOR = "bg-neutral";
+
+const Header = ({ children }: { children: React.ReactNode }) => (
+  <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}>
     <Text>{children}</Text>
   </div>
 );
@@ -24,23 +24,57 @@ const Title = ({
 const LocationResultsHeader = ({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div className={cn("p-4", "w-full", className)}>
-    <Text>{children}</Text>
-  </div>
-);
+  currentCountryCode,
+  scopeIsGlobal,
+  toggleScopeIsGlobal,
+}: LocationSearchResultsHeaderProps) => {
+  return (
+    <FlexRow
+      fit
+      gap={2}
+      align="center"
+      justify="between"
+      className={cn("p-4", HEADER_PADDING, HEADER_BG_COLOR, className)}
+    >
+      <Text>{children}</Text>
+      <div role="tablist" className="tabs tabs-box">
+        <button
+          type="button"
+          className={cn(
+            "tab",
+            !scopeIsGlobal && "tab-active",
+            scopeIsGlobal && "opacity-70",
+            scopeIsGlobal && "hover:opacity-100",
+            "transition-all",
+          )}
+          onClick={() => scopeIsGlobal && toggleScopeIsGlobal()}
+        >
+          <CA className="w-4" />
+        </button>
+        <button
+          type="button"
+          className={cn(
+            "tab",
+            scopeIsGlobal && "tab-active",
+            !scopeIsGlobal && "opacity-70",
+            !scopeIsGlobal && "hover:opacity-100",
+            "transition-all",
+          )}
+          onClick={() => !scopeIsGlobal && toggleScopeIsGlobal()}
+        >
+          <FcGlobe />
+        </button>
+      </div>
+    </FlexRow>
+  );
+};
 
 export const LocLinks = ({
-  title,
   results,
   onClickSuggestion,
-}: LocationSearchSuggestionLinkProps) => {
+}: LocationSearchSuggestionsLinkProps) => {
   return (
-    <FlexCol>
-      <Title className="bg-neutral">{title}</Title>
+    <>
       {results.map((loc) => (
         <Link
           key={loc.id}
@@ -61,7 +95,7 @@ export const LocLinks = ({
           </Text>
         </Link>
       ))}
-    </FlexCol>
+    </>
   );
 };
 
@@ -71,26 +105,42 @@ export const LocationSearchSuggestions = ({
   recentLocations,
   listIsOpen,
   onClickSuggestion,
+  currentCountryCode,
+  scopeIsGlobal,
+  toggleScopeIsGlobal,
 }: LocationSearchSuggestionsProps) => {
   if (!listIsOpen) return null;
 
   const recentLocationsComponent =
     recentLocations && recentLocations.length > 0 ? (
-      <LocLinks
-        title={LABELS.recentLocations}
-        results={recentLocations}
-        onClickSuggestion={onClickSuggestion}
-      />
+      <FlexCol>
+        <Header>{LABELS.recentLocations}</Header>
+        <LocLinks
+          results={recentLocations}
+          onClickSuggestion={onClickSuggestion}
+        />
+      </FlexCol>
     ) : null;
 
   const locationResultsComponent = isLoading ? (
-    <Title>{LABELS.isLoadingMessage}</Title>
+    <Header>{LABELS.isLoadingMessage}</Header>
   ) : (
-    <LocLinks
-      title={LABELS.locations}
-      results={results}
-      onClickSuggestion={onClickSuggestion}
-    />
+    <FlexCol>
+      <LocationResultsHeader
+        currentCountryCode={currentCountryCode}
+        scopeIsGlobal={scopeIsGlobal}
+        toggleScopeIsGlobal={toggleScopeIsGlobal}
+      >
+        {LABELS.locations}
+      </LocationResultsHeader>
+      {results && results.length > 0 ? (
+        <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
+      ) : (
+        <div className={cn("w-full", HEADER_PADDING)}>
+          <Text>{LABELS.noLocationsFound}</Text>
+        </div>
+      )}
+    </FlexCol>
   );
 
   return (

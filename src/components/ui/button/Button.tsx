@@ -57,7 +57,7 @@ export const Button = ({
   }
 
   return (
-    <button onClick={props.onClick} className={combinedClasses} type="button">
+    <button disabled={props.disabled} onClick={props.onClick} className={combinedClasses} type="button">
       {renderContent()}
     </button>
   );

@@ -17,20 +17,22 @@ import { saveRecentLocation } from "@/features/weather-forecast/utils";
 
 export const LocationSearchInput = ({
   size,
+  currentCountryCode,
   className,
 }: LocationSearchInputProps) => {
   const [query, setQuery] = useState("");
   const [listIsOpen, setListIsOpen] = useState(false);
+  const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const debouncedQuery = useDebounce(query, 400);
   const { data, isLoading } = useGetLocationsByName({
     name: debouncedQuery,
     count: 100,
-    countryCode: "CA",
+    ...(currentCountryCode !== undefined && !scopeIsGlobal
+      ? { countryCode: "CA" }
+      : {}),
   });
-
-  console.log(data);
 
   const results = data?.results || [];
 
@@ -71,6 +73,11 @@ export const LocationSearchInput = ({
         onClickSuggestion={(loc) => {
           saveRecentLocation(loc);
           setListIsOpen(false);
+        }}
+        currentCountryCode={currentCountryCode}
+        scopeIsGlobal={scopeIsGlobal}
+        toggleScopeIsGlobal={() => {
+          setScopeIsGlobal((prevState) => !prevState);
         }}
       />
     </div>

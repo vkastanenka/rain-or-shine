@@ -37,6 +37,7 @@ interface BaseProps {
   shape?: ResponsiveValue<ButtonShapeMapKey>;
   display?: ResponsiveValue<ButtonDisplayMapKey>;
   unstyled?: boolean;
+  disabled?: boolean;
 }
 
 export type ButtonProps =
