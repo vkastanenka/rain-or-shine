@@ -1,7 +1,8 @@
+import { lazy, Suspense } from "react";
 import { Link } from "@tanstack/react-router";
-import { CA } from "country-flag-icons/react/3x2";
 import { FcGlobe } from "react-icons/fc";
-import { Button, Flex, FlexCol, FlexRow, Text } from "@/components";
+import { FaFlag } from "react-icons/fa";
+import { FlexCol, FlexRow, Text } from "@/components";
 import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LABELS } from "./constants";
@@ -16,10 +17,45 @@ const HEADER_PADDING = "p-4";
 const HEADER_BG_COLOR = "bg-neutral";
 
 const Header = ({ children }: { children: React.ReactNode }) => (
-  <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}>
+  <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR, "py-7")}>
     <Text>{children}</Text>
   </div>
 );
+
+const flagCache: Record<string, any> = {};
+const animatedFlags = new Set<string>();
+
+const Flag = ({ code }: { code?: string }) => {
+  console.log("FLAG", code);
+
+  const flagCode = code?.toUpperCase();
+
+  if (!flagCode) return <FaFlag className="w-4" />;
+
+  if (!flagCache[flagCode]) {
+    flagCache[flagCode] = lazy(() =>
+      // Clean, aliased path. Vite handles the resolution behind the scenes.
+      import(`@flags/${flagCode}/index.js`).catch(() => ({
+        default: () => <FaFlag />,
+      })),
+    );
+  }
+
+  const CachedFlag = flagCache[flagCode];
+
+  const shouldAnimate = !animatedFlags.has(flagCode);
+
+  return (
+    <Suspense fallback={<div className="w-4 h-3 bg-base-300 animate-pulse" />}>
+      <div
+        className={cn(shouldAnimate && "animate-fade-in")}
+        onAnimationEnd={() => animatedFlags.add(flagCode)}
+      >
+        <CachedFlag className="w-4" />
+      </div>
+    </Suspense>
+  );
+};
 
 const LocationResultsHeader = ({
   children,
@@ -34,7 +70,7 @@ const LocationResultsHeader = ({
       gap={2}
       align="center"
       justify="between"
-      className={cn("p-4", HEADER_PADDING, HEADER_BG_COLOR, className)}
+      className={cn(HEADER_PADDING, HEADER_BG_COLOR, className)}
     >
       <Text>{children}</Text>
       <div role="tablist" className="tabs tabs-box">
@@ -49,7 +85,7 @@ const LocationResultsHeader = ({
           )}
           onClick={() => scopeIsGlobal && toggleScopeIsGlobal()}
         >
-          <CA className="w-4" />
+          <Flag code={currentCountryCode} />
         </button>
         <button
           type="button"
@@ -136,7 +172,7 @@ export const LocationSearchSuggestions = ({
       {results && results.length > 0 ? (
         <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
       ) : (
-        <div className={cn("w-full", HEADER_PADDING)}>
+        <div className={cn("w-full", HEADER_PADDING, "py-7")}>
           <Text>{LABELS.noLocationsFound}</Text>
         </div>
       )}

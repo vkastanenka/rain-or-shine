@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDebounce } from "@/hooks";
 import { TextInput } from "@/components";
-import { useGetLocationsByName } from "@/services";
+import { useGetLocalityByCoords, useGetLocationsByName } from "@/services";
 import { cn } from "@/utils";
 import { LABELS } from "./constants";
 import {
@@ -17,24 +17,30 @@ import { saveRecentLocation } from "@/features/weather-forecast/utils";
 
 export const LocationSearchInput = ({
   size,
-  currentCountryCode,
   className,
 }: LocationSearchInputProps) => {
   const [query, setQuery] = useState("");
   const [listIsOpen, setListIsOpen] = useState(false);
   const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
+  const [currentCountryCode, setCurrentCountryCode] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
   const debouncedQuery = useDebounce(query, 400);
   const { data, isLoading } = useGetLocationsByName({
     name: debouncedQuery,
     count: 100,
-    ...(currentCountryCode !== undefined && !scopeIsGlobal
-      ? { countryCode: "CA" }
-      : {}),
+    ...(currentCountryCode && !scopeIsGlobal ? { countryCode: "CA" } : {}),
   });
 
   const results = data?.results || [];
+
+  const { data: locality } = useGetLocalityByCoords();
+
+  useEffect(() => {
+    if (locality?.countryCode) {
+      setCurrentCountryCode(locality.countryCode);
+    }
+  }, [locality?.countryCode]);
 
   const filteredResults = useFilterResults(results);
   const recentLocations = useGetRecentLocations(listIsOpen);
@@ -51,7 +57,12 @@ export const LocationSearchInput = ({
         type="search"
         size={size ?? { base: "lg", md: "xl" }}
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          if (query.length < 3 && listIsOpen) {
+            setListIsOpen(false);
+          }
+        }}
         placeholder={LABELS.placeholder}
         className="w-full"
         onClear={() => {

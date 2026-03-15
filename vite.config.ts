@@ -19,6 +19,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      '@flags': path.resolve(__dirname, 'node_modules/country-flag-icons/react/3x2'),
     },
   },
 });

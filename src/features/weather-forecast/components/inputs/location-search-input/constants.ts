@@ -3,5 +3,5 @@ export const LABELS = {
   isLoadingMessage: "Searching...",
   locations: "Locations",
   recentLocations: "Recent locations",
-  noLocationsFound: "No locations found!"
+  noLocationsFound: "No locations found"
 } as const;
