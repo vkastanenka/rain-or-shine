@@ -54,7 +54,7 @@ export const LocationSearchInput = ({
         results={filteredResults}
         listIsOpen={listIsOpen}
         query={query}
-        onNavigate={() => {
+        onClickSuggestion={() => {
           setListIsOpen(false);
         }}
       />

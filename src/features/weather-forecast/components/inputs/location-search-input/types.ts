@@ -18,5 +18,5 @@ export interface LocationSearchSuggestionsProps {
   results: ValidLocation[];
   listIsOpen: boolean;
   query: string;
-  onNavigate: () => void;
+  onClickSuggestion: () => void;
 }

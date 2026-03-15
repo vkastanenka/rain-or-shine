@@ -16,10 +16,10 @@ const IsLoadingMessage = () => (
 
 export const LocLinks = ({
   results,
-  onNavigate,
+  onClickSuggestion,
 }: {
   results: ValidLocation[];
-  onNavigate: () => void;
+  onClickSuggestion: () => void;
 }) => {
   return (
     <>
@@ -33,7 +33,7 @@ export const LocLinks = ({
             FORECAST_PERIOD_MAP.current,
           )}
           className="input-suggestions-link"
-          onClick={onNavigate}
+          onClick={onClickSuggestion}
         >
           <Text type="large" className="font-medium">
             {loc.name}
@@ -51,14 +51,14 @@ export const LocationSearchSuggestions = ({
   isLoading,
   results,
   listIsOpen,
-  onNavigate,
+  onClickSuggestion,
 }: LocationSearchSuggestionsProps) => {
   if (!listIsOpen) return null;
 
   const renderedComponent = isLoading ? (
     <IsLoadingMessage />
   ) : (
-    <LocLinks results={results} onNavigate={onNavigate} />
+    <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
   );
 
   return (
