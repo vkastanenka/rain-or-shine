@@ -20,6 +20,7 @@ export const LocationSearchInput = ({
   className,
 }: LocationSearchInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [searchCount, setSearchCount] = useState(20);
   const [query, setQuery] = useState("");
   const [listIsOpen, setListIsOpen] = useState(false);
   const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
@@ -29,13 +30,26 @@ export const LocationSearchInput = ({
   const debouncedQuery = useDebounce(query, 400);
   const { data, isLoading } = useGetLocationsByName({
     name: debouncedQuery,
-    count: 100,
+    count: searchCount,
     ...(currentCountryCode && !scopeIsGlobal
       ? { countryCode: currentCountryCode }
       : {}),
   });
 
   const results = data?.results || [];
+
+  // Escalation Logic
+  useEffect(() => {
+    if (!isLoading && data?.results?.length === 0 && searchCount < 100) {
+      // If we found nothing, bump the count to look deeper
+      setSearchCount((prev) => (prev === 20 ? 50 : 100));
+    }
+  }, [data, isLoading, searchCount]);
+
+  // Reset count when query changes
+  useEffect(() => {
+    setSearchCount(20);
+  }, [debouncedQuery]);
 
   const { data: locality } = useGetLocalityByCoords();
 
@@ -46,7 +60,8 @@ export const LocationSearchInput = ({
   }, [locality?.countryCode]);
 
   const filteredResults = useFilterResults(results);
-  const recentLocations = useGetRecentLocations(listIsOpen);
+  const { locations: recentLocations, refresh: refreshRecentLocations } =
+    useGetRecentLocations(listIsOpen);
 
   useOnClickOutside(containerRef, () => setListIsOpen(false));
 
@@ -100,6 +115,7 @@ export const LocationSearchInput = ({
         toggleScopeIsGlobal={() => {
           setScopeIsGlobal((prevState) => !prevState);
         }}
+        onDeleteRecent={refreshRecentLocations}
       />
     </div>
   );

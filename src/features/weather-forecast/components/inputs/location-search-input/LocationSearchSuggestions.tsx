@@ -1,10 +1,12 @@
 import { lazy, Suspense } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
-import { FaFlag } from "react-icons/fa";
-import { FlexCol, FlexRow, Text } from "@/components";
-import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
+import { FaFlag, FaTimes } from "react-icons/fa";
+import { Button, FlexCol, FlexRow, Text } from "@/components";
+import {
+  deleteRecentLocations,
+  formatWeatherUrlPath,
+} from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LABELS } from "./constants";
 import {
@@ -21,6 +23,34 @@ const Header = ({ children }: { children: React.ReactNode }) => (
   <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR, "py-7")}>
     <Text>{children}</Text>
   </div>
+);
+
+const RecentLocationsHeader = ({
+  children,
+  onDelete,
+}: {
+  children: React.ReactNode;
+  onDelete: () => void;
+}) => (
+  <FlexRow
+    fit
+    align="center"
+    justify="between"
+    gap={2}
+    className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}
+  >
+    <Text>{children}</Text>
+    <Button
+      onClick={() => {
+        deleteRecentLocations();
+        // 2. Tell the hook to update the UI state
+        onDelete();
+      }}
+      shape="circle"
+    >
+      <FaTimes />
+    </Button>
+  </FlexRow>
 );
 
 const flagCache: Record<string, any> = {};
@@ -137,6 +167,7 @@ export const LocLinks = ({
 };
 
 export const LocationSearchSuggestions = ({
+  query,
   debouncedQuery,
   isLoading,
   results,
@@ -146,11 +177,16 @@ export const LocationSearchSuggestions = ({
   currentCountryCode,
   scopeIsGlobal,
   toggleScopeIsGlobal,
+  onDeleteRecent,
 }: LocationSearchSuggestionsProps) => {
+  if (!listIsOpen) return null;
+
   const recentLocationsComponent =
     recentLocations && recentLocations.length > 0 ? (
       <FlexCol>
-        <Header>{LABELS.recentLocations}</Header>
+        <RecentLocationsHeader onDelete={onDeleteRecent}>
+          {LABELS.recentLocations}
+        </RecentLocationsHeader>
         <LocLinks
           results={recentLocations}
           onClickSuggestion={onClickSuggestion}
@@ -169,44 +205,20 @@ export const LocationSearchSuggestions = ({
       >
         {LABELS.locations}
       </LocationResultsHeader>
-      {results && results.length > 0 ? (
+      {results && results.length > 0 && debouncedQuery ? (
         <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
       ) : (
         <div className={cn("w-full", HEADER_PADDING, "py-7")}>
-          <Text>
-            {!debouncedQuery ? LABELS.searchToFind : LABELS.noLocationsFound}
-          </Text>
+          <Text>{!query ? LABELS.searchToFind : LABELS.noLocationsFound}</Text>
         </div>
       )}
     </FlexCol>
   );
 
   return (
-    <AnimatePresence>
-      {listIsOpen && (
-        <motion.div
-          key="location-suggestions-panel"
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{
-            height: { type: "spring", duration: 0.5, bounce: 0 },
-            opacity: { duration: 0.2 },
-          }}
-          layout
-          style={{ transformOrigin: "top" }}
-          className="input-suggestions-container overflow-hidden"
-        >
-          {/* Change layout="position" to just layout. 
-    This helps the parent measure the delta more accurately 
-    during the loading -> results swap.
-  */}
-          <motion.div layout="position" className="flex flex-col w-full">
-            {recentLocationsComponent}
-            {locationResultsComponent}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="input-suggestions-container">
+      {recentLocationsComponent}
+      {locationResultsComponent}
+    </div>
   );
 };

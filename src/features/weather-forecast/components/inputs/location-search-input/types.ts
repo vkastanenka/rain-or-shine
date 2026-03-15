@@ -9,16 +9,17 @@ export interface LocationSearchInputProps {
 }
 
 export interface LocationSearchSuggestionsProps {
+  query: string;
   debouncedQuery: string;
   isLoading: boolean;
   results: ValidWeatherPathLocation[];
   recentLocations?: ValidWeatherPathLocation[];
   listIsOpen: boolean;
-  query: string;
   onClickSuggestion: (loc: ValidWeatherPathLocation) => void;
   currentCountryCode?: string;
   scopeIsGlobal: boolean;
   toggleScopeIsGlobal: () => void;
+  onDeleteRecent: () => void;
 }
 
 export interface LocationSearchSuggestionsLinkProps {

@@ -1,7 +1,7 @@
 import { RECENT_LOCATIONS_KEY } from "../constants";
 import { type ValidWeatherPathLocation } from "../types";
 
-const MAX_RECENT = 5;
+const MAX_RECENT = 2;
 
 export const saveRecentLocation = (location: ValidWeatherPathLocation) => {
   const existing = getRecentLocations();
@@ -17,3 +17,7 @@ export const getRecentLocations = (): ValidWeatherPathLocation[] => {
   const data = localStorage.getItem(RECENT_LOCATIONS_KEY);
   return data ? JSON.parse(data) : [];
 };
+
+export const deleteRecentLocations = () => {
+  localStorage.removeItem(RECENT_LOCATIONS_KEY);
+}
