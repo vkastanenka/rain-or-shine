@@ -19,12 +19,14 @@ export const useFilterResults = (
 };
 
 export const useShowSuggestionsOnSearch = (
+  isFocused: boolean,
   debouncedQuery: string,
   openFn: () => void,
   closeFn: () => void,
 ) => {
+  const recentLocations = getRecentLocations();
   useEffect(() => {
-    if (debouncedQuery.length >= 2) {
+    if (isFocused && (debouncedQuery.length > 0 || recentLocations.length > 0)) {
       openFn();
       return;
     }

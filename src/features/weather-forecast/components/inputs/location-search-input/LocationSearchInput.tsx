@@ -19,6 +19,7 @@ export const LocationSearchInput = ({
   size,
   className,
 }: LocationSearchInputProps) => {
+  const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState("");
   const [listIsOpen, setListIsOpen] = useState(false);
   const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
@@ -50,14 +51,13 @@ export const LocationSearchInput = ({
   useOnClickOutside(containerRef, () => setListIsOpen(false));
 
   useShowSuggestionsOnSearch(
+    isFocused,
     debouncedQuery,
     () => {
       setListIsOpen(true);
     },
     () => setListIsOpen(false),
   );
-
-  console.log(debouncedQuery);
 
   return (
     <div ref={containerRef} className={cn("relative", "w-full", className)}>
@@ -67,9 +67,6 @@ export const LocationSearchInput = ({
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
-          if (query.length < 3 && listIsOpen) {
-            setListIsOpen(false);
-          }
         }}
         placeholder={LABELS.placeholder}
         className="w-full"
@@ -77,13 +74,18 @@ export const LocationSearchInput = ({
           setQuery("");
           setListIsOpen(false);
         }}
-        onFocus={() =>
+        onFocus={() => {
+          setIsFocused(true);
           onInputFocus(query, filteredResults, isLoading, () => {
             setListIsOpen(true);
-          })
-        }
+          });
+        }}
+        onBlur={() => {
+          setIsFocused(false);
+        }}
       />
       <LocationSearchSuggestions
+        debouncedQuery={debouncedQuery}
         isLoading={isLoading}
         results={filteredResults}
         recentLocations={recentLocations}

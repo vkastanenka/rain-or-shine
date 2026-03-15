@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
 import { FaFlag } from "react-icons/fa";
@@ -136,6 +137,7 @@ export const LocLinks = ({
 };
 
 export const LocationSearchSuggestions = ({
+  debouncedQuery,
   isLoading,
   results,
   recentLocations,
@@ -145,8 +147,6 @@ export const LocationSearchSuggestions = ({
   scopeIsGlobal,
   toggleScopeIsGlobal,
 }: LocationSearchSuggestionsProps) => {
-  if (!listIsOpen) return null;
-
   const recentLocationsComponent =
     recentLocations && recentLocations.length > 0 ? (
       <FlexCol>
@@ -173,16 +173,40 @@ export const LocationSearchSuggestions = ({
         <LocLinks results={results} onClickSuggestion={onClickSuggestion} />
       ) : (
         <div className={cn("w-full", HEADER_PADDING, "py-7")}>
-          <Text>{LABELS.noLocationsFound}</Text>
+          <Text>
+            {!debouncedQuery ? LABELS.searchToFind : LABELS.noLocationsFound}
+          </Text>
         </div>
       )}
     </FlexCol>
   );
 
   return (
-    <div className="input-suggestions-container">
-      {recentLocationsComponent}
-      {locationResultsComponent}
-    </div>
+    <AnimatePresence>
+      {listIsOpen && (
+        <motion.div
+          key="location-suggestions-panel"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{
+            height: { type: "spring", duration: 0.5, bounce: 0 },
+            opacity: { duration: 0.2 },
+          }}
+          layout
+          style={{ transformOrigin: "top" }}
+          className="input-suggestions-container overflow-hidden"
+        >
+          {/* Change layout="position" to just layout. 
+    This helps the parent measure the delta more accurately 
+    during the loading -> results swap.
+  */}
+          <motion.div layout="position" className="flex flex-col w-full">
+            {recentLocationsComponent}
+            {locationResultsComponent}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

@@ -9,6 +9,7 @@ export interface LocationSearchInputProps {
 }
 
 export interface LocationSearchSuggestionsProps {
+  debouncedQuery: string;
   isLoading: boolean;
   results: ValidWeatherPathLocation[];
   recentLocations?: ValidWeatherPathLocation[];

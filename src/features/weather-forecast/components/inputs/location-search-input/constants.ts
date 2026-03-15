@@ -3,5 +3,6 @@ export const LABELS = {
   isLoadingMessage: "Searching...",
   locations: "Locations",
   recentLocations: "Recent locations",
-  noLocationsFound: "No locations found"
+  noLocationsFound: "No locations found",
+  searchToFind: "Search to find locations",
 } as const;

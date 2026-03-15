@@ -1,7 +1,10 @@
 import { type Location } from "@/services";
+import { getRecentLocations } from "@/features/weather-forecast/utils";
 import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types";
 
-export const locationHasValidPath = (loc: Location): loc is ValidWeatherPathLocation => {
+export const locationHasValidPath = (
+  loc: Location,
+): loc is ValidWeatherPathLocation => {
   return !!(loc.country_code && loc.admin1 && loc.name);
 };
 
@@ -11,7 +14,11 @@ export const onInputFocus = (
   isLoading: boolean,
   callbackFn: () => void,
 ) => {
-  if (query.length >= 2 && (results.length > 0 || isLoading)) {
+  const recentLocations = getRecentLocations();
+  if (
+    recentLocations.length > 0 ||
+    (query.length >= 0 && (results.length > 0 || isLoading))
+  ) {
     callbackFn();
   }
 };
