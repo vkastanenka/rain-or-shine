@@ -9,12 +9,11 @@ import { LocationSearchSuggestions } from "./LocationSearchSuggestions";
 import { LABELS } from "./constants";
 import {
   useGetRecentLocations,
-  useShowSuggestionsOnSearch,
+  useShowSuggestions,
   useFilterResults,
   useIncreaseSearchCount,
 } from "./hooks";
 import { type LocationSearchInputProps } from "./types";
-import { onInputFocus } from "./utils";
 
 export const LocationSearchInput = ({
   size,
@@ -56,6 +55,7 @@ export const LocationSearchInput = ({
 
   /**
    * Increase search count if no initial results
+   * TODO: Ensure it resets / see if this is what the best pattern is
    */
 
   useIncreaseSearchCount({
@@ -70,28 +70,30 @@ export const LocationSearchInput = ({
 
   /**
    * Get recent locations and remove logic
+   * TODO: Move to context?
    */
 
   const { locations: recentLocations, refresh: refreshRecentLocations } =
     useGetRecentLocations(listIsOpen);
 
   /**
-   * Show suggestions when searching
+   * Show suggestion management
    */
 
-  useShowSuggestionsOnSearch({
-    isFocused,
+  useShowSuggestions({
+    query,
     debouncedQuery,
+    isFocused,
     openFn: () => setListIsOpen(true),
     closeFn: () => setListIsOpen(false),
   });
 
   /**
-   * Close suggestions if input no longer focused
+   * Stop focus when clicking outside of the container
    */
 
   const containerRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(containerRef, () => setListIsOpen(false));
+  useOnClickOutside(containerRef, () => setIsFocused(false));
 
   return (
     <div ref={containerRef} className={cn("relative", "w-full", className)}>
@@ -101,22 +103,9 @@ export const LocationSearchInput = ({
         size={size ?? { base: "lg", md: "xl" }}
         value={query}
         placeholder={LABELS.placeholder}
-        onChange={(e) => {
-          setQuery(e.target.value);
-        }}
-        onClear={() => {
-          setQuery("");
-          setListIsOpen(false);
-        }}
-        onFocus={() => {
-          setIsFocused(true);
-          onInputFocus(query, filteredResults, isLoading, () => {
-            setListIsOpen(true);
-          });
-        }}
-        onBlur={() => {
-          setIsFocused(false);
-        }}
+        onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => setIsFocused(true)}
+        onClear={() => setQuery("")}
       />
       <LocationSearchSuggestions
         debouncedQuery={debouncedQuery}

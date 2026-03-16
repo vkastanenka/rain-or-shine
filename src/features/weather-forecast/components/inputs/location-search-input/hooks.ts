@@ -54,14 +54,16 @@ export const useIncreaseSearchCount = ({
   }, [debouncedQuery]);
 };
 
-export const useShowSuggestionsOnSearch = ({
-  isFocused,
+export const useShowSuggestions = ({
+  query,
   debouncedQuery,
+  isFocused,
   openFn,
   closeFn,
 }: {
-  isFocused: boolean;
+  query: string;
   debouncedQuery: string;
+  isFocused: boolean;
   openFn: () => void;
   closeFn: () => void;
 }) => {
@@ -69,11 +71,12 @@ export const useShowSuggestionsOnSearch = ({
   useEffect(() => {
     if (
       isFocused &&
-      (debouncedQuery.length > 0 || recentLocations.length > 0)
+      ((query.length > 0 && debouncedQuery.length > 0) ||
+        recentLocations.length > 0)
     ) {
       openFn();
       return;
     }
     closeFn();
-  }, [debouncedQuery]);
+  }, [isFocused, query, debouncedQuery, recentLocations.length]);
 };

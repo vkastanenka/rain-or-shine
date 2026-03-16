@@ -17,6 +17,7 @@ export const TextInput = ({
   suggestions,
   type = "text",
   value,
+  onClear,
   ...props
 }: TextInputProps) => {
   const isSearch = type === TEXT_INPUT_TYPE_MAP.search;
@@ -59,7 +60,7 @@ export const TextInput = ({
           <Button
             variant="ghost"
             shape="circle"
-            onClick={props.onClear}
+            onClick={onClear}
             aria-label="Clear search"
           >
             <FaTimes />
