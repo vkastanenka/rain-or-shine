@@ -66,7 +66,14 @@ const LocationResultsHeader = ({
       gap={2}
       align="center"
       justify="between"
-      className={cn(HEADER_PADDING, HEADER_BG_COLOR, className)}
+      className={cn(
+        "sticky",
+        "top-0",
+        HEADER_PADDING,
+        HEADER_BG_COLOR,
+        "z-60",
+        className,
+      )}
     >
       <Text>{children}</Text>
       <div role="tablist" className="tabs tabs-box">
@@ -190,15 +197,14 @@ export const LocationSearchSuggestions = ({
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{
-            height: { type: "spring", duration: 0.5, bounce: 0 },
-
+            height: { type: "spring", duration: 0.3, bounce: 0 },
             opacity: { duration: 0.2 },
           }}
           layout
           style={{ transformOrigin: "top" }}
-          className="input-suggestions-container overflow-hidden"
+          className="input-suggestions-container"
         >
-          <motion.div layout="position" className="flex flex-col w-full">
+          <motion.div layout="position">
             {recentLocationsComponent}
             {locationResultsComponent}
           </motion.div>
