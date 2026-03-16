@@ -38,19 +38,23 @@ export const Navbar = () => {
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">
               {/* Weather Button */}
-              <Button variant="ghost" to="/">
+              <Button variant="ghost" size={{ base: "md", lg: "lg" }} to="/">
                 Weather
               </Button>
 
               {/* Other Links */}
-              <Button variant="ghost" to="/maps">
+              <Button
+                variant="ghost"
+                size={{ base: "md", lg: "lg" }}
+                to="/maps"
+              >
                 Maps
               </Button>
             </FlexRow>
             <Button
               variant="ghost"
               shape="circle"
-              size={{ base: "sm", sm: "md" }}
+              size={{ base: "sm", sm: "md", lg: "lg" }}
               aria-label="Search"
             >
               <FaSearch />
@@ -61,7 +65,7 @@ export const Navbar = () => {
                 href={link.href}
                 variant="ghost"
                 shape="circle"
-                size={{ base: "sm", sm: "md" }}
+                size={{ base: "sm", sm: "md", lg: "lg" }}
                 aria-label={link.label}
               >
                 {link.icon}

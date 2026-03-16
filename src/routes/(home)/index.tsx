@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol, Grid, Flex } from "@/components";
-import { LocalityCard } from "@/features";
+import { Text, Section, FlexCol, Grid, Flex, Button } from "@/components";
+import { formatWeatherUrlPath, LocalityCard } from "@/features";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
 import { LocationSearchInput } from "@/features/weather-forecast/components/inputs";
@@ -11,8 +11,12 @@ export const Route = createFileRoute("/(home)/")({
 });
 
 function RouteComponent() {
-  const { currentLocalityCardParams, recentLocationsCardParams } =
-    Route.useLoaderData();
+  const {
+    currentLocality,
+    currentLocalityCardParams,
+    recentLocations,
+    recentLocationsCardParams,
+  } = Route.useLoaderData();
 
   return (
     <div>
@@ -38,16 +42,35 @@ function RouteComponent() {
                     <Text type="large" className="font-medium">
                       {LABELS.currentLocation.title}
                     </Text>
-                    <LocalityCard
-                      city={currentLocalityCardParams.city}
-                      region={currentLocalityCardParams.region}
-                      WmoIcon={currentLocalityCardParams.WmoIcon}
-                      temperature={currentLocalityCardParams.temperature}
-                    />
+                    <Button
+                      unstyled
+                      className="hover-3d w-full"
+                      to={formatWeatherUrlPath(
+                        currentLocality?.countryName || "",
+                        currentLocality?.locality || "",
+                        currentLocality?.city || "",
+                        "current",
+                      )}
+                    >
+                      <LocalityCard
+                        city={currentLocalityCardParams.city}
+                        region={currentLocalityCardParams.region}
+                        WmoIcon={currentLocalityCardParams.WmoIcon}
+                        temperature={currentLocalityCardParams.temperature}
+                      />
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </Button>
                   </FlexCol>
                 </Grid.Item>
               )}
-              {recentLocationsCardParams && (
+              {recentLocationsCardParams.length > 0 && (
                 <Grid.Item
                   span={{
                     base: 1,
@@ -65,13 +88,32 @@ function RouteComponent() {
                       stretchItems
                     >
                       {recentLocationsCardParams.map((params, i) => (
-                        <LocalityCard
+                        <Button
                           key={`${params.city}-${i}`}
-                          city={params.city}
-                          region={params.region}
-                          WmoIcon={params.WmoIcon}
-                          temperature={params.temperature}
-                        />
+                          unstyled
+                          className="hover-3d"
+                          to={formatWeatherUrlPath(
+                            recentLocations[i].country || "",
+                            recentLocations[i].admin1 || "",
+                            recentLocations[i].name || "",
+                            "current",
+                          )}
+                        >
+                          <LocalityCard
+                            city={params.city}
+                            region={params.region}
+                            WmoIcon={params.WmoIcon}
+                            temperature={params.temperature}
+                          />
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </Button>
                       ))}
                     </Flex>
                   </FlexCol>

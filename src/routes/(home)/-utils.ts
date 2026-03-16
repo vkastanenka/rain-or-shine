@@ -2,6 +2,7 @@ import {
   getLocalityCardProps,
   getLocationCardProps,
   getRecentLocations,
+  type LocalityCardProps,
   type ValidWeatherPathLocation,
 } from "@/features";
 import {
@@ -36,7 +37,7 @@ export const routeLoader = async ({ context }: { context: RouterContext }) => {
 
   // 2. Prepare Current Locality Forecast
   let currentLocalityForecast = null;
-  let currentLocalityCardParams = null;
+  let currentLocalityCardParams: LocalityCardProps | null = null;
 
   if (currentLocality) {
     const params = getForecastByCoordsParams(currentLocality);
@@ -53,7 +54,7 @@ export const routeLoader = async ({ context }: { context: RouterContext }) => {
   }
 
   // 3. Handle Recent Locations (Parallelized)
-  let recentLocationsCardParams: any[] = [];
+  let recentLocationsCardParams: LocalityCardProps[] = [];
 
   if (recentLocations?.length > 0) {
     // Taking the first 2 as "most recent" based on your .slice logic intent
@@ -87,6 +88,7 @@ export const routeLoader = async ({ context }: { context: RouterContext }) => {
     currentLocality,
     currentLocalityForecast,
     currentLocalityCardParams,
+    recentLocations,
     recentLocationsCardParams, // Now available to your route
   };
 };

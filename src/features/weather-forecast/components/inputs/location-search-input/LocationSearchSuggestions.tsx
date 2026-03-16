@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
 import { FaTimes } from "react-icons/fa";
@@ -143,8 +144,6 @@ export const LocationSearchSuggestions = ({
   toggleScopeIsGlobal,
   onDeleteRecent,
 }: LocationSearchSuggestionsProps) => {
-  if (!listIsOpen) return null;
-
   const recentLocationsComponent =
     recentLocations && recentLocations.length > 0 ? (
       <FlexCol>
@@ -183,9 +182,28 @@ export const LocationSearchSuggestions = ({
   );
 
   return (
-    <div className="input-suggestions-container">
-      {recentLocationsComponent}
-      {locationResultsComponent}
-    </div>
+    <AnimatePresence>
+      {listIsOpen && (
+        <motion.div
+          key="location-suggestions-panel"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{
+            height: { type: "spring", duration: 0.5, bounce: 0 },
+
+            opacity: { duration: 0.2 },
+          }}
+          layout
+          style={{ transformOrigin: "top" }}
+          className="input-suggestions-container overflow-hidden"
+        >
+          <motion.div layout="position" className="flex flex-col w-full">
+            {recentLocationsComponent}
+            {locationResultsComponent}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
