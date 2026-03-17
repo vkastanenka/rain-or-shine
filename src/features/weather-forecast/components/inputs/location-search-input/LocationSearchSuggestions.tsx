@@ -10,108 +10,18 @@ import {
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LocationSearchFlag } from "./LocationSearchFlag";
 import { LABELS } from "./constants";
-import {
-  type LocationSearchSuggestionsProps,
-  type LocationSearchSuggestionsLinkProps,
-  type LocationSearchResultsHeaderProps,
-} from "./types";
+import { type LocationSearchSuggestionsLinkProps } from "./types";
 import { cn } from "@/utils";
+import { saveRecentLocation } from "@/features/weather-forecast/utils";
+import { useLocationSearch } from "./context";
 
 const HEADER_PADDING = "p-4";
 const HEADER_BG_COLOR = "bg-neutral";
 
-const Header = ({ children }: { children: React.ReactNode }) => (
-  <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR, "py-7")}>
-    <Text>{children}</Text>
-  </div>
-);
-
-const RecentLocationsHeader = ({
-  children,
-  onDelete,
-}: {
-  children: React.ReactNode;
-  onDelete: () => void;
-}) => (
-  <FlexRow
-    fit
-    align="center"
-    justify="between"
-    gap={2}
-    className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}
-  >
-    <Text>{children}</Text>
-    <Button
-      onClick={() => {
-        deleteRecentLocations();
-        onDelete();
-      }}
-      shape="circle"
-    >
-      <FaTimes />
-    </Button>
-  </FlexRow>
-);
-
-const LocationResultsHeader = ({
-  children,
-  className,
-  currentCountryCode,
-  scopeIsGlobal,
-  toggleScopeIsGlobal,
-}: LocationSearchResultsHeaderProps) => {
-  return (
-    <FlexRow
-      fit
-      gap={2}
-      align="center"
-      justify="between"
-      className={cn(
-        "sticky",
-        "top-0",
-        HEADER_PADDING,
-        HEADER_BG_COLOR,
-        "z-60",
-        className,
-      )}
-    >
-      <Text>{children}</Text>
-      <div role="tablist" className="tabs tabs-box">
-        <button
-          type="button"
-          className={cn(
-            "tab",
-            !scopeIsGlobal && "tab-active",
-            scopeIsGlobal && "opacity-70",
-            scopeIsGlobal && "hover:opacity-100",
-            "transition-all",
-          )}
-          onClick={() => scopeIsGlobal && toggleScopeIsGlobal()}
-        >
-          <LocationSearchFlag code={currentCountryCode} />
-        </button>
-        <button
-          type="button"
-          className={cn(
-            "tab",
-            scopeIsGlobal && "tab-active",
-            !scopeIsGlobal && "opacity-70",
-            !scopeIsGlobal && "hover:opacity-100",
-            "transition-all",
-          )}
-          onClick={() => !scopeIsGlobal && toggleScopeIsGlobal()}
-        >
-          <FcGlobe />
-        </button>
-      </div>
-    </FlexRow>
-  );
-};
-
 export const LocationLinks = ({
   results,
-  onClickSuggestion,
 }: LocationSearchSuggestionsLinkProps) => {
+  const { setListIsOpen } = useLocationSearch();
   return (
     <>
       {results.map((loc) => (
@@ -124,7 +34,10 @@ export const LocationLinks = ({
             FORECAST_PERIOD_MAP.current,
           )}
           className="input-suggestions-link"
-          onClick={() => onClickSuggestion(loc)}
+          onClick={() => {
+            saveRecentLocation(loc);
+            setListIsOpen(false);
+          }}
         >
           <Text type="large" className="font-medium">
             {loc.name}
@@ -138,48 +51,100 @@ export const LocationLinks = ({
   );
 };
 
-export const LocationSearchSuggestions = ({
-  query,
-  debouncedQuery,
-  isLoading,
-  results,
-  recentLocations,
-  listIsOpen,
-  onClickSuggestion,
-  currentCountryCode,
-  scopeIsGlobal,
-  toggleScopeIsGlobal,
-  onDeleteRecent,
-}: LocationSearchSuggestionsProps) => {
-  const recentLocationsComponent =
-    recentLocations && recentLocations.length > 0 ? (
-      <FlexCol>
-        <RecentLocationsHeader onDelete={onDeleteRecent}>
-          {LABELS.recentLocations}
-        </RecentLocationsHeader>
-        <LocationLinks
-          results={recentLocations}
-          onClickSuggestion={onClickSuggestion}
-        />
-      </FlexCol>
-    ) : null;
+const RecentLocations = () => {
+  const { recentLocations, refreshRecentLocations } = useLocationSearch();
 
-  const locationResultsComponent = isLoading ? (
-    <Header>{LABELS.isLoadingMessage}</Header>
+  return recentLocations && recentLocations.length > 0 ? (
+    <FlexCol>
+      <FlexRow
+        fit
+        gap={2}
+        align="center"
+        justify="between"
+        className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}
+      >
+        <Text>{LABELS.recentLocations}</Text>
+        <Button
+          shape="circle"
+          onClick={() => {
+            refreshRecentLocations();
+            deleteRecentLocations();
+          }}
+        >
+          <FaTimes />
+        </Button>
+      </FlexRow>
+      <LocationLinks results={recentLocations} />
+    </FlexCol>
+  ) : null;
+};
+
+const SearchSuggestions = () => {
+  const {
+    query,
+    debouncedQuery,
+    isLoading,
+    results,
+    currentCountryCode,
+    scopeIsGlobal,
+    setScopeIsGlobal,
+  } = useLocationSearch();
+
+  return isLoading ? (
+    <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR, "py-7")}>
+      <Text>{LABELS.isLoadingMessage}</Text>
+    </div>
   ) : (
     <FlexCol>
-      <LocationResultsHeader
-        currentCountryCode={currentCountryCode}
-        scopeIsGlobal={scopeIsGlobal}
-        toggleScopeIsGlobal={toggleScopeIsGlobal}
+      <FlexRow
+        fit
+        gap={2}
+        align="center"
+        justify="between"
+        className={cn(
+          "sticky",
+          "top-0",
+          HEADER_PADDING,
+          HEADER_BG_COLOR,
+          "z-60",
+        )}
       >
-        {LABELS.locations}
-      </LocationResultsHeader>
+        <Text>{LABELS.locations}</Text>
+        <div role="tablist" className="tabs tabs-box">
+          <button
+            type="button"
+            className={cn(
+              "tab",
+              !scopeIsGlobal && "tab-active",
+              scopeIsGlobal && "opacity-70",
+              scopeIsGlobal && "hover:opacity-100",
+              "transition-all",
+            )}
+            onClick={() =>
+              scopeIsGlobal && setScopeIsGlobal((prevState) => !prevState)
+            }
+          >
+            <LocationSearchFlag code={currentCountryCode} />
+          </button>
+          <button
+            type="button"
+            className={cn(
+              "tab",
+              scopeIsGlobal && "tab-active",
+              !scopeIsGlobal && "opacity-70",
+              !scopeIsGlobal && "hover:opacity-100",
+              "transition-all",
+            )}
+            onClick={() =>
+              !scopeIsGlobal && setScopeIsGlobal((prevState) => !prevState)
+            }
+          >
+            <FcGlobe />
+          </button>
+        </div>
+      </FlexRow>
       {results && results.length > 0 && debouncedQuery ? (
-        <LocationLinks
-          results={results}
-          onClickSuggestion={onClickSuggestion}
-        />
+        <LocationLinks results={results} />
       ) : (
         <div className={cn("w-full", HEADER_PADDING, "py-7")}>
           <Text>{!query ? LABELS.searchToFind : LABELS.noLocationsFound}</Text>
@@ -187,6 +152,10 @@ export const LocationSearchSuggestions = ({
       )}
     </FlexCol>
   );
+};
+
+export const LocationSearchSuggestions = () => {
+  const { listIsOpen } = useLocationSearch();
 
   return (
     <AnimatePresence>
@@ -205,8 +174,8 @@ export const LocationSearchSuggestions = ({
           className="input-suggestions-container"
         >
           <motion.div layout="position">
-            {recentLocationsComponent}
-            {locationResultsComponent}
+            <RecentLocations />
+            <SearchSuggestions />
           </motion.div>
         </motion.div>
       )}

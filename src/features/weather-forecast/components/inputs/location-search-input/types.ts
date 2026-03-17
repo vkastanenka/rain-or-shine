@@ -24,7 +24,6 @@ export interface LocationSearchSuggestionsProps {
 
 export interface LocationSearchSuggestionsLinkProps {
   results: ValidWeatherPathLocation[];
-  onClickSuggestion: (loc: ValidWeatherPathLocation) => void;
 }
 
 export interface LocationSearchResultsHeaderProps {

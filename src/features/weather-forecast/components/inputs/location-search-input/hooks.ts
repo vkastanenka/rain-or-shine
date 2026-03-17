@@ -4,6 +4,7 @@ import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types
 import { locationHasValidPath } from "./utils";
 import { getRecentLocations } from "@/features/weather-forecast/utils";
 
+// TODO: Move to root
 export const useFilterResults = (
   results: Location[],
 ): ValidWeatherPathLocation[] => {
@@ -12,6 +13,7 @@ export const useFilterResults = (
   }, [results]);
 };
 
+// TODO: Move to root
 export const useGetRecentLocations = (listIsOpen: boolean) => {
   const [locations, setLocations] = useState<ValidWeatherPathLocation[]>([]);
 
@@ -28,6 +30,7 @@ export const useGetRecentLocations = (listIsOpen: boolean) => {
   return { locations, refresh };
 };
 
+// TODO: Determine better implementation
 export const useIncreaseSearchCount = ({
   debouncedQuery,
   isLoading,
