@@ -7,22 +7,28 @@ import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LocationSearchFlag } from "./LocationSearchFlag";
 import { LABELS } from "./constants";
-import { type LocationSearchSuggestionsLinkProps } from "./types";
 import { cn } from "@/utils";
 import { useLocationSearch } from "./context";
-import { useStorage, STORAGE_KEY_MAP, useSaveRecentLocation } from "@/services";
+import {
+  useStorage,
+  STORAGE_KEY_MAP,
+  useSaveRecentLocation,
+  type ValidWeatherPathLocation,
+} from "@/services";
 
 const HEADER_PADDING = "p-4";
 const HEADER_BG_COLOR = "bg-neutral";
 
 export const LocationLinks = ({
-  results,
-}: LocationSearchSuggestionsLinkProps) => {
+  locations,
+}: {
+  locations: ValidWeatherPathLocation[];
+}) => {
   const { setListIsOpen } = useLocationSearch();
   const { mutate: saveRecent } = useSaveRecentLocation();
   return (
     <>
-      {results.map((loc) => (
+      {locations.map((loc) => (
         <Link
           key={loc.id}
           to={formatWeatherUrlPath(
@@ -68,7 +74,7 @@ const RecentLocations = () => {
           <FaTimes />
         </Button>
       </FlexRow>
-      <LocationLinks results={recentLocations} />
+      <LocationLinks locations={recentLocations} />
     </FlexCol>
   ) : null;
 };
@@ -138,7 +144,7 @@ const SearchSuggestions = () => {
         </div>
       </FlexRow>
       {results && results.length > 0 && debouncedQuery ? (
-        <LocationLinks results={results} />
+        <LocationLinks locations={results} />
       ) : (
         <div className={cn("w-full", HEADER_PADDING, "py-7")}>
           <Text>{!query ? LABELS.searchToFind : LABELS.noLocationsFound}</Text>

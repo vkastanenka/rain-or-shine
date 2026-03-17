@@ -1,14 +1,14 @@
-import { createContext, useContext, useState, useRef } from "react";
-import { useDebounce, useOnClickOutside } from "@/hooks";
+import { createContext, useContext, useState } from "react";
+import { useDebounce } from "@/hooks";
 import { useGetLocalityByCoords, useGetLocationsByName } from "@/services";
 import { useShowSuggestions } from "./hooks";
-import type { LocationSearchInputProps } from "./types";
+import type { LocationSearchProps } from "./types";
 
 const LocationSearchContext = createContext<ReturnType<
   typeof useLocationSearchContext
 > | null>(null);
 
-const useLocationSearchContext = (props: LocationSearchInputProps) => {
+const useLocationSearchContext = (props: LocationSearchProps) => {
   /**
    * Input state
    */
@@ -34,13 +34,6 @@ const useLocationSearchContext = (props: LocationSearchInputProps) => {
       ? { countryCode: currentCountryCode }
       : {}),
   });
-
-  /**
-   * onBlur focus handling
-   */
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(containerRef, () => setIsFocused(false));
 
   /**
    * Show suggestions side effect
@@ -75,7 +68,7 @@ const useLocationSearchContext = (props: LocationSearchInputProps) => {
 export const LocationSearchProvider = ({
   children,
   ...props
-}: LocationSearchInputProps & { children: React.ReactNode }) => {
+}: LocationSearchProps & { children: React.ReactNode }) => {
   const value = useLocationSearchContext(props);
   return (
     <LocationSearchContext.Provider value={value}>

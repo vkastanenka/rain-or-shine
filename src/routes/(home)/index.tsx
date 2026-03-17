@@ -3,7 +3,7 @@ import { Text, Section, FlexCol, Grid, Flex, Button } from "@/components";
 import { formatWeatherUrlPath, LocalityCard } from "@/features";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
-import { LocationSearch } from "@/features/weather-forecast/components/inputs/location-search-input/LocationSearch";
+import { LocationSearch } from "@/features";
 
 export const Route = createFileRoute("/(home)/")({
   loader: routeLoader,
