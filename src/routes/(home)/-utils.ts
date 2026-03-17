@@ -1,7 +1,6 @@
 import {
   getLocalityCardProps,
   getLocationCardProps,
-  getRecentLocations,
   type LocalityCardProps,
   type ValidWeatherPathLocation,
 } from "@/features";
@@ -11,7 +10,7 @@ import {
   getForecastByCoordsOptions,
   getLocalityByCoordsOptions,
 } from "@/services";
-import { type RouterContext } from "@/types";
+import type { RootRouterContext } from "../__root";
 
 export const getForecastByCoordsParams = (
   place?: Locality | ValidWeatherPathLocation,
@@ -26,9 +25,13 @@ export const getForecastByCoordsParams = (
     : undefined;
 };
 
-export const routeLoader = async ({ context }: { context: RouterContext }) => {
+export const routeLoader = async ({
+  context,
+}: {
+  context: RootRouterContext;
+}) => {
   const queryClient = context.queryClient;
-  const recentLocations = getRecentLocations();
+  const recentLocations = context.storage.local.get("recentLocations");
 
   // 1. Fetch current locality first as it is often the primary data point
   const currentLocality = await queryClient
@@ -56,7 +59,7 @@ export const routeLoader = async ({ context }: { context: RouterContext }) => {
   // 3. Handle Recent Locations (Parallelized)
   let recentLocationsCardParams: LocalityCardProps[] = [];
 
-  if (recentLocations?.length > 0) {
+  if (recentLocations && recentLocations?.length > 0) {
     // Taking the first 2 as "most recent" based on your .slice logic intent
     const mostRecentLocations = recentLocations.slice(0, 2);
 

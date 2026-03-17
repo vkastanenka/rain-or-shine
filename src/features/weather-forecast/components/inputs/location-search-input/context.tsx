@@ -1,11 +1,7 @@
 import { createContext, useContext, useState, useRef } from "react";
 import { useDebounce, useOnClickOutside } from "@/hooks";
 import { useGetLocalityByCoords, useGetLocationsByName } from "@/services";
-import {
-  useShowSuggestions,
-  useGetRecentLocations,
-  useFilterResults,
-} from "./hooks";
+import { useShowSuggestions } from "./hooks";
 import type { LocationSearchInputProps } from "./types";
 
 const LocationSearchContext = createContext<ReturnType<
@@ -39,17 +35,6 @@ const useLocationSearchContext = (props: LocationSearchInputProps) => {
       : {}),
   });
 
-  // TODO: Move to upper context
-  const results = useFilterResults(data?.results || []);
-
-  /**
-   * Get recent locations and remove logic
-   * TODO: Move to context?
-   */
-
-  const { locations: recentLocations, refresh: refreshRecentLocations } =
-    useGetRecentLocations(listIsOpen);
-
   /**
    * onBlur focus handling
    */
@@ -80,10 +65,8 @@ const useLocationSearchContext = (props: LocationSearchInputProps) => {
     setListIsOpen,
     scopeIsGlobal,
     setScopeIsGlobal,
-    results,
+    results: data?.results,
     isLoading,
-    recentLocations,
-    refreshRecentLocations,
     currentCountryCode,
     setSearchCount,
   };

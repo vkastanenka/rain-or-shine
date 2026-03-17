@@ -19,7 +19,7 @@ export const getLocationsByNameOptions = (params: GetLocationsByNameParams) => {
       const { results, ...rest } = data;
       return {
         ...rest,
-        locations: results.filter(locationHasValidPath),
+        results: results.filter(locationHasValidPath),
       };
     },
     staleTime: 1000 * 60 * 5,

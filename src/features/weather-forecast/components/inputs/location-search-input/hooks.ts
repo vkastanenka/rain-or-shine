@@ -1,24 +1,5 @@
-import { useEffect, useState } from "react";
-import { type Location } from "@/services";
-import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types";
-import { getRecentLocations } from "@/features/weather-forecast/utils";
-
-// TODO: Move to root
-export const useGetRecentLocations = (listIsOpen: boolean) => {
-  const [locations, setLocations] = useState<ValidWeatherPathLocation[]>([]);
-
-  const refresh = () => {
-    setLocations(getRecentLocations());
-  };
-
-  useEffect(() => {
-    if (listIsOpen) {
-      refresh();
-    }
-  }, [listIsOpen]);
-
-  return { locations, refresh };
-};
+import { useEffect } from "react";
+import { STORAGE_KEY_MAP, useStorage, type Location } from "@/services";
 
 // TODO: Determine better implementation
 export const useIncreaseSearchCount = ({
@@ -60,16 +41,19 @@ export const useShowSuggestions = ({
   openFn: () => void;
   closeFn: () => void;
 }) => {
-  const recentLocations = getRecentLocations();
+  const [recentLocations] = useStorage(STORAGE_KEY_MAP.recentLocations);
+  const recentLocationsLength =
+    recentLocations && recentLocations.length > 0 ? recentLocations.length : 0;
+
   useEffect(() => {
     if (
       isFocused &&
       ((query.length > 0 && debouncedQuery.length > 0) ||
-        recentLocations.length > 0)
+        recentLocationsLength > 0)
     ) {
       openFn();
       return;
     }
     closeFn();
-  }, [isFocused, query, debouncedQuery, recentLocations.length]);
+  }, [isFocused, query, debouncedQuery, recentLocationsLength]);
 };

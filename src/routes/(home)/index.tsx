@@ -14,7 +14,7 @@ function RouteComponent() {
   const {
     currentLocality,
     currentLocalityCardParams,
-    recentLocations,
+    // recentLocations,
     recentLocationsCardParams,
   } = Route.useLoaderData();
 
@@ -70,7 +70,7 @@ function RouteComponent() {
                   </FlexCol>
                 </Grid.Item>
               )}
-              {recentLocationsCardParams.length > 0 && (
+              {/* {recentLocationsCardParams.length > 0 && (
                 <Grid.Item
                   span={{
                     base: 1,
@@ -118,7 +118,7 @@ function RouteComponent() {
                     </Flex>
                   </FlexCol>
                 </Grid.Item>
-              )}
+              )} */}
             </Grid>
           )}
         </FlexCol>

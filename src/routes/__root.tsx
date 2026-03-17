@@ -4,7 +4,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { Navbar } from "@/components";
 import { local, session } from "@/services";
 
-interface RootRouterContext {
+export interface RootRouterContext {
   queryClient: QueryClient;
   storage: {
     local: typeof local;

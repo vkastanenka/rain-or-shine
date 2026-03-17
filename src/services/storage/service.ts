@@ -18,6 +18,15 @@ const createStorageManager = (engine: globalThis.Storage) => ({
     window.dispatchEvent(new StorageEvent("storage", { key: fullKey }));
   },
 
+  update: <K extends StorageKey>(
+    key: K,
+    updater: (prev: Storage[K] | undefined) => Storage[K],
+  ): void => {
+    const current = createStorageManager(engine).get(key);
+    const next = updater(current);
+    createStorageManager(engine).set(key, next);
+  },
+
   remove: (key: StorageKey): void => {
     engine.removeItem(`${PREFIX}${key}`);
     window.dispatchEvent(

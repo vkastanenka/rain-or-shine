@@ -3,17 +3,14 @@ import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
 import { FaTimes } from "react-icons/fa";
 import { Button, FlexCol, FlexRow, Text } from "@/components";
-import {
-  deleteRecentLocations,
-  formatWeatherUrlPath,
-} from "@/features/weather-forecast/utils";
+import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
 import { LocationSearchFlag } from "./LocationSearchFlag";
 import { LABELS } from "./constants";
 import { type LocationSearchSuggestionsLinkProps } from "./types";
 import { cn } from "@/utils";
-import { saveRecentLocation } from "@/features/weather-forecast/utils";
 import { useLocationSearch } from "./context";
+import { useStorage, STORAGE_KEY_MAP, useSaveRecentLocation } from "@/services";
 
 const HEADER_PADDING = "p-4";
 const HEADER_BG_COLOR = "bg-neutral";
@@ -22,6 +19,7 @@ export const LocationLinks = ({
   results,
 }: LocationSearchSuggestionsLinkProps) => {
   const { setListIsOpen } = useLocationSearch();
+  const { mutate: saveRecent } = useSaveRecentLocation();
   return (
     <>
       {results.map((loc) => (
@@ -35,7 +33,7 @@ export const LocationLinks = ({
           )}
           className="input-suggestions-link"
           onClick={() => {
-            saveRecentLocation(loc);
+            saveRecent(loc);
             setListIsOpen(false);
           }}
         >
@@ -52,7 +50,9 @@ export const LocationLinks = ({
 };
 
 const RecentLocations = () => {
-  const { recentLocations, refreshRecentLocations } = useLocationSearch();
+  const [recentLocations, setRecentLocations] = useStorage(
+    STORAGE_KEY_MAP.recentLocations,
+  );
 
   return recentLocations && recentLocations.length > 0 ? (
     <FlexCol>
@@ -64,13 +64,7 @@ const RecentLocations = () => {
         className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}
       >
         <Text>{LABELS.recentLocations}</Text>
-        <Button
-          shape="circle"
-          onClick={() => {
-            refreshRecentLocations();
-            deleteRecentLocations();
-          }}
-        >
+        <Button shape="circle" onClick={() => setRecentLocations([])}>
           <FaTimes />
         </Button>
       </FlexRow>
