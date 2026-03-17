@@ -19,7 +19,9 @@
     /* Path aliasing */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@erikflowers-weather-icons": ["./src/assets/icons/erikflowers-weather-icons"],
+      "@meteocons": ["./src/assets/icons/meteocons"]
     },
 
     /* Linting */

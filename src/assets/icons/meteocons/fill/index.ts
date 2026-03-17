@@ -1,367 +1,367 @@
 import { IconWrapper } from '@/components';
 
 import BarometerRaw from './barometer.svg?react';
-export const Barometer = IconWrapper(BarometerRaw);
+export const BarometerFill = IconWrapper(BarometerRaw);
 
 import CelsiusRaw from './celsius.svg?react';
-export const Celsius = IconWrapper(CelsiusRaw);
+export const CelsiusFill = IconWrapper(CelsiusRaw);
 
 import ClearDayRaw from './clear-day.svg?react';
-export const ClearDay = IconWrapper(ClearDayRaw);
+export const ClearDayFill = IconWrapper(ClearDayRaw);
 
 import ClearNightRaw from './clear-night.svg?react';
-export const ClearNight = IconWrapper(ClearNightRaw);
+export const ClearNightFill = IconWrapper(ClearNightRaw);
 
 import CloudyRaw from './cloudy.svg?react';
-export const Cloudy = IconWrapper(CloudyRaw);
+export const CloudyFill = IconWrapper(CloudyRaw);
 
 import CompassRaw from './compass.svg?react';
-export const Compass = IconWrapper(CompassRaw);
+export const CompassFill = IconWrapper(CompassRaw);
 
 import DrizzleRaw from './drizzle.svg?react';
-export const Drizzle = IconWrapper(DrizzleRaw);
+export const DrizzleFill = IconWrapper(DrizzleRaw);
 
 import DustDayRaw from './dust-day.svg?react';
-export const DustDay = IconWrapper(DustDayRaw);
+export const DustDayFill = IconWrapper(DustDayRaw);
 
 import DustNightRaw from './dust-night.svg?react';
-export const DustNight = IconWrapper(DustNightRaw);
+export const DustNightFill = IconWrapper(DustNightRaw);
 
 import DustWindRaw from './dust-wind.svg?react';
-export const DustWind = IconWrapper(DustWindRaw);
+export const DustWindFill = IconWrapper(DustWindRaw);
 
 import DustRaw from './dust.svg?react';
-export const Dust = IconWrapper(DustRaw);
+export const DustFill = IconWrapper(DustRaw);
 
 import FahrenheitRaw from './fahrenheit.svg?react';
-export const Fahrenheit = IconWrapper(FahrenheitRaw);
+export const FahrenheitFill = IconWrapper(FahrenheitRaw);
 
 import FallingStarsRaw from './falling-stars.svg?react';
-export const FallingStars = IconWrapper(FallingStarsRaw);
+export const FallingStarsFill = IconWrapper(FallingStarsRaw);
 
 import FogDayRaw from './fog-day.svg?react';
-export const FogDay = IconWrapper(FogDayRaw);
+export const FogDayFill = IconWrapper(FogDayRaw);
 
 import FogNightRaw from './fog-night.svg?react';
-export const FogNight = IconWrapper(FogNightRaw);
+export const FogNightFill = IconWrapper(FogNightRaw);
 
 import FogRaw from './fog.svg?react';
-export const Fog = IconWrapper(FogRaw);
+export const FogFill = IconWrapper(FogRaw);
 
 import HailRaw from './hail.svg?react';
-export const Hail = IconWrapper(HailRaw);
+export const HailFill = IconWrapper(HailRaw);
 
 import HazeDayRaw from './haze-day.svg?react';
-export const HazeDay = IconWrapper(HazeDayRaw);
+export const HazeDayFill = IconWrapper(HazeDayRaw);
 
 import HazeNightRaw from './haze-night.svg?react';
-export const HazeNight = IconWrapper(HazeNightRaw);
+export const HazeNightFill = IconWrapper(HazeNightRaw);
 
 import HazeRaw from './haze.svg?react';
-export const Haze = IconWrapper(HazeRaw);
+export const HazeFill = IconWrapper(HazeRaw);
 
 import HorizonRaw from './horizon.svg?react';
-export const Horizon = IconWrapper(HorizonRaw);
+export const HorizonFill = IconWrapper(HorizonRaw);
 
 import HumidityRaw from './humidity.svg?react';
-export const Humidity = IconWrapper(HumidityRaw);
+export const HumidityFill = IconWrapper(HumidityRaw);
 
 import HurricaneRaw from './hurricane.svg?react';
-export const Hurricane = IconWrapper(HurricaneRaw);
+export const HurricaneFill = IconWrapper(HurricaneRaw);
 
 import LightningBoltRaw from './lightning-bolt.svg?react';
-export const LightningBolt = IconWrapper(LightningBoltRaw);
+export const LightningBoltFill = IconWrapper(LightningBoltRaw);
 
 import MistRaw from './mist.svg?react';
-export const Mist = IconWrapper(MistRaw);
+export const MistFill = IconWrapper(MistRaw);
 
 import MoonFirstQuarterRaw from './moon-first-quarter.svg?react';
-export const MoonFirstQuarter = IconWrapper(MoonFirstQuarterRaw);
+export const MoonFirstQuarterFill = IconWrapper(MoonFirstQuarterRaw);
 
 import MoonFullRaw from './moon-full.svg?react';
-export const MoonFull = IconWrapper(MoonFullRaw);
+export const MoonFullFill = IconWrapper(MoonFullRaw);
 
 import MoonLastQuarterRaw from './moon-last-quarter.svg?react';
-export const MoonLastQuarter = IconWrapper(MoonLastQuarterRaw);
+export const MoonLastQuarterFill = IconWrapper(MoonLastQuarterRaw);
 
 import MoonNewRaw from './moon-new.svg?react';
-export const MoonNew = IconWrapper(MoonNewRaw);
+export const MoonNewFill = IconWrapper(MoonNewRaw);
 
 import MoonWaningCrescentRaw from './moon-waning-crescent.svg?react';
-export const MoonWaningCrescent = IconWrapper(MoonWaningCrescentRaw);
+export const MoonWaningCrescentFill = IconWrapper(MoonWaningCrescentRaw);
 
 import MoonWaningGibbousRaw from './moon-waning-gibbous.svg?react';
-export const MoonWaningGibbous = IconWrapper(MoonWaningGibbousRaw);
+export const MoonWaningGibbousFill = IconWrapper(MoonWaningGibbousRaw);
 
 import MoonWaxingCrescentRaw from './moon-waxing-crescent.svg?react';
-export const MoonWaxingCrescent = IconWrapper(MoonWaxingCrescentRaw);
+export const MoonWaxingCrescentFill = IconWrapper(MoonWaxingCrescentRaw);
 
 import MoonWaxingGibbousRaw from './moon-waxing-gibbous.svg?react';
-export const MoonWaxingGibbous = IconWrapper(MoonWaxingGibbousRaw);
+export const MoonWaxingGibbousFill = IconWrapper(MoonWaxingGibbousRaw);
 
 import MoonriseRaw from './moonrise.svg?react';
-export const Moonrise = IconWrapper(MoonriseRaw);
+export const MoonriseFill = IconWrapper(MoonriseRaw);
 
 import MoonsetRaw from './moonset.svg?react';
-export const Moonset = IconWrapper(MoonsetRaw);
+export const MoonsetFill = IconWrapper(MoonsetRaw);
 
 import NotAvailableRaw from './not-available.svg?react';
-export const NotAvailable = IconWrapper(NotAvailableRaw);
+export const NotAvailableFill = IconWrapper(NotAvailableRaw);
 
 import OvercastDayRaw from './overcast-day.svg?react';
-export const OvercastDay = IconWrapper(OvercastDayRaw);
+export const OvercastDayFill = IconWrapper(OvercastDayRaw);
 
 import OvercastNightRaw from './overcast-night.svg?react';
-export const OvercastNight = IconWrapper(OvercastNightRaw);
+export const OvercastNightFill = IconWrapper(OvercastNightRaw);
 
 import OvercastRaw from './overcast.svg?react';
-export const Overcast = IconWrapper(OvercastRaw);
+export const OvercastFill = IconWrapper(OvercastRaw);
 
 import PartlyCloudyDayDrizzleRaw from './partly-cloudy-day-drizzle.svg?react';
-export const PartlyCloudyDayDrizzle = IconWrapper(PartlyCloudyDayDrizzleRaw);
+export const PartlyCloudyDayDrizzleFill = IconWrapper(PartlyCloudyDayDrizzleRaw);
 
 import PartlyCloudyDayFogRaw from './partly-cloudy-day-fog.svg?react';
-export const PartlyCloudyDayFog = IconWrapper(PartlyCloudyDayFogRaw);
+export const PartlyCloudyDayFogFill = IconWrapper(PartlyCloudyDayFogRaw);
 
 import PartlyCloudyDayHailRaw from './partly-cloudy-day-hail.svg?react';
-export const PartlyCloudyDayHail = IconWrapper(PartlyCloudyDayHailRaw);
+export const PartlyCloudyDayHailFill = IconWrapper(PartlyCloudyDayHailRaw);
 
 import PartlyCloudyDayHazeRaw from './partly-cloudy-day-haze.svg?react';
-export const PartlyCloudyDayHaze = IconWrapper(PartlyCloudyDayHazeRaw);
+export const PartlyCloudyDayHazeFill = IconWrapper(PartlyCloudyDayHazeRaw);
 
 import PartlyCloudyDayRainRaw from './partly-cloudy-day-rain.svg?react';
-export const PartlyCloudyDayRain = IconWrapper(PartlyCloudyDayRainRaw);
+export const PartlyCloudyDayRainFill = IconWrapper(PartlyCloudyDayRainRaw);
 
 import PartlyCloudyDaySleetRaw from './partly-cloudy-day-sleet.svg?react';
-export const PartlyCloudyDaySleet = IconWrapper(PartlyCloudyDaySleetRaw);
+export const PartlyCloudyDaySleetFill = IconWrapper(PartlyCloudyDaySleetRaw);
 
 import PartlyCloudyDaySmokeRaw from './partly-cloudy-day-smoke.svg?react';
-export const PartlyCloudyDaySmoke = IconWrapper(PartlyCloudyDaySmokeRaw);
+export const PartlyCloudyDaySmokeFill = IconWrapper(PartlyCloudyDaySmokeRaw);
 
 import PartlyCloudyDaySnowRaw from './partly-cloudy-day-snow.svg?react';
-export const PartlyCloudyDaySnow = IconWrapper(PartlyCloudyDaySnowRaw);
+export const PartlyCloudyDaySnowFill = IconWrapper(PartlyCloudyDaySnowRaw);
 
 import PartlyCloudyDayRaw from './partly-cloudy-day.svg?react';
-export const PartlyCloudyDay = IconWrapper(PartlyCloudyDayRaw);
+export const PartlyCloudyDayFill = IconWrapper(PartlyCloudyDayRaw);
 
 import PartlyCloudyNightDrizzleRaw from './partly-cloudy-night-drizzle.svg?react';
-export const PartlyCloudyNightDrizzle = IconWrapper(PartlyCloudyNightDrizzleRaw);
+export const PartlyCloudyNightDrizzleFill = IconWrapper(PartlyCloudyNightDrizzleRaw);
 
 import PartlyCloudyNightFogRaw from './partly-cloudy-night-fog.svg?react';
-export const PartlyCloudyNightFog = IconWrapper(PartlyCloudyNightFogRaw);
+export const PartlyCloudyNightFogFill = IconWrapper(PartlyCloudyNightFogRaw);
 
 import PartlyCloudyNightHailRaw from './partly-cloudy-night-hail.svg?react';
-export const PartlyCloudyNightHail = IconWrapper(PartlyCloudyNightHailRaw);
+export const PartlyCloudyNightHailFill = IconWrapper(PartlyCloudyNightHailRaw);
 
 import PartlyCloudyNightHazeRaw from './partly-cloudy-night-haze.svg?react';
-export const PartlyCloudyNightHaze = IconWrapper(PartlyCloudyNightHazeRaw);
+export const PartlyCloudyNightHazeFill = IconWrapper(PartlyCloudyNightHazeRaw);
 
 import PartlyCloudyNightRainRaw from './partly-cloudy-night-rain.svg?react';
-export const PartlyCloudyNightRain = IconWrapper(PartlyCloudyNightRainRaw);
+export const PartlyCloudyNightRainFill = IconWrapper(PartlyCloudyNightRainRaw);
 
 import PartlyCloudyNightSleetRaw from './partly-cloudy-night-sleet.svg?react';
-export const PartlyCloudyNightSleet = IconWrapper(PartlyCloudyNightSleetRaw);
+export const PartlyCloudyNightSleetFill = IconWrapper(PartlyCloudyNightSleetRaw);
 
 import PartlyCloudyNightSmokeRaw from './partly-cloudy-night-smoke.svg?react';
-export const PartlyCloudyNightSmoke = IconWrapper(PartlyCloudyNightSmokeRaw);
+export const PartlyCloudyNightSmokeFill = IconWrapper(PartlyCloudyNightSmokeRaw);
 
 import PartlyCloudyNightSnowRaw from './partly-cloudy-night-snow.svg?react';
-export const PartlyCloudyNightSnow = IconWrapper(PartlyCloudyNightSnowRaw);
+export const PartlyCloudyNightSnowFill = IconWrapper(PartlyCloudyNightSnowRaw);
 
 import PartlyCloudyNightRaw from './partly-cloudy-night.svg?react';
-export const PartlyCloudyNight = IconWrapper(PartlyCloudyNightRaw);
+export const PartlyCloudyNightFill = IconWrapper(PartlyCloudyNightRaw);
 
 import PressureHighAltRaw from './pressure-high-alt.svg?react';
-export const PressureHighAlt = IconWrapper(PressureHighAltRaw);
+export const PressureHighAltFill = IconWrapper(PressureHighAltRaw);
 
 import PressureHighRaw from './pressure-high.svg?react';
-export const PressureHigh = IconWrapper(PressureHighRaw);
+export const PressureHighFill = IconWrapper(PressureHighRaw);
 
 import PressureLowAltRaw from './pressure-low-alt.svg?react';
-export const PressureLowAlt = IconWrapper(PressureLowAltRaw);
+export const PressureLowAltFill = IconWrapper(PressureLowAltRaw);
 
 import PressureLowRaw from './pressure-low.svg?react';
-export const PressureLow = IconWrapper(PressureLowRaw);
+export const PressureLowFill = IconWrapper(PressureLowRaw);
 
 import RainRaw from './rain.svg?react';
-export const Rain = IconWrapper(RainRaw);
+export const RainFill = IconWrapper(RainRaw);
 
 import RaindropRaw from './raindrop.svg?react';
-export const Raindrop = IconWrapper(RaindropRaw);
+export const RaindropFill = IconWrapper(RaindropRaw);
 
 import RaindropsRaw from './raindrops.svg?react';
-export const Raindrops = IconWrapper(RaindropsRaw);
+export const RaindropsFill = IconWrapper(RaindropsRaw);
 
 import SleetRaw from './sleet.svg?react';
-export const Sleet = IconWrapper(SleetRaw);
+export const SleetFill = IconWrapper(SleetRaw);
 
 import SmokeParticlesRaw from './smoke-particles.svg?react';
-export const SmokeParticles = IconWrapper(SmokeParticlesRaw);
+export const SmokeParticlesFill = IconWrapper(SmokeParticlesRaw);
 
 import SmokeRaw from './smoke.svg?react';
-export const Smoke = IconWrapper(SmokeRaw);
+export const SmokeFill = IconWrapper(SmokeRaw);
 
 import SnowRaw from './snow.svg?react';
-export const Snow = IconWrapper(SnowRaw);
+export const SnowFill = IconWrapper(SnowRaw);
 
 import SnowflakeRaw from './snowflake.svg?react';
-export const Snowflake = IconWrapper(SnowflakeRaw);
+export const SnowflakeFill = IconWrapper(SnowflakeRaw);
 
 import SolarEclipseRaw from './solar-eclipse.svg?react';
-export const SolarEclipse = IconWrapper(SolarEclipseRaw);
+export const SolarEclipseFill = IconWrapper(SolarEclipseRaw);
 
 import StarRaw from './star.svg?react';
-export const Star = IconWrapper(StarRaw);
+export const StarFill = IconWrapper(StarRaw);
 
 import StarryNightRaw from './starry-night.svg?react';
-export const StarryNight = IconWrapper(StarryNightRaw);
+export const StarryNightFill = IconWrapper(StarryNightRaw);
 
 import SunriseRaw from './sunrise.svg?react';
-export const Sunrise = IconWrapper(SunriseRaw);
+export const SunriseFill = IconWrapper(SunriseRaw);
 
 import SunsetRaw from './sunset.svg?react';
-export const Sunset = IconWrapper(SunsetRaw);
+export const SunsetFill = IconWrapper(SunsetRaw);
 
 import ThermometerCelsiusRaw from './thermometer-celsius.svg?react';
-export const ThermometerCelsius = IconWrapper(ThermometerCelsiusRaw);
+export const ThermometerCelsiusFill = IconWrapper(ThermometerCelsiusRaw);
 
 import ThermometerColderRaw from './thermometer-colder.svg?react';
-export const ThermometerColder = IconWrapper(ThermometerColderRaw);
+export const ThermometerColderFill = IconWrapper(ThermometerColderRaw);
 
 import ThermometerFahrenheitRaw from './thermometer-fahrenheit.svg?react';
-export const ThermometerFahrenheit = IconWrapper(ThermometerFahrenheitRaw);
+export const ThermometerFahrenheitFill = IconWrapper(ThermometerFahrenheitRaw);
 
 import ThermometerGlassCelsiusRaw from './thermometer-glass-celsius.svg?react';
-export const ThermometerGlassCelsius = IconWrapper(ThermometerGlassCelsiusRaw);
+export const ThermometerGlassCelsiusFill = IconWrapper(ThermometerGlassCelsiusRaw);
 
 import ThermometerGlassFahrenheitRaw from './thermometer-glass-fahrenheit.svg?react';
-export const ThermometerGlassFahrenheit = IconWrapper(ThermometerGlassFahrenheitRaw);
+export const ThermometerGlassFahrenheitFill = IconWrapper(ThermometerGlassFahrenheitRaw);
 
 import ThermometerGlassRaw from './thermometer-glass.svg?react';
-export const ThermometerGlass = IconWrapper(ThermometerGlassRaw);
+export const ThermometerGlassFill = IconWrapper(ThermometerGlassRaw);
 
 import ThermometerMercuryColdRaw from './thermometer-mercury-cold.svg?react';
-export const ThermometerMercuryCold = IconWrapper(ThermometerMercuryColdRaw);
+export const ThermometerMercuryColdFill = IconWrapper(ThermometerMercuryColdRaw);
 
 import ThermometerMercuryRaw from './thermometer-mercury.svg?react';
-export const ThermometerMercury = IconWrapper(ThermometerMercuryRaw);
+export const ThermometerMercuryFill = IconWrapper(ThermometerMercuryRaw);
 
 import ThermometerWarmerRaw from './thermometer-warmer.svg?react';
-export const ThermometerWarmer = IconWrapper(ThermometerWarmerRaw);
+export const ThermometerWarmerFill = IconWrapper(ThermometerWarmerRaw);
 
 import ThermometerRaw from './thermometer.svg?react';
-export const Thermometer = IconWrapper(ThermometerRaw);
+export const ThermometerFill = IconWrapper(ThermometerRaw);
 
 import ThunderstormsDayRainRaw from './thunderstorms-day-rain.svg?react';
-export const ThunderstormsDayRain = IconWrapper(ThunderstormsDayRainRaw);
+export const ThunderstormsDayRainFill = IconWrapper(ThunderstormsDayRainRaw);
 
 import ThunderstormsDaySnowRaw from './thunderstorms-day-snow.svg?react';
-export const ThunderstormsDaySnow = IconWrapper(ThunderstormsDaySnowRaw);
+export const ThunderstormsDaySnowFill = IconWrapper(ThunderstormsDaySnowRaw);
 
 import ThunderstormsDayRaw from './thunderstorms-day.svg?react';
-export const ThunderstormsDay = IconWrapper(ThunderstormsDayRaw);
+export const ThunderstormsDayFill = IconWrapper(ThunderstormsDayRaw);
 
 import ThunderstormsNightRainRaw from './thunderstorms-night-rain.svg?react';
-export const ThunderstormsNightRain = IconWrapper(ThunderstormsNightRainRaw);
+export const ThunderstormsNightRainFill = IconWrapper(ThunderstormsNightRainRaw);
 
 import ThunderstormsNightSnowRaw from './thunderstorms-night-snow.svg?react';
-export const ThunderstormsNightSnow = IconWrapper(ThunderstormsNightSnowRaw);
+export const ThunderstormsNightSnowFill = IconWrapper(ThunderstormsNightSnowRaw);
 
 import ThunderstormsNightRaw from './thunderstorms-night.svg?react';
-export const ThunderstormsNight = IconWrapper(ThunderstormsNightRaw);
+export const ThunderstormsNightFill = IconWrapper(ThunderstormsNightRaw);
 
 import ThunderstormsRainRaw from './thunderstorms-rain.svg?react';
-export const ThunderstormsRain = IconWrapper(ThunderstormsRainRaw);
+export const ThunderstormsRainFill = IconWrapper(ThunderstormsRainRaw);
 
 import ThunderstormsSnowRaw from './thunderstorms-snow.svg?react';
-export const ThunderstormsSnow = IconWrapper(ThunderstormsSnowRaw);
+export const ThunderstormsSnowFill = IconWrapper(ThunderstormsSnowRaw);
 
 import ThunderstormsRaw from './thunderstorms.svg?react';
-export const Thunderstorms = IconWrapper(ThunderstormsRaw);
+export const ThunderstormsFill = IconWrapper(ThunderstormsRaw);
 
 import TornadoRaw from './tornado.svg?react';
-export const Tornado = IconWrapper(TornadoRaw);
+export const TornadoFill = IconWrapper(TornadoRaw);
 
 import UmbrellaRaw from './umbrella.svg?react';
-export const Umbrella = IconWrapper(UmbrellaRaw);
+export const UmbrellaFill = IconWrapper(UmbrellaRaw);
 
 import UvIndex1Raw from './uv-index-1.svg?react';
-export const UvIndex1 = IconWrapper(UvIndex1Raw);
+export const UvIndex1Fill = IconWrapper(UvIndex1Raw);
 
 import UvIndex10Raw from './uv-index-10.svg?react';
-export const UvIndex10 = IconWrapper(UvIndex10Raw);
+export const UvIndex10Fill = IconWrapper(UvIndex10Raw);
 
 import UvIndex11Raw from './uv-index-11.svg?react';
-export const UvIndex11 = IconWrapper(UvIndex11Raw);
+export const UvIndex11Fill = IconWrapper(UvIndex11Raw);
 
 import UvIndex2Raw from './uv-index-2.svg?react';
-export const UvIndex2 = IconWrapper(UvIndex2Raw);
+export const UvIndex2Fill = IconWrapper(UvIndex2Raw);
 
 import UvIndex3Raw from './uv-index-3.svg?react';
-export const UvIndex3 = IconWrapper(UvIndex3Raw);
+export const UvIndex3Fill = IconWrapper(UvIndex3Raw);
 
 import UvIndex4Raw from './uv-index-4.svg?react';
-export const UvIndex4 = IconWrapper(UvIndex4Raw);
+export const UvIndex4Fill = IconWrapper(UvIndex4Raw);
 
 import UvIndex5Raw from './uv-index-5.svg?react';
-export const UvIndex5 = IconWrapper(UvIndex5Raw);
+export const UvIndex5Fill = IconWrapper(UvIndex5Raw);
 
 import UvIndex6Raw from './uv-index-6.svg?react';
-export const UvIndex6 = IconWrapper(UvIndex6Raw);
+export const UvIndex6Fill = IconWrapper(UvIndex6Raw);
 
 import UvIndex7Raw from './uv-index-7.svg?react';
-export const UvIndex7 = IconWrapper(UvIndex7Raw);
+export const UvIndex7Fill = IconWrapper(UvIndex7Raw);
 
 import UvIndex8Raw from './uv-index-8.svg?react';
-export const UvIndex8 = IconWrapper(UvIndex8Raw);
+export const UvIndex8Fill = IconWrapper(UvIndex8Raw);
 
 import UvIndex9Raw from './uv-index-9.svg?react';
-export const UvIndex9 = IconWrapper(UvIndex9Raw);
+export const UvIndex9Fill = IconWrapper(UvIndex9Raw);
 
 import UvIndexRaw from './uv-index.svg?react';
-export const UvIndex = IconWrapper(UvIndexRaw);
+export const UvIndexFill = IconWrapper(UvIndexRaw);
 
 import WindBeaufort0Raw from './wind-beaufort-0.svg?react';
-export const WindBeaufort0 = IconWrapper(WindBeaufort0Raw);
+export const WindBeaufort0Fill = IconWrapper(WindBeaufort0Raw);
 
 import WindBeaufort1Raw from './wind-beaufort-1.svg?react';
-export const WindBeaufort1 = IconWrapper(WindBeaufort1Raw);
+export const WindBeaufort1Fill = IconWrapper(WindBeaufort1Raw);
 
 import WindBeaufort10Raw from './wind-beaufort-10.svg?react';
-export const WindBeaufort10 = IconWrapper(WindBeaufort10Raw);
+export const WindBeaufort10Fill = IconWrapper(WindBeaufort10Raw);
 
 import WindBeaufort11Raw from './wind-beaufort-11.svg?react';
-export const WindBeaufort11 = IconWrapper(WindBeaufort11Raw);
+export const WindBeaufort11Fill = IconWrapper(WindBeaufort11Raw);
 
 import WindBeaufort12Raw from './wind-beaufort-12.svg?react';
-export const WindBeaufort12 = IconWrapper(WindBeaufort12Raw);
+export const WindBeaufort12Fill = IconWrapper(WindBeaufort12Raw);
 
 import WindBeaufort2Raw from './wind-beaufort-2.svg?react';
-export const WindBeaufort2 = IconWrapper(WindBeaufort2Raw);
+export const WindBeaufort2Fill = IconWrapper(WindBeaufort2Raw);
 
 import WindBeaufort3Raw from './wind-beaufort-3.svg?react';
-export const WindBeaufort3 = IconWrapper(WindBeaufort3Raw);
+export const WindBeaufort3Fill = IconWrapper(WindBeaufort3Raw);
 
 import WindBeaufort4Raw from './wind-beaufort-4.svg?react';
-export const WindBeaufort4 = IconWrapper(WindBeaufort4Raw);
+export const WindBeaufort4Fill = IconWrapper(WindBeaufort4Raw);
 
 import WindBeaufort5Raw from './wind-beaufort-5.svg?react';
-export const WindBeaufort5 = IconWrapper(WindBeaufort5Raw);
+export const WindBeaufort5Fill = IconWrapper(WindBeaufort5Raw);
 
 import WindBeaufort6Raw from './wind-beaufort-6.svg?react';
-export const WindBeaufort6 = IconWrapper(WindBeaufort6Raw);
+export const WindBeaufort6Fill = IconWrapper(WindBeaufort6Raw);
 
 import WindBeaufort7Raw from './wind-beaufort-7.svg?react';
-export const WindBeaufort7 = IconWrapper(WindBeaufort7Raw);
+export const WindBeaufort7Fill = IconWrapper(WindBeaufort7Raw);
 
 import WindBeaufort8Raw from './wind-beaufort-8.svg?react';
-export const WindBeaufort8 = IconWrapper(WindBeaufort8Raw);
+export const WindBeaufort8Fill = IconWrapper(WindBeaufort8Raw);
 
 import WindBeaufort9Raw from './wind-beaufort-9.svg?react';
-export const WindBeaufort9 = IconWrapper(WindBeaufort9Raw);
+export const WindBeaufort9Fill = IconWrapper(WindBeaufort9Raw);
 
 import WindRaw from './wind.svg?react';
-export const Wind = IconWrapper(WindRaw);
+export const WindFill = IconWrapper(WindRaw);
 
 import WindsockRaw from './windsock.svg?react';
-export const Windsock = IconWrapper(WindsockRaw);
+export const WindsockFill = IconWrapper(WindsockRaw);

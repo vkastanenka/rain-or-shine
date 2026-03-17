@@ -2,10 +2,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
 import { FaTimes } from "react-icons/fa";
-import { Button, FlexCol, FlexRow, Text } from "@/components";
+import {
+  Button,
+  FlexCol,
+  FlexRow,
+  Text,
+  LazyCountryFlagIcon,
+  type CountryFlagIconName,
+} from "@/components";
 import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
 import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
-import { LocationSearchFlag } from "./LocationSearchFlag";
 import { LABELS } from "./constants";
 import { cn } from "@/utils";
 import { useLocationSearch } from "./context";
@@ -124,7 +130,9 @@ const SearchSuggestions = () => {
               scopeIsGlobal && setScopeIsGlobal((prevState) => !prevState)
             }
           >
-            <LocationSearchFlag code={currentCountryCode} />
+            <LazyCountryFlagIcon
+              name={currentCountryCode as CountryFlagIconName}
+            />
           </button>
           <button
             type="button"

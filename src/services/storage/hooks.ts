@@ -19,7 +19,7 @@ export const useStorage = <K extends StorageKey>(
   });
 
   const mutation = useMutation({
-    mutationFn: async (newValue: Storage[K]) => manager.set(key, newValue),
+    mutationFn: async (newValue: Storage[K]) => manager.set(key, newValue), // Want to set / remove undefined
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey });
     },
