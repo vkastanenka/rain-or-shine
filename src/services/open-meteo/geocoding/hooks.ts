@@ -6,6 +6,7 @@ import {
 import { queryKeys } from "./keys";
 import { geocodingService } from "./service";
 import { type GetLocationsByNameParams } from "./types";
+import { locationHasValidPath } from "./utils";
 
 export const getLocationsByNameOptions = (params: GetLocationsByNameParams) => {
   const searchTerm = params.name.trim();
@@ -14,6 +15,13 @@ export const getLocationsByNameOptions = (params: GetLocationsByNameParams) => {
     queryFn: ({ signal }) =>
       geocodingService.getLocationsByName(params, { signal }),
     enabled: searchTerm.length >= 2,
+    select: (data) => {
+      const { results, ...rest } = data;
+      return {
+        ...rest,
+        locations: results.filter(locationHasValidPath),
+      };
+    },
     staleTime: 1000 * 60 * 5,
     placeholderData: keepPreviousData,
   });

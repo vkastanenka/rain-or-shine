@@ -1,17 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { type Location } from "@/services";
 import { type ValidWeatherPathLocation } from "@/features/weather-forecast/types";
-import { locationHasValidPath } from "./utils";
 import { getRecentLocations } from "@/features/weather-forecast/utils";
-
-// TODO: Move to root
-export const useFilterResults = (
-  results: Location[],
-): ValidWeatherPathLocation[] => {
-  return useMemo(() => {
-    return results.filter(locationHasValidPath);
-  }, [results]);
-};
 
 // TODO: Move to root
 export const useGetRecentLocations = (listIsOpen: boolean) => {

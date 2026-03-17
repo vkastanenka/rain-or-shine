@@ -2,6 +2,16 @@ import { z } from "zod";
 import { LocationSchema, LocationsSchema } from "./schema";
 
 /**
+ * Utils
+ */
+
+export type ValidWeatherPathLocation = Location & {
+  country_code: string;
+  admin1: string;
+  name: string;
+};
+
+/**
  * Api Req Params
  */
 
