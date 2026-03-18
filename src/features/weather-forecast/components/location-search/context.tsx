@@ -22,17 +22,17 @@ const useLocationSearchContext = (props: LocationSearchProps) => {
    * Query state
    */
 
+  const defaultSearchCount = 20;
+  const maxSearchCount = 100;
   const { data: locality } = useGetLocalityByCoords();
-  const currentCountryCode = locality?.countryCode;
-  const [searchCount, setSearchCount] = useState(40); // TODO: See if we can improve
+  const countryCode = locality?.countryCode;
+  const [searchCount, setSearchCount] = useState(defaultSearchCount);
   const [scopeIsGlobal, setScopeIsGlobal] = useState(false);
 
   const { data, isLoading } = useGetLocationsByName({
     name: debouncedQuery,
     count: searchCount,
-    ...(currentCountryCode && !scopeIsGlobal
-      ? { countryCode: currentCountryCode }
-      : {}),
+    ...(countryCode && !scopeIsGlobal ? { countryCode } : {}),
   });
 
   /**
@@ -60,7 +60,10 @@ const useLocationSearchContext = (props: LocationSearchProps) => {
     setScopeIsGlobal,
     results: data?.results,
     isLoading,
-    currentCountryCode,
+    countryCode,
+    defaultSearchCount,
+    maxSearchCount,
+    searchCount,
     setSearchCount,
   };
 };

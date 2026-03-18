@@ -11,10 +11,19 @@ export const LocationSearchContainer = ({
   const {
     props: { className },
     setIsFocused,
+    defaultSearchCount,
+    maxSearchCount,
+    searchCount,
+    setSearchCount,
   } = useLocationSearch();
 
   const containerRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(containerRef, () => setIsFocused(false));
+  useOnClickOutside(containerRef, () => {
+    setIsFocused(false);
+    if (searchCount === maxSearchCount) {
+      setSearchCount(defaultSearchCount);
+    }
+  });
 
   return (
     <div ref={containerRef} className={cn("relative", "w-full", className)}>

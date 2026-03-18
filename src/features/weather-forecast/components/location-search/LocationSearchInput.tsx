@@ -8,6 +8,10 @@ export const LocationSearchInput = () => {
     query,
     setQuery,
     setIsFocused,
+    defaultSearchCount,
+    maxSearchCount,
+    searchCount,
+    setSearchCount,
   } = useLocationSearch();
 
   return (
@@ -17,9 +21,20 @@ export const LocationSearchInput = () => {
       size={size ?? { base: "lg", md: "xl" }}
       value={query}
       placeholder={LABELS.placeholder}
-      onChange={(e) => setQuery(e.target.value)}
+      onChange={(e) => {
+        setQuery(e.target.value);
+        if (searchCount === maxSearchCount) {
+          setSearchCount(defaultSearchCount);
+        }
+      }}
       onFocus={() => setIsFocused(true)}
-      onClear={() => setQuery("")}
+      onClear={() => {
+        setQuery("");
+        if (searchCount === maxSearchCount) {
+          setSearchCount(defaultSearchCount);
+        }
+        setIsFocused(false);
+      }}
     />
   );
 };

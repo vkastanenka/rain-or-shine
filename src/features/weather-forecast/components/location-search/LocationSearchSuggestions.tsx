@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaArrowRight } from "react-icons/fa";
 import {
   Button,
   FlexCol,
@@ -91,8 +91,12 @@ const SearchSuggestions = () => {
     debouncedQuery,
     isLoading,
     results,
-    currentCountryCode,
+    countryCode,
     scopeIsGlobal,
+    defaultSearchCount,
+    maxSearchCount,
+    searchCount,
+    setSearchCount,
     setScopeIsGlobal,
   } = useLocationSearch();
 
@@ -130,9 +134,7 @@ const SearchSuggestions = () => {
               scopeIsGlobal && setScopeIsGlobal((prevState) => !prevState)
             }
           >
-            <LazyCountryFlagIcon
-              name={currentCountryCode as CountryFlagIconName}
-            />
+            <LazyCountryFlagIcon name={countryCode as CountryFlagIconName} />
           </button>
           <button
             type="button"
@@ -154,8 +156,22 @@ const SearchSuggestions = () => {
       {results && results.length > 0 && debouncedQuery ? (
         <LocationLinks locations={results} />
       ) : (
-        <div className={cn("w-full", HEADER_PADDING, "py-7")}>
-          <Text>{!query ? LABELS.searchToFind : LABELS.noLocationsFound}</Text>
+        <div className="w-full">
+          <div className={cn("w-full", HEADER_PADDING, "py-7")}>
+            <Text>
+              {!query ? LABELS.searchToFind : LABELS.noLocationsFound}
+            </Text>
+          </div>
+          {query && debouncedQuery && searchCount === defaultSearchCount ? (
+            <Button
+              color="neutral"
+              onClick={() => setSearchCount(maxSearchCount)}
+              className={cn("w-full", HEADER_PADDING, "py-7", "rounded-none")}
+            >
+              {LABELS.expandSearchBreadth}
+              <FaArrowRight />
+            </Button>
+          ) : null}
         </div>
       )}
     </FlexCol>

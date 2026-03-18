@@ -82,7 +82,7 @@ export const LazyCountryFlagIcon = ({
   />
 );
 
-export const LazyReactIcon = ({ name, lib, className }: LazyReactIconProps) => (
+export const LazyReactIcon = ({ name, lib, ...props }: LazyReactIconProps) => (
   <LazyIconBase
     cacheKey={`ri-${lib}-${name}`}
     importFn={() =>
@@ -90,7 +90,7 @@ export const LazyReactIcon = ({ name, lib, className }: LazyReactIconProps) => (
         .then((module) => ({ default: module[name] }))
         .catch(defaultFallbackIconFn)
     }
-    className={className}
+    {...props}
   />
 );
 
@@ -106,14 +106,14 @@ export const LazyErikFlowersWeatherIcon = ({
         .then((module) => ({ default: module[name] }))
         .catch(defaultFallbackIconFn)
     }
-    className={`${className} fill-current`}
+    className={cn("fill-current", className)}
     {...props}
   />
 );
 
 export const LazyMeteoconIcon = ({ name, ...props }: LazyMeteoconIconProps) => (
   <LazyIconBase
-    cacheKey={`flag-${name}`}
+    cacheKey={`meteocon-${name}`}
     importFn={() =>
       import(`@meteocons`)
         .then((module) => ({ default: module[name] }))

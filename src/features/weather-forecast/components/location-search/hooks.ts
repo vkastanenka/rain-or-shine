@@ -1,32 +1,5 @@
 import { useEffect } from "react";
-import { STORAGE_KEY_MAP, useStorage, type Location } from "@/services";
-
-// TODO: Determine better implementation
-export const useIncreaseSearchCount = ({
-  debouncedQuery,
-  isLoading,
-  locationResults,
-  searchCount,
-  increaseSearchCountFn,
-  resetSearchCountFn,
-}: {
-  debouncedQuery: string;
-  isLoading: boolean;
-  locationResults?: Location[];
-  searchCount: number;
-  increaseSearchCountFn: () => void;
-  resetSearchCountFn: () => void;
-}) => {
-  useEffect(() => {
-    if (!isLoading && locationResults?.length === 0 && searchCount < 100) {
-      increaseSearchCountFn();
-    }
-  }, [locationResults, isLoading, searchCount]);
-
-  useEffect(() => {
-    resetSearchCountFn();
-  }, [debouncedQuery]);
-};
+import { STORAGE_KEY_MAP, useStorage } from "@/services";
 
 export const useShowSuggestions = ({
   query,
