@@ -1,18 +1,10 @@
 import { TextInput } from "@/components";
 import { LABELS } from "./constants";
-import { useLocationSearch } from "./context";
+import { useSearchState, useSearchActions } from "./hooks";
 
 export const LocationSearchInput = () => {
-  const {
-    props: { size },
-    query,
-    setQuery,
-    setIsFocused,
-    defaultSearchCount,
-    maxSearchCount,
-    searchCount,
-    setSearchCount,
-  } = useLocationSearch();
+  const { size, query } = useSearchState();
+  const { handleClear, handleQueryChange, setIsFocused } = useSearchActions();
 
   return (
     <TextInput
@@ -21,20 +13,9 @@ export const LocationSearchInput = () => {
       size={size ?? { base: "lg", md: "xl" }}
       value={query}
       placeholder={LABELS.placeholder}
-      onChange={(e) => {
-        setQuery(e.target.value);
-        if (searchCount === maxSearchCount) {
-          setSearchCount(defaultSearchCount);
-        }
-      }}
+      onChange={(e) => handleQueryChange(e.target.value)}
       onFocus={() => setIsFocused(true)}
-      onClear={() => {
-        setQuery("");
-        if (searchCount === maxSearchCount) {
-          setSearchCount(defaultSearchCount);
-        }
-        setIsFocused(false);
-      }}
+      onClear={handleClear}
     />
   );
 };
