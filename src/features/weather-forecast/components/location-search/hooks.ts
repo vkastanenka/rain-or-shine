@@ -5,6 +5,8 @@ import {
   useStorage,
   useGetLocalityByCoords,
   useGetLocationsByName,
+  useSaveRecentLocation,
+  type ValidWeatherPathLocation,
 } from "@/services";
 import { ERRORS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
 import { StateContext, ActionsContext } from "./context";
@@ -34,20 +36,26 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     count: queryCount,
     countryCode: queryScope === "local" ? locality?.countryCode : undefined,
   });
+  const locations = data?.results ?? []; // TODO: why is results undefined?
+  const hasLocations = locations.length > 0;
+  const isSettled = !isLoading && query === debouncedQuery;
+  const isEmpty = isSettled && !hasLocations;
 
   /**
-   * Recent locations state
+   * Recent locations
    */
 
-  const [recentLocations] = useStorage(STORAGE_KEY_MAP.recentLocations);
-  const recentLocationsLength = recentLocations?.length ?? 0;
+  const { mutate: saveRecentLocation } = useSaveRecentLocation(); // TODO: Handle better
+  const [recentLocations, setRecentLocations] = useStorage(
+    STORAGE_KEY_MAP.recentLocations,
+  );
+  const hasRecentLocations = recentLocations && recentLocations?.length > 0;
 
   /**
    * Suggestion list is open
    */
 
-  const listIsOpen =
-    isFocused && (query.length > 0 || recentLocationsLength > 0);
+  const isOpen = isFocused && (query.length > 0 || hasRecentLocations);
 
   /**
    * Utility functions
@@ -83,6 +91,14 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     handleBlur();
   }, [handleBlur]);
 
+  const handleSelectLocation = useCallback(
+    (location: ValidWeatherPathLocation) => {
+      saveRecentLocation(location);
+      handleClear();
+    },
+    [saveRecentLocation, handleClear],
+  );
+
   /**
    * State value
    */
@@ -104,15 +120,18 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       queryScope,
 
       // Query
-      results: data?.results ?? [],
+      locations,
+      hasLocations,
       isLoading,
+      isSettled,
+      isEmpty,
 
       // Recent locations state
       recentLocations,
-      recentLocationsLength,
+      hasRecentLocations,
 
-      // List state
-      listIsOpen,
+      // UI state
+      isOpen,
     }),
     [
       // Props
@@ -130,15 +149,18 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       queryScope,
 
       // Query
-      data?.results,
+      locations,
+      hasLocations,
       isLoading,
+      isSettled,
+      isEmpty,
 
       // Recent locations state
       recentLocations,
-      recentLocationsLength,
+      hasRecentLocations,
 
-      // List state
-      listIsOpen,
+      // UI state
+      isOpen,
     ],
   );
 
@@ -156,19 +178,23 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       setQueryScope,
 
       // Utility actions
+      setRecentLocations,
       handleQueryCountReset,
       handleQueryCountIncrease,
       handleQueryChange,
       handleBlur,
       handleClear,
+      handleSelectLocation,
     }),
     [
       // Utility actions
+      setRecentLocations,
       handleQueryCountReset,
       handleQueryCountIncrease,
       handleQueryChange,
       handleBlur,
       handleClear,
+      handleSelectLocation,
     ],
   );
 

@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "@tanstack/react-router";
 import { FcGlobe } from "react-icons/fc";
 import { FaTimes, FaArrowRight } from "react-icons/fa";
 import {
@@ -10,180 +9,183 @@ import {
   LazyCountryFlagIcon,
   type CountryFlagIconName,
 } from "@/components";
-import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
-import { FORECAST_PERIOD_MAP } from "@/features/weather-forecast/constants";
-import { LABELS } from "./constants";
 import { cn } from "@/utils";
-import { useLocationSearch } from "./context";
-import {
-  useStorage,
-  STORAGE_KEY_MAP,
-  useSaveRecentLocation,
-  type ValidWeatherPathLocation,
-} from "@/services";
+import { LocationLinkList } from "./LocationLinkList";
+import { LABELS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
+import { useSearchActions, useSearchState } from "./hooks";
+import type { QueryScopeMapValue } from "./types";
 
-const HEADER_PADDING = "p-4";
-const HEADER_BG_COLOR = "bg-neutral";
+const LIST_ITEM_PADDING_MAP = {
+  sm: "px-4 py-4",
+  lg: "px-4 py-7",
+} as const;
 
-export const LocationLinks = ({
-  locations,
+const SectionHeader = ({
+  label,
+  pad,
+  sticky,
+  className,
+  children,
 }: {
-  locations: ValidWeatherPathLocation[];
+  label: string;
+  pad?: keyof typeof LIST_ITEM_PADDING_MAP;
+  sticky?: boolean;
+  className?: string;
+  children?: React.ReactNode;
 }) => {
-  const { setListIsOpen } = useLocationSearch();
-  const { mutate: saveRecent } = useSaveRecentLocation();
+  const baseClasses = cn(
+    "bg-neutral",
+    "w-full",
+    LIST_ITEM_PADDING_MAP[pad ?? "sm"],
+    sticky && "sticky top-0 z-50",
+    className,
+  );
+
+  const Label = <Text>{label}</Text>;
+
+  if (!children) {
+    return <div className={cn(baseClasses)}>{Label}</div>;
+  }
+
   return (
-    <>
-      {locations.map((loc) => (
-        <Link
-          key={loc.id}
-          to={formatWeatherUrlPath(
-            loc.country_code,
-            loc.admin1,
-            loc.name,
-            FORECAST_PERIOD_MAP.current,
-          )}
-          className="input-suggestions-link"
-          onClick={() => {
-            saveRecent(loc);
-            setListIsOpen(false);
-          }}
-        >
-          <Text type="large" className="font-medium">
-            {loc.name}
-          </Text>
-          <Text className="opacity-70">
-            {loc.admin1}, {loc.country}
-          </Text>
-        </Link>
-      ))}
-    </>
+    <FlexRow
+      fit
+      gap={2}
+      align="center"
+      justify="between"
+      className={baseClasses}
+    >
+      {Label}
+      {children}
+    </FlexRow>
+  );
+};
+
+const ScopeButton = ({
+  scope,
+  isActive,
+  onClick,
+}: {
+  scope: QueryScopeMapValue;
+  isActive: boolean;
+  onClick: () => void;
+}) => {
+  const { locality } = useSearchState();
+
+  const Icon =
+    scope === "local" ? (
+      <LazyCountryFlagIcon
+        name={locality?.countryCode as CountryFlagIconName} // TODO: Handle better
+      />
+    ) : (
+      <FcGlobe />
+    );
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "tab transition-all",
+        isActive ? "tab-active" : "opacity-70 hover:opacity-100",
+      )}
+    >
+      {Icon}
+    </button>
+  );
+};
+
+const ScopeTabList = () => {
+  const { queryScope } = useSearchState();
+  const { setQueryScope } = useSearchActions();
+  return (
+    <div role="tablist" className="tabs tabs-box">
+      <ScopeButton
+        scope={QUERY_SCOPE_MAP.local}
+        isActive={queryScope === QUERY_SCOPE_MAP.local}
+        onClick={() => setQueryScope(QUERY_SCOPE_MAP.local)}
+      />
+      <ScopeButton
+        scope={QUERY_SCOPE_MAP.global}
+        isActive={queryScope === QUERY_SCOPE_MAP.global}
+        onClick={() => setQueryScope(QUERY_SCOPE_MAP.global)}
+      />
+    </div>
   );
 };
 
 const RecentLocations = () => {
-  const [recentLocations, setRecentLocations] = useStorage(
-    STORAGE_KEY_MAP.recentLocations,
-  );
+  const { recentLocations, hasRecentLocations } = useSearchState();
+  const { setRecentLocations } = useSearchActions();
 
-  return recentLocations && recentLocations.length > 0 ? (
+  if (!recentLocations || !hasRecentLocations) {
+    return null;
+  }
+
+  return (
     <FlexCol>
-      <FlexRow
-        fit
-        gap={2}
-        align="center"
-        justify="between"
-        className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR)}
-      >
-        <Text>{LABELS.recentLocations}</Text>
+      <SectionHeader label={LABELS.recentLocations}>
         <Button shape="circle" onClick={() => setRecentLocations([])}>
           <FaTimes />
         </Button>
-      </FlexRow>
-      <LocationLinks locations={recentLocations} />
+      </SectionHeader>
+      <LocationLinkList locations={recentLocations} />
     </FlexCol>
-  ) : null;
+  );
 };
 
-const SearchSuggestions = () => {
-  const {
-    query,
-    debouncedQuery,
-    isLoading,
-    results,
-    countryCode,
-    scopeIsGlobal,
-    defaultSearchCount,
-    maxSearchCount,
-    searchCount,
-    setSearchCount,
-    setScopeIsGlobal,
-  } = useLocationSearch();
+const LocationResultsStatus = () => {
+  const { queryCount, isEmpty } = useSearchState();
+  const { handleQueryCountIncrease } = useSearchActions();
 
-  return isLoading ? (
-    <div className={cn("w-full", HEADER_PADDING, HEADER_BG_COLOR, "py-7")}>
-      <Text>{LABELS.isLoadingMessage}</Text>
+  const canIncrease = queryCount === QUERY_COUNT_MAP.default;
+
+  return (
+    <div className="w-full">
+      <div className={LIST_ITEM_PADDING_MAP.lg}>
+        <Text>{isEmpty ? LABELS.noLocationsFound : LABELS.searchToFind}</Text>
+      </div>
+      {isEmpty && canIncrease && (
+        <Button
+          color="neutral"
+          onClick={handleQueryCountIncrease}
+          className={cn(LIST_ITEM_PADDING_MAP.lg, "w-full", "rounded-none")}
+        >
+          {LABELS.expandSearchBreadth}
+          <FaArrowRight />
+        </Button>
+      )}
     </div>
-  ) : (
+  );
+};
+
+const LocationResults = () => {
+  const { isLoading, hasLocations, locations } = useSearchState();
+
+  if (isLoading && !hasLocations) {
+    return <SectionHeader label={LABELS.isLoadingMessage} pad="lg" />;
+  }
+
+  return (
     <FlexCol>
-      <FlexRow
-        fit
-        gap={2}
-        align="center"
-        justify="between"
-        className={cn(
-          "sticky",
-          "top-0",
-          HEADER_PADDING,
-          HEADER_BG_COLOR,
-          "z-60",
-        )}
-      >
-        <Text>{LABELS.locations}</Text>
-        <div role="tablist" className="tabs tabs-box">
-          <button
-            type="button"
-            className={cn(
-              "tab",
-              !scopeIsGlobal && "tab-active",
-              scopeIsGlobal && "opacity-70",
-              scopeIsGlobal && "hover:opacity-100",
-              "transition-all",
-            )}
-            onClick={() =>
-              scopeIsGlobal && setScopeIsGlobal((prevState) => !prevState)
-            }
-          >
-            <LazyCountryFlagIcon name={countryCode as CountryFlagIconName} />
-          </button>
-          <button
-            type="button"
-            className={cn(
-              "tab",
-              scopeIsGlobal && "tab-active",
-              !scopeIsGlobal && "opacity-70",
-              !scopeIsGlobal && "hover:opacity-100",
-              "transition-all",
-            )}
-            onClick={() =>
-              !scopeIsGlobal && setScopeIsGlobal((prevState) => !prevState)
-            }
-          >
-            <FcGlobe />
-          </button>
-        </div>
-      </FlexRow>
-      {results && results.length > 0 && debouncedQuery ? (
-        <LocationLinks locations={results} />
+      <SectionHeader label={LABELS.locations} sticky>
+        <ScopeTabList />
+      </SectionHeader>
+      {hasLocations ? (
+        <LocationLinkList locations={locations} />
       ) : (
-        <div className="w-full">
-          <div className={cn("w-full", HEADER_PADDING, "py-7")}>
-            <Text>
-              {!query ? LABELS.searchToFind : LABELS.noLocationsFound}
-            </Text>
-          </div>
-          {query && debouncedQuery && searchCount === defaultSearchCount ? (
-            <Button
-              color="neutral"
-              onClick={() => setSearchCount(maxSearchCount)}
-              className={cn("w-full", HEADER_PADDING, "py-7", "rounded-none")}
-            >
-              {LABELS.expandSearchBreadth}
-              <FaArrowRight />
-            </Button>
-          ) : null}
-        </div>
+        <LocationResultsStatus />
       )}
     </FlexCol>
   );
 };
 
 export const LocationSearchSuggestions = () => {
-  const { listIsOpen } = useLocationSearch();
+  const { isOpen } = useSearchState();
 
   return (
     <AnimatePresence>
-      {listIsOpen && (
+      {isOpen && (
         <motion.div
           key="location-suggestions-panel"
           initial={{ height: 0, opacity: 0 }}
@@ -199,7 +201,7 @@ export const LocationSearchSuggestions = () => {
         >
           <motion.div layout="position">
             <RecentLocations />
-            <SearchSuggestions />
+            <LocationResults />
           </motion.div>
         </motion.div>
       )}
