@@ -6,7 +6,7 @@ import {
   useGetLocalityByCoords,
   useGetLocationsByName,
 } from "@/services";
-import { QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
+import { ERRORS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
 import { StateContext, ActionsContext } from "./context";
 import type { LocationSearchProps, QueryScopeMapValue } from "./types";
 
@@ -177,13 +177,12 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
 
 export const useSearchState = () => {
   const context = useContext(StateContext);
-  if (!context) throw new Error("useSearchState must be used within Provider");
+  if (!context) throw new Error(ERRORS.stateProviderHookMissingContext);
   return context;
 };
 
 export const useSearchActions = () => {
   const context = useContext(ActionsContext);
-  if (!context)
-    throw new Error("useSearchActions must be used within Provider");
+  if (!context) throw new Error(ERRORS.actionProviderHookMissingContext);
   return context;
 };

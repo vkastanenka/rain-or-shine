@@ -1,3 +1,13 @@
+export const QUERY_COUNT_MAP = {
+  default: 20,
+  max: 100,
+};
+
+export const QUERY_SCOPE_MAP = {
+  local: "local",
+  global: "global",
+} as const;
+
 export const LABELS = {
   placeholder: "Enter location",
   isLoadingMessage: "Searching...",
@@ -8,12 +18,9 @@ export const LABELS = {
   expandSearchBreadth: "Expand search breadth",
 } as const;
 
-export const QUERY_COUNT_MAP = {
-  default: 20,
-  max: 100,
-}
-
-export const QUERY_SCOPE_MAP = {
-  local: "local",
-  global: "global",
-} as const;
+export const ERRORS = {
+  stateProviderHookMissingContext:
+    "useSearchState must be used within Provider",
+  actionProviderHookMissingContext:
+    "useSearchActions must be used within Provider",
+};
