@@ -90,18 +90,15 @@
     font-family: var(--font-quicksand);
     min-height: 100svh;
   }
-
-  a {
-  }
 }
 
 @layer components {
   .input-suggestions-container {
-    @apply absolute top-full left-0 w-full mt-2 bg-base-100 border border-base-300 rounded-lg shadow-xl z-50 max-h-[50vh] overflow-y-scroll;
+    @apply absolute top-full left-0 w-full mt-2 bg-base-100 border border-base-300 rounded-lg shadow-xl z-50 max-h-[50vh] overflow-y-auto;
   }
 
   .input-suggestions-link {
-    @apply p-4 hover:bg-base-200 transition-colors text-left border-b border-base-200 last:border-0 w-full;
+    @apply block p-4 hover:bg-base-200 transition-colors text-left border-b border-base-200 last:border-0 w-full;
   }
 }
 

@@ -8,12 +8,14 @@ import {
   Text,
   LazyCountryFlagIcon,
   type CountryFlagIconName,
+  VirtualList,
 } from "@/components";
 import { cn } from "@/utils";
-import { LocationLinkList } from "./LocationLinkList";
+import { LocationLink } from "./LocationLink";
 import { LABELS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
 import { useSearchActions, useSearchState } from "./hooks";
 import type { QueryScopeMapValue } from "./types";
+import { useRef } from "react";
 
 const LIST_ITEM_PADDING_MAP = {
   sm: "px-4 py-4",
@@ -129,7 +131,9 @@ const RecentLocations = () => {
           <FaTimes />
         </Button>
       </SectionHeader>
-      <LocationLinkList locations={recentLocations} />
+      {recentLocations.map((location) => (
+        <LocationLink key={location.id} location={location} />
+      ))}
     </FlexCol>
   );
 };
@@ -159,7 +163,11 @@ const LocationResultsStatus = () => {
   );
 };
 
-const LocationResults = () => {
+const LocationResults = ({
+  containerRef,
+}: {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}) => {
   const { isLoading, hasLocations, locations } = useSearchState();
 
   if (isLoading && !hasLocations) {
@@ -172,7 +180,12 @@ const LocationResults = () => {
         <ScopeTabList />
       </SectionHeader>
       {hasLocations ? (
-        <LocationLinkList locations={locations} />
+        <VirtualList
+          items={locations}
+          estimateSize={84}
+          containerRef={containerRef}
+          renderItem={(loc) => <LocationLink key={loc.id} location={loc} />}
+        />
       ) : (
         <LocationResultsStatus />
       )}
@@ -182,11 +195,13 @@ const LocationResults = () => {
 
 export const LocationSearchSuggestions = () => {
   const { isOpen } = useSearchState();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          ref={containerRef}
           key="location-suggestions-panel"
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
@@ -201,7 +216,7 @@ export const LocationSearchSuggestions = () => {
         >
           <motion.div layout="position">
             <RecentLocations />
-            <LocationResults />
+            <LocationResults containerRef={containerRef} />
           </motion.div>
         </motion.div>
       )}
