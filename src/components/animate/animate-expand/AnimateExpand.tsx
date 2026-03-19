@@ -7,7 +7,7 @@ export const AnimateExpand = forwardRef(
     {
       children,
       isOpen,
-      transformOrigin = "top",
+      transformOrigin = "top", // TODO: Allow for horizontal expansion
       className,
     }: AnimateExpandProps,
     ref: React.Ref<HTMLDivElement> | undefined,
