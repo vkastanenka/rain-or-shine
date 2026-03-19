@@ -55,7 +55,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
    * Suggestion list is open
    */
 
-  const isOpen = isFocused && (query.length > 0 || hasRecentLocations);
+  const isOpen = !!(isFocused && (query.length > 0 || hasRecentLocations));
 
   /**
    * Utility functions

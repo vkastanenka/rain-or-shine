@@ -94,7 +94,7 @@
 
 @layer components {
   .input-suggestions-container {
-    @apply absolute top-full left-0 w-full mt-2 bg-base-100 border border-base-300 rounded-lg shadow-xl z-50 max-h-[50vh] overflow-y-auto;
+    @apply absolute top-full left-0 w-full mt-2 bg-base-100 border border-base-300 rounded-lg shadow-xl z-50 max-h-[50vh] overflow-auto;
   }
 
   .input-suggestions-link {

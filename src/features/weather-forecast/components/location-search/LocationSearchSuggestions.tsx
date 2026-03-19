@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { FcGlobe } from "react-icons/fc";
 import { FaTimes, FaArrowRight } from "react-icons/fa";
 import {
+  AnimateExpand,
   Button,
   FlexCol,
   FlexRow,
@@ -198,28 +198,13 @@ export const LocationSearchSuggestions = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          ref={containerRef}
-          key="location-suggestions-panel"
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{
-            height: { type: "spring", duration: 0.3, bounce: 0 },
-            opacity: { duration: 0.2 },
-          }}
-          layout
-          style={{ transformOrigin: "top" }}
-          className="input-suggestions-container"
-        >
-          <motion.div layout="position">
-            <RecentLocations />
-            <LocationResults containerRef={containerRef} />
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <AnimateExpand
+      ref={containerRef}
+      isOpen={isOpen}
+      className="input-suggestions-container"
+    >
+      <RecentLocations />
+      <LocationResults containerRef={containerRef} />
+    </AnimateExpand>
   );
 };
