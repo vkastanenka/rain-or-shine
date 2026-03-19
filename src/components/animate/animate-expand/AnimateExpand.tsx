@@ -25,7 +25,10 @@ export const AnimateExpand = forwardRef(
           opacity: { duration: 0.25 },
         }}
         layout
-        style={{ transformOrigin, overflow: isOpen ? "auto" : "hidden" }}
+        style={{
+          transformOrigin,
+          overflow: isOpen ? "auto" : "hidden", // TODO: onAnimationEnd?
+        }}
         className={className}
       >
         <motion.div layout="position">{children}</motion.div>
