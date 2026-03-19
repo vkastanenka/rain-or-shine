@@ -10,19 +10,19 @@ import type { LocationLinkProps } from "../types";
 export const LocationLink = ({ location }: LocationLinkProps) => {
   const { handleSelectLocation } = useSearchActions();
 
-  const path = formatWeatherUrlPath(
-    location.country_code,
-    location.admin1,
-    location.name,
-    FORECAST_PERIOD_MAP.current,
-  );
+  const path = formatWeatherUrlPath({
+    countryCode: location.country_code,
+    region: location.admin1,
+    city: location.name,
+    period: FORECAST_PERIOD_MAP.current,
+  });
 
   const handleClick = () => {
     handleSelectLocation(location);
   };
 
   return (
-    <Link to={path} className="input-suggestions-link" onClick={handleClick}>
+    <Link to={path} className="input-suggestions-item" onClick={handleClick}>
       <Text type="large" className="font-medium">
         {location.name}
       </Text>

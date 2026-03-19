@@ -7,6 +7,8 @@ import {
   type WmoCodeDescriptionMapKey,
 } from "@/entities";
 import type { LinkProps } from "@tanstack/react-router";
+import { toUrlSlug } from "@/utils";
+import type { WeatherUrlPathParams } from "../types";
 
 const EMPTY_VALUE = "--";
 
@@ -49,15 +51,12 @@ export const formatWmoIcon = (
   return iconMap[code];
 };
 
-export const formatWeatherUrlPath = (
-  countryCode: string,
-  region: string,
-  city: string,
-  period: string,
-): LinkProps["to"] => {
-  const formatString = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
-  const parsedCountryCode = formatString(countryCode);
-  const parsedRegion = formatString(region);
-  const parsedCity = formatString(city);
-  return `/weather/${parsedCountryCode}/${parsedRegion}/${parsedCity}/${period}` as "/weather/$country/$province/$city/$period";
+export const formatWeatherUrlPath = ({
+  countryCode,
+  region,
+  city,
+  period,
+}: WeatherUrlPathParams): LinkProps["to"] => {
+  const segments = [countryCode, region, city, period].map(toUrlSlug);
+  return `/weather/${segments.join("/")}` as any;
 };

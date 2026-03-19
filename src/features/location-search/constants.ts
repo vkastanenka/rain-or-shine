@@ -5,7 +5,6 @@ export const LIST_ITEM_PADDING_MAP = {
 
 export const MIN_ACTIVE_QUERY_LENGTH = 2;
 
-
 export const QUERY_COUNT_MAP = {
   default: 20,
   max: 100,

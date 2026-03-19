@@ -10,3 +10,10 @@ export type ValidWeatherPathLocation = Location & {
   admin1: string;
   name: string;
 };
+
+export interface WeatherUrlPathParams {
+  countryCode: string;
+  region: string;
+  city: string;
+  period: ForecastPeriodMapKey;
+}
