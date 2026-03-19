@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Text, Section, FlexCol, Grid, Flex, Button } from "@/components";
-import { formatWeatherUrlPath, LocalityCard } from "@/features";
+import { formatWeatherUrlPath, LocalityCard, LocationSearch } from "@/features";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
-import { LocationSearch } from "@/features";
 
 export const Route = createFileRoute("/(home)/")({
   loader: routeLoader,

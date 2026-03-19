@@ -1,13 +1,10 @@
 import { useRef } from "react";
 import { useOnClickOutside } from "@/hooks";
 import { cn } from "@/utils";
-import { useSearchState, useSearchActions } from "./hooks";
+import { useSearchState, useSearchActions } from "../hooks";
+import type { LocationSearchContainerProps } from "../types";
 
-export const LocationSearchContainer = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const LocationSearchContainer = ({ children }: LocationSearchContainerProps) => {
   const { className } = useSearchState();
   const { handleBlur } = useSearchActions();
 

@@ -1,2 +1,2 @@
-export * from './weather-forecast/components/location-search'
-export * from './weather-forecast'
+export * from "./location-search";
+export * from "./weather-forecast";

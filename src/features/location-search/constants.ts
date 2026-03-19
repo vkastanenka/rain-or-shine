@@ -1,3 +1,9 @@
+export const LIST_ITEM_PADDING_MAP = {
+  sm: "px-4 py-4",
+  lg: "px-4 py-7",
+} as const;
+
+
 export const QUERY_COUNT_MAP = {
   default: 20,
   max: 100,

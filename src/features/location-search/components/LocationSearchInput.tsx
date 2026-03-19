@@ -1,6 +1,6 @@
 import { TextInput } from "@/components";
-import { LABELS } from "./constants";
-import { useSearchState, useSearchActions } from "./hooks";
+import { LABELS } from "../constants";
+import { useSearchState, useSearchActions } from "../hooks";
 
 export const LocationSearchInput = () => {
   const { size, query } = useSearchState();

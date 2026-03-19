@@ -9,7 +9,7 @@ import {
   type ValidWeatherPathLocation,
 } from "@/services";
 import { ERRORS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
-import { StateContext, ActionsContext } from "./context";
+import { StateContext, ActionsContext } from "./LocationSearchProvider";
 import type { LocationSearchProps, QueryScopeMapValue } from "./types";
 
 export const useLocationSearchContext = (props: LocationSearchProps) => {

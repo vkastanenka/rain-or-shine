@@ -4,14 +4,10 @@ import {
   formatWeatherUrlPath,
   FORECAST_PERIOD_MAP,
 } from "@/features/weather-forecast";
-import { type ValidWeatherPathLocation } from "@/services";
-import { useSearchActions } from "./hooks";
+import { useSearchActions } from "../hooks";
+import type { LocationLinkProps } from "../types";
 
-export const LocationLink = ({
-  location,
-}: {
-  location: ValidWeatherPathLocation;
-}) => {
+export const LocationLink = ({ location }: LocationLinkProps) => {
   const { handleSelectLocation } = useSearchActions();
 
   const path = formatWeatherUrlPath(
