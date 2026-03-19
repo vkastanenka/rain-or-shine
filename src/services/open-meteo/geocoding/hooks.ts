@@ -1,20 +1,22 @@
 import {
   useQuery,
   queryOptions,
-  keepPreviousData,
+  type UseQueryOptions,
 } from "@tanstack/react-query";
 import { queryKeys } from "./keys";
 import { geocodingService } from "./service";
-import { type GetLocationsByNameParams } from "./types";
+import { type GetLocationsByNameParams, type Locations } from "./types";
 import { locationHasValidPath } from "./utils";
 
-export const getLocationsByNameOptions = (params: GetLocationsByNameParams) => {
-  const searchTerm = params.name.trim();
+export const getLocationsByNameOptions = (
+  params: GetLocationsByNameParams,
+  options?: Partial<UseQueryOptions<Locations>>,
+) => {
   return queryOptions({
     queryKey: queryKeys.search(params),
     queryFn: ({ signal }) =>
       geocodingService.getLocationsByName(params, { signal }),
-    enabled: searchTerm.length >= 2,
+    enabled: options?.enabled,
     select: (data) => {
       return {
         ...data,
@@ -22,10 +24,12 @@ export const getLocationsByNameOptions = (params: GetLocationsByNameParams) => {
       };
     },
     staleTime: 1000 * 60 * 5,
-    placeholderData: keepPreviousData,
   });
 };
 
-export const useGetLocationsByName = (params: GetLocationsByNameParams) => {
-  return useQuery(getLocationsByNameOptions(params));
+export const useGetLocationsByName = (
+  params: GetLocationsByNameParams,
+  options?: Partial<UseQueryOptions<Locations>>,
+) => {
+  return useQuery(getLocationsByNameOptions(params, options));
 };

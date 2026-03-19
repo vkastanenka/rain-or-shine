@@ -8,7 +8,12 @@ import {
   type ValidWeatherPathLocation,
 } from "@/services";
 import { upsertToFront } from "@/utils";
-import { ERRORS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
+import {
+  ERRORS,
+  MIN_ACTIVE_QUERY_LENGTH,
+  QUERY_COUNT_MAP,
+  QUERY_SCOPE_MAP,
+} from "./constants";
 import { StateContext, ActionsContext } from "./LocationSearchProvider";
 import type { LocationSearchProps, QueryScopeMapValue } from "./types";
 
@@ -28,17 +33,32 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
   const { data: locality } = useGetLocalityByCoords();
   const [queryCount, setQueryCount] = useState(QUERY_COUNT_MAP.default);
   const [queryScope, setQueryScope] = useState<QueryScopeMapValue>(
-    QUERY_SCOPE_MAP.local,
+    locality?.countryCode ? QUERY_SCOPE_MAP.local : QUERY_SCOPE_MAP.global,
   );
 
-  const { data, isLoading } = useGetLocationsByName({
-    name: debouncedQuery,
-    count: queryCount,
-    countryCode: queryScope === "local" ? locality?.countryCode : undefined,
-  });
-  const locations = data?.results ?? [];
+  const { data, isLoading, isFetching } = useGetLocationsByName(
+    {
+      name: debouncedQuery,
+      count: queryCount,
+      countryCode: queryScope === "local" ? locality?.countryCode : undefined,
+    },
+    {
+      enabled:
+        query === debouncedQuery &&
+        debouncedQuery.trim().length >= MIN_ACTIVE_QUERY_LENGTH,
+    },
+  );
+
+  const locations = useMemo(() => {
+    if (query.length < MIN_ACTIVE_QUERY_LENGTH || query !== debouncedQuery) {
+      return [];
+    }
+    return data?.results ?? [];
+  }, [query, debouncedQuery, data]);
+
+  const showLoading = isLoading || (isFetching && query === debouncedQuery);
   const hasLocations = locations.length > 0;
-  const isSettled = !isLoading && query === debouncedQuery;
+  const isSettled = !showLoading && query === debouncedQuery;
   const isEmpty = isSettled && !hasLocations;
 
   /**
@@ -56,7 +76,10 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
    * Suggestion list is open
    */
 
-  const isOpen = !!(isFocused && (query.length > 0 || hasRecentLocations));
+  const isOpen = !!(
+    isFocused &&
+    (query.length > MIN_ACTIVE_QUERY_LENGTH || hasRecentLocations)
+  );
 
   /**
    * Utility functions
@@ -101,7 +124,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       setRecentLocations(newLocations);
       handleClear();
     },
-    [setRecentLocations, handleClear],
+    [recentLocations, setRecentLocations, handleClear],
   );
 
   const handleRemoveRecentLocations = useCallback(() => {

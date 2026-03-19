@@ -34,6 +34,7 @@ const ScopeButton = ({ scope, isActive, onClick }: ScopeButtonProps) => {
 export const ScopeTabList = () => {
   const { queryScope } = useSearchState();
   const { setQueryScope } = useSearchActions();
+  // TODO: Handle no locality / locality error
   return (
     <div role="tablist" className="tabs tabs-box">
       <ScopeButton
