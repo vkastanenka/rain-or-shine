@@ -36,7 +36,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     count: queryCount,
     countryCode: queryScope === "local" ? locality?.countryCode : undefined,
   });
-  const locations = data?.results ?? []; // TODO: why is results undefined?
+  const locations = data?.results ?? [];
   const hasLocations = locations.length > 0;
   const isSettled = !isLoading && query === debouncedQuery;
   const isEmpty = isSettled && !hasLocations;

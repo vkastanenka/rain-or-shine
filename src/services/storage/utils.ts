@@ -1,10 +1,4 @@
-import type { ValidWeatherPathLocation } from "@/features";
+import { STORAGE_PREFIX } from "./constants";
+import type { StorageKey } from "./types";
 
-export const moveLocationToFront = (
-  list: ValidWeatherPathLocation[] = [],
-  newItem: ValidWeatherPathLocation,
-  maxItems = 2,
-) => {
-  const filtered = list.filter((item) => item.id !== newItem.id);
-  return [newItem, ...filtered].slice(0, maxItems);
-};
+export const getStorageKey = (key: StorageKey) => `${STORAGE_PREFIX}${key}`;

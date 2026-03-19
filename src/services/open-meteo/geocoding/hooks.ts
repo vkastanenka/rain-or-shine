@@ -16,10 +16,9 @@ export const getLocationsByNameOptions = (params: GetLocationsByNameParams) => {
       geocodingService.getLocationsByName(params, { signal }),
     enabled: searchTerm.length >= 2,
     select: (data) => {
-      const { results, ...rest } = data;
       return {
-        ...rest,
-        results: results.filter(locationHasValidPath),
+        ...data,
+        results: data.results?.filter(locationHasValidPath) ?? [],
       };
     },
     staleTime: 1000 * 60 * 5,

@@ -1,5 +1,5 @@
-import { STORAGE_KEY_MAP } from "./constants";
 import type { ValidWeatherPathLocation } from "@/features";
+import { STORAGE_KEY_MAP } from "./constants";
 
 export interface Storage {
   [STORAGE_KEY_MAP.recentLocations]: ValidWeatherPathLocation[];
