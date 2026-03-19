@@ -37,17 +37,6 @@ export const useStorage = <K extends StorageKey>(
     onSuccess: invalidate,
   });
 
-  const updateMutation = useMutation({
-    mutationFn: async ({
-      item,
-      filterKey,
-    }: {
-      item: any;
-      filterKey?: string;
-    }) => manager.update(key, item, filterKey),
-    onSuccess: invalidate,
-  });
-
   const removeMutation = useMutation({
     mutationFn: async () => manager.remove(key),
     onSuccess: invalidate,
@@ -56,7 +45,6 @@ export const useStorage = <K extends StorageKey>(
   return {
     data: query.data as Storage[K] | undefined,
     set: setMutation.mutate,
-    update: updateMutation.mutate,
     remove: removeMutation.mutate,
     isLoading: query.isLoading,
   };

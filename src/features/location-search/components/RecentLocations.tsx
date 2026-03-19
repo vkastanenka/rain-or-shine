@@ -7,7 +7,7 @@ import { LocationLink } from "./LocationLink";
 
 export const RecentLocations = () => {
   const { recentLocations, hasRecentLocations } = useSearchState();
-  const { setRecentLocations } = useSearchActions();
+  const { handleRemoveRecentLocations } = useSearchActions();
 
   if (!recentLocations || !hasRecentLocations) {
     return null;
@@ -16,7 +16,7 @@ export const RecentLocations = () => {
   return (
     <FlexCol>
       <LocationSuggestionsHeader label={LABELS.recentLocations}>
-        <Button shape="circle" onClick={() => setRecentLocations([])}>
+        <Button shape="circle" onClick={handleRemoveRecentLocations}>
           <FaTimes />
         </Button>
       </LocationSuggestionsHeader>

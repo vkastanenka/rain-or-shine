@@ -5,9 +5,9 @@ import {
   useStorage,
   useGetLocalityByCoords,
   useGetLocationsByName,
-  useSaveRecentLocation,
   type ValidWeatherPathLocation,
 } from "@/services";
+import { upsertToFront } from "@/utils";
 import { ERRORS, QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
 import { StateContext, ActionsContext } from "./LocationSearchProvider";
 import type { LocationSearchProps, QueryScopeMapValue } from "./types";
@@ -45,10 +45,11 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
    * Recent locations
    */
 
-  const { mutate: saveRecentLocation } = useSaveRecentLocation(); // TODO: Handle better
-  const [recentLocations, setRecentLocations] = useStorage(
-    STORAGE_KEY_MAP.recentLocations,
-  );
+  const {
+    data: recentLocations,
+    set: setRecentLocations,
+    remove: removeRecentLocations,
+  } = useStorage(STORAGE_KEY_MAP.recentLocations);
   const hasRecentLocations = recentLocations && recentLocations?.length > 0;
 
   /**
@@ -93,11 +94,19 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
 
   const handleSelectLocation = useCallback(
     (location: ValidWeatherPathLocation) => {
-      saveRecentLocation(location);
+      const newLocations = upsertToFront(location, recentLocations ?? [], {
+        filterKey: "id",
+        max: 2,
+      });
+      setRecentLocations(newLocations);
       handleClear();
     },
-    [saveRecentLocation, handleClear],
+    [setRecentLocations, handleClear],
   );
+
+  const handleRemoveRecentLocations = useCallback(() => {
+    removeRecentLocations();
+  }, [removeRecentLocations]);
 
   /**
    * State value
@@ -178,23 +187,23 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       setQueryScope,
 
       // Utility actions
-      setRecentLocations,
       handleQueryCountReset,
       handleQueryCountIncrease,
       handleQueryChange,
       handleBlur,
       handleClear,
       handleSelectLocation,
+      handleRemoveRecentLocations,
     }),
     [
       // Utility actions
-      setRecentLocations,
       handleQueryCountReset,
       handleQueryCountIncrease,
       handleQueryChange,
       handleBlur,
       handleClear,
       handleSelectLocation,
+      handleRemoveRecentLocations,
     ],
   );
 

@@ -18,37 +18,6 @@ const createStorageManager = (engine: globalThis.Storage) => {
       window.dispatchEvent(new StorageEvent("storage", { key: fullKey }));
     },
 
-    update: <K extends StorageKey>(
-      key: K,
-      value: any,
-      filterKey?: string,
-    ): void => {
-      const current = manager.get(key);
-      let next: any;
-
-      if (Array.isArray(current)) {
-        const filtered = current.filter((item) => {
-          const itemId =
-            typeof item === "object" && filterKey
-              ? (item as Record<string, any>)[filterKey]
-              : item;
-
-          const valueId =
-            typeof value === "object" && filterKey
-              ? (value as Record<string, any>)[filterKey]
-              : value;
-
-          return itemId !== valueId;
-        });
-
-        next = [value, ...filtered];
-      } else {
-        next = value;
-      }
-
-      manager.set(key, next);
-    },
-
     remove: <K extends StorageKey>(key: K): void => {
       engine.removeItem(getStorageKey(key));
       window.dispatchEvent(
