@@ -3,19 +3,20 @@ import { getStorageKey } from "./utils";
 
 const createStorageManager = (engine: globalThis.Storage) => {
   const manager = {
-    get: <K extends StorageKey>(key: K): Storage[K] | undefined => {
+    get: <K extends StorageKey>(key: K): Storage[K] | null => {
       const data = engine.getItem(getStorageKey(key));
       try {
-        return data ? (JSON.parse(data) as Storage[K]) : undefined;
+        return data ? (JSON.parse(data) as Storage[K]) : null;
       } catch {
-        return undefined;
+        return null;
       }
     },
 
-    set: <K extends StorageKey>(key: K, value: Storage[K]): void => {
+    set: <K extends StorageKey>(key: K, value: Storage[K]): Storage[K] => {
       const fullKey = getStorageKey(key);
       engine.setItem(fullKey, JSON.stringify(value));
       window.dispatchEvent(new StorageEvent("storage", { key: fullKey }));
+      return value;
     },
 
     remove: <K extends StorageKey>(key: K): void => {

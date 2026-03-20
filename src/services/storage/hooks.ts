@@ -1,8 +1,8 @@
+import { useCallback, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { local, session } from "./service";
 import type { StorageKey, Storage, StorageType } from "./types";
 import { getStorageKey } from "./utils";
-import { useCallback, useEffect } from "react";
 
 export const useStorage = <K extends StorageKey>(
   key: K,
@@ -34,18 +34,23 @@ export const useStorage = <K extends StorageKey>(
 
   const setMutation = useMutation({
     mutationFn: async (newValue: Storage[K]) => manager.set(key, newValue),
-    onSuccess: invalidate,
+    onSuccess: (newValue) => {
+      queryClient.setQueryData(queryKey, newValue);
+    },
   });
 
   const removeMutation = useMutation({
     mutationFn: async () => manager.remove(key),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      queryClient.setQueryData(queryKey, null);
+      queryClient.invalidateQueries({ queryKey });
+    },
   });
 
   return {
     data: query.data as Storage[K] | undefined,
     set: setMutation.mutate,
-    remove: removeMutation.mutate,
+    remove: removeMutation.mutateAsync,
     isLoading: query.isLoading,
   };
 };

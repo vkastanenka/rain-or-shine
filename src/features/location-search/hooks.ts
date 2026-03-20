@@ -158,8 +158,8 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     [recentLocations, setRecentLocations, handleClear],
   );
 
-  const handleRemoveRecentLocations = useCallback(() => {
-    removeRecentLocations();
+  const handleRemoveRecentLocations = useCallback(async () => {
+    await removeRecentLocations(); // Only if you change the mutation call
   }, [removeRecentLocations]);
 
   /**

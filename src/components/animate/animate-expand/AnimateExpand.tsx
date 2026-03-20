@@ -4,11 +4,12 @@ import { type AnimateExpandProps } from "./types";
 
 export const AnimateExpand = forwardRef(
   (
-    { children, isOpen, className, onClose }: AnimateExpandProps,
+    { key, children, isOpen, className, onClose }: AnimateExpandProps,
     ref: React.Ref<HTMLDivElement> | undefined,
   ) => {
     return (
       <motion.div
+        key={key}
         ref={ref}
         initial={{ height: 0, opacity: 0 }}
         animate={{
