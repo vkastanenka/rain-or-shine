@@ -1,4 +1,4 @@
-import { useContext, useCallback, useMemo, useState } from "react";
+import { useContext, useCallback, useMemo, useState, useRef } from "react";
 import { useDebounce } from "@/hooks";
 import {
   STORAGE_KEY_MAP,
@@ -7,7 +7,7 @@ import {
   useGetLocationsByName,
   type ValidWeatherPathLocation,
 } from "@/services";
-import { upsertToFront } from "@/utils";
+import { animateScroll, upsertToFront } from "@/utils";
 import {
   ERRORS,
   MIN_ACTIVE_QUERY_LENGTH,
@@ -50,6 +50,12 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
   );
 
   const locations = useMemo(() => {
+    const currentResults = data?.results ?? [];
+
+    if (debouncedQuery && query.length === 0) {
+      return currentResults;
+    }
+
     if (query.length < MIN_ACTIVE_QUERY_LENGTH || query !== debouncedQuery) {
       return [];
     }
@@ -76,14 +82,31 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
    * Suggestion list is open
    */
 
-  const isOpen = !!(
-    isFocused &&
-    (query.length >= MIN_ACTIVE_QUERY_LENGTH || hasRecentLocations)
-  );
+  const isOpen = isFocused;
+
+  /**
+   * Container
+   */
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   /**
    * Utility functions
    */
+
+  const handleResetScroll = useCallback(
+    (behavior: "instant" | "smooth" = "smooth") => {
+      if (containerRef.current) {
+        if (behavior === "instant") {
+          containerRef.current.scrollTop = 0;
+          return;
+        }
+
+        animateScroll(containerRef.current, 400);
+      }
+    },
+    [containerRef],
+  );
 
   const handleQueryCountReset = useCallback(() => {
     if (queryCount !== QUERY_COUNT_MAP.default) {
@@ -99,8 +122,16 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
 
   const handleQueryChange = useCallback(
     (val: string) => {
-      setQuery(val);
       handleQueryCountReset();
+      setQuery(val);
+    },
+    [handleQueryCountReset],
+  );
+
+  const handleQueryScopeChange = useCallback(
+    (scope: QueryScopeMapValue) => {
+      handleQueryCountReset();
+      setQueryScope(scope);
     },
     [handleQueryCountReset],
   );
@@ -112,8 +143,8 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
 
   const handleClear = useCallback(() => {
     setQuery("");
-    handleBlur();
-  }, [handleBlur]);
+    handleResetScroll();
+  }, [handleResetScroll]);
 
   const handleSelectLocation = useCallback(
     (location: ValidWeatherPathLocation) => {
@@ -140,6 +171,9 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       // Props
       size: props.size,
       className: props.className,
+
+      // Container
+      containerRef,
 
       // Input state
       query,
@@ -170,6 +204,9 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       // Props
       props.size,
       props.className,
+
+      // Container
+      containerRef,
 
       // Input state
       query,
@@ -208,13 +245,12 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       setQuery,
       setIsFocused,
 
-      // Query actions
-      setQueryScope,
-
       // Utility actions
+      handleResetScroll,
       handleQueryCountReset,
       handleQueryCountIncrease,
       handleQueryChange,
+      handleQueryScopeChange,
       handleBlur,
       handleClear,
       handleSelectLocation,
@@ -222,9 +258,11 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     }),
     [
       // Utility actions
+      handleResetScroll,
       handleQueryCountReset,
       handleQueryCountIncrease,
       handleQueryChange,
+      handleQueryScopeChange,
       handleBlur,
       handleClear,
       handleSelectLocation,

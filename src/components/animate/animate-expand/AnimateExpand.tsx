@@ -4,12 +4,7 @@ import { type AnimateExpandProps } from "./types";
 
 export const AnimateExpand = forwardRef(
   (
-    {
-      children,
-      isOpen,
-      transformOrigin = "top", // TODO: Allow for horizontal expansion
-      className,
-    }: AnimateExpandProps,
+    { children, isOpen, className, onClose }: AnimateExpandProps,
     ref: React.Ref<HTMLDivElement> | undefined,
   ) => {
     return (
@@ -20,14 +15,17 @@ export const AnimateExpand = forwardRef(
           height: isOpen ? "auto" : 0,
           opacity: isOpen ? 1 : 0,
         }}
+        onAnimationComplete={() => {
+          onClose?.();
+        }}
         transition={{
-          height: { type: "spring", duration: 0.4, bounce: 0 },
+          height: { type: "spring", duration: 0.3, bounce: 0 },
           opacity: { duration: 0.25 },
         }}
         layout
         style={{
-          transformOrigin,
-          overflow: isOpen ? "auto" : "hidden", // TODO: onAnimationEnd?
+          transformOrigin: "top",
+          overflow: isOpen ? "auto" : "hidden",
         }}
         className={className}
       >

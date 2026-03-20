@@ -37,20 +37,20 @@ const ScopeButton = ({ scope, isActive, onClick }: ScopeButtonProps) => {
 
 export const ScopeTabList = () => {
   const { queryScope, locality } = useSearchState();
-  const { setQueryScope } = useSearchActions();
+  const { handleQueryScopeChange } = useSearchActions();
   return (
     <div role="tablist" className="tabs tabs-box">
       {locality?.countryCode && (
         <ScopeButton
           scope={QUERY_SCOPE_MAP.local}
           isActive={queryScope === QUERY_SCOPE_MAP.local}
-          onClick={() => setQueryScope(QUERY_SCOPE_MAP.local)}
+          onClick={() => handleQueryScopeChange(QUERY_SCOPE_MAP.local)}
         />
       )}
       <ScopeButton
         scope={QUERY_SCOPE_MAP.global}
         isActive={queryScope === QUERY_SCOPE_MAP.global}
-        onClick={() => setQueryScope(QUERY_SCOPE_MAP.global)}
+        onClick={() => handleQueryScopeChange(QUERY_SCOPE_MAP.global)}
       />
     </div>
   );

@@ -18,7 +18,7 @@ export const VirtualList = <T,>({
     getScrollElement: () => containerRef?.current ?? internalRef.current,
     estimateSize: () => estimateSize,
     horizontal,
-    overscan: 0,
+    overscan: 5,
   });
 
   return (

@@ -8,6 +8,7 @@ import {
   TEXT_INPUT_TYPE_MAP,
 } from "./text-input.constants";
 import { type TextInputProps } from "./text-input.types";
+import { useRef } from "react";
 
 export const TextInput = ({
   className,
@@ -20,6 +21,13 @@ export const TextInput = ({
   onClear,
   ...props
 }: TextInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClearClick = () => {
+    onClear?.();
+    inputRef.current?.focus();
+  };
+
   const isSearch = type === TEXT_INPUT_TYPE_MAP.search;
   const iconColor =
     "text-[color-mix(in_oklab,var(--color-base-content)_20%,transparent)]";
@@ -36,6 +44,7 @@ export const TextInput = ({
     <>
       <input
         {...props}
+        ref={inputRef}
         value={value}
         type={type}
         list={suggestions?.id ? suggestions.id : undefined}
@@ -64,7 +73,7 @@ export const TextInput = ({
           <Button
             variant="ghost"
             shape="circle"
-            onClick={onClear}
+            onClick={handleClearClick}
             aria-label="Clear search"
           >
             <FaTimes />

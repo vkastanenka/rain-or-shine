@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import {
   FlexCol,
@@ -12,8 +13,11 @@ import type { LocationResultsProps } from "../types";
 import { LocationLink } from "./LocationLink";
 import { ScopeTabList } from "./ScopeTabList";
 
+const ANIMATION_DURATION = 0.3;
+
 export const LocationResults = ({ containerRef }: LocationResultsProps) => {
   const {
+    debouncedQuery,
     showLoading,
     hasLocations,
     locations,
@@ -30,30 +34,59 @@ export const LocationResults = ({ containerRef }: LocationResultsProps) => {
       <TextInputSuggestionsHeader label={LABELS.locations} sticky>
         <ScopeTabList />
       </TextInputSuggestionsHeader>
-      {hasLocations ? (
-        <VirtualList
-          items={locations}
-          estimateSize={84}
-          containerRef={containerRef}
-          renderItem={(loc) => <LocationLink key={loc.id} location={loc} />}
-        />
-      ) : (
-        <TextInputSuggestionsMessage
-          label={
-            showLoading
-              ? LABELS.isLoadingMessage
-              : isEmpty
-                ? LABELS.noLocationsFound
-                : LABELS.searchToFind
-          }
-        />
-      )}
-      {isSettled && canIncrease && (
-        <TextInputSuggestionsButton onClick={handleQueryCountIncrease}>
-          {LABELS.expandSearchBreadth}
-          <FaArrowRight />
-        </TextInputSuggestionsButton>
-      )}
+      <AnimatePresence mode="popLayout">
+        {hasLocations ? (
+          <motion.div
+            key="results-list"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: ANIMATION_DURATION }}
+            className="w-full"
+          >
+            <VirtualList
+              items={locations}
+              estimateSize={84}
+              containerRef={containerRef}
+              renderItem={(loc) => <LocationLink key={loc.id} location={loc} />}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="status-message"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: ANIMATION_DURATION }}
+          >
+            <TextInputSuggestionsMessage
+              label={
+                showLoading
+                  ? LABELS.isLoadingMessage
+                  : debouncedQuery && isEmpty
+                    ? LABELS.noLocationsFound
+                    : LABELS.searchToFind
+              }
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence mode="popLayout">
+        {isSettled && canIncrease && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: ANIMATION_DURATION }}
+            className="w-full"
+          >
+            <TextInputSuggestionsButton onClick={handleQueryCountIncrease}>
+              {LABELS.expandSearchBreadth}
+              <FaArrowRight />
+            </TextInputSuggestionsButton>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </FlexCol>
   );
 };

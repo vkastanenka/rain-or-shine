@@ -1,17 +1,21 @@
-import { useRef } from "react";
-import { TextInputSuggestionsContainer } from "@/components";
-import { useSearchState } from "../hooks";
+import { AnimateExpand } from "@/components";
+import { useSearchActions, useSearchState } from "../hooks";
 import { RecentLocations } from "./RecentLocations";
 import { LocationResults } from "./LocationResults";
 
 export const LocationSuggestions = () => {
-  const { isOpen } = useSearchState();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { isOpen, containerRef } = useSearchState();
+  const { handleResetScroll } = useSearchActions();
 
   return (
-    <TextInputSuggestionsContainer ref={containerRef} isOpen={isOpen}>
+    <AnimateExpand
+      ref={containerRef}
+      isOpen={isOpen}
+      className="text-input-suggestions-container"
+      onClose={() => handleResetScroll("instant")}
+    >
       <RecentLocations />
       <LocationResults containerRef={containerRef} />
-    </TextInputSuggestionsContainer>
+    </AnimateExpand>
   );
 };

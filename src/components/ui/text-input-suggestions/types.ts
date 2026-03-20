@@ -18,12 +18,6 @@ export interface TextInputSuggestionsButtonProps {
   onClick?: () => void;
 }
 
-export interface TextInputSuggestionsContainerProps {
-  children: React.ReactNode;
-  isOpen: boolean;
-  className?: string;
-}
-
 export interface TextInputSuggestionsMessageProps {
   label: string;
 }

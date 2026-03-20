@@ -17,7 +17,7 @@ export const LABELS = {
   recentLocations: "Recent locations",
   noLocationsFound: "No locations found",
   searchToFind: "Search to find locations",
-  expandSearchBreadth: "Search everywhere",
+  expandSearchBreadth: "Search with more results",
 } as const;
 
 export const ERRORS = {

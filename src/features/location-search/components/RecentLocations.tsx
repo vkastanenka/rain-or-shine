@@ -13,7 +13,7 @@ export const RecentLocations = () => {
   }
 
   return (
-    <FlexCol>
+    <FlexCol className="relative bg-base-100 z-50">
       <TextInputSuggestionsHeader label={LABELS.recentLocations}>
         <Button
           size={{ base: "xs", sm: "md" }}
