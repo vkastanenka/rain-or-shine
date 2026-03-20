@@ -3,11 +3,7 @@ import type { ValidWeatherPathLocation } from "@/services";
 import type { MapKey, MapValue } from "@/types";
 import { type ResponsiveValue } from "@/utils";
 import { useLocationSearchContext } from "./hooks";
-import {
-  LIST_ITEM_PADDING_MAP,
-  QUERY_COUNT_MAP,
-  QUERY_SCOPE_MAP,
-} from "./constants";
+import { QUERY_COUNT_MAP, QUERY_SCOPE_MAP } from "./constants";
 
 /**
  * Context
@@ -16,13 +12,6 @@ import {
 type LocationSearchContext = ReturnType<typeof useLocationSearchContext>;
 export type LocationSearchState = LocationSearchContext["state"];
 export type LocationSearchActions = LocationSearchContext["actions"];
-
-/**
- * List Item Padding
- */
-
-export type ListItemPaddingMapKey = MapKey<typeof LIST_ITEM_PADDING_MAP>;
-export type ListItemPaddingMapValue = MapValue<typeof LIST_ITEM_PADDING_MAP>;
 
 /**
  * Query
@@ -48,14 +37,6 @@ export interface LocationResultsProps {
 
 export interface LocationSearchContainerProps {
   children: React.ReactNode;
-}
-
-export interface LocationSuggestionsHeaderProps {
-  label: string;
-  pad?: ListItemPaddingMapKey;
-  sticky?: boolean;
-  className?: string;
-  children?: React.ReactNode;
 }
 
 export interface ScopeButtonProps {

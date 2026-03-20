@@ -11,7 +11,7 @@ const ScopeButton = ({ scope, isActive, onClick }: ScopeButtonProps) => {
   const Icon =
     scope === "local" ? (
       <LazyCountryFlagIcon
-        name={locality?.countryCode as CountryFlagIconName} // TODO: Handle better
+        name={locality?.countryCode as CountryFlagIconName}
       />
     ) : (
       <FcGlobe />
@@ -32,16 +32,17 @@ const ScopeButton = ({ scope, isActive, onClick }: ScopeButtonProps) => {
 };
 
 export const ScopeTabList = () => {
-  const { queryScope } = useSearchState();
+  const { queryScope, locality } = useSearchState();
   const { setQueryScope } = useSearchActions();
-  // TODO: Handle no locality / locality error
   return (
     <div role="tablist" className="tabs tabs-box">
-      <ScopeButton
-        scope={QUERY_SCOPE_MAP.local}
-        isActive={queryScope === QUERY_SCOPE_MAP.local}
-        onClick={() => setQueryScope(QUERY_SCOPE_MAP.local)}
-      />
+      {locality?.countryCode && (
+        <ScopeButton
+          scope={QUERY_SCOPE_MAP.local}
+          isActive={queryScope === QUERY_SCOPE_MAP.local}
+          onClick={() => setQueryScope(QUERY_SCOPE_MAP.local)}
+        />
+      )}
       <ScopeButton
         scope={QUERY_SCOPE_MAP.global}
         isActive={queryScope === QUERY_SCOPE_MAP.global}

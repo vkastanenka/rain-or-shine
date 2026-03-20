@@ -1,8 +1,3 @@
-export const LIST_ITEM_PADDING_MAP = {
-  sm: "px-4 py-4",
-  lg: "px-4 py-7",
-} as const;
-
 export const MIN_ACTIVE_QUERY_LENGTH = 2;
 
 export const QUERY_COUNT_MAP = {
@@ -22,7 +17,7 @@ export const LABELS = {
   recentLocations: "Recent locations",
   noLocationsFound: "No locations found",
   searchToFind: "Search to find locations",
-  expandSearchBreadth: "Expand search breadth",
+  expandSearchBreadth: "Search everywhere",
 } as const;
 
 export const ERRORS = {

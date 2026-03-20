@@ -56,10 +56,10 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     return data?.results ?? [];
   }, [query, debouncedQuery, data]);
 
-  const showLoading = isLoading || (isFetching && query === debouncedQuery);
   const hasLocations = locations.length > 0;
-  const isSettled = !showLoading && query === debouncedQuery;
+  const isSettled = !isLoading && query === debouncedQuery;
   const isEmpty = isSettled && !hasLocations;
+  const showLoading = isLoading || (isFetching && query === debouncedQuery);
 
   /**
    * Recent locations
@@ -78,7 +78,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
 
   const isOpen = !!(
     isFocused &&
-    (query.length > MIN_ACTIVE_QUERY_LENGTH || hasRecentLocations)
+    (query.length >= MIN_ACTIVE_QUERY_LENGTH || hasRecentLocations)
   );
 
   /**
@@ -157,6 +157,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       isLoading,
       isSettled,
       isEmpty,
+      showLoading,
 
       // Recent locations state
       recentLocations,
@@ -186,6 +187,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       isLoading,
       isSettled,
       isEmpty,
+      showLoading,
 
       // Recent locations state
       recentLocations,

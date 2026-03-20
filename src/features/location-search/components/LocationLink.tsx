@@ -22,7 +22,7 @@ export const LocationLink = ({ location }: LocationLinkProps) => {
   };
 
   return (
-    <Link to={path} className="input-suggestions-item" onClick={handleClick}>
+    <Link to={path} className="text-input-suggestions-item" onClick={handleClick}>
       <Text type="large" className="font-medium">
         {location.name}
       </Text>

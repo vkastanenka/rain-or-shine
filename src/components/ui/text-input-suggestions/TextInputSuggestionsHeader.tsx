@@ -1,19 +1,19 @@
 import { FlexRow, Text } from "@/components";
 import { cn } from "@/utils";
-import { LIST_ITEM_PADDING_MAP } from "../constants";
-import type { LocationSuggestionsHeaderProps } from "../types";
+import { SUGGESTION_PADDING_MAP } from "./constants";
+import type { TextInputSuggestionsHeaderProps } from "./types";
 
-export const LocationSuggestionsHeader = ({
+export const TextInputSuggestionsHeader = ({
   label,
   pad,
   sticky,
   className,
   children,
-}: LocationSuggestionsHeaderProps) => {
+}: TextInputSuggestionsHeaderProps) => {
   const baseClasses = cn(
     "bg-neutral",
     "w-full",
-    LIST_ITEM_PADDING_MAP[pad ?? "sm"],
+    SUGGESTION_PADDING_MAP[pad ?? "sm"],
     sticky && "sticky top-0 z-50",
     className,
   );

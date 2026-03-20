@@ -1,8 +1,7 @@
 import { FaTimes } from "react-icons/fa";
-import { Button, FlexCol } from "@/components";
+import { Button, FlexCol, TextInputSuggestionsHeader } from "@/components";
 import { LABELS } from "../constants";
 import { useSearchActions, useSearchState } from "../hooks";
-import { LocationSuggestionsHeader } from "./LocationSuggestionsHeader";
 import { LocationLink } from "./LocationLink";
 
 export const RecentLocations = () => {
@@ -15,11 +14,11 @@ export const RecentLocations = () => {
 
   return (
     <FlexCol>
-      <LocationSuggestionsHeader label={LABELS.recentLocations}>
+      <TextInputSuggestionsHeader label={LABELS.recentLocations}>
         <Button shape="circle" onClick={handleRemoveRecentLocations}>
           <FaTimes />
         </Button>
-      </LocationSuggestionsHeader>
+      </TextInputSuggestionsHeader>
       {recentLocations.map((location) => (
         <LocationLink key={location.id} location={location} />
       ))}

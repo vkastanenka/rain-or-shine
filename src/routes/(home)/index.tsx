@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Text, Section, FlexCol, Grid, Flex, Button } from "@/components";
 import { formatWeatherUrlPath, LocalityCard, LocationSearch } from "@/features";
+import { cn } from "@/utils";
 import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
 
@@ -10,18 +11,18 @@ export const Route = createFileRoute("/(home)/")({
 });
 
 function RouteComponent() {
-  const {
-    currentLocality,
-    currentLocalityCardParams,
-    // recentLocations,
-    recentLocationsCardParams,
-  } = Route.useLoaderData();
+  // const {
+  //   currentLocality,
+  //   currentLocalityCardParams,
+  //   // recentLocations,
+  //   recentLocationsCardParams,
+  // } = Route.useLoaderData();
 
   return (
     <div>
       <Section py={{ base: 10, md: 16 }}>
         <FlexCol gap={{ base: 4, md: 6 }}>
-          <FlexCol gap={4}>
+          <FlexCol gap={4} className="w-full">
             <div>
               <Text type={{ base: "headline6", sm: "headline5" }}>
                 {LABELS.hero.superTitle()}
@@ -31,9 +32,17 @@ function RouteComponent() {
                 <span>{LABELS.hero.secondaryTitle}</span>
               </Text>
             </div>
-            <LocationSearch className="max-w-130" />
+            <LocationSearch
+              className={cn(
+                "max-w-90",
+                "sm:max-w-6/10",
+                "md:max-w-5/10",
+                "lg:max-w-4/9",
+                "xl:max-w-130",
+              )}
+            />
           </FlexCol>
-          {(currentLocalityCardParams || recentLocationsCardParams) && (
+          {/*  {(currentLocalityCardParams || recentLocationsCardParams) && (
             <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>
               {currentLocalityCardParams && (
                 <Grid.Item span={1}>
@@ -117,9 +126,9 @@ function RouteComponent() {
                     </Flex>
                   </FlexCol>
                 </Grid.Item>
-              )} */}
+              )} 
             </Grid>
-          )}
+          )}  */}
         </FlexCol>
       </Section>
     </div>

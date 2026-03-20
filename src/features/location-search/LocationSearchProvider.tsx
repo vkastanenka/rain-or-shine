@@ -11,9 +11,10 @@ export const ActionsContext = createContext<LocationSearchActions | null>(null);
 
 export const LocationSearchProvider = ({
   children,
-  ...props
+  size,
+  className,
 }: LocationSearchProps & { children: React.ReactNode }) => {
-  const { state, actions } = useLocationSearchContext(props);
+  const { state, actions } = useLocationSearchContext({ size, className });
 
   return (
     <StateContext.Provider value={state}>

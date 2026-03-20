@@ -1,52 +1,35 @@
 import { FaArrowRight } from "react-icons/fa";
-import { Button, FlexCol, Text, VirtualList } from "@/components";
-import { cn } from "@/utils";
-import { LABELS, LIST_ITEM_PADDING_MAP, QUERY_COUNT_MAP } from "../constants";
+import {
+  FlexCol,
+  TextInputSuggestionsButton,
+  TextInputSuggestionsHeader,
+  TextInputSuggestionsMessage,
+  VirtualList,
+} from "@/components";
+import { LABELS, QUERY_COUNT_MAP } from "../constants";
 import { useSearchActions, useSearchState } from "../hooks";
 import type { LocationResultsProps } from "../types";
-import { LocationSuggestionsHeader } from "./LocationSuggestionsHeader";
 import { LocationLink } from "./LocationLink";
 import { ScopeTabList } from "./ScopeTabList";
 
-const LocationResultsStatus = () => {
-  const { queryCount, isEmpty } = useSearchState();
+export const LocationResults = ({ containerRef }: LocationResultsProps) => {
+  const {
+    showLoading,
+    hasLocations,
+    locations,
+    queryCount,
+    isSettled,
+    isEmpty,
+  } = useSearchState();
   const { handleQueryCountIncrease } = useSearchActions();
 
   const canIncrease = queryCount === QUERY_COUNT_MAP.default;
 
   return (
-    <div className="w-full">
-      <div className={LIST_ITEM_PADDING_MAP.lg}>
-        <Text>{isEmpty ? LABELS.noLocationsFound : LABELS.searchToFind}</Text>
-      </div>
-      {isEmpty && canIncrease && (
-        <Button
-          color="neutral"
-          onClick={handleQueryCountIncrease}
-          className={cn(LIST_ITEM_PADDING_MAP.lg, "w-full", "rounded-none")}
-        >
-          {LABELS.expandSearchBreadth}
-          <FaArrowRight />
-        </Button>
-      )}
-    </div>
-  );
-};
-
-export const LocationResults = ({ containerRef }: LocationResultsProps) => {
-  const { isLoading, hasLocations, locations } = useSearchState();
-
-  if (isLoading && !hasLocations) {
-    return (
-      <LocationSuggestionsHeader label={LABELS.isLoadingMessage} pad="lg" />
-    );
-  }
-
-  return (
     <FlexCol>
-      <LocationSuggestionsHeader label={LABELS.locations} sticky>
+      <TextInputSuggestionsHeader label={LABELS.locations} sticky>
         <ScopeTabList />
-      </LocationSuggestionsHeader>
+      </TextInputSuggestionsHeader>
       {hasLocations ? (
         <VirtualList
           items={locations}
@@ -55,7 +38,21 @@ export const LocationResults = ({ containerRef }: LocationResultsProps) => {
           renderItem={(loc) => <LocationLink key={loc.id} location={loc} />}
         />
       ) : (
-        <LocationResultsStatus />
+        <TextInputSuggestionsMessage
+          label={
+            showLoading
+              ? LABELS.isLoadingMessage
+              : isEmpty
+                ? LABELS.noLocationsFound
+                : LABELS.searchToFind
+          }
+        />
+      )}
+      {isSettled && canIncrease && (
+        <TextInputSuggestionsButton onClick={handleQueryCountIncrease}>
+          {LABELS.expandSearchBreadth}
+          <FaArrowRight />
+        </TextInputSuggestionsButton>
       )}
     </FlexCol>
   );
