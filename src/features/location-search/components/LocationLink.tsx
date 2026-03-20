@@ -22,11 +22,15 @@ export const LocationLink = ({ location }: LocationLinkProps) => {
   };
 
   return (
-    <Link to={path} className="text-input-suggestions-item" onClick={handleClick}>
-      <Text type="large" className="font-medium">
+    <Link
+      to={path}
+      className="text-input-suggestions-item"
+      onClick={handleClick}
+    >
+      <Text type={{ base: "body1", sm: "large" }} className="font-medium">
         {location.name}
       </Text>
-      <Text className="opacity-70">
+      <Text type={{ base: "body2", sm: "body1" }} className="opacity-70">
         {location.admin1}, {location.country}
       </Text>
     </Link>

@@ -12,6 +12,7 @@ export const TextInputSuggestionsButton = ({
   return (
     <Button
       color="neutral"
+      size={{ base: "md", sm: "md", lg: "lg" }}
       onClick={onClick}
       className={cn(
         SUGGESTION_PADDING_MAP.lg,

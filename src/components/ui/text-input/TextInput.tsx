@@ -39,7 +39,11 @@ export const TextInput = ({
         value={value}
         type={type}
         list={suggestions?.id ? suggestions.id : undefined}
-        className={isSearch ? "" : combinedClasses}
+        className={cn(
+          isSearch ? "" : combinedClasses,
+          "[&::-webkit-search-cancel-button]:appearance-none",
+          "[&::-webkit-search-decoration]:appearance-none",
+        )}
       />
       {suggestions?.collection && suggestions?.collection.length > 0 && (
         <datalist id={suggestions.id}>

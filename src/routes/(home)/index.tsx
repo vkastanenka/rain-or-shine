@@ -32,15 +32,7 @@ function RouteComponent() {
                 <span>{LABELS.hero.secondaryTitle}</span>
               </Text>
             </div>
-            <LocationSearch
-              className={cn(
-                "max-w-90",
-                "sm:max-w-6/10",
-                "md:max-w-5/10",
-                "lg:max-w-4/9",
-                "xl:max-w-130",
-              )}
-            />
+            <LocationSearch className={cn("xl:max-w-130")} />
           </FlexCol>
           {/*  {(currentLocalityCardParams || recentLocationsCardParams) && (
             <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>

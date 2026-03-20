@@ -1,5 +1,9 @@
 import { FcGlobe } from "react-icons/fc";
-import { LazyCountryFlagIcon, type CountryFlagIconName } from "@/components";
+import {
+  Button,
+  LazyCountryFlagIcon,
+  type CountryFlagIconName,
+} from "@/components";
 import { cn } from "@/utils";
 import { QUERY_SCOPE_MAP } from "../constants";
 import { useSearchActions, useSearchState } from "../hooks";
@@ -18,8 +22,8 @@ const ScopeButton = ({ scope, isActive, onClick }: ScopeButtonProps) => {
     );
 
   return (
-    <button
-      type="button"
+    <Button
+      size={{ base: "xs", sm: "md" }}
       onClick={onClick}
       className={cn(
         "tab transition-all",
@@ -27,7 +31,7 @@ const ScopeButton = ({ scope, isActive, onClick }: ScopeButtonProps) => {
       )}
     >
       {Icon}
-    </button>
+    </Button>
   );
 };
 

@@ -18,7 +18,11 @@ export const TextInputSuggestionsHeader = ({
     className,
   );
 
-  const Label = <Text>{label}</Text>;
+  const Label = (
+    <Text type={{ base: "body1", sm: "large" }} className="font-medium">
+      {label}
+    </Text>
+  );
 
   if (!children) {
     return <div className={cn(baseClasses)}>{Label}</div>;

@@ -15,7 +15,11 @@ export const RecentLocations = () => {
   return (
     <FlexCol>
       <TextInputSuggestionsHeader label={LABELS.recentLocations}>
-        <Button shape="circle" onClick={handleRemoveRecentLocations}>
+        <Button
+          size={{ base: "xs", sm: "md" }}
+          shape="circle"
+          onClick={handleRemoveRecentLocations}
+        >
           <FaTimes />
         </Button>
       </TextInputSuggestionsHeader>
