@@ -38,13 +38,12 @@ interface BaseProps {
   display?: ResponsiveValue<ButtonDisplayMapKey>;
   unstyled?: boolean;
   disabled?: boolean;
+  onClick?: (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => void;
 }
 
 export type ButtonProps =
-  | (BaseProps & { href: string; to?: never; onClick?: never })
-  | (BaseProps & {
-      to: LinkProps["to"];
-      href?: never;
-      onClick?: never;
-    } & LinkProps)
-  | (BaseProps & { onClick?: () => void; to?: never; href?: never });
+  | (BaseProps & { href: string; to?: never })
+  | (BaseProps & { to: LinkProps["to"]; href?: never } & LinkProps)
+  | (BaseProps & { to?: never; href?: never });
