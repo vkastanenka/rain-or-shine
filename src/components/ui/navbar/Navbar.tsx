@@ -3,7 +3,7 @@ import {
   RainOrShineLogomark,
   RainOrShineLogotype,
 } from "@/assets/icons/rain-or-shine";
-import { ACCESSIBILITY_LABELS } from "@/constants";
+import { APP_ROUTES, ACCESSIBILITY_LABELS } from "@/constants";
 import { Container, FlexRow } from "@/components/layout";
 import { useGetLocalityByCoords } from "@/services";
 import { Button, ButtonLink, ButtonAnchor } from "../button";
@@ -27,7 +27,7 @@ export const Navbar = () => {
       <Container>
         <FlexRow gap={2} align="center" justify="between">
           <ButtonLink
-            to="/"
+            to={APP_ROUTES.home.path}
             aria-label={ACCESSIBILITY_LABELS.navigation.home}
             unstyled
           >

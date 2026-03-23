@@ -22,7 +22,16 @@ export const getButtonStyles = <T extends ButtonStyleProps>(props: T) => {
         display && resolveResponsiveValues(display, BUTTON_DISPLAY_MAP),
         className,
       )
-    : cn("bg-transparent border-none p-0 appearance-none", className);
+    : cn(
+        "bg-transparent",
+        "border-none",
+        "p-0",
+        "appearance-none",
+        "transition-all",
+        "hover:opacity-80",
+        "active:scale-98",
+        className,
+      );
 
   return { styles, rest };
 };
