@@ -1,3 +1,3 @@
 export * from "./Flex";
-export * from "./flex.constants";
-export * from "./flex.types";
+export * from "./constants";
+export * from "./types";

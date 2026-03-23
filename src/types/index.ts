@@ -15,6 +15,10 @@ export interface GeolocationCoordinates {
   latitude: number;
 }
 
+export type HTMLAnchorProps = React.ComponentProps<"a">;
+export type HTMLButtonProps = React.ComponentProps<"button">;
+export type HTMLDivProps = React.ComponentProps<"div">;
+
 export type Ref<T> = React.Ref<T | null> | undefined;
 
 export type AnchorRef = React.Ref<HTMLAnchorElement | null> | undefined;

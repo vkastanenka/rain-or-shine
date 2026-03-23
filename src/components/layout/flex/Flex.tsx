@@ -4,8 +4,8 @@ import {
   FLEX_DIRECTION_MAP,
   FLEX_GAP_MAP,
   FLEX_JUSTIFY_MAP,
-} from "./flex.constants";
-import { type FlexProps } from "./flex.types";
+} from "./constants";
+import { type FlexProps } from "./types";
 
 export const Flex = ({
   direction = "row",
@@ -14,7 +14,6 @@ export const Flex = ({
   gap = 0,
   wrap = false,
   stretchItems = false,
-  fit = false,
   className,
   children,
   ...props
@@ -32,7 +31,6 @@ export const Flex = ({
         }),
         resolveResponsiveValues(gap, FLEX_GAP_MAP),
         stretchItems && "*:flex-1",
-        fit && "w-full",
         className,
       )}
       {...props}
