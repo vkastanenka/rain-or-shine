@@ -1,64 +1,33 @@
+import { forwardRef } from "react";
 import { Link } from "@tanstack/react-router";
-import { cn, resolveResponsiveValues } from "@/utils";
-import {
-  BUTTON_SIZE_MAP,
-  BUTTON_COLOR_MAP,
-  BUTTON_VARIANT_MAP,
-  BUTTON_SHAPE_MAP,
-  BUTTON_DISPLAY_MAP,
-} from "./button.constants";
-import { type ButtonProps } from "./button.types";
+import type { AnchorRef, ButtonRef } from "@/types";
+import type { ButtonProps, ButtonLinkProps, ButtonAnchorProps } from "./types";
+import { getButtonStyles } from "./utils";
 
-export const Button = ({
-  children,
-  className,
-  size,
-  color,
-  variant,
-  shape,
-  display,
-  unstyled = false,
-  ...props
-}: ButtonProps) => {
-  const combinedClasses = !unstyled
-    ? cn(
-        "btn",
-        size && resolveResponsiveValues(size, BUTTON_SIZE_MAP),
-        color && resolveResponsiveValues(color, BUTTON_COLOR_MAP),
-        variant && resolveResponsiveValues(variant, BUTTON_VARIANT_MAP),
-        shape && resolveResponsiveValues(shape, BUTTON_SHAPE_MAP),
-        display && resolveResponsiveValues(display, BUTTON_DISPLAY_MAP),
-        className,
-      )
-    : cn("bg-transparent border-none p-0 appearance-none", className);
+export const Button = forwardRef((props: ButtonProps, ref: ButtonRef) => {
+  const { styles, rest } = getButtonStyles(props);
+  return <button ref={ref} type="button" className={styles} {...rest} />;
+});
 
-  // Common wrapper logic
-  const renderContent = () => <>{children}</>;
+export const ButtonLink = forwardRef(
+  ({ to, ...props }: ButtonLinkProps, ref: AnchorRef) => {
+    const { styles, rest } = getButtonStyles(props);
+    return <Link ref={ref} to={to} className={styles} {...rest} />;
+  },
+);
 
-  if ("href" in props) {
+export const ButtonAnchor = forwardRef(
+  ({ href, ...props }: ButtonAnchorProps, ref: AnchorRef) => {
+    const { styles, rest } = getButtonStyles(props);
     return (
       <a
-        href={props.href}
+        ref={ref}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={combinedClasses}
-      >
-        {renderContent()}
-      </a>
+        className={styles}
+        {...rest}
+      />
     );
-  }
-
-  if ("to" in props) {
-    return (
-      <Link {...props} className={combinedClasses}>
-        {renderContent()}
-      </Link>
-    );
-  }
-
-  return (
-    <button disabled={props.disabled} onClick={props.onClick} className={combinedClasses} type="button">
-      {renderContent()}
-    </button>
-  );
-};
+  },
+);

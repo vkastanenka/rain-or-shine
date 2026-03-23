@@ -12,7 +12,7 @@
     "generate-icons:erikflowers-weather-icons": "npm run generate-icons -- erikflowers-weather-icons",
     "generate-icons:meteocons-fill": "npm run generate-icons -- meteocons/fill",
     "generate-icons:meteocons-line": "npm run generate-icons -- meteocons/line",
-    "generate-tailwind-safelist": "tsx ./scripts/generate-tailwind-safelist.mjs"
+    "generate-tailwind-maps": "node ./scripts/generate-tailwind-maps.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.0",

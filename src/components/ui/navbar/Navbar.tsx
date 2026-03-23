@@ -5,7 +5,7 @@ import {
 } from "@/assets/icons/rain-or-shine";
 import { Container, FlexRow } from "@/components/layout";
 import { useGetLocalityByCoords } from "@/services";
-import { Button } from "../button";
+import { ButtonLink } from "../button";
 import { NavButton } from "./NavButton";
 import {
   ARIA_LABELS,
@@ -25,10 +25,10 @@ export const Navbar = () => {
     <nav className="bg-base-300 py-3 sticky top-0">
       <Container>
         <FlexRow gap={2} align="center" justify="between">
-          <Button aria-label={ARIA_LABELS.home} to="/" unstyled>
+          <ButtonLink aria-label={ARIA_LABELS.home} to="/" unstyled>
             <RainOrShineLogotype className="hidden md:block w-60 lg:w-70" />
             <RainOrShineLogomark className="block md:hidden w-10 sm:w-1" />
-          </Button>
+          </ButtonLink>
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">
               {NAV_LINKS.map((link, i) => (

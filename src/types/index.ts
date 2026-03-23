@@ -7,3 +7,8 @@ export interface GeolocationCoordinates {
   longitude: number;
   latitude: number;
 }
+
+export type Ref<T> = React.Ref<T | null> | undefined;
+
+export type AnchorRef = React.Ref<HTMLAnchorElement | null> | undefined;
+export type ButtonRef = React.Ref<HTMLButtonElement | null> | undefined;
