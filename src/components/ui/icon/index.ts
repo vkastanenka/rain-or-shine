@@ -1,2 +1,9 @@
-export * from "./IconWrapper";
-export * from "./icon.types";
+export * from "./IconContainer";
+export * from "./LazyIcon";
+export type {
+  CountryFlagIconName,
+  ReactIconName,
+  ErikFlowersWeatherIconName,
+  MeteoconIconName,
+} from "./types";
+export * from "./utils";

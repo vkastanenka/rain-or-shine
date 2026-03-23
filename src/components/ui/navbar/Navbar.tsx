@@ -1,8 +1,6 @@
-import { FaSearch } from "react-icons/fa";
-import {
-  RainOrShineLogomark,
-  RainOrShineLogotype,
-} from "@/assets/icons/rain-or-shine";
+import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
+import { RosLogomark } from "@/assets/icons/rain-or-shine/RosLogomark";
+import { RosLogotype } from "@/assets/icons/rain-or-shine/RosLogotype";
 import { APP_ROUTES, ACCESSIBILITY_LABELS } from "@/constants";
 import { Container, FlexRow } from "@/components/layout";
 import { useGetLocalityByCoords } from "@/services";
@@ -31,8 +29,8 @@ export const Navbar = () => {
             aria-label={ACCESSIBILITY_LABELS.navigation.home}
             unstyled
           >
-            <RainOrShineLogotype className="hidden md:block w-60 lg:w-70" />
-            <RainOrShineLogomark className="block md:hidden w-10 sm:w-1" />
+            <RosLogomark className="hidden md:block w-60 lg:w-70" />
+            <RosLogotype className="block md:hidden w-10 sm:w-1" />
           </ButtonLink>
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">

@@ -1,8 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol, Grid, Flex, Button } from "@/components";
-import { formatWeatherUrlPath, LocalityCard, LocationSearch } from "@/features";
-import { cn } from "@/utils";
-import { LABELS } from "./-constants";
+import {
+  // Text,
+  Section,
+  // FlexCol,
+  // Grid,
+  // Flex,
+  // Button,
+  // LazyReactIcon,
+  // LazyCountryFlagIcon,
+  LazyErikFlowersWeatherIcon,
+  LazyCountryFlagIcon,
+  LazyMeteoconIcon,
+} from "@/components";
+// import { formatWeatherUrlPath, LocalityCard, LocationSearch } from "@/features";
+// import { cn } from "@/utils";
+// import { LABELS } from "./-constants";
 import { routeLoader } from "./-utils";
 
 export const Route = createFileRoute("/(home)/")({
@@ -20,109 +32,115 @@ function RouteComponent() {
 
   return (
     <div>
-      <Section py={{ base: 10, md: 16 }}>
-        <FlexCol gap={{ base: 4, md: 6 }}>
-          <FlexCol gap={4} className="w-full">
-            <div>
-              <Text type={{ base: "headline6", sm: "headline5" }}>
-                {LABELS.hero.superTitle()}
-              </Text>
-              <Text type={{ base: "headline3", sm: "headline2" }}>
-                <span className="block">{LABELS.hero.primaryTitle}</span>
-                <span>{LABELS.hero.secondaryTitle}</span>
-              </Text>
-            </div>
-            <LocationSearch className={cn("xl:max-w-130")} />
-          </FlexCol>
-          {/*  {(currentLocalityCardParams || recentLocationsCardParams) && (
-            <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>
-              {currentLocalityCardParams && (
-                <Grid.Item span={1}>
-                  <FlexCol fit gap={1} stretchItems>
-                    <Text type="large" className="font-medium">
-                      {LABELS.currentLocation.title}
-                    </Text>
-                    <Button
-                      unstyled
-                      className="hover-3d w-full"
-                      to={formatWeatherUrlPath(
-                        currentLocality?.countryName || "",
-                        currentLocality?.locality || "",
-                        currentLocality?.city || "",
-                        "current",
-                      )}
-                    >
-                      <LocalityCard
-                        city={currentLocalityCardParams.city}
-                        region={currentLocalityCardParams.region}
-                        WmoIcon={currentLocalityCardParams.WmoIcon}
-                        temperature={currentLocalityCardParams.temperature}
-                      />
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </Button>
-                  </FlexCol>
-                </Grid.Item>
-              )}
-              {/* {recentLocationsCardParams.length > 0 && (
-                <Grid.Item
-                  span={{
-                    base: 1,
-                    lg: recentLocationsCardParams.length === 1 ? 1 : 2,
-                  }}
-                >
-                  <FlexCol fit gap={1}>
-                    <Text type="large" className="font-medium">
-                      {LABELS.recentLocations.title}
-                    </Text>
-                    <Flex
-                      fit
-                      gap={4}
-                      direction={{ base: "col", md: "row" }}
-                      stretchItems
-                    >
-                      {recentLocationsCardParams.map((params, i) => (
-                        <Button
-                          key={`${params.city}-${i}`}
-                          unstyled
-                          className="hover-3d"
-                          to={formatWeatherUrlPath(
-                            recentLocations[i].country || "",
-                            recentLocations[i].admin1 || "",
-                            recentLocations[i].name || "",
-                            "current",
-                          )}
-                        >
-                          <LocalityCard
-                            city={params.city}
-                            region={params.region}
-                            WmoIcon={params.WmoIcon}
-                            temperature={params.temperature}
-                          />
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </Button>
-                      ))}
-                    </Flex>
-                  </FlexCol>
-                </Grid.Item>
-              )} 
-            </Grid>
-          )}  */}
-        </FlexCol>
+      <Section>
+        <LazyCountryFlagIcon name="CA" />
+        <LazyErikFlowersWeatherIcon name="WiAlien" />
+        <LazyMeteoconIcon lib="fill" name="Barometer" />
       </Section>
     </div>
   );
 }
+
+//         <FlexCol gap={{ base: 4, md: 6 }}>
+//           <FlexCol gap={4} className="w-full">
+//             <div>
+//               <Text type={{ base: "headline6", sm: "headline5" }}>
+//                 {LABELS.hero.superTitle()}
+//               </Text>
+//               <Text type={{ base: "headline3", sm: "headline2" }}>
+//                 <span className="block">{LABELS.hero.primaryTitle}</span>
+//                 <span>{LABELS.hero.secondaryTitle}</span>
+//               </Text>
+//             </div>
+//             <LocationSearch className={cn("xl:max-w-130")} />
+//           </FlexCol>
+//           {(currentLocalityCardParams || recentLocationsCardParams) && (
+//             <Grid fit gap={4} cols={{ base: 1, lg: 3 }}>
+//               {currentLocalityCardParams && (
+//                 <Grid.Item span={1}>
+//                   <FlexCol fit gap={1} stretchItems>
+//                     <Text type="large" className="font-medium">
+//                       {LABELS.currentLocation.title}
+//                     </Text>
+//                     <Button
+//                       unstyled
+//                       className="hover-3d w-full"
+//                       to={formatWeatherUrlPath(
+//                         currentLocality?.countryName || "",
+//                         currentLocality?.locality || "",
+//                         currentLocality?.city || "",
+//                         "current",
+//                       )}
+//                     >
+//                       <LocalityCard
+//                         city={currentLocalityCardParams.city}
+//                         region={currentLocalityCardParams.region}
+//                         WmoIcon={currentLocalityCardParams.WmoIcon}
+//                         temperature={currentLocalityCardParams.temperature}
+//                       />
+//                       <div></div>
+//                       <div></div>
+//                       <div></div>
+//                       <div></div>
+//                       <div></div>
+//                       <div></div>
+//                       <div></div>
+//                       <div></div>
+//                     </Button>
+//                   </FlexCol>
+//                 </Grid.Item>
+//               )}
+//               {recentLocationsCardParams.length > 0 && (
+//                 <Grid.Item
+//                   span={{
+//                     base: 1,
+//                     lg: recentLocationsCardParams.length === 1 ? 1 : 2,
+//                   }}
+//                 >
+//                   <FlexCol fit gap={1}>
+//                     <Text type="large" className="font-medium">
+//                       {LABELS.recentLocations.title}
+//                     </Text>
+//                     <Flex
+//                       fit
+//                       gap={4}
+//                       direction={{ base: "col", md: "row" }}
+//                       stretchItems
+//                     >
+//                       {recentLocationsCardParams.map((params, i) => (
+//                         <Button
+//                           key={`${params.city}-${i}`}
+//                           unstyled
+//                           className="hover-3d"
+//                           to={formatWeatherUrlPath(
+//                             recentLocations[i].country || "",
+//                             recentLocations[i].admin1 || "",
+//                             recentLocations[i].name || "",
+//                             "current",
+//                           )}
+//                         >
+//                           <LocalityCard
+//                             city={params.city}
+//                             region={params.region}
+//                             WmoIcon={params.WmoIcon}
+//                             temperature={params.temperature}
+//                           />
+//                           <div></div>
+//                           <div></div>
+//                           <div></div>
+//                           <div></div>
+//                           <div></div>
+//                           <div></div>
+//                           <div></div>
+//                           <div></div>
+//                         </Button>
+//                       ))}
+//                     </Flex>
+//                   </FlexCol>
+//                 </Grid.Item>
+//               )}
+//             </Grid>
+//           )}
+//     </FlexCol>
+//   </Section>
+// </div>

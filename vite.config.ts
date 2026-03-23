@@ -20,7 +20,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       '@country-flag-icons': path.resolve(__dirname, 'node_modules/country-flag-icons/react/3x2'),
-      '@react-icons': path.resolve(__dirname, 'node_modules/react-icons'),
+      '@react-icons-all-files': path.resolve(__dirname, 'node_modules/@react-icons/all-files'),
       '@erikflowers-weather-icons': path.resolve(__dirname, 'src/assets/icons/erikflowers-weather-icons'),
       '@meteocons': path.resolve(__dirname, 'src/assets/icons/meteocons'),
     },

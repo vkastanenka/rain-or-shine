@@ -1,5 +1,6 @@
 import { cn, resolveResponsiveValues } from "@/utils";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import { Button } from "../button";
 import {
   TEXT_INPUT_SIZE_MAP,

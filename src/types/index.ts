@@ -19,3 +19,4 @@ export type Ref<T> = React.Ref<T | null> | undefined;
 
 export type AnchorRef = React.Ref<HTMLAnchorElement | null> | undefined;
 export type ButtonRef = React.Ref<HTMLButtonElement | null> | undefined;
+export type DivRef = React.Ref<HTMLDivElement | null> | undefined;

@@ -1,4 +1,4 @@
-import { FcGlobe } from "react-icons/fc";
+import { FcGlobe } from "@react-icons/all-files/fc/FcGlobe";
 import {
   Button,
   LazyCountryFlagIcon,

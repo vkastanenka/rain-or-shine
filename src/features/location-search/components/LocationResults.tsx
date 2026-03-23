@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "@react-icons/all-files/fa/FaArrowRight";
 import {
   FlexCol,
   TextInputSuggestionsButton,

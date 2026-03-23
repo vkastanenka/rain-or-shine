@@ -1,4 +1,6 @@
-import { FaBriefcase, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaBriefcase } from "@react-icons/all-files/fa/FaBriefcase";
+import { FaLinkedin } from "@react-icons/all-files/fa/FaLinkedin";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import {
   LABELS,
   APP_ROUTES,
