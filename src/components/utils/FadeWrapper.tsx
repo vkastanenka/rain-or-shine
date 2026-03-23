@@ -1,6 +1,5 @@
-import { cn } from "@/utils";
-
 import { useState, useEffect } from "react";
+import { cn } from "@/utils";
 
 export const FadeWrapper = ({ children }: { children: React.ReactNode }) => {
   const [isLoaded, setIsLoaded] = useState(false);

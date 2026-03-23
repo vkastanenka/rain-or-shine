@@ -2,7 +2,7 @@ import type { MapKey, MapValue } from "@/types";
 import { SUGGESTION_PADDING_MAP } from "./constants";
 
 /**
- * Maps
+ * Constants
  */
 
 export type SuggestionPaddingMapKey = MapKey<typeof SUGGESTION_PADDING_MAP>;

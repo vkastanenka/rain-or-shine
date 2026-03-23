@@ -6,7 +6,10 @@ import { formatInternalLink, formatExternalLink } from "./utils";
  */
 
 export const ACCESSIBILITY_LABELS = {
-  actions: { searchDrawer: "Open location search input drawer" },
+  actions: {
+    clearSearchInput: "Clear search input",
+    searchDrawer: "Open location search input drawer",
+  },
   navigation: {
     home: formatInternalLink("home"),
   },

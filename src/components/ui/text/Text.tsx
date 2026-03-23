@@ -1,6 +1,6 @@
 import { cn, resolveResponsiveValues } from "@/utils";
-import { TEXT_TYPE_MAP } from "./text.constants";
-import { type TextProps } from "./text.types";
+import { TEXT_TYPE_MAP } from "./constants";
+import { type TextProps } from "./types";
 
 export const Text = ({
   element: Component = "p",

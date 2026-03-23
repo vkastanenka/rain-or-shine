@@ -29,13 +29,7 @@ export const TextInputSuggestionsHeader = ({
   }
 
   return (
-    <FlexRow
-      fit
-      gap={2}
-      align="center"
-      justify="between"
-      className={baseClasses}
-    >
+    <FlexRow gap={2} align="center" justify="between" className={baseClasses}>
       {Label}
       {children}
     </FlexRow>

@@ -51,7 +51,7 @@ export const NAV_SOCIAL_LINKS: SocialLink[] = SOCIAL_CONFIG.map(
 );
 
 /**
- * STYLES
+ * Styles
  */
 
 const BASE_BUTTON_STYLES = {

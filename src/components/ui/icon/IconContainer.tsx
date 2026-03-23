@@ -1,11 +1,10 @@
 import { forwardRef } from "react";
 import { cn } from "@/utils";
-import type { DivRef } from "@/types";
+import type { DivRef, HTMLDivProps } from "@/types";
 import { iconContainerStyles } from "./constants";
-import { type IconContainerProps } from "./types";
 
 export const IconContainer = forwardRef(
-  ({ children, className }: IconContainerProps, ref: DivRef) => {
+  ({ children, className }: HTMLDivProps, ref: DivRef) => {
     return (
       <div ref={ref} className={cn(iconContainerStyles, className)}>
         {children}

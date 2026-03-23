@@ -1,7 +1,8 @@
 import React, { lazy, Suspense, useMemo, useState } from "react";
 import { FaFlag } from "@react-icons/all-files/fa/FaFlag";
-import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import { cn } from "@/utils";
+import { IconContainer } from "./IconContainer";
+import { iconContainerStyles, iconComponentStyles } from "./constants";
 import type {
   LazyIconBaseProps,
   LazyCountryFlagIconProps,
@@ -9,8 +10,7 @@ import type {
   LazyErikFlowersWeatherIconProps,
   LazyMeteoconIconProps,
 } from "./types";
-import { iconContainerStyles, iconComponentStyles } from "./constants";
-import { IconContainer } from "./IconContainer";
+import { defaultFallbackIconFn } from "./utils";
 
 const iconCache: Record<
   string,
@@ -18,8 +18,6 @@ const iconCache: Record<
 > = {};
 
 const loadedIcons = new Set<string>();
-
-const defaultFallbackIconFn = () => ({ default: () => <FaTimes /> });
 
 const LazyIconBase = ({
   cacheKey,
@@ -42,7 +40,7 @@ const LazyIconBase = ({
         <div
           className={cn(
             iconContainerStyles,
-            "rounded-sm animate-pulse bg-base-300",
+            "aspect-square rounded-sm animate-pulse bg-base-300",
             className,
           )}
         />
@@ -78,7 +76,7 @@ export const LazyCountryFlagIcon = ({
   />
 );
 
-export const LazyReactIcon = ({ name, lib, ...props }: LazyReactIconProps) => (
+export const LazyReactIcon = ({ lib, name, ...props }: LazyReactIconProps) => (
   <LazyIconBase
     cacheKey={`ri-${lib}-${name}`}
     importFn={() =>

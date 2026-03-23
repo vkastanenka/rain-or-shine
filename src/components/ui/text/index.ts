@@ -1,3 +1,3 @@
 export * from "./Text";
-export * from "./text.constants";
-export * from "./text.types";
+export * from "./constants";
+export * from "./types";

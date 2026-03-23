@@ -29,8 +29,8 @@ export const Navbar = () => {
             aria-label={ACCESSIBILITY_LABELS.navigation.home}
             unstyled
           >
-            <RosLogomark className="hidden md:block w-60 lg:w-70" />
-            <RosLogotype className="block md:hidden w-10 sm:w-1" />
+            <RosLogotype className="hidden md:block w-60 lg:w-70" />
+            <RosLogomark className="block md:hidden w-10 sm:w-12" />
           </ButtonLink>
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">

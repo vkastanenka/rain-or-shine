@@ -1,12 +1,11 @@
 /**
- * Imports
+ * Library Types
  */
 
-// Country Flag Icons
-
 import type * as CountryFlagIcons from "country-flag-icons/react/3x2";
-
-// React Icons
+import type * as ErikFlowersWeatherIcons from "@/assets/icons/erikflowers-weather-icons";
+import type * as MeteoconFillIcons from "@/assets/icons/meteocons/fill";
+import type * as MeteoconLineIcons from "@/assets/icons/meteocons/line";
 
 import type * as AiIcons from "react-icons/ai";
 import type * as BiIcons from "react-icons/bi";
@@ -40,20 +39,9 @@ import type * as TiIcons from "react-icons/ti";
 import type * as VscIcons from "react-icons/vsc";
 import type * as WiIcons from "react-icons/wi";
 
-// Erik Flowers Weather Icons
-
-import type * as ErikFlowersWeatherIcons from "@/assets/icons/erikflowers-weather-icons";
-
-// Meteocons
-
-import type * as MeteoconFillIcons from "@/assets/icons/meteocons/fill";
-import type * as MeteoconLineIcons from "@/assets/icons/meteocons/line";
-
 /**
  * Lazy Icons
  */
-
-// Utility
 
 type LazyIconProps<T> = T & React.SVGAttributes<SVGElement>;
 
@@ -162,9 +150,3 @@ export type MeteoconIconName =
   | { lib: "line"; name: MeteoconLineIconName };
 
 export type LazyMeteoconIconProps = LazyIconProps<MeteoconIconName>;
-
-/**
- * Container
- */
-
-export type IconContainerProps = React.ComponentProps<"div">;

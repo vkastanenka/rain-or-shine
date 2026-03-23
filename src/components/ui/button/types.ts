@@ -1,6 +1,11 @@
 import { type LinkProps } from "@tanstack/react-router";
 import { type ResponsiveValue } from "@/utils";
-import type { MapKey, MapValue } from "@/types";
+import type {
+  MapKey,
+  MapValue,
+  HTMLAnchorProps,
+  HTMLButtonProps,
+} from "@/types";
 import {
   BUTTON_SIZE_MAP,
   BUTTON_COLOR_MAP,
@@ -32,9 +37,6 @@ export type ButtonDisplayMapValue = MapValue<typeof BUTTON_DISPLAY_MAP>;
  * Components
  */
 
-type HTMLAnchorProps = React.ComponentProps<"a">;
-type HTMLButtonProps = React.ComponentProps<"button">;
-
 export interface ButtonStyleProps {
   unstyled?: boolean;
   className?: string;
@@ -49,8 +51,8 @@ export type BaseButtonProps = {
   children: React.ReactNode;
 } & ButtonStyleProps;
 
-export type BaseButtonLinkProps = BaseButtonProps & { showActive?: boolean };
-
 export type ButtonProps = BaseButtonProps & HTMLButtonProps;
-export type ButtonLinkProps = BaseButtonLinkProps & LinkProps;
+export type ButtonLinkProps = BaseButtonProps & {
+  showActive?: boolean;
+} & LinkProps;
 export type ButtonAnchorProps = BaseButtonProps & HTMLAnchorProps;

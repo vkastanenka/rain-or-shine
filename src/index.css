@@ -101,6 +101,10 @@
     @apply text-neutral-content! hover:bg-neutral!;
   }
 
+  .text-input-button-color {
+    @apply text-[color-mix(in_oklab,var(--color-base-content)_20%,transparent)];
+  }
+
   .text-input-suggestions-container {
     @apply absolute top-full left-0 w-full mt-2 bg-base-100 border border-base-300 rounded-lg shadow-xl z-50 max-h-[50vh] overflow-auto;
   }
@@ -126,5 +130,9 @@
 
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .remove-input-decorations {
+    @apply [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none;
   }
 }

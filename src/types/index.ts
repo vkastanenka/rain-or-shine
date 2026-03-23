@@ -18,6 +18,7 @@ export interface GeolocationCoordinates {
 export type HTMLAnchorProps = React.ComponentProps<"a">;
 export type HTMLButtonProps = React.ComponentProps<"button">;
 export type HTMLDivProps = React.ComponentProps<"div">;
+export type HTMLElementProps = React.HTMLAttributes<HTMLElement>
 
 export type Ref<T> = React.Ref<T | null> | undefined;
 

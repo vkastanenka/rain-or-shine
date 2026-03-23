@@ -1,13 +1,15 @@
 import { forwardRef, type ComponentType, type SVGProps } from "react";
-import type { DivRef } from "@/types";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
+import type { DivRef, HTMLDivProps } from "@/types";
 import { IconContainer } from "./IconContainer";
-import { type IconContainerProps } from "./types";
 import { iconComponentStyles } from "./constants";
 
 export const createIcon = (Svg: ComponentType<SVGProps<SVGSVGElement>>) => {
-  return forwardRef((props: IconContainerProps, ref: DivRef) => (
+  return forwardRef((props: HTMLDivProps, ref: DivRef) => (
     <IconContainer ref={ref} {...props}>
       <Svg className={iconComponentStyles} />
     </IconContainer>
   ));
 };
+
+export const defaultFallbackIconFn = () => ({ default: () => <FaTimes /> });
