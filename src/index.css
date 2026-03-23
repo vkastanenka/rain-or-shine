@@ -93,8 +93,12 @@
 }
 
 @layer components {
-  .button-ghost-neutral {
-    @apply hover:bg-neutral!;
+  .btn-soft.btn-neutral {
+    @apply text-neutral-content! bg-neutral/7! hover:bg-neutral!;
+  }
+
+  .btn-ghost.btn-neutral {
+    @apply text-neutral-content! hover:bg-neutral!;
   }
 
   .text-input-suggestions-container {

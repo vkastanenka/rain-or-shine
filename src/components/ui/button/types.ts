@@ -45,10 +45,12 @@ export interface ButtonStyleProps {
   display?: ResponsiveValue<ButtonDisplayMapKey>;
 }
 
-export type BaseButtonprops = {
+export type BaseButtonProps = {
   children: React.ReactNode;
 } & ButtonStyleProps;
 
-export type ButtonProps = BaseButtonprops & HTMLButtonProps;
-export type ButtonLinkProps = BaseButtonprops & LinkProps;
-export type ButtonAnchorProps = BaseButtonprops & HTMLAnchorProps;
+export type BaseButtonLinkProps = BaseButtonProps & { showActive?: boolean };
+
+export type ButtonProps = BaseButtonProps & HTMLButtonProps;
+export type ButtonLinkProps = BaseButtonLinkProps & LinkProps;
+export type ButtonAnchorProps = BaseButtonProps & HTMLAnchorProps;

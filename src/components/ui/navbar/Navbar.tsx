@@ -5,14 +5,15 @@ import {
 } from "@/assets/icons/rain-or-shine";
 import { Container, FlexRow } from "@/components/layout";
 import { useGetLocalityByCoords } from "@/services";
-import { ButtonLink } from "../button";
-import { NavButton } from "./NavButton";
+import { Button, ButtonLink, ButtonAnchor } from "../button";
 import {
   ARIA_LABELS,
-  NAV_BUTTON_VARIANT_MAP,
   NAV_LINKS,
   SOCIAL_LINKS,
+  ICON_BUTTON_STYLES,
+  TEXT_BUTTON_STYLES,
 } from "./constants";
+import { resolveTo } from "./utils";
 
 export const Navbar = () => {
   const { data: locality } = useGetLocalityByCoords();
@@ -32,32 +33,32 @@ export const Navbar = () => {
           <FlexRow gap={2} align="center">
             <FlexRow gap={2} align="center" className="hidden sm:flex">
               {NAV_LINKS.map((link, i) => (
-                <NavButton
+                <ButtonLink
                   key={`${link.label}-${i}`}
-                  to={
-                    typeof link.to === "function" ? link.to(locality) : link.to
-                  }
+                  to={resolveTo(link, locality)}
+                  showActive={true}
+                  {...TEXT_BUTTON_STYLES}
                 >
                   {link.label}
-                </NavButton>
+                </ButtonLink>
               ))}
             </FlexRow>
-            <NavButton
+            <Button
               aria-label={ARIA_LABELS.search}
-              variant={NAV_BUTTON_VARIANT_MAP.icon}
               onClick={openLocationSearch}
+              {...ICON_BUTTON_STYLES}
             >
               <FaSearch />
-            </NavButton>
+            </Button>
             {SOCIAL_LINKS.map(({ ariaLabel, href, Icon }, i) => (
-              <NavButton
+              <ButtonAnchor
                 key={`navbar-social-link-${i}`}
                 aria-label={ariaLabel}
                 href={href}
-                variant={NAV_BUTTON_VARIANT_MAP.icon}
+                {...ICON_BUTTON_STYLES}
               >
                 <Icon />
-              </NavButton>
+              </ButtonAnchor>
             ))}
           </FlexRow>
         </FlexRow>

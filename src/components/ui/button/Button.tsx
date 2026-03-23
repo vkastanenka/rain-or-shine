@@ -10,9 +10,23 @@ export const Button = forwardRef((props: ButtonProps, ref: ButtonRef) => {
 });
 
 export const ButtonLink = forwardRef(
-  ({ to, ...props }: ButtonLinkProps, ref: AnchorRef) => {
+  (
+    { to, showActive, activeProps, ...props }: ButtonLinkProps,
+    ref: AnchorRef,
+  ) => {
     const { styles, rest } = getButtonStyles(props);
-    return <Link ref={ref} to={to} className={styles} {...rest} />;
+    return (
+      <Link
+        ref={ref}
+        to={to}
+        className={styles}
+        activeProps={{
+          ...(showActive && { className: "btn-active" }),
+          ...activeProps,
+        }}
+        {...rest}
+      />
+    );
   },
 );
 

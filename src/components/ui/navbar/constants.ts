@@ -3,6 +3,7 @@ import { FaBriefcase, FaGithub, FaLinkedin } from "react-icons/fa";
 import { formatWeatherUrlPath, FORECAST_PERIOD_MAP } from "@/features";
 import { type Locality } from "@/services";
 import type { NavLink, SocialLink } from "./type";
+import type { ButtonStyleProps } from "../button";
 
 export const LABELS = {
   weather: "Weather",
@@ -26,11 +27,6 @@ const URLS = {
   linkedIn: "https://www.linkedin.com/in/vkastanenka",
   portfolio: "https://www.vkastanenka.com",
   github: "https://github.com/vkastanenka",
-} as const;
-
-export const NAV_BUTTON_VARIANT_MAP = {
-  text: "text",
-  icon: "icon",
 } as const;
 
 const WEATHER_NAV_LINK: NavLink = {
@@ -76,3 +72,19 @@ export const SOCIAL_LINKS: SocialLink[] = [
   PORTFOLIO_SOCIAL_LINK,
   GITHUB_SOCIAL_LINK,
 ];
+
+const BASE_BUTTON_STYLES = {
+  variant: "ghost",
+  color: "neutral",
+} as const satisfies ButtonStyleProps;
+
+export const ICON_BUTTON_STYLES = {
+  ...BASE_BUTTON_STYLES,
+  shape: "circle",
+  size: { base: "sm", sm: "md", lg: "lg" },
+} as const satisfies ButtonStyleProps;
+
+export const TEXT_BUTTON_STYLES = {
+  ...BASE_BUTTON_STYLES,
+  size: { base: "md", lg: "lg" },
+} as const satisfies ButtonStyleProps;
