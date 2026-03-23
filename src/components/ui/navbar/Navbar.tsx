@@ -3,13 +3,13 @@ import {
   RainOrShineLogomark,
   RainOrShineLogotype,
 } from "@/assets/icons/rain-or-shine";
+import { ACCESSIBILITY_LABELS } from "@/constants";
 import { Container, FlexRow } from "@/components/layout";
 import { useGetLocalityByCoords } from "@/services";
 import { Button, ButtonLink, ButtonAnchor } from "../button";
 import {
-  ARIA_LABELS,
   NAV_LINKS,
-  SOCIAL_LINKS,
+  NAV_SOCIAL_LINKS,
   ICON_BUTTON_STYLES,
   TEXT_BUTTON_STYLES,
 } from "./constants";
@@ -26,7 +26,11 @@ export const Navbar = () => {
     <nav className="bg-base-300 py-3 sticky top-0">
       <Container>
         <FlexRow gap={2} align="center" justify="between">
-          <ButtonLink aria-label={ARIA_LABELS.home} to="/" unstyled>
+          <ButtonLink
+            to="/"
+            aria-label={ACCESSIBILITY_LABELS.navigation.home}
+            unstyled
+          >
             <RainOrShineLogotype className="hidden md:block w-60 lg:w-70" />
             <RainOrShineLogomark className="block md:hidden w-10 sm:w-1" />
           </ButtonLink>
@@ -44,13 +48,13 @@ export const Navbar = () => {
               ))}
             </FlexRow>
             <Button
-              aria-label={ARIA_LABELS.search}
+              aria-label={ACCESSIBILITY_LABELS.actions.searchDrawer}
               onClick={openLocationSearch}
               {...ICON_BUTTON_STYLES}
             >
               <FaSearch />
             </Button>
-            {SOCIAL_LINKS.map(({ ariaLabel, href, Icon }, i) => (
+            {NAV_SOCIAL_LINKS.map(({ ariaLabel, href, Icon }, i) => (
               <ButtonAnchor
                 key={`navbar-social-link-${i}`}
                 aria-label={ariaLabel}

@@ -8,7 +8,7 @@ import type { LinkProps } from "@tanstack/react-router";
 
 export type NavLink = {
   label: string;
-  to: LinkProps["to"] | ((locality?: Locality) => LinkProps["to"]);
+  path: LinkProps["to"] | ((locality?: Locality) => LinkProps["to"]);
 };
 
 export interface SocialLink {

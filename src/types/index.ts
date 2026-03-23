@@ -1,3 +1,10 @@
+import type { LinkProps } from "@tanstack/react-router";
+
+export interface AppRoute {
+  path: LinkProps["to"];
+  label: string;
+}
+
 export type UnwrapArray<T> = T extends (infer U)[] ? U : T;
 
 export type MapKey<T> = keyof T;
