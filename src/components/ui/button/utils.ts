@@ -28,7 +28,7 @@ export const getButtonStyles = <T extends ButtonStyleProps>(props: T) => {
         "p-0",
         "appearance-none",
         "transition-all",
-        "hover:opacity-80",
+        "hover:opacity-70",
         "active:scale-98",
         className,
       );

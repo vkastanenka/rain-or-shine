@@ -15,9 +15,9 @@ import {
 // import { formatWeatherUrlPath, LocalityCard, LocationSearch } from "@/features";
 // import { cn } from "@/utils";
 // import { LABELS } from "./-constants";
-import { routeLoader } from "./-utils";
+import { routeLoader } from "../routing/home/-utils";
 
-export const Route = createFileRoute("/(home)/")({
+export const Route = createFileRoute("/")({
   loader: routeLoader,
   component: RouteComponent,
 });

@@ -4,6 +4,7 @@ import { RosLogotype } from "@/assets/icons/rain-or-shine/RosLogotype";
 import { APP_ROUTES, ACCESSIBILITY_LABELS } from "@/constants";
 import { FlexRow } from "@/components/layout";
 import { useGetLocalityByCoords } from "@/services";
+import { useRootLayoutActions, useRootLayoutState } from "@/routing";
 import { NavContainer } from "./NavContainer";
 import { Button, ButtonLink, ButtonAnchor } from "../button";
 import {
@@ -13,13 +14,12 @@ import {
   TEXT_BUTTON_STYLES,
 } from "./constants";
 import { resolveTo } from "./utils";
+import { cn } from "@/utils";
 
 export const Navbar = () => {
   const { data: locality } = useGetLocalityByCoords();
-
-  const openLocationSearch = () => {
-    console.log("Open search drawer");
-  };
+  const { searchDrawerIsOpen } = useRootLayoutState();
+  const { toggleSearchDrawer } = useRootLayoutActions();
 
   return (
     <NavContainer>
@@ -45,8 +45,9 @@ export const Navbar = () => {
           ))}
         </FlexRow>
         <Button
-          aria-label={ACCESSIBILITY_LABELS.actions.searchDrawer}
-          onClick={openLocationSearch}
+          aria-label={ACCESSIBILITY_LABELS.actions.toggleSearchDrawer}
+          onClick={toggleSearchDrawer}
+          className={cn(searchDrawerIsOpen && "btn-active")}
           {...ICON_BUTTON_STYLES}
         >
           <FaSearch />

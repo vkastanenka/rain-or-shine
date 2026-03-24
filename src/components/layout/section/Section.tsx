@@ -6,7 +6,7 @@ import { type SectionProps } from "./types";
 export const Section = ({
   maxWidth,
   px,
-  py = { sm: 10 },
+  py = { base: 5, sm: 10 },
   className,
   children,
   ...props

@@ -118,6 +118,10 @@
     @apply text-neutral-content! hover:bg-neutral!;
   }
 
+  .btn-ghost.btn-neutral.btn-active {
+    @apply bg-neutral! hover:bg-neutral/70!;
+  }
+
   // Drawers
 
   /* Drawer.css */

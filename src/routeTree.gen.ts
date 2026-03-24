@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MapsRouteImport } from './routes/maps'
-import { Route as homeIndexRouteImport } from './routes/(home)/index'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as WeatherCountryProvinceCityPeriodRouteImport } from './routes/weather.$country.$province.$city.$period'
 
 const MapsRoute = MapsRouteImport.update({
@@ -18,8 +18,8 @@ const MapsRoute = MapsRouteImport.update({
   path: '/maps',
   getParentRoute: () => rootRouteImport,
 } as any)
-const homeIndexRoute = homeIndexRouteImport.update({
-  id: '/(home)/',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
@@ -31,36 +31,32 @@ const WeatherCountryProvinceCityPeriodRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/maps': typeof MapsRoute
-  '/': typeof homeIndexRoute
   '/weather/$country/$province/$city/$period': typeof WeatherCountryProvinceCityPeriodRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/maps': typeof MapsRoute
-  '/': typeof homeIndexRoute
   '/weather/$country/$province/$city/$period': typeof WeatherCountryProvinceCityPeriodRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/maps': typeof MapsRoute
-  '/(home)/': typeof homeIndexRoute
   '/weather/$country/$province/$city/$period': typeof WeatherCountryProvinceCityPeriodRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/maps' | '/' | '/weather/$country/$province/$city/$period'
+  fullPaths: '/' | '/maps' | '/weather/$country/$province/$city/$period'
   fileRoutesByTo: FileRoutesByTo
-  to: '/maps' | '/' | '/weather/$country/$province/$city/$period'
-  id:
-    | '__root__'
-    | '/maps'
-    | '/(home)/'
-    | '/weather/$country/$province/$city/$period'
+  to: '/' | '/maps' | '/weather/$country/$province/$city/$period'
+  id: '__root__' | '/' | '/maps' | '/weather/$country/$province/$city/$period'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   MapsRoute: typeof MapsRoute
-  homeIndexRoute: typeof homeIndexRoute
   WeatherCountryProvinceCityPeriodRoute: typeof WeatherCountryProvinceCityPeriodRoute
 }
 
@@ -73,11 +69,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(home)/': {
-      id: '/(home)/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof homeIndexRouteImport
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/weather/$country/$province/$city/$period': {
@@ -91,8 +87,8 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   MapsRoute: MapsRoute,
-  homeIndexRoute: homeIndexRoute,
   WeatherCountryProvinceCityPeriodRoute: WeatherCountryProvinceCityPeriodRoute,
 }
 export const routeTree = rootRouteImport

@@ -8,7 +8,9 @@ import { formatInternalLink, formatExternalLink } from "./utils";
 export const ACCESSIBILITY_LABELS = {
   actions: {
     clearSearchInput: "Clear search input",
-    searchDrawer: "Open location search input drawer",
+    toggleSearchDrawer: "Toggle location search input drawer",
+    openSearchDrawer: "Open location search input drawer",
+    closeSearchDrawer: "Close location search input drawer",
   },
   navigation: {
     home: formatInternalLink("home"),

@@ -10,7 +10,7 @@
 //   getForecastByCoordsOptions,
 //   getLocalityByCoordsOptions,
 // } from "@/services";
-import type { RootRouterContext } from "../__root";
+import type { RootRouterContext } from "../../routes/__root";
 
 // export const getForecastByCoordsParams = (
 //   place?: Locality | ValidWeatherPathLocation,
@@ -32,22 +32,18 @@ export const routeLoader = async ({
 }) => {
   // const queryClient = context.queryClient;
   // const recentLocations = context.storage.local.get("recentLocations");
-
   // // 1. Fetch current locality first as it is often the primary data point
   // const currentLocality = await queryClient
   //   .fetchQuery(getLocalityByCoordsOptions())
   //   .catch(() => null);
-
   // // 2. Prepare Current Locality Forecast
   // let currentLocalityForecast = null;
   // let currentLocalityCardParams: LocalityCardProps | null = null;
-
   // if (currentLocality) {
   //   const params = getForecastByCoordsParams(currentLocality);
   //   currentLocalityForecast = await queryClient.fetchQuery(
   //     getForecastByCoordsOptions(params),
   //   );
-
   //   if (currentLocalityForecast) {
   //     currentLocalityCardParams = getLocalityCardProps(
   //       currentLocality,
@@ -55,14 +51,11 @@ export const routeLoader = async ({
   //     );
   //   }
   // }
-
   // // 3. Handle Recent Locations (Parallelized)
   // let recentLocationsCardParams: LocalityCardProps[] = [];
-
   // if (recentLocations && recentLocations?.length > 0) {
   //   // Taking the first 2 as "most recent" based on your .slice logic intent
   //   const mostRecentLocations = recentLocations.slice(0, 2);
-
   //   // Map locations to a list of Promises
   //   const forecastPromises = mostRecentLocations.map(async (loc) => {
   //     const params = getForecastByCoordsParams(loc);
@@ -71,7 +64,6 @@ export const routeLoader = async ({
   //       const forecast = await queryClient.fetchQuery(
   //         getForecastByCoordsOptions(params),
   //       );
-
   //       // Return the formatted card params if forecast exists
   //       return forecast ? getLocationCardProps(loc, forecast) : null;
   //     } catch (error) {
@@ -79,14 +71,11 @@ export const routeLoader = async ({
   //       return null;
   //     }
   //   });
-
   //   // Execute all requests in parallel
   //   const results = await Promise.all(forecastPromises);
-
   //   // Filter out any nulls from failed requests or missing forecasts
   //   recentLocationsCardParams = results.filter((params) => params !== null);
   // }
-
   // return {
   //   currentLocality,
   //   currentLocalityForecast,
