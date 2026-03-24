@@ -12,6 +12,9 @@ export const ACCESSIBILITY_LABELS = {
     openSearchDrawer: "Open location search input drawer",
     closeSearchDrawer: "Close location search input drawer",
   },
+  components: {
+    searchDrawer: "Location search drawer"
+  },
   navigation: {
     home: formatInternalLink("home"),
   },

@@ -9,10 +9,11 @@ export const LocationSearchDrawer = () => {
 
   return (
     <Drawer
-      heightVariant="contained"
-      widthVariant="contained"
+      height="layout"
+      width="full"
       isOpen={searchDrawerIsOpen}
       onCloseClick={closeSearchDrawer}
+      drawerAriaLabel={ACCESSIBILITY_LABELS.components.searchDrawer}
       closeBtnAriaLabel={ACCESSIBILITY_LABELS.actions.closeSearchDrawer}
     >
       <LocationSearch />

@@ -11,6 +11,7 @@ export const AnimateSlide = forwardRef(
       translateXEnd,
       translateYStart,
       translateYEnd,
+      ...props
     }: AnimateSlideProps,
     ref: React.Ref<HTMLDivElement> | undefined,
   ) => {
@@ -29,6 +30,7 @@ export const AnimateSlide = forwardRef(
         }}
         layout
         className={className}
+        {...props}
       >
         <motion.div layout="position">{children}</motion.div>
       </motion.div>

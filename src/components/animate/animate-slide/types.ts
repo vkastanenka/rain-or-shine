@@ -1,7 +1,6 @@
-import type { HTMLDivProps } from "@/types";
-import type { ValueKeyframesDefinition } from "framer-motion";
+import type { HTMLMotionProps, ValueKeyframesDefinition } from "framer-motion";
 
-export interface AnimateSlideProps extends HTMLDivProps {
+export interface AnimateSlideProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
   translateXStart?: ValueKeyframesDefinition;
   translateXEnd?: ValueKeyframesDefinition;

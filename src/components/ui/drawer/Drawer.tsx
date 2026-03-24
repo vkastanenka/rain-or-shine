@@ -16,11 +16,12 @@ type DrawerProps = {
   isOpen: boolean;
   onCloseClick: () => void;
   children: React.ReactNode;
-  drawerAriaLabel: string; // What to write for location search drawer?
+  drawerAriaLabel: string;
   closeBtnAriaLabel: string;
   anchor?: "left" | "right";
-  heightVariant?: "full" | "contained";
-  widthVariant?: "full" | "contained";
+  height?: "screen" | "layout";
+  width?: "full" | "auto";
+  zIndex?: number;
 } & HTMLDivProps;
 
 export const Drawer = ({
@@ -30,13 +31,14 @@ export const Drawer = ({
   drawerAriaLabel,
   closeBtnAriaLabel,
   anchor = "right",
-  heightVariant = "full",
-  widthVariant = "contained",
+  height = "screen",
+  width = "auto",
+  zIndex = 1000,
   className,
 }: DrawerProps) => {
   const anchorIsRight = anchor === "right";
-  const heightVariantIsFull = heightVariant === "full";
-  const widthVariantIsFull = widthVariant === "full";
+  const heightIsScreen = height === "screen";
+  const widthIsFull = width === "full";
 
   const containedHeightStyles = cn(
     "top-(--nav-height-base)",
@@ -54,11 +56,10 @@ export const Drawer = ({
   const styles = cn(
     "bg-base-200",
     "fixed",
-    "z-[1000]",
     "top-0",
     anchorIsRight ? "right-0" : "left-0",
-    heightVariantIsFull ? "h-full" : containedHeightStyles,
-    widthVariantIsFull ? "w-full" : containedWidthStyles,
+    heightIsScreen ? "h-full" : containedHeightStyles,
+    widthIsFull ? "w-full" : containedWidthStyles,
     className,
   );
 
@@ -96,9 +97,10 @@ export const Drawer = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onCloseClick}
+            style={{ zIndex: zIndex - 1 }}
             className={cn(
-              "fixed inset-0 z-999 backdrop-blur-sm",
-              heightVariantIsFull ? "inset-0" : containedHeightStyles,
+              "fixed inset-0 bg-black/10 backdrop-blur-sm",
+              heightIsScreen ? "inset-0" : containedHeightStyles,
             )}
             aria-hidden="true"
           />
@@ -108,13 +110,14 @@ export const Drawer = ({
             aria-label={drawerAriaLabel}
             translateXStart={anchorIsRight ? "100%" : "-100%"}
             translateXEnd="0%"
+            style={{ zIndex }}
             className={styles}
           >
             <Container>
               <FocusLock returnFocus className="w-full">
                 <FlexCol
                   gap={4}
-                  className={cn(heightVariantIsFull ? "py-8" : "py-4")}
+                  className={cn(heightIsScreen ? "py-8" : "py-4")}
                 >
                   <FlexRow justify="end" className="w-full">
                     <Button
