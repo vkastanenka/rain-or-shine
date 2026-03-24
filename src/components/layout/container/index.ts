@@ -1,3 +1,3 @@
 export * from "./Container";
-export * from "./container.constants";
-export * from "./container.types";
+export * from "./constants";
+export * from "./types";

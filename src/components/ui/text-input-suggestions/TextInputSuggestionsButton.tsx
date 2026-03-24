@@ -1,6 +1,5 @@
-import { Button } from "../button";
 import { cn } from "@/utils";
-
+import { Button } from "../button";
 import { SUGGESTION_PADDING_MAP } from "./constants";
 import type { TextInputSuggestionsButtonProps } from "./types";
 

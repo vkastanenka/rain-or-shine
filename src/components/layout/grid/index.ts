@@ -1,14 +1,10 @@
 import { Grid as GridRoot } from "./Grid";
 import { GridItem } from "./GridItem";
-import { type GridProps, type GridItemProps } from "./grid.types";
-
-type GridComponent = React.FC<GridProps> & {
-  Item: React.FC<GridItemProps>;
-};
+import type { GridComponent } from "./types";
 
 export const Grid = Object.assign(GridRoot, {
   Item: GridItem,
 }) as GridComponent;
 
-export * from "./grid.constants";
-export * from "./grid.types";
+export * from "./constants";
+export * from "./types";

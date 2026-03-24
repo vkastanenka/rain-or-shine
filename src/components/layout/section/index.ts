@@ -1,3 +1,3 @@
 export * from "./Section";
-export * from "./section.constants";
-export * from "./section.types";
+export * from "./constants";
+export * from "./types";

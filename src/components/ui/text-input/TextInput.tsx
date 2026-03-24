@@ -1,14 +1,16 @@
+import { useRef } from "react";
+import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
+import { ACCESSIBILITY_LABELS } from "@/constants";
 import { cn, resolveResponsiveValues } from "@/utils";
-import { FaSearch, FaTimes } from "react-icons/fa";
 import { Button } from "../button";
 import {
   TEXT_INPUT_SIZE_MAP,
   TEXT_INPUT_COLOR_MAP,
   TEXT_INPUT_VARIANT_MAP,
   TEXT_INPUT_TYPE_MAP,
-} from "./text-input.constants";
-import { type TextInputProps } from "./text-input.types";
-import { useRef } from "react";
+} from "./constants";
+import { type TextInputProps } from "./types";
 
 export const TextInput = ({
   className,
@@ -29,10 +31,8 @@ export const TextInput = ({
   };
 
   const isSearch = type === TEXT_INPUT_TYPE_MAP.search;
-  const iconColor =
-    "text-[color-mix(in_oklab,var(--color-base-content)_20%,transparent)]";
 
-  const combinedClasses = cn(
+  const styles = cn(
     "input",
     size && resolveResponsiveValues(size, TEXT_INPUT_SIZE_MAP),
     color && resolveResponsiveValues(color, TEXT_INPUT_COLOR_MAP),
@@ -48,11 +48,7 @@ export const TextInput = ({
         value={value}
         type={type}
         list={suggestions?.id ? suggestions.id : undefined}
-        className={cn(
-          isSearch ? "" : combinedClasses,
-          "[&::-webkit-search-cancel-button]:appearance-none",
-          "[&::-webkit-search-decoration]:appearance-none",
-        )}
+        className={cn(isSearch ? "" : styles, "remove-input-decorations")}
       />
       {suggestions?.collection && suggestions?.collection.length > 0 && (
         <datalist id={suggestions.id}>
@@ -66,15 +62,15 @@ export const TextInput = ({
 
   if (isSearch) {
     return (
-      <label className={cn(combinedClasses)}>
-        <FaSearch className={iconColor} />
+      <label className={cn(styles)}>
+        <FaSearch className={"text-input-button-color"} />
         {inputElement}
         {value && (
           <Button
             variant="ghost"
             shape="circle"
             onClick={handleClearClick}
-            aria-label="Clear search"
+            aria-label={ACCESSIBILITY_LABELS.actions.clearSearchInput}
           >
             <FaTimes />
           </Button>

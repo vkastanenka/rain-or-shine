@@ -13,8 +13,13 @@ export const LocationSearchProvider = ({
   children,
   size,
   className,
+  showRecentLocations,
 }: LocationSearchProps & { children: React.ReactNode }) => {
-  const { state, actions } = useLocationSearchContext({ size, className });
+  const { state, actions } = useLocationSearchContext({
+    size,
+    className,
+    showRecentLocations,
+  });
 
   return (
     <StateContext.Provider value={state}>

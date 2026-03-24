@@ -15,8 +15,10 @@ export const LABELS = {
   isLoadingMessage: "Searching...",
   locations: "Locations",
   recentLocations: "Recent locations",
+  clearRecentLocations: "Clear recent locations",
   noLocationsFound: "No locations found",
   searchToFind: "Search to find locations",
+  searchLocation: "Search location",
   expandSearchBreadth: "Search with more results",
 } as const;
 

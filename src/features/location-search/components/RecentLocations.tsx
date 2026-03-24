@@ -1,4 +1,4 @@
-import { FaTimes } from "react-icons/fa";
+import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import {
   AnimateExpand,
   Button,
@@ -28,9 +28,11 @@ export const RecentLocations = () => {
           </Button>
         </TextInputSuggestionsHeader>
         {isOpen &&
-          recentLocations.map((location) => (
-            <LocationLink key={location.id} location={location} />
-          ))}
+          recentLocations
+            .slice(0, 3)
+            .map((location) => (
+              <LocationLink key={location.id} location={location} />
+            ))}
       </FlexCol>
     </AnimateExpand>
   );

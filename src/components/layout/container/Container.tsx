@@ -1,9 +1,6 @@
 import { cn, resolveResponsiveValues } from "@/utils";
-import {
-  CONTAINER_PADDING_MAP,
-  CONTAINER_WIDTH_MAP,
-} from "./container.constants";
-import { type ContainerProps } from "./container.types";
+import { CONTAINER_PADDING_MAP, CONTAINER_WIDTH_MAP } from "./constants";
+import { type ContainerProps } from "./types";
 
 export const Container = ({
   center = true,

@@ -1,8 +1,9 @@
-import React from "react";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
-import { Navbar } from "@/components";
+import { Navbar, MobileNav } from "@/components";
+import { LocationSearchDrawer } from "@/features";
 import { local, session } from "@/services";
+import { RootLayoutProvider } from "@/routing";
 
 export interface RootRouterContext {
   queryClient: QueryClient;
@@ -18,9 +19,11 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
 
 function RootComponent() {
   return (
-    <React.Fragment>
+    <RootLayoutProvider>
       <Navbar />
+      <LocationSearchDrawer />
       <Outlet />
-    </React.Fragment>
+      <MobileNav />
+    </RootLayoutProvider>
   );
 }

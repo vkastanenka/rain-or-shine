@@ -1,12 +1,12 @@
 import { cn, resolveResponsiveValues } from "@/utils";
 import { Container } from "../container";
-import { SECTION_PADDING_MAP } from "./section.constants";
-import { type SectionProps } from "./section.types";
+import { SECTION_PADDING_MAP } from "./constants";
+import { type SectionProps } from "./types";
 
 export const Section = ({
   maxWidth,
   px,
-  py = { sm: 10 },
+  py = { base: 5, sm: 10 },
   className,
   children,
   ...props

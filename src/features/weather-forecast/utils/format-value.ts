@@ -1,6 +1,6 @@
-import { FaMinus } from "react-icons/fa";
+import { FaMinus } from "@react-icons/all-files/fa/FaMinus";
 import { type IsDayValue } from "@/services";
-import type { IconComponent } from "@/components";
+// import type { IconComponent } from "@/components";
 import {
   WMO_CODE_DAY_ICON_FILL_MAP,
   WMO_CODE_NIGHT_ICON_FILL_MAP,
@@ -38,18 +38,18 @@ export const formatValueWithUnit = (
   return `${value}${unit}`;
 };
 
-export const formatWmoIcon = (
-  code?: WmoCodeDescriptionMapKey,
-  isDay?: IsDayValue,
-): IconComponent => {
-  if (code === undefined || isDay === undefined) {
-    return FaMinus as IconComponent;
-  }
-  const iconMap = !!isDay
-    ? WMO_CODE_DAY_ICON_FILL_MAP
-    : WMO_CODE_NIGHT_ICON_FILL_MAP;
-  return iconMap[code];
-};
+// export const formatWmoIcon = (
+//   code?: WmoCodeDescriptionMapKey,
+//   isDay?: IsDayValue,
+// ): IconComponent => {
+//   if (code === undefined || isDay === undefined) {
+//     return FaMinus as IconComponent;
+//   }
+//   const iconMap = !!isDay
+//     ? WMO_CODE_DAY_ICON_FILL_MAP
+//     : WMO_CODE_NIGHT_ICON_FILL_MAP;
+//   return iconMap[code];
+// };
 
 export const formatWeatherUrlPath = ({
   countryCode,

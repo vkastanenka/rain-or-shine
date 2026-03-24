@@ -9,15 +9,19 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate-icons": "node ./scripts/generate-icons.mjs",
+    "generate-icon-barrel-file": "node ./scripts/generate-barrel.mjs",
     "generate-icons:erikflowers-weather-icons": "npm run generate-icons -- erikflowers-weather-icons",
     "generate-icons:meteocons-fill": "npm run generate-icons -- meteocons/fill",
     "generate-icons:meteocons-line": "npm run generate-icons -- meteocons/line",
-    "generate-tailwind-safelist": "tsx ./scripts/generate-tailwind-safelist.mjs"
+    "generate-icons:rain-or-shine": "npm run generate-icons -- rain-or-shine",
+    "generate-tailwind-maps": "node ./scripts/generate-tailwind-maps.mjs"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "@tailwindcss/vite": "^4.2.0",
     "@tanstack/react-query": "^5.90.20",
     "@tanstack/react-router": "^1.166.7",
+    "@tanstack/react-virtual": "^3.13.23",
     "axios": "^1.13.5",
     "clsx": "^2.1.1",
     "convert": "^7.0.0",
@@ -26,7 +30,7 @@
     "framer-motion": "^12.36.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-icons": "^5.6.0",
+    "react-focus-lock": "^2.13.7",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.0",
     "zod": "^4.3.6"
@@ -43,6 +47,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "react-icons": "^5.6.0",
     "tsx": "^4.21.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",

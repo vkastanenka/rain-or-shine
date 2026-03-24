@@ -4,7 +4,7 @@ import { RecentLocations } from "./RecentLocations";
 import { LocationResults } from "./LocationResults";
 
 export const LocationSuggestions = () => {
-  const { isOpen, containerRef } = useSearchState();
+  const { isOpen, containerRef, showRecentLocations } = useSearchState();
   const { handleResetScroll } = useSearchActions();
 
   return (
@@ -14,7 +14,7 @@ export const LocationSuggestions = () => {
       className="text-input-suggestions-container"
       onClose={() => handleResetScroll("instant")}
     >
-      <RecentLocations />
+      {showRecentLocations && <RecentLocations />}
       <LocationResults containerRef={containerRef} />
     </AnimateExpand>
   );
