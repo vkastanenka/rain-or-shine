@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
-import { Navbar } from "@/components";
+import { Navbar, MobileNav } from "@/components";
 import { local, session } from "@/services";
 
 export interface RootRouterContext {
@@ -21,6 +21,7 @@ function RootComponent() {
     <React.Fragment>
       <Navbar />
       <Outlet />
+      <MobileNav />
     </React.Fragment>
   );
 }
