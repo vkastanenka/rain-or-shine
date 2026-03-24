@@ -11,10 +11,11 @@ import {
 } from "@/components";
 import type { HTMLDivProps } from "@/types";
 import { cn } from "@/utils";
+import { useOverlay } from "./hooks";
 
 type DrawerProps = {
   isOpen: boolean;
-  onCloseClick: () => void;
+  onClose: () => void;
   children: React.ReactNode;
   drawerAriaLabel: string;
   closeBtnAriaLabel: string;
@@ -26,7 +27,7 @@ type DrawerProps = {
 
 export const Drawer = ({
   isOpen,
-  onCloseClick,
+  onClose,
   children,
   drawerAriaLabel,
   closeBtnAriaLabel,
@@ -63,30 +64,7 @@ export const Drawer = ({
     className,
   );
 
-  useEffect(() => {
-    if (isOpen) {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") onCloseClick();
-      };
-
-      const timer = setTimeout(() => {
-        const closeBtn = document.querySelector(
-          `[aria-label="${closeBtnAriaLabel}"]`,
-        ) as HTMLElement;
-        closeBtn?.focus();
-      }, 100);
-
-      const originalStyle = window.getComputedStyle(document.body).overflow;
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-
-      return () => {
-        clearTimeout(timer);
-        document.body.style.overflow = originalStyle;
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    }
-  }, [isOpen, onCloseClick, closeBtnAriaLabel]);
+  useOverlay(isOpen, onClose);
 
   return (
     <AnimatePresence>
@@ -96,7 +74,7 @@ export const Drawer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onCloseClick}
+            onClick={onClose}
             style={{ zIndex: zIndex - 1 }}
             className={cn(
               "fixed inset-0 bg-black/10 backdrop-blur-sm",
@@ -122,7 +100,7 @@ export const Drawer = ({
                   <FlexRow justify="end" className="w-full">
                     <Button
                       aria-label={closeBtnAriaLabel}
-                      onClick={onCloseClick}
+                      onClick={onClose}
                       variant="ghost"
                       shape="circle"
                       color="neutral"

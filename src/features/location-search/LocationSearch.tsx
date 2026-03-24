@@ -6,9 +6,17 @@ import {
 } from "./components";
 import type { LocationSearchProps } from "./types";
 
-export const LocationSearch = ({ size, className }: LocationSearchProps) => {
+export const LocationSearch = ({
+  size,
+  className,
+  showRecentLocations = true,
+}: LocationSearchProps) => {
   return (
-    <LocationSearchProvider size={size} className={className}>
+    <LocationSearchProvider
+      size={size}
+      className={className}
+      showRecentLocations={showRecentLocations}
+    >
       <LocationSearchContainer>
         <LocationSearchInput />
         <LocationSuggestions />

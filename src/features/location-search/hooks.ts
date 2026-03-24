@@ -150,7 +150,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
     (location: ValidWeatherPathLocation) => {
       const newLocations = upsertToFront(location, recentLocations ?? [], {
         filterKey: "id",
-        max: 2,
+        max: 10,
       });
       setRecentLocations(newLocations);
       handleClear();
@@ -159,7 +159,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
   );
 
   const handleRemoveRecentLocations = useCallback(async () => {
-    await removeRecentLocations(); // Only if you change the mutation call
+    await removeRecentLocations();
   }, [removeRecentLocations]);
 
   /**
@@ -171,6 +171,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       // Props
       size: props.size,
       className: props.className,
+      showRecentLocations: props.showRecentLocations,
 
       // Container
       containerRef,
@@ -204,6 +205,7 @@ export const useLocationSearchContext = (props: LocationSearchProps) => {
       // Props
       props.size,
       props.className,
+      props.showRecentLocations,
 
       // Container
       containerRef,

@@ -52,4 +52,5 @@ export interface ScopeButtonProps {
 export interface LocationSearchProps {
   size?: ResponsiveValue<TextInputSizeMapKey>;
   className?: string;
+  showRecentLocations?: boolean;
 }

@@ -1,6 +1,7 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
-import { LocationSearchDrawer, Navbar, MobileNav } from "@/components";
+import { Navbar, MobileNav } from "@/components";
+import { LocationSearchDrawer } from "@/features";
 import { local, session } from "@/services";
 import { RootLayoutProvider } from "@/routing";
 

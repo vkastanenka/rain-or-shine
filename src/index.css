@@ -133,7 +133,7 @@
   }
 
   .text-input-suggestions-item {
-    @apply block p-4 text-left border-b border-base-200 last:border-0 w-full;
+    @apply block p-4 text-left border-b border-neutral-content last:border-0 w-full hover:bg-neutral transition-colors rounded-t-xs last:rounded-b-xs;
   }
 
   .text-input-suggestions-link {
