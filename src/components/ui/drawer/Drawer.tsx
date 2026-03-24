@@ -1,21 +1,41 @@
+import React, { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
-import { AnimateSlide, Button, FlexCol, FlexRow, Section } from "@/components";
-import { LocationSearch } from "@/features";
-import { useRootLayoutState, useRootLayoutActions } from "@/routing";
+import {
+  AnimateSlide,
+  Button,
+  Container,
+  FlexCol,
+  FlexRow,
+} from "@/components";
+import type { HTMLDivProps } from "@/types";
 import { cn } from "@/utils";
-import { AnimatePresence } from "framer-motion";
-import { ACCESSIBILITY_LABELS } from "@/constants";
 
-export const Drawer = () => {
-  const { searchDrawerIsOpen } = useRootLayoutState();
-  const { closeSearchDrawer } = useRootLayoutActions();
+type DrawerProps = {
+  isOpen: boolean;
+  onCloseClick: () => void;
+  children: React.ReactNode;
+  closeBtnAriaLabel: string;
+  anchor?: "left" | "right";
+  heightVariant?: "full" | "contained";
+  widthVariant?: "full" | "contained";
+} & HTMLDivProps;
 
-  const styles = cn(
-    "bg-base-100",
-    "fixed",
-    "z-(--search-drawer-z)",
-    "w-full",
-    "left-0",
+export const Drawer = ({
+  isOpen,
+  onCloseClick,
+  children,
+  closeBtnAriaLabel,
+  anchor = "right",
+  heightVariant = "full",
+  widthVariant = "contained",
+  className,
+}: DrawerProps) => {
+  const anchorIsRight = anchor === "right";
+  const heightVariantIsFull = heightVariant === "full";
+  const widthVariantIsFull = widthVariant === "full";
+
+  const containedHeightStyles = cn(
     "top-(--nav-height-base)",
     "sm:top-(--nav-height-sm)",
     "md:top-(--nav-height-md)",
@@ -26,74 +46,73 @@ export const Drawer = () => {
     "lg:h-[calc(100vh-var(--nav-height-lg))]",
   );
 
+  const containedWidthStyles = cn("w-4/5", "sm:w-100", "lg:w-125");
+
+  const styles = cn(
+    "bg-base-200",
+    "fixed",
+    "z-[1000]",
+    "top-0",
+    anchorIsRight ? "right-0" : "left-0",
+    heightVariantIsFull ? "h-full" : containedHeightStyles,
+    widthVariantIsFull ? "w-full" : containedWidthStyles,
+    className,
+  );
+
+  useEffect(() => {
+    if (isOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
-      {searchDrawerIsOpen && (
-        <AnimateSlide
-          translateXStart={"100%"}
-          translateXEnd={"0%"}
-          className={styles}
-        >
-          <Section>
-            <FlexCol gap={{ base: 2, sm: 6 }}>
-              <FlexRow justify="end" className="w-full">
-                <Button
-                  aria-label={ACCESSIBILITY_LABELS.actions.closeSearchDrawer}
-                  onClick={closeSearchDrawer}
-                  variant="ghost"
-                  shape="circle"
-                  color="neutral"
-                >
-                  <FaTimes className="w-4 h-4" />
-                </Button>
-              </FlexRow>
-              <LocationSearch />
-            </FlexCol>
-          </Section>
-        </AnimateSlide>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onCloseClick}
+            className={cn(
+              "fixed inset-0 z-999 backdrop-blur-sm",
+              !heightVariantIsFull && containedHeightStyles,
+            )}
+            aria-hidden="true"
+          />
+          <AnimateSlide
+            translateXStart={anchorIsRight ? "100%" : "-100%"}
+            translateXEnd="0%"
+            className={styles}
+          >
+            <Container>
+              <FlexCol
+                gap={4}
+                className={cn(heightVariantIsFull ? "py-8" : "py-4")}
+              >
+                <FlexRow justify="end" className="w-full">
+                  <Button
+                    aria-label={closeBtnAriaLabel}
+                    onClick={onCloseClick}
+                    variant="ghost"
+                    shape="circle"
+                    color="neutral"
+                    size={{ base: "sm", sm: "md", lg: "lg" }}
+                  >
+                    <FaTimes />
+                  </Button>
+                </FlexRow>
+                {children}
+              </FlexCol>
+            </Container>
+          </AnimateSlide>
+        </>
       )}
     </AnimatePresence>
   );
 };
-
-// export const Drawer = ({ isOpen, onClose, children, title }: any) => {
-//   // Close on 'Escape' key press
-//   useEffect(() => {
-//     const handleEsc = (event: any) => {
-//       if (event.key === "Escape") onClose();
-//     };
-//     window.addEventListener("keydown", handleEsc);
-//     return () => window.removeEventListener("keydown", handleEsc);
-//   }, [onClose]);
-
-//   if (!isOpen) return null;
-
-//   <div className="drawer-overlay" onClick={onClose}>
-//     <div
-//       className={`drawer-content ${isOpen ? "open" : ""}`}
-//       onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
-//     >
-//       <div className="drawer-header">
-//         <h2>{title}</h2>
-//         <button onClick={onClose}>&times;</button>
-//       </div>
-//       <div className="drawer-body">{children}</div>
-//     </div>
-//   </div>;
-// };
-
-//   return ReactDOM.createPortal(
-//     <div className="drawer-overlay" onClick={onClose}>
-//       <div
-//         className={`drawer-content ${isOpen ? "open" : ""}`}
-//         onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
-//       >
-//         <div className="drawer-header">
-//           <h2>{title}</h2>
-//           <button onClick={onClose}>&times;</button>
-//         </div>
-//         <div className="drawer-body">{children}</div>
-//       </div>
-//     </div>,
-//     document.body,
-//   );

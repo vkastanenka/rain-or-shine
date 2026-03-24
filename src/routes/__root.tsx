@@ -1,6 +1,6 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
-import { Drawer, Navbar, MobileNav } from "@/components";
+import { LocationSearchDrawer, Navbar, MobileNav } from "@/components";
 import { local, session } from "@/services";
 import { RootLayoutProvider } from "@/routing";
 
@@ -20,7 +20,7 @@ function RootComponent() {
   return (
     <RootLayoutProvider>
       <Navbar />
-      <Drawer />
+      <LocationSearchDrawer />
       <Outlet />
       <MobileNav />
     </RootLayoutProvider>
