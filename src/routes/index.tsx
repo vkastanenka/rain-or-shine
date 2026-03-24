@@ -1,21 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Text, Section, FlexCol } from "@/components";
+import { LocationSearch } from "@/features";
+import { cn } from "@/utils";
 import {
-  // Text,
-  Section,
-  // FlexCol,
-  // Grid,
-  // Flex,
-  // Button,
-  // LazyReactIcon,
-  // LazyCountryFlagIcon,
-  LazyErikFlowersWeatherIcon,
-  LazyCountryFlagIcon,
-  LazyMeteoconIcon,
-} from "@/components";
-// import { formatWeatherUrlPath, LocalityCard, LocationSearch } from "@/features";
-// import { cn } from "@/utils";
-// import { LABELS } from "./-constants";
-import { routeLoader } from "../routing/home/-utils";
+  HOME_LABELS as LABELS,
+  homeRouteLoader as routeLoader,
+} from "@/routing";
 
 export const Route = createFileRoute("/")({
   loader: routeLoader,
@@ -31,13 +21,20 @@ function RouteComponent() {
   // } = Route.useLoaderData();
 
   return (
-    <div>
-      <Section>
-        <LazyCountryFlagIcon name="CA" />
-        <LazyErikFlowersWeatherIcon name="WiAlien" />
-        <LazyMeteoconIcon lib="fill" name="Barometer" />
-      </Section>
-    </div>
+    <Section>
+      <FlexCol gap={4} className="w-full">
+        <div>
+          <Text type={{ base: "headline6", sm: "headline5" }}>
+            {LABELS.hero.superTitle()}
+          </Text>
+          <Text type={{ base: "headline3", sm: "headline2" }}>
+            <span className="block">{LABELS.hero.primaryTitle}</span>
+            <span>{LABELS.hero.secondaryTitle}</span>
+          </Text>
+        </div>
+        <LocationSearch className={cn("xl:max-w-130")} />
+      </FlexCol>
+    </Section>
   );
 }
 
