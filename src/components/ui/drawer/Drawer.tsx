@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import FocusLock from "react-focus-lock";
 import { FaTimes } from "@react-icons/all-files/fa/FaTimes";
 import { AnimatePresence, motion } from "framer-motion";
