@@ -15,6 +15,21 @@
 
 @theme {
   /**
+   * Drawers
+   */
+
+  --search-drawer-z: 10;
+
+  /**
+   * Navs
+   */
+
+  --nav-height-base: 64px;
+  --nav-height-sm: 72px;
+  --nav-height-md: 78px;
+  --nav-height-lg: 87px;
+
+  /**
    * Typography Design System
    * Scale: Fluid 640px -> 1280px
    */
@@ -93,6 +108,8 @@
 }
 
 @layer components {
+  // Buttons
+
   .btn-soft.btn-neutral {
     @apply text-neutral-content! bg-neutral/7! hover:bg-neutral!;
   }
@@ -100,6 +117,39 @@
   .btn-ghost.btn-neutral {
     @apply text-neutral-content! hover:bg-neutral!;
   }
+
+  // Drawers
+
+  /* Drawer.css */
+  .drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* background: rgba(0, 0, 0, 0.5); */
+    display: flex;
+    justify-content: flex-end; /* Change to flex-start for a left-side drawer */
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    background: white;
+  }
+
+  .drawer-content {
+    width: 300px;
+    height: 100%;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /* transform: translateX(100%); */
+    transition: transform 0.3s ease-in-out;
+    background: white;
+  }
+
+  /* .drawer-content.open {
+    transform: translateX(0);
+  } */
+
+  // Inputs
 
   .text-input-button-color {
     @apply text-[color-mix(in_oklab,var(--color-base-content)_20%,transparent)];

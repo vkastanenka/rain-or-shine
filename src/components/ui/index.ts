@@ -1,5 +1,6 @@
 export * from "./button";
 export * from "./card";
+export * from "./drawer";
 export * from "./icon";
 export * from "./navbar";
 export * from "./text";

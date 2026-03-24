@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
-import { Navbar, MobileNav } from "@/components";
+import { Drawer, Navbar, MobileNav } from "@/components";
 import { local, session } from "@/services";
 
 export interface RootRouterContext {
@@ -19,9 +19,12 @@ export const Route = createRootRouteWithContext<RootRouterContext>()({
 function RootComponent() {
   return (
     <React.Fragment>
-      <Navbar />
-      <Outlet />
-      <MobileNav />
+      <div className="bg-pink-100">
+        <Navbar />
+        <Drawer />
+        {/* <Outlet /> */}
+        <MobileNav />
+      </div>
     </React.Fragment>
   );
 }
