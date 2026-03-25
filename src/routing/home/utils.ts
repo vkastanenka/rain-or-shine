@@ -4,26 +4,52 @@ import {
   getForecastByCoordsOptions,
   getLocalityByCoordsOptions,
   STORAGE_KEY_MAP,
-  type GetForecastByCoordsParams,
+  type Forecast,
+  type Locality,
   type LocalStorageManager,
+  type ValidWeatherPathLocation,
 } from "@/services";
 import type { RootRouterContext } from "@/routes/__root";
+import type { QueryResult } from "@/types";
 
-export const formatCurrentForecastParams = ({
-  latitude,
-  longitude,
-}: {
-  latitude: number;
-  longitude: number;
-}): GetForecastByCoordsParams | undefined => {
-  return formatGetForecastByCoordsParams({
+export const formatAllLocations = (
+  currentLocality: Locality | undefined,
+  recentLocations: ValidWeatherPathLocation[],
+) => {
+  const allLocations = [
+    ...(currentLocality ? [currentLocality] : []),
+    ...recentLocations,
+  ];
+  return allLocations;
+};
+
+export const formatAllForecasts = (
+  currentLocality: Locality | undefined,
+  forecasts: QueryResult<Forecast | undefined>[],
+) => {
+  const localityForecast = currentLocality ? forecasts[0] : undefined;
+  const recentLocationsForecasts = currentLocality
+    ? forecasts.slice(1)
+    : forecasts;
+
+  return { localityForecast, recentLocationsForecasts };
+};
+
+export const formatCurrentForecastQuery = (
+  place: Locality | ValidWeatherPathLocation,
+) => {
+  const { latitude, longitude } = place;
+  const params = formatGetForecastByCoordsParams({
     latitude,
     longitude,
     current: ["temperature_2m", "weather_code", "is_day"],
   });
+  return getForecastByCoordsOptions(params);
 };
 
-const prepareCurrentLocalityForecast = async (queryClient: QueryClient) => {
+const prepareCurrentLocalityForecast = async (
+  queryClient: QueryClient,
+): Promise<Locality | undefined> => {
   // Fetch current locality for forecast (Synchronous)
   const currentLocality = await queryClient
     .fetchQuery(getLocalityByCoordsOptions())
@@ -31,9 +57,8 @@ const prepareCurrentLocalityForecast = async (queryClient: QueryClient) => {
 
   // Fetch current locality forecast (Asynchronous)
   if (currentLocality) {
-    const { latitude, longitude } = currentLocality;
-    const params = formatCurrentForecastParams({ latitude, longitude });
-    queryClient.prefetchQuery(getForecastByCoordsOptions(params));
+    const query = formatCurrentForecastQuery(currentLocality);
+    queryClient.prefetchQuery(query);
   }
 
   return currentLocality;
@@ -42,15 +67,14 @@ const prepareCurrentLocalityForecast = async (queryClient: QueryClient) => {
 const prepareRecentLocationsForecasts = (
   queryClient: QueryClient,
   local: LocalStorageManager,
-) => {
+): ValidWeatherPathLocation[] => {
   const recentLocations =
     local.get(STORAGE_KEY_MAP.recentLocations)?.slice(0, 2) ?? [];
 
   // Fetch recent locations forecasts (Asynchronous)
-  recentLocations.forEach((loc) => {
-    const { latitude, longitude } = loc;
-    const params = formatCurrentForecastParams({ latitude, longitude });
-    queryClient.prefetchQuery(getForecastByCoordsOptions(params));
+  recentLocations.forEach((location) => {
+    const query = formatCurrentForecastQuery(location);
+    queryClient.prefetchQuery(query);
   });
 
   return recentLocations;

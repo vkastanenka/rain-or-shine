@@ -6,10 +6,10 @@ export interface GetLocationCardPropsParams {
   countryName: string;
   region: string;
   city: string;
-  weatherCode: WmoCodeDescriptionMapKey;
-  isDay: IsDayValue;
-  temperature: number;
-  temperatureUnit: string;
+  weatherCode?: WmoCodeDescriptionMapKey;
+  isDay?: IsDayValue;
+  temperature?: number;
+  temperatureUnit?: string;
 }
 
 export interface LocationCardProps {

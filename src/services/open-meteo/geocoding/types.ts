@@ -6,9 +6,11 @@ import { LocationSchema, LocationsSchema } from "./schema";
  */
 
 export type ValidWeatherPathLocation = Location & {
-  country_code: string;
+  country: string;
   admin1: string;
   name: string;
+  longitude: number;
+  latitude: number;
 };
 
 /**

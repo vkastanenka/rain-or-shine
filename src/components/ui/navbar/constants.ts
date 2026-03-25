@@ -25,10 +25,12 @@ const WEATHER_NAV_LINK: NavLink = {
   path: (locality?: Locality) => {
     if (!locality) return APP_ROUTES.home.path;
     return formatWeatherUrlPath({
-      countryCode: locality.countryCode,
+      countryName: locality.countryName,
       region: locality.locality,
       city: locality.city,
       period: FORECAST_PERIOD_MAP.current,
+      longitude: locality.longitude,
+      latitude: locality.latitude,
     });
   },
   Icon: FaSun,

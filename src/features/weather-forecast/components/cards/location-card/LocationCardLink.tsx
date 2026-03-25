@@ -2,20 +2,27 @@ import { ButtonLink } from "@/components";
 import { formatWeatherUrlPath } from "@/features/weather-forecast/utils";
 import { LocationCard } from "./LocationCard";
 import { getLocationCardProps } from "./utils";
+import type { Forecast, Locality, ValidWeatherPathLocation } from "@/services";
+import type { QueryResult } from "@/types";
+import type { ForecastPeriodMapKey } from "@/features/weather-forecast/types";
 
 export const LocationCardLink = ({
-  countryName,
-  region,
-  city,
+  place,
+  forecast,
   period,
-  longitude,
-  latitude,
-  weatherCode,
-  isDay,
-  temperature,
-  temperatureUnit,
   className,
-}: any) => {
+}: {
+  place: Locality | ValidWeatherPathLocation;
+  forecast: QueryResult<Forecast | undefined>;
+  period: ForecastPeriodMapKey;
+  className?: string;
+}) => {
+  const placeIsLocality = "countryName" in place;
+  const countryName = placeIsLocality ? place.countryName : place.country;
+  const region = placeIsLocality ? place.locality : place.admin1;
+  const city = placeIsLocality ? place.city : place.name;
+  const { longitude, latitude } = place;
+
   const path = formatWeatherUrlPath({
     countryName,
     region,
@@ -25,20 +32,23 @@ export const LocationCardLink = ({
     latitude,
   });
 
+  const { data } = forecast;
+  const currentForecastData = data?.current;
+  const currentForecastUnits = data?.current_units;
+
   const cardProps = getLocationCardProps({
     countryName,
     region,
     city,
-    weatherCode,
-    isDay,
-    temperature,
-    temperatureUnit,
+    weatherCode: currentForecastData?.weather_code,
+    isDay: currentForecastData?.is_day,
+    temperature: currentForecastData?.temperature_2m,
+    temperatureUnit: currentForecastUnits?.temperature_2m,
   });
 
   return (
-    <ButtonLink unstyled to={path} className={className}>
+    <ButtonLink  unstyled to={path} className={className}>
       <LocationCard
-        isHover3d
         city={cardProps.city}
         region={cardProps.region}
         iconConfig={cardProps.iconConfig}

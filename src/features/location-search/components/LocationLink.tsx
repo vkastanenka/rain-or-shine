@@ -11,10 +11,12 @@ export const LocationLink = ({ location }: LocationLinkProps) => {
   const { handleSelectLocation } = useSearchActions();
 
   const path = formatWeatherUrlPath({
-    countryCode: location.country_code,
+    countryName: location.country,
     region: location.admin1,
     city: location.name,
     period: FORECAST_PERIOD_MAP.current,
+    longitude: location.longitude,
+    latitude: location.latitude,
   });
 
   const handleClick = () => {

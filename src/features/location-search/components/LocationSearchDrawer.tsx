@@ -51,12 +51,13 @@ export const LocationSearchDrawer = () => {
             <FlexCol className="w-full">
               {recentLocations.map((location) => (
                 <Link
-                  to={formatWeatherUrlPath({
-                    countryCode: location.country_code,
-                    region: location.admin1,
-                    city: location.name,
-                    period: FORECAST_PERIOD_MAP.current,
-                  })}
+                  to="/"
+                  // to={formatWeatherUrlPath({
+                  //   countryCode: location.country_code,
+                  //   region: location.admin1,
+                  //   city: location.name,
+                  //   period: FORECAST_PERIOD_MAP.current,
+                  // })}
                   className="text-input-suggestions-item w-full"
                 >
                   <Text

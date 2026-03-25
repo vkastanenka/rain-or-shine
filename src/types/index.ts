@@ -1,3 +1,7 @@
+import type {
+  DefinedUseQueryResult,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import type { LinkProps } from "@tanstack/react-router";
 
 export interface AppRoute {
@@ -26,3 +30,7 @@ export type Ref<T> = React.Ref<T | null> | undefined;
 export type AnchorRef = React.Ref<HTMLAnchorElement | null> | undefined;
 export type ButtonRef = React.Ref<HTMLButtonElement | null> | undefined;
 export type DivRef = React.Ref<HTMLDivElement | null> | undefined;
+
+export type QueryResult<TData, TError = Error> =
+  | UseQueryResult<TData, TError>
+  | DefinedUseQueryResult<TData, TError>;

@@ -1,4 +1,4 @@
-import type { ValidWeatherPathLocation } from "@/features";
+import type { ValidWeatherPathLocation } from "@/services";
 import { STORAGE_KEY_MAP } from "./constants";
 import { local, session } from "./service";
 

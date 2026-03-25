@@ -50,12 +50,19 @@ export const formatWmoIconConfig = (
   return iconMap[code];
 };
 
+export const formatCoord = (coord: number): number => {
+  return Number(coord.toFixed(2));
+};
+
 export const formatWeatherUrlPath = ({
   countryName,
   region,
   city,
   period,
+  longitude,
+  latitude,
 }: WeatherUrlPathParams): LinkProps["to"] => {
-  const segments = [countryName, region, city, period].map(toUrlSlug);
-  return `/weather/${segments.join("/")}` as LinkProps["to"];
+  const coordsPath = `${formatCoord(longitude)},${formatCoord(latitude)}`;
+  const paths = [countryName, region, city, period, coordsPath].map(toUrlSlug);
+  return `/weather/${paths.join("/")}` as LinkProps["to"];
 };
