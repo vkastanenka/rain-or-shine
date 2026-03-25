@@ -1,1 +1,1 @@
-export * from "./locality-card";
+export * from "./location-card";

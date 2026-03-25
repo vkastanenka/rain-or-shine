@@ -1,4 +1,12 @@
 import { z, type ZodRawShape } from "zod";
+import type { GetForecastByCoordsParams } from "./types";
+
+export const formatGetForecastByCoordsParams = (
+  params: GetForecastByCoordsParams,
+): GetForecastByCoordsParams => ({
+  ...params,
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+});
 
 export const transformValuesShapeToUnitsShape = <T extends ZodRawShape>(
   shape: T,

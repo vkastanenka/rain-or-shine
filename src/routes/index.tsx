@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Text, Section, FlexCol } from "@/components";
-import { LocationSearch } from "@/features";
+import { Grid, Text, Section, FlexCol } from "@/components";
+import { LocationSearch, LocationCardLink } from "@/features";
 import { cn } from "@/utils";
 import {
   HOME_LABELS as LABELS,
   homeRouteLoader as routeLoader,
+  useHomeForecastQueries as useForecastQueries,
 } from "@/routing";
 
 export const Route = createFileRoute("/")({
@@ -13,28 +14,48 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  // const {
-  //   currentLocality,
-  //   currentLocalityCardParams,
-  //   // recentLocations,
-  //   recentLocationsCardParams,
-  // } = Route.useLoaderData();
+  const { currentLocality, recentLocations } = Route.useLoaderData();
+
+  const allLocations = [
+    ...(currentLocality ? [currentLocality] : []),
+    ...recentLocations,
+  ];
+
+  const results = useForecastQueries(allLocations);
+
+  const currentForecast = currentLocality ? results[0] : undefined;
+  const recentForecasts = currentLocality ? results.slice(1) : results;
 
   return (
-    <Section>
-      <FlexCol gap={4} className="w-full">
-        <div>
-          <Text type={{ base: "headline6", sm: "headline5" }}>
-            {LABELS.hero.superTitle()}
-          </Text>
-          <Text type={{ base: "headline3", sm: "headline2" }}>
-            <span className="block">{LABELS.hero.primaryTitle}</span>
-            <span>{LABELS.hero.secondaryTitle}</span>
-          </Text>
-        </div>
-        <LocationSearch className={cn("xl:max-w-130")} />
-      </FlexCol>
-    </Section>
+    <>
+      <Section>
+        <FlexCol gap={4} className="w-full">
+          <div>
+            <Text type={{ base: "headline6", sm: "headline5" }}>
+              {LABELS.hero.superTitle()}
+            </Text>
+            <Text type={{ base: "headline3", sm: "headline2" }}>
+              <span className="block">{LABELS.hero.primaryTitle}</span>
+              <span>{LABELS.hero.secondaryTitle}</span>
+            </Text>
+          </div>
+          <LocationSearch className={cn("xl:max-w-130")} />
+        </FlexCol>
+      </Section>
+      {currentLocality && (
+        <Section>
+          <Grid gap={4} cols={{ base: 1, lg: 3 }} className="w-full">
+            <Grid.Item span={1}>
+              <FlexCol gap={1} stretchItems className="w-full">
+                <Text type="large" className="font-medium">
+                  {LABELS.currentLocation.title}
+                </Text>
+              </FlexCol>
+            </Grid.Item>
+          </Grid>
+        </Section>
+      )}
+    </>
   );
 }
 

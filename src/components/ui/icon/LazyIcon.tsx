@@ -10,7 +10,7 @@ import type {
   LazyErikFlowersWeatherIconProps,
   LazyMeteoconIconProps,
 } from "./types";
-import { defaultFallbackIconFn } from "./utils";
+import { fallbackIconFn } from "./utils";
 
 const iconCache: Record<
   string,
@@ -82,7 +82,7 @@ export const LazyReactIcon = ({ lib, name, ...props }: LazyReactIconProps) => (
     importFn={() =>
       import(`@react-icons-all-files/${lib}/${name}.esm.js`)
         .then((module) => ({ default: module[name] }))
-        .catch(defaultFallbackIconFn)
+        .catch(fallbackIconFn)
     }
     {...props}
   />
@@ -98,7 +98,7 @@ export const LazyErikFlowersWeatherIcon = ({
     importFn={() =>
       import(`@erikflowers-weather-icons/${name}.tsx`)
         .then((module) => ({ default: module[name] }))
-        .catch(defaultFallbackIconFn)
+        .catch(fallbackIconFn)
     }
     className={cn("fill-current", className)}
     {...props}
@@ -115,7 +115,7 @@ export const LazyMeteoconIcon = ({
     importFn={() =>
       import(`@meteocons/${lib}/${name}.tsx`)
         .then((module) => ({ default: module[name] }))
-        .catch(defaultFallbackIconFn)
+        .catch(fallbackIconFn)
     }
     {...props}
   />

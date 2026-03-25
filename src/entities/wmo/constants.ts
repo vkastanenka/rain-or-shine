@@ -78,7 +78,7 @@ export const WMO_SNOW_CODE_DESCRIPTION_MAP = {
  * Icon Map Types
  */
 
-export const WMO_CODE_DAY_ICON_FILL_MAP = {
+export const WMO_CODE_DAY_ICON_FILL_CONFIG_MAP = {
   0: { lib: "fill", name: "ClearDay" },
   1: { lib: "fill", name: "ClearDay" },
   2: { lib: "fill", name: "PartlyCloudyDay" },
@@ -109,7 +109,7 @@ export const WMO_CODE_DAY_ICON_FILL_MAP = {
   99: { lib: "fill", name: "ThunderstormsRain" },
 } as const;
 
-export const WMO_CODE_DAY_ICON_LINE_MAP = {
+export const WMO_CODE_DAY_ICON_LINE_CONFIG_MAP = {
   0: { lib: "line", name: "ClearDay" },
   1: { lib: "line", name: "ClearDay" },
   2: { lib: "line", name: "PartlyCloudyDay" },
@@ -140,7 +140,7 @@ export const WMO_CODE_DAY_ICON_LINE_MAP = {
   99: { lib: "line", name: "ThunderstormsRain" },
 } as const;
 
-export const WMO_CODE_NIGHT_ICON_FILL_MAP = {
+export const WMO_CODE_NIGHT_ICON_FILL_CONFIG_MAP = {
   0: { lib: "fill", name: "ClearNight" },
   1: { lib: "fill", name: "ClearNight" },
   2: { lib: "fill", name: "PartlyCloudyNight" },
@@ -171,7 +171,7 @@ export const WMO_CODE_NIGHT_ICON_FILL_MAP = {
   99: { lib: "fill", name: "ThunderstormsRain" },
 } as const;
 
-export const WMO_CODE_NIGHT_ICON_LINE_MAP = {
+export const WMO_CODE_NIGHT_ICON_LINE_CONFIG_MAP = {
   0: { lib: "line", name: "ClearNight" },
   1: { lib: "line", name: "ClearNightFill" },
   2: { lib: "line", name: "PartlyCloudyNight" },

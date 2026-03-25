@@ -1,14 +1,13 @@
-import { FaMinus } from "@react-icons/all-files/fa/FaMinus";
 import { type IsDayValue } from "@/services";
-// import type { IconComponent } from "@/components";
 import {
-  WMO_CODE_DAY_ICON_FILL_MAP,
-  WMO_CODE_NIGHT_ICON_FILL_MAP,
+  WMO_CODE_DAY_ICON_FILL_CONFIG_MAP,
+  WMO_CODE_NIGHT_ICON_FILL_CONFIG_MAP,
   type WmoCodeDescriptionMapKey,
 } from "@/entities";
 import type { LinkProps } from "@tanstack/react-router";
 import { toUrlSlug } from "@/utils";
 import type { WeatherUrlPathParams } from "../types";
+import type { MeteoconIconConfig } from "@/components/ui/icon/types";
 
 const EMPTY_VALUE = "--";
 
@@ -38,25 +37,25 @@ export const formatValueWithUnit = (
   return `${value}${unit}`;
 };
 
-// export const formatWmoIcon = (
-//   code?: WmoCodeDescriptionMapKey,
-//   isDay?: IsDayValue,
-// ): IconComponent => {
-//   if (code === undefined || isDay === undefined) {
-//     return FaMinus as IconComponent;
-//   }
-//   const iconMap = !!isDay
-//     ? WMO_CODE_DAY_ICON_FILL_MAP
-//     : WMO_CODE_NIGHT_ICON_FILL_MAP;
-//   return iconMap[code];
-// };
+export const formatWmoIconConfig = (
+  code?: WmoCodeDescriptionMapKey,
+  isDay?: IsDayValue,
+): MeteoconIconConfig => {
+  if (code === undefined || isDay === undefined) {
+    return { lib: "fill", name: "ClearDay" };
+  }
+  const iconMap = !!isDay
+    ? WMO_CODE_DAY_ICON_FILL_CONFIG_MAP
+    : WMO_CODE_NIGHT_ICON_FILL_CONFIG_MAP;
+  return iconMap[code];
+};
 
 export const formatWeatherUrlPath = ({
-  countryCode,
+  countryName,
   region,
   city,
   period,
 }: WeatherUrlPathParams): LinkProps["to"] => {
-  const segments = [countryCode, region, city, period].map(toUrlSlug);
-  return `/weather/${segments.join("/")}` as any;
+  const segments = [countryName, region, city, period].map(toUrlSlug);
+  return `/weather/${segments.join("/")}` as LinkProps["to"];
 };

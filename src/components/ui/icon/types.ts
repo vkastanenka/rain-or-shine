@@ -97,7 +97,7 @@ type TiIconName = keyof typeof TiIcons;
 type VscIconName = keyof typeof VscIcons;
 type WiIconName = keyof typeof WiIcons;
 
-export type ReactIconName =
+export type ReactIconConfig =
   | { lib: "ai"; name: AiIconName }
   | { lib: "bi"; name: BiIconName }
   | { lib: "bs"; name: BsIconName }
@@ -130,7 +130,7 @@ export type ReactIconName =
   | { lib: "vsc"; name: VscIconName }
   | { lib: "wi"; name: WiIconName };
 
-export type LazyReactIconProps = LazyIconProps<ReactIconName>;
+export type LazyReactIconProps = LazyIconProps<ReactIconConfig>;
 
 // Erik Flowers Weather Icons
 
@@ -145,8 +145,8 @@ export type LazyErikFlowersWeatherIconProps = LazyIconProps<{
 export type MeteoconFillIconName = keyof typeof MeteoconFillIcons;
 export type MeteoconLineIconName = keyof typeof MeteoconLineIcons;
 
-export type MeteoconIconName =
+export type MeteoconIconConfig =
   | { lib: "fill"; name: MeteoconFillIconName }
   | { lib: "line"; name: MeteoconLineIconName };
 
-export type LazyMeteoconIconProps = LazyIconProps<MeteoconIconName>;
+export type LazyMeteoconIconProps = LazyIconProps<MeteoconIconConfig>;

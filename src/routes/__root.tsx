@@ -2,14 +2,17 @@ import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
 import { Navbar, MobileNav } from "@/components";
 import { LocationSearchDrawer } from "@/features";
-import { local, session } from "@/services";
+import {
+  type LocalStorageManager,
+  type SessionStorageManager,
+} from "@/services";
 import { RootLayoutProvider } from "@/routing";
 
 export interface RootRouterContext {
   queryClient: QueryClient;
   storage: {
-    local: typeof local;
-    session: typeof session;
+    local: LocalStorageManager;
+    session: SessionStorageManager;
   };
 }
 

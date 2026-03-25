@@ -12,8 +12,10 @@ export type ValidWeatherPathLocation = Location & {
 };
 
 export interface WeatherUrlPathParams {
-  countryCode: string;
+  countryName: string;
   region: string;
   city: string;
   period: ForecastPeriodMapKey;
+  longitude: number;
+  latitude: number;
 }
