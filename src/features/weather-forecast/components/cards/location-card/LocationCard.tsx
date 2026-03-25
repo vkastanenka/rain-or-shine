@@ -19,7 +19,11 @@ export const LocationCard = ({
           <Text type="body2">{region}</Text>
         </FlexCol>
         <FlexRow gap={1} align="center">
-          <LazyMeteoconIcon lib={iconConfig.lib} name={iconConfig.name} />
+          <LazyMeteoconIcon
+            lib={iconConfig.lib}
+            name={iconConfig.name}
+            className="w-8 h-8"
+          />
           <Text type="large">{temperature}</Text>
         </FlexRow>
       </FlexRow>
